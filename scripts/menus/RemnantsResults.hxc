@@ -72,6 +72,11 @@ class RemnantsResults extends Module
         newBG.cameras = [curState.cameraBG];
         newBG.scrollFactor.set();
         newBG.zIndex = 11;
+        
+        newBG.alpha = 0;
+        FlxTween.tween(newBG, {alpha: 1}, 1.0, {
+          ease: FlxEase.quartInOut,
+        });
 
         curState.insert(curState.members.indexOf(curState.bgFlash), newBG);
         curState.bgFlash?.makeGraphic(FlxG.width, FlxG.height, gradientColor);
