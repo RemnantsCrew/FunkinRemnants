@@ -1,7 +1,10 @@
-import funkin.ui.charSelect.CharSelectSubState;
 import funkin.modding.module.Module;
+import funkin.ui.charSelect.CharSelectSubState;
 import funkin.ui.MusicBeatSubState;
+import funkin.util.ReflectUtil;
 import flixel.FlxG;
+
+using funkin.util.tools.StringTools;
 
 class RemnantsCharSelect extends Module
 {
@@ -10,12 +13,95 @@ class RemnantsCharSelect extends Module
     super('remnantsCharSelect', 1000, {state: CharSelectSubState});
   }
 
+  var charSel:CharSelectSubState = null;
+  var fixedIcons:Bool = false;
+
   override public function onSubStateOpenEnd(event:SubStateScriptEvent)
   {
     super.onSubStateOpenEnd(event);
 
-    trace('Character Select');
+    charSel = FlxG.state;
+    fixedIcons = false;
+  }
 
-    var charSel:CharSelectSubState = FlxG.state?.subState;
+  // the checks for the string not being a valid thing didn't work so these are sadly required ...
+  var iconPrefix:String = 'assets/images/freeplay/icons/';
+  var iconSuffix:String = 'pixel.png';
+
+  var remnantIcons = [
+    'pico-remnants',
+    'bf-remnants',
+  ];
+
+  var iconsToMoveUp = [];
+
+  var startingI = -1;
+
+  override public function onUpdate(event:ScriptEvent)
+  {
+    super.onUpdate(event);
+
+    if (!fixedIcons)
+    {
+      if (charSel?.grpIcons == null) return;
+
+      fixedIcons = true;
+
+      var i = 0;
+      for (icon in charSel?.grpIcons?.members)
+      {
+        i++;
+
+        if (icon == null) continue;
+
+        var iconAssetKey:String = icon?.graphic?.key;
+        
+        if (iconAssetKey == null) continue;
+        if (iconAssetKey == '') continue;
+        if (iconAssetKey.length == 0) continue;
+        
+        // trace('"'+iconAssetKey+'"');
+
+        var isRemnantIcon:Bool = false;
+
+        for (icon in remnantIcons)
+        {
+          if (isRemnantIcon) continue;
+          if (iconAssetKey == null) continue;
+
+          // ... and I can't do "iconAssetKey.contains(icon);"
+          isRemnantIcon = iconAssetKey == (iconPrefix + icon + iconSuffix);
+          if (isRemnantIcon)
+          { 
+            trace('icon: ' + icon);
+            trace(' * ' + iconAssetKey);
+            trace(' * ' + (iconPrefix + icon + iconSuffix));
+          }
+        }
+
+        if (!isRemnantIcon) continue;
+
+        trace(' * ' + icon.y);
+
+        if (i > startingI && startingI == -1)
+        {
+          startingI = i;
+          trace(' * set startingI to: ' + startingI);
+        }
+
+        iconsToMoveUp.push(icon);
+      }
+    }
+
+    var i = startingI;
+    for (icon in iconsToMoveUp)
+    {
+      icon.y = (Math.floor(i / 3) * charSel.grpYSpread);
+      icon.y += charSel.grpIcons.y;
+      icon.y += icon.height / 2;
+      // trace(icon.y);
+
+      i++;
+    }
   }
 }
