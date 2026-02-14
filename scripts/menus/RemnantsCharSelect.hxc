@@ -25,16 +25,20 @@ class RemnantsCharSelect extends Module
   }
 
   // the checks for the string not being a valid thing didn't work so these are sadly required ...
+  // ... and I can't do "iconAssetKey.contains(icon);"
   var iconPrefix:String = 'assets/images/freeplay/icons/';
   var iconSuffix:String = 'pixel.png';
 
+  // The icons that need adjusting
   var remnantIcons = [
     'pico-remnants',
     'bf-remnants',
   ];
 
+  // this is cause looping over it once won't let it STAY fixed...
   var iconsToMoveUp = [];
 
+  // this is for the math stuff
   var startingI = -1;
 
   override public function onUpdate(event:ScriptEvent)
@@ -69,7 +73,6 @@ class RemnantsCharSelect extends Module
           if (isRemnantIcon) continue;
           if (iconAssetKey == null) continue;
 
-          // ... and I can't do "iconAssetKey.contains(icon);"
           isRemnantIcon = iconAssetKey == (iconPrefix + icon + iconSuffix);
           if (isRemnantIcon)
           { 
@@ -98,7 +101,10 @@ class RemnantsCharSelect extends Module
     {
       icon.y = (Math.floor(i / 3) * charSel.grpYSpread);
       icon.y += charSel.grpIcons.y;
-      icon.y += icon.height / 2;
+      
+      icon.y -= icon.height / 4;
+      icon.y += 16;
+
       // trace(icon.y);
 
       i++;
