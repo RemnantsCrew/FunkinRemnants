@@ -1,6 +1,7 @@
 import funkin.ui.charSelect.CharSelectSubState;
 import funkin.modding.module.Module;
 import funkin.ui.MusicBeatSubState;
+import flixel.FlxG;
 
 class RemnantsCharSelect extends Module
 {
