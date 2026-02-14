@@ -16,6 +16,6 @@ class RemnantsCharSelect extends Module
 
     trace('Character Select');
 
-    var charSel:MusicBeatSubState = FlxG.state?.subState;
+    var charSel:CharSelectSubState = FlxG.state?.subState;
   }
 }
