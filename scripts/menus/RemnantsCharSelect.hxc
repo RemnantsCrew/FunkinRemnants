@@ -1,0 +1,20 @@
+import funkin.ui.charSelect.CharSelectSubState;
+import funkin.modding.module.Module;
+import funkin.ui.MusicBeatSubState;
+
+class RemnantsCharSelect extends Module
+{
+  public function new()
+  {
+    super('remnantsCharSelect', 1000, {state: CharSelectSubState});
+  }
+
+  override public function onSubStateOpenEnd(event:SubStateScriptEvent)
+  {
+    super.onSubStateOpenEnd(event);
+
+    trace('Character Select');
+
+    var charSel:MusicBeatSubState = FlxG.state?.subState;
+  }
+}
