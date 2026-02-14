@@ -77,8 +77,8 @@ class RemnantsResults extends Module
         FlxTween.tween(newBG, {alpha: 1}, 1.0, {
           ease: FlxEase.quartInOut,
         });
-        curState.bgFlash.visible = false;
 
+        curState.members[0].color = 0xFF000000;
         curState.insert(curState.members.indexOf(curState.bgFlash), newBG);
         curState.bgFlash?.makeGraphic(FlxG.width, FlxG.height, gradientColor);
 
