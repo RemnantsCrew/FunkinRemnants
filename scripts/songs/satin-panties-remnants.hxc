@@ -23,7 +23,7 @@ class SatinPantiesRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Stay out of mine", 'freeplay/albumRoll/remnants-week4');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Stay out of mine", path: 'freeplay/albumRoll/remnants-week4'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

@@ -41,7 +41,7 @@ class UghRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Ugh...", 'freeplay/albumRoll/remnants-week7');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Ugh...", path: 'freeplay/albumRoll/remnants-week7'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

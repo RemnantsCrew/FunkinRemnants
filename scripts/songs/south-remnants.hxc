@@ -259,7 +259,7 @@ class SouthRemnantsMixSong extends Song
     }
     else
     {
-      RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "What was that?", 'freeplay/albumRoll/remnants-week2');
+      RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "What was that?", path: 'freeplay/albumRoll/remnants-week2'});
     }
     
     super.onSongEnd(event);

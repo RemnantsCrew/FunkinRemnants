@@ -16,7 +16,7 @@ class HighRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Getting high on a friday night yeah", 'freeplay/albumRoll/remnants-week4');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Getting high on a friday night yeah", path: 'freeplay/albumRoll/remnants-week4'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

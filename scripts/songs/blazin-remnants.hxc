@@ -27,7 +27,7 @@ class BlazinRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Freinds again!", 'freeplay/albumRoll/remnants-weekend1');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Freinds again!", path: 'freeplay/albumRoll/remnants-weekend1'});
 	}
 
   function onCreate(event:ScriptEvent):Void

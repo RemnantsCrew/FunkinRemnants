@@ -19,7 +19,7 @@ class PlaytimeRemnantsSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "I want a hug...", 'freeplay/albumRoll/remnants-huggy');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "I want a hug...", path: 'freeplay/albumRoll/remnants-huggy'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

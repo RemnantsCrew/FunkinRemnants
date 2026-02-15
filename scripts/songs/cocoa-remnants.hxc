@@ -22,7 +22,7 @@ class CocoaRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Chocolate?", 'freeplay/albumRoll/remnants-week5');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Chocolate?", path: 'freeplay/albumRoll/remnants-week5'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

@@ -28,7 +28,7 @@ class TwoHOTRemnantsBFMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "I'm funkin' my remnants!", 'freeplay/albumRoll/remnants-weekend1-bf');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "I'm funkin' my remnants!", path: 'freeplay/albumRoll/remnants-weekend1-bf'});
 	}
 
   var bfAttackSound:FunkinSound;

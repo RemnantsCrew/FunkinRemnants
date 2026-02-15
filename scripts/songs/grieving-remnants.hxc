@@ -26,7 +26,7 @@ class GrievingRemnantsSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, 80085, "BOOBIES NO COME BACK", 'freeplay/albumRoll/remnants-grieving');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: null, 80085, "BOOBIES NO COME BACK", path: 'freeplay/albumRoll/remnants-grieving'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

@@ -23,7 +23,7 @@ class RemnantsErectSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, ['erect', 'nightmare'], RemnantsContentUtil.remnantsMedalName(), 'freeplay/albumRoll/remnants-general');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: null, ['erect', 'nightmare'], RemnantsContentUtil.remnantsMedalName(), path: 'freeplay/albumRoll/remnants-general'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

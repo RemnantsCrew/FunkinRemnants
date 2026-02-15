@@ -19,7 +19,7 @@ class GlitcherRemnantsSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "sudo rm -rf /user/bin", 'freeplay/albumRoll/remnants-glitcher');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "sudo rm -rf /user/bin", path: 'freeplay/albumRoll/remnants-glitcher'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

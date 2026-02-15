@@ -403,7 +403,7 @@ class GunsRemnantsMixSong extends Song
 
   function onSongEnd(event:ScriptEvent):Void
   {
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Brbrbrbrbrbrb", 'freeplay/albumRoll/remnants-week7');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Brbrbrbrbrbrb", path: 'freeplay/albumRoll/remnants-week7'});
     PlayState.instance.camGame.visible = false;
   }
 

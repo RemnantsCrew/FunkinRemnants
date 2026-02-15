@@ -24,7 +24,7 @@ class SpookeezRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "IT'S A SPOOKY MONTH!", 'freeplay/albumRoll/remnants-week2');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "IT'S A SPOOKY MONTH!", path: 'freeplay/albumRoll/remnants-week2'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

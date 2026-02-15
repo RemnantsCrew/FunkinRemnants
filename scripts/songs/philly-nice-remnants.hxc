@@ -23,7 +23,7 @@ class PhillyNiceRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "I don't know if it's that nice...", 'freeplay/albumRoll/remnants-week3');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "I don't know if it's that nice...", path: 'freeplay/albumRoll/remnants-week3'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

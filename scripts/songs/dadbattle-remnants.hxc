@@ -25,7 +25,7 @@ class DadBattleRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "She calls me daddy too!", 'freeplay/albumRoll/remnants-week1');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "She calls me daddy too!", path: 'freeplay/albumRoll/remnants-week1'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

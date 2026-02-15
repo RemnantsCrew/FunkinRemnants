@@ -33,7 +33,7 @@ class LitUpRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Liar Liar your pants lit on fire", 'freeplay/albumRoll/remnants-weekend1');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Liar Liar your pants lit on fire", path: 'freeplay/albumRoll/remnants-weekend1'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

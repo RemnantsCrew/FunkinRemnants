@@ -105,7 +105,7 @@ class TutorialRemnantsMixSong extends Song
       trace("Removed resize signal.");
     }
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "That's how you do it :3", 'freeplay/albumRoll/remnants-tutorial');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "That's how you do it :3", path: 'freeplay/albumRoll/remnants-tutorial'});
 
     super.onSongEnd(event);
   }

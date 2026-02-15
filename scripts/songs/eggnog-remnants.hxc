@@ -80,7 +80,7 @@ class EggnogRemnantsMixSong extends Song
       // Make sure the cutscene can play again next time!
       hasPlayedCutscene = false;
       // DO NOT CANCEL THE EVENT!
-      RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Plant the evidence", 'freeplay/albumRoll/remnants-week5');
+      RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Plant the evidence", path: 'freeplay/albumRoll/remnants-week5'});
     }
   }
 

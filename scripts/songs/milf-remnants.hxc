@@ -37,7 +37,7 @@ class MILFRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Mother I like Frogs", 'freeplay/albumRoll/remnants-week4');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Mother I like Frogs", path: 'freeplay/albumRoll/remnants-week4'});
 	}
 
   /**

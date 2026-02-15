@@ -55,7 +55,7 @@ class StressRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "You're stressing ME out...", 'freeplay/albumRoll/remnants-week7');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "You're stressing ME out...", path: 'freeplay/albumRoll/remnants-week7'});
 	}
 
   /**

@@ -37,7 +37,7 @@ class RosesRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "You pest!", 'freeplay/albumRoll/remnants-week6');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "You pest!", path: 'freeplay/albumRoll/remnants-week6'});
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

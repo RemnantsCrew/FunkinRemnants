@@ -407,7 +407,7 @@ class ThornsRemnantsMixSong extends Song
   function onSongEnd(event:ScriptEvent):Void
   {
     PlayState.instance.camGame.visible = false;
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "trace(\"Leave me alone.\");", 'freeplay/albumRoll/remnants-week6');
+    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "trace(\"Leave me alone.\");", path: 'freeplay/albumRoll/remnants-week6'});
 	}
 
   function onSongStart(event:ScriptEvent):Void
