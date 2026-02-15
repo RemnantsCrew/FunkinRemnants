@@ -2,7 +2,10 @@ import funkin.modding.module.Module;
 import funkin.ui.charSelect.CharSelectSubState;
 import funkin.ui.MusicBeatSubState;
 import funkin.util.ReflectUtil;
+
 import flixel.FlxG;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 
 using funkin.util.tools.StringTools;
 
@@ -16,12 +19,19 @@ class RemnantsCharSelect extends Module
   var charSel:CharSelectSubState = null;
   var fixedIcons:Bool = false;
 
+  // I forgot about the transitions
+  var iconYOffset:Float = 0;
+
   override public function onSubStateOpenEnd(event:SubStateScriptEvent)
   {
     super.onSubStateOpenEnd(event);
 
     charSel = FlxG.state;
     fixedIcons = false;
+
+    iconYOffset = -300;
+    
+    FlxTween.tween(this, {iconYOffset: 0}, 1, {ease: FlxEase.expoOut});
   }
 
   // the checks for the string not being a valid thing didn't work so these are sadly required ...
@@ -100,10 +110,13 @@ class RemnantsCharSelect extends Module
     for (icon in iconsToMoveUp)
     {
       icon.y = (Math.floor(i / 3) * charSel.grpYSpread);
-      icon.y += charSel.grpIcons.y;
+      icon.y += 120;
+      // icon.y += charSel.grpIcons.y;
       
       icon.y -= icon.height / 4;
       icon.y += 16;
+
+      icon.y += iconYOffset;
 
       // trace(icon.y);
 
