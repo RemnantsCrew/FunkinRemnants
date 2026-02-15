@@ -8,6 +8,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.math.FlxMath;
 import flixel.FlxG;
+import funkin.FunkinMemory;
 
 class DadRemnantsCharacter extends SparrowCharacter
 {
@@ -149,6 +150,7 @@ class DadRemnantsCharacter extends SparrowCharacter
   {
     super.onCreate(event);
 
+    FunkinMemory.cacheSound(Paths.sound('crash', "week1"));
     slip = false;
   }
 
