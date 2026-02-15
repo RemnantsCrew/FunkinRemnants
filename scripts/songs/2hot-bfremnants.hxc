@@ -23,13 +23,20 @@ class TwoHOTRemnantsBFMixSong extends Song
 
     hasPlayedCutscene = false;
   }
-  
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "I'm funkin' my remnants!", path: 'freeplay/albumRoll/remnants-weekend1-bf'});
-	}
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "I'm funkin' my remnants!",
+        path: 'freeplay/albumRoll/remnants-weekend1-bf'
+      });
+  }
 
   var bfAttackSound:FunkinSound;
 

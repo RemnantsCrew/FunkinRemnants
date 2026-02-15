@@ -22,12 +22,19 @@ class MonsterRemnantsMixSong extends Song
       });
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Oh won't chu give me a piece?", path: 'freeplay/albumRoll/remnants-week2-scaryk'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "Oh won't chu give me a piece?",
+        path: 'freeplay/albumRoll/remnants-week2-scaryk'
+      });
+  }
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {

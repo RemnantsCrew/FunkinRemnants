@@ -15,12 +15,19 @@ class GlitcherRemnantsSong extends Song
     super('glitcher-remnants');
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "sudo rm -rf /user/bin", path: 'freeplay/albumRoll/remnants-glitcher'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "sudo rm -rf /user/bin",
+        path: 'freeplay/albumRoll/remnants-glitcher'
+      });
+  }
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {

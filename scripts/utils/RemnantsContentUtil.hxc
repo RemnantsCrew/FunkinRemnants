@@ -3,7 +3,6 @@ import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.data.song.SongRegistry;
 import funkin.save.Save;
 import StringTools;
-
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import funkin.util.plugins.NewgroundsMedalPlugin;
@@ -31,23 +30,29 @@ class RemnantsContentUtil
       splitSong.remove(splitSong[splitSong.length - 1]);
       var curSong = splitSong.join('-');
 
-      if (remnantSongs.contains(curSong))
-        finishedRemnantsSongs.push(curSong);
+      if (remnantSongs.contains(curSong)) finishedRemnantsSongs.push(curSong);
     }
 
-    switch(finishedRemnantsSongs.length)
+    switch (finishedRemnantsSongs.length)
     {
-      case 1: return 'The second piece';
-      case 2: return 'THE REMNANTS TRIFECTA!';
+      case 1:
+        return 'The second piece';
+      case 2:
+        return 'THE REMNANTS TRIFECTA!';
     }
 
-    if (finishedRemnantsSongs.length >= 3)
-      return 'Bonus piece #' + finishedRemnantsSongs.length - 2;
-    
+    if (finishedRemnantsSongs.length >= 3) return 'Bonus piece #' + finishedRemnantsSongs.length - 2;
+
     return 'The first piece';
   }
 
-  public static function unlockNewgroundsMedal(params: {songID:String, difficulties:Array<String>, wantedpoints:Null<Int>, label:String, path:String})
+  public static function unlockNewgroundsMedal(params:{
+    songID:String,
+    difficulties:Array<String>,
+    wantedpoints:Null<Int>,
+    label:String,
+    path:String
+  })
   {
     var points:Null<Int> = params.wantedpoints;
 
@@ -56,100 +61,130 @@ class RemnantsContentUtil
       var si = StringTools.replace(params.songID, '-remnants', '').toLowerCase();
 
       // * :  as of when making this
-      switch(si)
+      switch (si)
       {
         // remnant downloads*
-        case 'remnants': points = 2803;
-        
+        case 'remnants':
+          points = 2803;
+
         // remnant views*
-        case 'remnants-erect': points = 2373;
+        case 'remnants-erect':
+          points = 2373;
 
         // remnant release trailer views*
-        case 'remnants-pico': points = 4932;
+        case 'remnants-pico':
+          points = 4932;
 
         // amount of ratings multiplied by average rating of fnf ludum dare*
-        case 'fresh': points = 502 * 4.48;
+        case 'fresh':
+          points = 502 * 4.48;
 
         // fnf newgrounds release date timestamp multiplied by 0.113 (1:13 am (est))
-        case 'dadbattle': points = 1604188800 * 0.113;
+        case 'dadbattle':
+          points = 1604188800 * 0.113;
 
         // (default) song length: (1:38)
-        case 'spookeez': points = 138;
+        case 'spookeez':
+          points = 138;
 
         // 4.84 score on ng for og song*
-        case 'south': points = 484;
-       
+        case 'south':
+          points = 484;
+
         // 4.70 score on ng for Bassetfilms' "What's in the Bathtub?"*
-        case 'monster': points = 470;
+        case 'monster':
+          points = 470;
 
         // 4.73 score on pico school*
-        case 'pico': points = 473;
-       
+        case 'pico':
+          points = 473;
+
         // note count for og song*
-        case 'philly-nice': points = 224;
-       
+        case 'philly-nice':
+          points = 224;
+
         // blam converted to numbers and added
-        case 'blammed': points = 2 + 12 + 1 + 13 + 13;
+        case 'blammed':
+          points = 2 + 12 + 1 + 13 + 13;
 
         // first 3 digits of pi
-        case 'high': points = 314;
-       
+        case 'high':
+          points = 314;
+
         // // how many bitches u get
         // case 'satin-panties': points = 0;
 
         // we're about to reach the funny
-        case 'satin-panties': points = 68;
-       
+        case 'satin-panties':
+          points = 68;
+
         // ( ͡° ͜ʖ ͡°)
-        case 'milf': points = 69;
+        case 'milf':
+          points = 69;
 
         // 1:55 og song length
-        case 'cocoa': points = 155;
-       
+        case 'cocoa':
+          points = 155;
+
         // eggnog sold each year (240 million cups) in the thousands*
-        case 'eggnog': points = 240 * 1000;
-       
+        case 'eggnog':
+          points = 240 * 1000;
+
         // monster made you get high
-        case 'winter-horrorland': points = 420;
-        
+        case 'winter-horrorland':
+          points = 420;
+
         // x position of "BG girls group0021" in week 6 (og) bgFreaks*
-        case 'senpai': points = 460;
-       
+        case 'senpai':
+          points = 460;
+
         // senpai scored you
-        case 'roses': points = -PlayState.instance.songScore;
-       
+        case 'roses':
+          points = -PlayState.instance.songScore;
+
         // why not?
-        case 'thorns': points = PlayState.instance.songScore * FlxG.random.float(0.1, 2.0);
+        case 'thorns':
+          points = PlayState.instance.songScore * FlxG.random.float(0.1, 2.0);
 
         // amount of tankman gameover lines for bf*
-        case 'ugh': points = 25;
-       
+        case 'ugh':
+          points = 25;
+
         // casualties in world war 2 (70 - 85 million) in thousands*
-        case 'guns': points = FlxG.random.float(70 * 85) * 1000;
-       
+        case 'guns':
+          points = FlxG.random.float(70 * 85) * 1000;
+
         // pico notes in the song*
-        case 'stress': points = 462;
+        case 'stress':
+          points = 462;
 
         // the private fnf newgrounds project id*
-        case 'darnell': points = 1528775;
-       
+        case 'darnell':
+          points = 1528775;
+
         // amount of deaths by fire annually*
-        case 'lit-up': points = 3000;
-       
+        case 'lit-up':
+          points = 3000;
+
         // 2hot in numbers to try and look like 2hot the world/phrase
-        case '2hot': points = 2401;
-       
+        case '2hot':
+          points = 2401;
+
         // notes in the hard version for pico*
-        case 'blazin': points = 1024;
+        case 'blazin':
+          points = 1024;
 
         // 404 not found
-        case 'glitcher': points = 404;
-       
+        case 'glitcher':
+          points = 404;
+
         // length of tormentor (og)* (4:24)
-        case 'tormentor': points = 423;
+        case 'tormentor':
+          points = 423;
 
         // amount of recent reviews on poppy playtime*
-        case 'playtime': points = 2979;
+        case 'playtime':
+          points = 2979;
 
         default:
           trace('no medal null points case for ' + si);
@@ -157,8 +192,7 @@ class RemnantsContentUtil
       }
     }
 
-    if (params.difficulties == null)
-      params.difficulties = ['easy', 'normal', 'hard'];
+    if (params.difficulties == null) params.difficulties = ['easy', 'normal', 'hard'];
 
     updateSongMedals();
 
@@ -168,23 +202,13 @@ class RemnantsContentUtil
 
       if (!songMedals.contains(params.songID + '-' + difficulty) || bruteForceMedals)
       {
-        new FlxTimer().start(1, function()
-          {
-            NewgroundsMedalPlugin.play(
-              points,
-              params.label ?? "Cool swag",
-              FlxGraphic.fromBitmapData(
-                BitmapData.fromBytes(
-                  Assets.getBytes(
-                    Paths.image(params.path)
-                  )
-                )
-              )
-            );
+        new FlxTimer().start(1, function() {
+          NewgroundsMedalPlugin.play(points, params.label ?? "Cool swag",
+            FlxGraphic.fromBitmapData(BitmapData.fromBytes(Assets.getBytes(Paths.image(params.path)))));
 
-            songMedals.push(params.songID + '-' + difficulty);
-            updateSongMedals();
-          });
+          songMedals.push(params.songID + '-' + difficulty);
+          updateSongMedals();
+        });
       }
     }
   }

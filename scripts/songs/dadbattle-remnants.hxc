@@ -21,12 +21,19 @@ class DadBattleRemnantsMixSong extends Song
       });
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "She calls me daddy too!", path: 'freeplay/albumRoll/remnants-week1'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "She calls me daddy too!",
+        path: 'freeplay/albumRoll/remnants-week1'
+      });
+  }
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {

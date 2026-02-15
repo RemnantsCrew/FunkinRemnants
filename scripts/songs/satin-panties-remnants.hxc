@@ -19,12 +19,19 @@ class SatinPantiesRemnantsMixSong extends Song
       });
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Stay out of mine", path: 'freeplay/albumRoll/remnants-week4'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "Stay out of mine",
+        path: 'freeplay/albumRoll/remnants-week4'
+      });
+  }
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {

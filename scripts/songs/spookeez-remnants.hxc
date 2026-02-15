@@ -20,12 +20,19 @@ class SpookeezRemnantsMixSong extends Song
       });
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "IT'S A SPOOKY MONTH!", path: 'freeplay/albumRoll/remnants-week2'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "IT'S A SPOOKY MONTH!",
+        path: 'freeplay/albumRoll/remnants-week2'
+      });
+  }
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {

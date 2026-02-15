@@ -33,12 +33,19 @@ class MILFRemnantsMixSong extends Song
       });
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: "Mother I like Frogs", path: 'freeplay/albumRoll/remnants-week4'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: "Mother I like Frogs",
+        path: 'freeplay/albumRoll/remnants-week4'
+      });
+  }
 
   /**
    * Health lost when hit by lamp.

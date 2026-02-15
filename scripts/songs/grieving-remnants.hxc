@@ -22,12 +22,21 @@ class GrievingRemnantsSong extends Song
     super('grieving-remnants');
   }
 
-	public function onSongEnd(event:ScriptEvent):Void 
-	{
-		super.onSongEnd(event);
+  public function onSongEnd(event:ScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal({songID: this.id, difficulties: null, wantedpoints: null, label: null, 80085, "BOOBIES NO COME BACK", path: 'freeplay/albumRoll/remnants-grieving'});
-	}
+    RemnantsContentUtil.unlockNewgroundsMedal(
+      {
+        songID: this.id,
+        difficulties: null,
+        wantedpoints: null,
+        label: null,
+        80085,
+        "BOOBIES NO COME BACK",
+        path: 'freeplay/albumRoll/remnants-grieving'
+      });
+  }
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
