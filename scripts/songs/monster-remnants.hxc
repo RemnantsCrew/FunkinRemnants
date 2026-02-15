@@ -32,7 +32,7 @@ class MonsterRemnantsMixSong extends Song
         difficulties: null,
         wantedpoints: null,
         label: "Oh won't chu give me a piece?",
-        path: 'freeplay/albumRoll/remnants-week2-scaryk'
+        path: 'freeplay/albumRoll/remnants-week2-scary'
       });
   }
 
