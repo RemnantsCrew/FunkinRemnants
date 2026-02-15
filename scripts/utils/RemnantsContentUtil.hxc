@@ -10,13 +10,22 @@ import funkin.util.plugins.NewgroundsMedalPlugin;
 
 class RemnantsContentUtil
 {
-  public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, points:Int, label:String, path:String)
+  public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, points:Null<Int>, label:String, path:String)
   {
+    if (points == null)
+    {
+      switch(songID.toLowerCase())
+      {
+        default:
+          points = 0;
+      }
+    }
+
     if (!Save.instance.hasBeatenSong(songID, difficulties))
 		{
       NewgroundsMedalPlugin.play(
         points,
-        label,
+        label ?? "Cool swag",
         FlxGraphic.fromBitmapData(
           BitmapData.fromBytes(
             Assets.getBytes(
