@@ -202,13 +202,11 @@ class RemnantsContentUtil
 
       if (!songMedals.contains(params.songID + '-' + difficulty) || bruteForceMedals)
       {
-        FlxTimer.wait(1, function() {
-          NewgroundsMedalPlugin.play(points, params.label ?? "Cool swag",
-            FlxGraphic.fromBitmapData(BitmapData.fromBytes(Assets.getBytes(Paths.image(params.path)))));
-
-          songMedals.push(params.songID + '-' + difficulty);
-          updateSongMedals();
-        });
+        NewgroundsMedalPlugin.play(points, params.label ?? "Cool swag",
+          FlxGraphic.fromBitmapData(BitmapData.fromBytes(Assets.getBytes(Paths.image(params.path)))));
+        
+        songMedals.push(params.songID + '-' + difficulty);
+        updateSongMedals();
       }
     }
   }
