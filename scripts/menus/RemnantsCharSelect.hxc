@@ -29,15 +29,10 @@ class RemnantsCharSelect extends Module
 
     charSel = FlxG.state;
     fixedIcons = false;
+    startingI = -1;
+    iconsToMoveUp = [];
 
     FlxTween.num(300, 0, 1.0, {ease: FlxEase.expoOut}, function(num) { iconYOffset = num; });
-  }
-
-  override public function onSubStateCloseBegin(event:SubStateScriptEvent)
-  {
-    super.onSubStateCloseBegin(event);
-
-    startingI = -1;
   }
 
   // the checks for the string not being a valid thing didn't work so these are sadly required ...
