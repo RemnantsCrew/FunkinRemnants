@@ -15,6 +15,13 @@ class GlitcherRemnantsSong extends Song
     super('glitcher-remnants');
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "sudo rm -rf /user/bin", 'freeplay/albumRoll/remnants-glitcher');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentDifficulty == 'easy' || currentDifficulty == 'normal' || currentDifficulty == 'hard')
