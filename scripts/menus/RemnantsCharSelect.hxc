@@ -104,6 +104,19 @@ class RemnantsCharSelect extends Module
       }
     }
 
+    var accepted = (charSel.allowInput && !charSel.pressedSelect && (charSel.controls.ACCEPT_P || charSel.mobileAccept));
+
+    if (accepted
+      || charSel.controls.BACK_P)
+    {
+      if (accepted)
+        new FlxTimer().start(1.5, function(t) {
+          FlxTween.num(0, 300,  0.8, {ease: FlxEase.backIn}, function(num) { iconYOffset = num; });
+        });
+      else
+        FlxTween.num(0, 300,  0.8, {ease: FlxEase.backIn}, function(num) { iconYOffset = num; });
+    }
+
     var i = startingI;
     for (icon in iconsToMoveUp)
     {
