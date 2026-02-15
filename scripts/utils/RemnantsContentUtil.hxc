@@ -49,9 +49,106 @@ class RemnantsContentUtil
   {
     if (points == null)
     {
-      switch(songID.toLowerCase())
+      var si = StringTools.replace(songID, '-remnants', '').toLowerCase()
+
+      // * :  as of when making this
+      switch(si)
       {
+        // remnant downloads*
+        case 'remnants': points = 2803;
+        
+        // remnant views*
+        case 'remnants-erect': points = 2373;
+
+        // remnant release trailer views*
+        case 'remnants-pico': points = 4932;
+
+        // amount of ratings multiplied by average rating of fnf ludum dare*
+        case 'fresh': points = 502 * 4.48;
+
+        // fnf newgrounds release date timestamp multiplied by 0.113 (1:13 am (est))
+        case 'dadbattle': points = 1604188800 * 0.113;
+
+        // (default) song length: (1:38)
+        case 'spookeez': points = 138;
+
+        // 4.84 score on ng for og song*
+        case 'south': points = 484;
+       
+        // 4.70 score on ng for Bassetfilms' "What's in the Bathtub?"*
+        case 'monster': points = 470;
+
+        // 4.73 score on pico school*
+        case 'pico': points = 473;
+       
+        // note count for og song*
+        case 'philly-nice': points = 224;
+       
+        // blam converted to numbers and added
+        case 'blammed': points = 2 + 12 + 1 + 13 + 13;
+
+        // first 3 digits of pi
+        case 'high': points = 314;
+       
+        // // how many bitches u get
+        // case 'satin-panties': points = 0;
+
+        // we're about to reach the funny
+        case 'satin-panties': points = 68;
+       
+        // ( ͡° ͜ʖ ͡°)
+        case 'milf': points = 69;
+
+        // 1:55 og song length
+        case 'cocoa': points = 155;
+       
+        // eggnog sold each year (240 million cups) in the thousands*
+        case 'eggnog': points = 240 * 1000;
+       
+        // monster made you get high
+        case 'winter-horrorland': points = 420;
+        
+        // x position of "BG girls group0021" in week 6 bgFreaks*
+        case 'senpai': points = 460;
+       
+        // senpai scored you
+        case 'roses': points = -PlayState.instance.songScore;
+       
+        // why not?
+        case 'thorns': points = PlayState.instance.songScore * FlxG.random.float(0.1, 2.0);
+
+        // amount of tankman gameover lines for bf*
+        case 'ugh': points = 25;
+       
+        // casualties in world war 2 (70 - 85 million) in thousands*
+        case 'guns': points = FlxG.random.float(70 * 85) * 1000;
+       
+        // pico notes in the song*
+        case 'stress': points = 462;
+
+        // the private fnf newgrounds project id*
+        case 'darnell': points = 1528775;
+       
+        // amount of deaths by fire annually*
+        case 'lit-up': points = 3000;
+       
+        // 2hot in numbers to try and look like 2hot the world/phrase
+        case '2hot': points = 2401;
+       
+        // notes in the hard version for pico*
+        case 'blazin': points = 1024;
+
+        // 404 not found
+        case 'glitcher': points = 404;
+       
+        // length of tormentor (og)* (4:24)
+        case 'tormentor': points = 423;
+
+        // amount of recent reviews on poppy playtime*
+        case 'playtime': points = 2979;
+
         default:
+          trace('no medal null points case for ' + si);
           points = 0;
       }
     }
