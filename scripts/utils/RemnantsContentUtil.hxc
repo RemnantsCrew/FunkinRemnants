@@ -21,20 +21,31 @@ class RemnantsContentUtil
       }
     }
 
-    if (!Save.instance.hasBeatenSong(songID, difficulties))
-		{
-      NewgroundsMedalPlugin.play(
-        points,
-        label ?? "Cool swag",
-        FlxGraphic.fromBitmapData(
-          BitmapData.fromBytes(
-            Assets.getBytes(
-              Paths.image(path)
+    if (difficulties == null)
+      difficulties = ['easy', 'normal', 'hard'];
+
+    updateSongMedals();
+
+    for (difficulty in difficulties)
+    {
+      if (!songMedals.contains(songID + '-' + difficulty))
+      {
+        NewgroundsMedalPlugin.play(
+          points,
+          label ?? "Cool swag",
+          FlxGraphic.fromBitmapData(
+            BitmapData.fromBytes(
+              Assets.getBytes(
+                Paths.image(path)
+              )
             )
           )
-        )
-      );
-		}
+        );
+
+        songMedals.push(songID + '-' + difficulty);
+        updateSongMedals();
+      }
+    }
   }
 
   public static function remnantsContentEnabled():Bool
@@ -80,6 +91,16 @@ class RemnantsContentUtil
     }
 
     return true;
+  }
+
+  public static var songMedals:Array<String> = [];
+
+  public static function updateSongMedals():Void
+  {
+    if (Save.instance.modOptions.exists('songMedals')) songMedals = Save.instance.modOptions.get('songMedals');
+
+    Save.instance.modOptions.set('songMedals', songMedals);
+    Save.instance.flush();
   }
 
   public static function loadLastRemnantsChar():Void
