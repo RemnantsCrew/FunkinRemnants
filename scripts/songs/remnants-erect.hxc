@@ -26,11 +26,9 @@ class RemnantsErectSong extends Song
     RemnantsContentUtil.unlockNewgroundsMedal(
       {
         songID: this.id,
-        difficulties: null,
+        difficulties: ['erect', 'nightmare'],
         wantedpoints: null,
-        label: null,
-        ['erect', 'nightmare'],
-        RemnantsContentUtil.remnantsMedalName(),
+        label: RemnantsContentUtil.remnantsMedalName(),
         path: 'freeplay/albumRoll/remnants-general'
       });
   }
