@@ -10,6 +10,8 @@ import funkin.util.plugins.NewgroundsMedalPlugin;
 
 class RemnantsContentUtil
 {
+  static var bruteForceMedals:Bool = true;
+
   public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, points:Null<Int>, label:String, path:String)
   {
     if (points == null)
@@ -28,7 +30,7 @@ class RemnantsContentUtil
 
     for (difficulty in difficulties)
     {
-      if (!songMedals.contains(songID + '-' + difficulty))
+      if (!songMedals.contains(songID + '-' + difficulty) || bruteForceMedals)
       {
         NewgroundsMedalPlugin.play(
           points,
