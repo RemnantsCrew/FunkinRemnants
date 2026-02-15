@@ -13,6 +13,13 @@ class DarnellBFRemnantsMixSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "Chud Street", 'freeplay/albumRoll/remnants-weekend1-bf');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentVariation == 'bfremnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);

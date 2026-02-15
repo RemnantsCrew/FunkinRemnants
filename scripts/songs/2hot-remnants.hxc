@@ -23,6 +23,13 @@ class TwoHOTRemnantsMixSong extends Song
     hasPlayedCutscene = false;
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "We got beef", 'freeplay/albumRoll/remnants-weekend1');
+	}
+
   function onCreate(event:ScriptEvent)
   {
     super.onCreate(event);

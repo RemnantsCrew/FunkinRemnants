@@ -23,6 +23,13 @@ class BlazinRemnantsMixSong extends Song
     this.hasPlayedCutscene = false;
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], 81423, "Freinds again!", 'freeplay/albumRoll/remnants-weekend1');
+	}
+
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);

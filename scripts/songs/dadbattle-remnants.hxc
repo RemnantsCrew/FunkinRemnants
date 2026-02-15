@@ -21,6 +21,13 @@ class DadBattleRemnantsMixSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "She calls me daddy too!", 'freeplay/albumRoll/remnants-week1');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentVariation == 'remnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);

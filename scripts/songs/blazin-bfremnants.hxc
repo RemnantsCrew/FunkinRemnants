@@ -24,6 +24,13 @@ class BlazinBFRemnantsMixSong extends Song
     this.hasPlayedCutscene = false;
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], 81423, "Blocks and Punches", 'freeplay/albumRoll/remnants-weekend1-bf');
+	}
+
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);

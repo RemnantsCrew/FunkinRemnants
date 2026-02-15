@@ -18,6 +18,13 @@ class CocoaRemnantsMixSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "Ludum Dare Extraordinaire", 'freeplay/albumRoll/remnants-week5');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentVariation == 'remnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);
