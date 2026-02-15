@@ -28,7 +28,7 @@ class BlammedRemnantsMixSong extends Song
         songID: this.id,
         difficulties: null,
         wantedpoints: null,
-        label: "Chud",
+        label: "Nice gun",
         path: 'freeplay/albumRoll/remnants-week3'
       });
   }
