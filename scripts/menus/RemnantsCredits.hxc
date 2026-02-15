@@ -4,6 +4,7 @@ import funkin.graphics.video.FunkinVideoSprite;
 import funkin.modding.module.Module;
 import funkin.graphics.FunkinSprite;
 import funkin.audio.FunkinSound;
+import funkin.save.Save;
 import flixel.FlxG;
 import Std;
 
@@ -41,6 +42,12 @@ class RemnantsCredits extends Module
     event.targetState.scrollPaused = true;
     event.targetState.creditsGroup.y += FlxG.height / 4;
     FlxG.sound.music?.stop();
+
+    if (!Save.instance.modOptions.exists('seenRemnantsCredits'))
+    {
+      Save.instance.modOptions.set('seenRemnantsCredits', true);
+      Save.instance.flush();
+    }
 
     startVideo();
   }

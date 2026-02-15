@@ -82,15 +82,6 @@ class RemnantsMainMenu extends Module
     if (Save.instance.modOptions.exists('seenRemnantsCredits')) return;
 
     var creditsMenuItem:FlxSprite = state.menuItems.getItem('credits');
-    if (creditsMenuItem != null)
-    {
-      var oldCallback:Void->Void = creditsMenuItem.callback;
-      creditsMenuItem.callback = () -> {
-        Save.instance.modOptions.set('seenRemnantsCredits', true);
-        Save.instance.flush();
-        oldCallback();
-      }
-    }
 
     newCredits = FunkinSprite.createSparrow((creditsMenuItem?.x ?? 0) + 200, (creditsMenuItem?.y ?? 0) - 80, 'freeplay/freeplayCapsule/new');
     newCredits.scrollFactor.set(creditsMenuItem?.scrollFactor?.x ?? 1, creditsMenuItem?.scrollFactor?.y ?? 1);
