@@ -30,10 +30,8 @@ class GrievingRemnantsSong extends Song
       {
         songID: this.id,
         difficulties: null,
-        wantedpoints: null,
-        label: null,
-        80085,
-        "BOOBIES NO COME BACK",
+        wantedpoints: 80085,
+        label: "BOOBIES NO COME BACK",
         path: 'freeplay/albumRoll/remnants-grieving'
       });
   }
