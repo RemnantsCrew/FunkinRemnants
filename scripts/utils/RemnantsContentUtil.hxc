@@ -204,7 +204,7 @@ class RemnantsContentUtil
       {
         var imgPath:String = params.path;
 
-        if (!Paths.exists(Paths.image((imgPath))))
+        if (!Assets.exists(Paths.image((imgPath))))
           params.path = 'freeplay/remnants-general';
 
         NewgroundsMedalPlugin.play(points, params.label ?? "Cool swag",
