@@ -109,7 +109,7 @@ class RemnantsContentUtil
         // monster made you get high
         case 'winter-horrorland': points = 420;
         
-        // x position of "BG girls group0021" in week 6 bgFreaks*
+        // x position of "BG girls group0021" in week 6 (og) bgFreaks*
         case 'senpai': points = 460;
        
         // senpai scored you
