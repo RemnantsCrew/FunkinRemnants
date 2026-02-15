@@ -4,8 +4,30 @@ import funkin.data.song.SongRegistry;
 import funkin.save.Save;
 import StringTools;
 
+import flixel.graphics.FlxGraphic;
+import openfl.display.BitmapData;
+import funkin.util.plugins.NewgroundsMedalPlugin;
+
 class RemnantsContentUtil
 {
+  public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, points:Int, label:String, path:String)
+  {
+    if (!Save.instance.hasBeatenSong(songID, difficulties))
+		{
+      NewgroundsMedalPlugin.play(
+        points,
+        label,
+        FlxGraphic.fromBitmapData(
+          BitmapData.fromBytes(
+            Assets.getBytes(
+              Paths.image(path)
+            )
+          )
+        )
+      );
+		}
+  }
+
   public static function remnantsContentEnabled():Bool
   {
     // Look through all new characters + the current selected character.
