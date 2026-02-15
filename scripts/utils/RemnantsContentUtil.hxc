@@ -8,6 +8,7 @@ import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import funkin.util.plugins.NewgroundsMedalPlugin;
 import flixel.util.FlxTimer;
+import funkin.play.PlayState;
 
 class RemnantsContentUtil
 {
