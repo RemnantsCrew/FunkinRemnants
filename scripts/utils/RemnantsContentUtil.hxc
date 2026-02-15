@@ -47,8 +47,10 @@ class RemnantsContentUtil
     return 'The first piece';
   }
 
-  public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, points:Null<Int>, label:String, path:String)
+  public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, wantedpoints:Null<Int>, label:String, path:String)
   {
+    var points:Null<Int> = wantedpoints;
+
     if (points == null)
     {
       var si = StringTools.replace(songID, '-remnants', '').toLowerCase();
