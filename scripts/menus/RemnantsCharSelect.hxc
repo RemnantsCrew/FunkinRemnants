@@ -33,6 +33,13 @@ class RemnantsCharSelect extends Module
     FlxTween.num(300, 0, 1.0, {ease: FlxEase.expoOut}, function(num) { iconYOffset = num; });
   }
 
+  override public function onSubStateCloseBegin(event:SubStateScriptEvent)
+  {
+    super.onSubStateCloseBegin(event);
+
+    startingI = -1;
+  }
+
   // the checks for the string not being a valid thing didn't work so these are sadly required ...
   // ... and I can't do "iconAssetKey.contains(icon);"
   var iconPrefix:String = 'assets/images/freeplay/icons/';
@@ -92,8 +99,6 @@ class RemnantsCharSelect extends Module
         }
 
         if (!isRemnantIcon) continue;
-
-        trace(' * ' + icon.y);
 
         if (i > startingI && startingI == -1)
         {
