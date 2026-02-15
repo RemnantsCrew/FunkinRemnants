@@ -26,7 +26,7 @@ class MonsterRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Oh won't chu give me a piece?", 'freeplay/albumRoll/remnants-week2-scary');
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Oh won't chu give me a piece?", 'freeplay/albumRoll/remnants-week2-scaryk');
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
