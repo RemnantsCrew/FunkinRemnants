@@ -27,7 +27,7 @@ class TwoHOTRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "We got beef", 'freeplay/albumRoll/remnants-weekend1');
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "We got beef", 'freeplay/albumRoll/remnants-weekend1');
 	}
 
   function onCreate(event:ScriptEvent)

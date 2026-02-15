@@ -23,7 +23,7 @@ class BlammedRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "Chud", 'freeplay/albumRoll/remnants-week3');
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Chud", 'freeplay/albumRoll/remnants-week3');
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

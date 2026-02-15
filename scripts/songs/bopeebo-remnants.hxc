@@ -17,7 +17,7 @@ class BopeeboRemnantsMixSong extends Song
 		super.onSongEnd(event);
 
     //                                                                  ludum dare 47
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], 47, "Ludum Dare Extraordinaire", 'freeplay/albumRoll/remnants-week1');
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, 47, "Ludum Dare Extraordinaire", 'freeplay/albumRoll/remnants-week1');
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool

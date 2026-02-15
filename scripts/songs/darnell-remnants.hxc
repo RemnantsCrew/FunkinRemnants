@@ -59,7 +59,7 @@ class DarnellRemnantsMixSong extends Song
 	{
 		super.onSongEnd(event);
 
-    RemnantsContentUtil.unlockNewgroundsMedal(this.id, ['easy', 'normal', 'hard'], null, "Chud!", 'freeplay/albumRoll/remnants-weekend1');
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Chud!", 'freeplay/albumRoll/remnants-weekend1');
 	}
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
