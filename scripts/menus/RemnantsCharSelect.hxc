@@ -45,7 +45,7 @@ class RemnantsCharSelect extends Module
           },
         function(icon:PixelatedIcon) 
           {
-            return -(icon.height / 4) + 16;
+            return -(icon.height / 4) + 48;
           }
       ]
     ],
@@ -58,7 +58,7 @@ class RemnantsCharSelect extends Module
           },
         function(icon:PixelatedIcon) 
           {
-            return -(icon.height / 4) + 16;
+            return -(icon.height / 4) + 48;
           }
       ]
     ],
