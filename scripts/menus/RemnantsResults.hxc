@@ -73,6 +73,10 @@ class RemnantsResults extends Module
         newBG.scrollFactor.set();
         newBG.zIndex = 11;
 
+        newBG.alpha = 0;
+        FlxTween.tween(newBG, {alpha: 1}, 1.0, {ease: FlxEase.quartInOut});
+
+        curState.members[0].color = 0xFF000000;
         curState.insert(curState.members.indexOf(curState.bgFlash), newBG);
         curState.bgFlash?.makeGraphic(FlxG.width, FlxG.height, gradientColor);
 
