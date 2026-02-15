@@ -49,7 +49,7 @@ class RemnantsContentUtil
   {
     if (points == null)
     {
-      var si = StringTools.replace(songID, '-remnants', '').toLowerCase()
+      var si = StringTools.replace(songID, '-remnants', '').toLowerCase();
 
       // * :  as of when making this
       switch(si)
