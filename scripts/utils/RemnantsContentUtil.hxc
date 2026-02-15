@@ -7,6 +7,7 @@ import StringTools;
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
 import funkin.util.plugins.NewgroundsMedalPlugin;
+import flixel.util.FlxTimer;
 
 class RemnantsContentUtil
 {
@@ -160,22 +161,27 @@ class RemnantsContentUtil
 
     for (difficulty in difficulties)
     {
+      if (PlayState.instance.currentDifficulty != difficulty) continue;
+
       if (!songMedals.contains(songID + '-' + difficulty) || bruteForceMedals)
       {
-        NewgroundsMedalPlugin.play(
-          points,
-          label ?? "Cool swag",
-          FlxGraphic.fromBitmapData(
-            BitmapData.fromBytes(
-              Assets.getBytes(
-                Paths.image(path)
+        new FlxTimer().start(1, function()
+          {
+            NewgroundsMedalPlugin.play(
+              points,
+              label ?? "Cool swag",
+              FlxGraphic.fromBitmapData(
+                BitmapData.fromBytes(
+                  Assets.getBytes(
+                    Paths.image(path)
+                  )
+                )
               )
-            )
-          )
-        );
+            );
 
-        songMedals.push(songID + '-' + difficulty);
-        updateSongMedals();
+            songMedals.push(songID + '-' + difficulty);
+            updateSongMedals();
+          });
       }
     }
   }
