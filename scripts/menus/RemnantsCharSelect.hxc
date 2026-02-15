@@ -39,10 +39,12 @@ class RemnantsCharSelect extends Module
     [
       'pico-remnants',
       [
+        // x
         function(icon:PixelatedIcon)
           {
             return 0;
           },
+        // y
         function(icon:PixelatedIcon) 
           {
             return -(icon.height / 4) + 48;
@@ -52,10 +54,12 @@ class RemnantsCharSelect extends Module
     [
       'bf-remnants',
       [
+        // x
         function(icon:PixelatedIcon)
           {
             return 0;
           },
+        // y
         function(icon:PixelatedIcon) 
           {
             return -(icon.height / 4) + 48;
