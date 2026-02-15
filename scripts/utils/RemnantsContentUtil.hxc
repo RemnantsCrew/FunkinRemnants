@@ -47,13 +47,13 @@ class RemnantsContentUtil
     return 'The first piece';
   }
 
-  public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, wantedpoints:Null<Int>, label:String, path:String)
+  public static function unlockNewgroundsMedal(params: {songID:String, difficulties:Array<String>, wantedpoints:Null<Int>, label:String, path:String})
   {
-    var points:Null<Int> = wantedpoints;
+    var points:Null<Int> = params.wantedpoints;
 
     if (points == null)
     {
-      var si = StringTools.replace(songID, '-remnants', '').toLowerCase();
+      var si = StringTools.replace(params.songID, '-remnants', '').toLowerCase();
 
       // * :  as of when making this
       switch(si)
@@ -157,32 +157,32 @@ class RemnantsContentUtil
       }
     }
 
-    if (difficulties == null)
-      difficulties = ['easy', 'normal', 'hard'];
+    if (params.difficulties == null)
+      params.difficulties = ['easy', 'normal', 'hard'];
 
     updateSongMedals();
 
-    for (difficulty in difficulties)
+    for (difficulty in params.difficulties)
     {
       if (PlayState.instance.currentDifficulty != difficulty) continue;
 
-      if (!songMedals.contains(songID + '-' + difficulty) || bruteForceMedals)
+      if (!songMedals.contains(params.songID + '-' + difficulty) || bruteForceMedals)
       {
         new FlxTimer().start(1, function()
           {
             NewgroundsMedalPlugin.play(
               points,
-              label ?? "Cool swag",
+              params.label ?? "Cool swag",
               FlxGraphic.fromBitmapData(
                 BitmapData.fromBytes(
                   Assets.getBytes(
-                    Paths.image(path)
+                    Paths.image(params.path)
                   )
                 )
               )
             );
 
-            songMedals.push(songID + '-' + difficulty);
+            songMedals.push(params.songID + '-' + difficulty);
             updateSongMedals();
           });
       }
