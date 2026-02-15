@@ -202,8 +202,13 @@ class RemnantsContentUtil
 
       if (!songMedals.contains(params.songID + '-' + difficulty) || bruteForceMedals)
       {
+        var imgPath:String = params.path;
+
+        if (!Paths.exists(Paths.image((imgPath))))
+          params.path = 'freeplay/remnants-general';
+
         NewgroundsMedalPlugin.play(points, params.label ?? "Cool swag",
-          FlxGraphic.fromBitmapData(BitmapData.fromBytes(Assets.getBytes(Paths.image(params.path)))));
+          FlxGraphic.fromBitmapData(BitmapData.fromBytes(Assets.getBytes(Paths.image(imgPath)))));
         
         songMedals.push(params.songID + '-' + difficulty);
         updateSongMedals();
