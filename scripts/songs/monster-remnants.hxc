@@ -22,6 +22,13 @@ class MonsterRemnantsMixSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Oh won't chu give me a piece?", 'freeplay/albumRoll/remnants-week2-scary');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentVariation == 'remnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);

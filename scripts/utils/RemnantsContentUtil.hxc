@@ -12,6 +12,39 @@ class RemnantsContentUtil
 {
   static var bruteForceMedals:Bool = true;
 
+  public static function remnantsMedalName()
+  {
+    updateSongMedals();
+
+    var remnantSongs:Array<String> = ['remnants', 'remnants-erect', 'remnants-pico'];
+    var finishedRemnantsSongs:Array<String> = [];
+
+    var piece1:Bool = false;
+    var piece2:Bool = false;
+    var piece3:Bool = false;
+
+    for (song in songMedals)
+    {
+      var splitSong = song.split('-');
+      splitSong.remove(splitSong[splitSong.length - 1]);
+      var curSong = splitSong.join('-');
+
+      if (remnantSongs.contains(curSong))
+        finishedRemnantsSongs.push(curSong);
+    }
+
+    switch(finishedRemnantsSongs.length)
+    {
+      case 1: return 'The second piece';
+      case 2: return 'THE REMNANTS TRIFECTA!';
+    }
+
+    if (finishedRemnantsSongs.length >= 3)
+      return 'Bonus piece #' + finishedRemnantsSongs.length - 2;
+    
+    return 'The first piece';
+  }
+
   public static function unlockNewgroundsMedal(songID:String, difficulties:Array<String>, points:Null<Int>, label:String, path:String)
   {
     if (points == null)

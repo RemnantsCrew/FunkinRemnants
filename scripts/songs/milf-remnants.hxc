@@ -33,6 +33,13 @@ class MILFRemnantsMixSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Mother I like Frogs", 'freeplay/albumRoll/remnants-week4');
+	}
+
   /**
    * Health lost when hit by lamp.
    */

@@ -19,6 +19,13 @@ class RemnantsErectSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, ['erect', 'nightmare'], RemnantsContentUtil.remnantsMedalName(), 'freeplay/albumRoll/remnants-general');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentDifficulty == 'erect' || currentDifficulty == 'nightmare')

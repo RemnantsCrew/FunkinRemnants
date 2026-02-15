@@ -26,6 +26,13 @@ class LitUpBFRemnantsMixSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "That's a fire hazard", 'freeplay/albumRoll/remnants-weekend1-bf');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentVariation == 'bfremnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);

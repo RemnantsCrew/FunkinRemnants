@@ -37,6 +37,13 @@ class UghRemnantsMixSong extends Song
     hasPlayedCutscene = false;
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "Ugh...", 'freeplay/albumRoll/remnants-week7');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentVariation == 'remnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);

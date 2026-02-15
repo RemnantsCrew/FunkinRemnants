@@ -15,6 +15,13 @@ class PlaytimeRemnantsSong extends Song
     super('playtime-remnants');
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "I want a hug...", 'freeplay/albumRoll/remnants-huggy');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentDifficulty == 'easy' || currentDifficulty == 'normal' || currentDifficulty == 'hard')

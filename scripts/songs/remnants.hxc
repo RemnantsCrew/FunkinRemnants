@@ -127,7 +127,8 @@ class RemnantsSong extends Song
   function onSongEnd(event:ScriptEvent):Void
   {
     PlayState.instance.camGame.visible = false;
-  }
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, RemnantsContentUtil.remnantsMedalName(), 'freeplay/albumRoll/remnants-general');
+	}
 
   function onBeatHit(event:ScriptEvent):Void
   {

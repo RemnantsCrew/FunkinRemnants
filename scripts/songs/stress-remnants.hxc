@@ -51,6 +51,13 @@ class StressRemnantsMixSong extends Song
     hasPlayedCutscene = false;
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "You're stressing ME out...", 'freeplay/albumRoll/remnants-week7');
+	}
+
   /**
    * Replay the cutscene after leaving the song.
    */

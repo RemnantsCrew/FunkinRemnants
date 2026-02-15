@@ -18,6 +18,13 @@ class TormentorSong extends Song
     super('tormentor-remnants');
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "WAKE UP.", 'freeplay/albumRoll/remnants-corruption');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentDifficulty == 'easy' || currentDifficulty == 'normal' || currentDifficulty == 'hard')

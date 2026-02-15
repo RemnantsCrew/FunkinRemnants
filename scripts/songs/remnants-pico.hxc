@@ -24,6 +24,13 @@ class RemnantsPicoSong extends Song
       });
   }
 
+	public function onSongEnd(event:ScriptEvent):Void 
+	{
+		super.onSongEnd(event);
+
+    RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, RemnantsContentUtil.remnantsMedalName(), 'freeplay/albumRoll/remnants-pico');
+	}
+
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
     if (currentDifficulty == 'easy' || currentDifficulty == 'normal' || currentDifficulty == 'hard')

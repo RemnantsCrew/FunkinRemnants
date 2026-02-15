@@ -257,6 +257,11 @@ class SouthRemnantsMixSong extends Song
         currentStage?.visible = true;
       });
     }
+    else
+    {
+      RemnantsContentUtil.unlockNewgroundsMedal(this.id, null, null, "What was that?", 'freeplay/albumRoll/remnants-week2');
+    }
+    
     super.onSongEnd(event);
   }
 }
