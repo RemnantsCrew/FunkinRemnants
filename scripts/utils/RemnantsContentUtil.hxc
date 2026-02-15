@@ -202,7 +202,7 @@ class RemnantsContentUtil
 
       if (!songMedals.contains(params.songID + '-' + difficulty) || bruteForceMedals)
       {
-        new FlxTimer().start(1, function(t) {
+        new FlxTimer().start(1, function(t:FlxTimer) {
           NewgroundsMedalPlugin.play(points, params.label ?? "Cool swag",
             FlxGraphic.fromBitmapData(BitmapData.fromBytes(Assets.getBytes(Paths.image(params.path)))));
 
