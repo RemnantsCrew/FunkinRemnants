@@ -105,16 +105,16 @@ class RemnantsCredits extends Module
     if (vid?.bitmap != null)
     {
       var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
-      if (FlxG.onMobile) justPressedEnter = TouchUtil.pressed && !TouchUtil.overlaps(backButton);
+      var pressingEnterMobile:Bool = (FlxG.onMobile) ? TouchUtil.pressed && !TouchUtil.overlaps(state.backButton) : false;
 
       if (playingVideo)
       {
-        vid.bitmap.rate = pressingEnter ? 2 : 1;
+        vid.bitmap.rate = (pressingEnter || pressingEnterMobile) ? 2 : 1;
 
         if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) vid.pause();
         else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT) vid.resume();
       }
-      else if (pressingEnter)
+      else if (pressingEnter || pressingEnterMobile)
       {
         // Move the whole group by the base scroll speed.
         vid.y -= CreditsState.CREDITS_SCROLL_FAST_SPEED * event.elapsed;
