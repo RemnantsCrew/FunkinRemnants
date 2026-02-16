@@ -92,6 +92,7 @@ class RemnantsBumpers extends Module
     {
       trace("setupBumper() returned 'true', stopping the countdown...");
       event.cancel();
+      event.stopPropagation();
     }
   }
 
