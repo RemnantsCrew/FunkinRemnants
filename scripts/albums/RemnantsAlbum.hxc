@@ -8,19 +8,21 @@ import haxe.Json;
 
 class RemnantsAlbum extends Album
 {
+  var albumArtJsonObj:Dynamic = {};
+
   public function new()
   {
     super('remnants');
+
+    var albumArtJsonPath:String = Paths.json('ui/freeplay/remnant-album-covers');
+    albumArtJsonObj = Json.parse(Assets.getText(albumArtJsonPath))?.albumCoversList ?? {};
   }
 
   override public function getAlbumArtAssetKey():String
   {
-    var albumArtJsonPath:String = Paths.json('ui/freeplay/remnant-album-covers');
-    var albumArtJsonObj:Map<String, Map<String, String>> = Json.parse(Assets.getText(albumArtJsonPath)).albumCoversList;
-
     var curSelectedFreeplaySong:FreeplaySongData = FlxG.state.subState.currentCapsule.freeplayData;
 
-    var curSongAlbumVariations:Map<String, String> = ReflectUtil.getProperty(albumArtJsonObj, curSelectedFreeplaySong.songId);
+    var curSongAlbumVariations:Dynamic = ReflectUtil.getProperty(albumArtJsonObj, curSelectedFreeplaySong.songId);
     var curVariationAlbum:String = ReflectUtil.getProperty(curSongAlbumVariations, curSelectedFreeplaySong.curVariation);
 
     var albumPath:String = 'freeplay/albumRoll/' + curVariationAlbum;
