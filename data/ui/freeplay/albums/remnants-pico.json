@@ -1,8 +1,0 @@
-{
-  "version": "1.0.0",
-  "name": "Funkin' Remnants OST",
-  "artists": ["Remnants Mix Team"],
-  "albumArtAsset": "freeplay/albumRoll/remnants-pico",
-  "albumTitleAsset": "freeplay/albumRoll/remnants-text",
-  "albumTitleOffsets": [-15, 0]
-}

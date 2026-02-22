@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "name": "Funkin' Remnants OST",
   "artists": ["Funkin' Remnants Mix Team"],
-  "albumArtAsset": "freeplay/albumRoll/remnants-week1",
+  "albumArtAsset": "freeplay/albumRoll/remnants-placeholder",
   "albumTitleAsset": "freeplay/albumRoll/remnants-text",
   "albumTitleOffsets": [-15, 0]
 }

@@ -1,8 +1,0 @@
-{
-  "version": "1.0.0",
-  "name": "Funkin' Remnants OST",
-  "artists": ["Loopy"],
-  "albumArtAsset": "freeplay/albumRoll/remnants-huggy",
-  "albumTitleAsset": "freeplay/albumRoll/remnants-text",
-  "albumTitleOffsets": [-15, 0]
-}

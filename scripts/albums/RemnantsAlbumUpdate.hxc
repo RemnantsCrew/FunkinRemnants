@@ -1,0 +1,38 @@
+import funkin.ui.freeplay.AlbumRoll;
+import funkin.modding.module.Module;
+import flixel.FlxG;
+
+class RemnantsAlbumUpdate extends Module
+{
+  public function new()
+  {
+    super('RemnantsAlbumUpdate');
+  }
+
+  var previousAlbumKey:String = null;
+
+  override public function onCapsuleSelected(event:CapsuleScriptEvent):Void
+  {
+    if (event?.capsule?.freeplayData?.data?.getAlbumId(event.difficultyId, event.variationId) == 'remnants')
+    {
+      var albumRoll:AlbumRoll = FlxG.state.subState.albumRoll;
+
+      if (albumRoll.albumData == null)
+      {
+        return;
+      }
+
+      var albumRollKey:String = albumRoll?.albumData?.getAlbumArtAssetKey();
+
+      if (albumRollKey != previousAlbumKey || previousAlbumKey == null)
+      {
+        albumRoll.updateAlbum();
+        albumRoll.skipIntro();
+      }
+
+      previousAlbumKey = albumRollKey;
+    }
+
+    super.onCapsuleSelected(event);
+  }
+}
