@@ -1,10 +1,7 @@
 import funkin.play.song.Song;
-import funkin.modding.module.ModuleHandler;
 import funkin.play.PlayState;
 import funkin.save.Save;
-import funkin.graphics.FunkinSprite;
 import funkin.util.FlxTweenUtil;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxG;
 import funkin.util.SongSequence;
@@ -12,8 +9,6 @@ import funkin.Conductor;
 
 class BlazinBFRemnantsMixSong extends Song
 {
-  var black:FunkinSprite;
-  var fadeOut:Bool = false;
   var sequence:SongSequence;
 
   public function new()
@@ -33,13 +28,6 @@ class BlazinBFRemnantsMixSong extends Song
 
     this.hasHidden = false;
     this.hasPlayedCutscene = false;
-    fadeOut = false;
-
-    black = new FunkinSprite(-1600, -500);
-    black.makeSolidColor(4200, 1800, 0xFF000000);
-    black.cameras = [PlayState.instance.camGame];
-    PlayState.instance.add(black);
-    black.alpha = 1;
   }
 
   function onDestroy(event:ScriptEvent):Void
@@ -97,86 +85,5 @@ class BlazinBFRemnantsMixSong extends Song
     {
       playerStrumline.x = FlxG.width / 2 - playerStrumline.width / 2;
     }
-  }
-
-  function onSongRetry(event:ScriptEvent)
-  {
-    super.onSongRetry(event);
-
-    FlxG.camera.stopFX();
-    FlxTween.cancelTweensOf(black);
-
-    if (fadeOut)
-    {
-      FlxTween.tween(black, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-      fadeOut = false;
-    }
-    else
-    {
-      black.cameras = [PlayState.instance.camGame];
-      black.alpha = 1;
-    }
-  }
-
-  function onGameOver(event:ScriptEvent):Void
-  {
-    super.onGameOver(event);
-    sequence?.destroy();
-
-    FlxG.camera.stopFX();
-    fadeOut = false;
-  }
-
-  function onPause(event:ScriptEvent):Void
-  {
-    super.onPause(event);
-
-    FlxG.camera?.active = false;
-    for (i in [black, PlayState.instance.camHUD])
-      FlxTweenUtil.pauseTweensOf(i);
-  }
-
-  function onResume(event:ScriptEvent):Void
-  {
-    super.onResume(event);
-
-    FlxG.camera?.active = true;
-    for (i in [black, PlayState.instance.camHUD])
-      FlxTweenUtil.resumeTweensOf(i);
-  }
-
-  function onSongLoaded(event:SongLoadScriptEvent)
-  {
-    sequence?.destroy();
-
-    var sequenceData = [
-      {
-        time: 0,
-        callback: () -> {
-          FlxTween.tween(black, {alpha: 0.5}, 10.66);
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(32) / 1000,
-        callback: () -> {
-          FlxG.camera.flash(0xFFFFFFFF, 0.5);
-          black.alpha = 0;
-          fadeOut = true;
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(352) / 1000,
-        callback: () -> {
-          black.cameras = [PlayState.instance.camCutscene];
-          FlxTween.tween(black, {alpha: 1}, 6);
-          fadeOut = false;
-        }
-      },
-    ];
-
-    sequence = new SongSequence(sequenceData);
-    sequence.startTime = 0;
   }
 }

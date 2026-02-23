@@ -12,7 +12,6 @@ class RemnantsSong extends Song
 {
   var hasPlayedIntro:Bool;
   var outro:Bool = false;
-  var hudFade:Bool = false;
   var sequence:SongSequence;
 
   function new()
@@ -58,15 +57,11 @@ class RemnantsSong extends Song
     PlayState.instance.camHUD.alpha = 0;
     hasPlayedIntro = false;
     outro = false;
-    hudFade = false;
   }
 
   function onCountdownStart(event:ScriptEvent):Void
   {
     super.onCountdownStart(event);
-
-    PlayState.instance.camHUD.alpha = 0;
-    PlayState.instance.camHUD.visible = true;
 
     if (!hasPlayedIntro)
     {
@@ -79,31 +74,16 @@ class RemnantsSong extends Song
     }
   }
 
-  /**
-   * Don't replay the cutscene between restarts.
-   */
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
 
     hasPlayedIntro = true;
 
-    if (outro)
-    {
-      PlayState.instance.camCutscene?.stopFX();
-      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, false);
-      outro = false;
-    }
-
-    if (hudFade)
+    if (PlayState.instance.camHUD.alpha > 0)
     {
       FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.5, {ease: FlxEase.linear});
-      hudFade = false;
-    }
-    else
-    {
-      PlayState.instance.camHUD.visible = false;
+      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.5, {ease: FlxEase.expoIn});
     }
   }
 
@@ -112,17 +92,14 @@ class RemnantsSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
-    hudFade = false;
   }
 
   function onPause(event:ScriptEvent):Void
   {
     super.onPause(event);
 
-    PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
@@ -130,7 +107,6 @@ class RemnantsSong extends Song
   {
     super.onResume(event);
 
-    PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
@@ -150,8 +126,6 @@ class RemnantsSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(272) / 1000,
         callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 0.8, false, null, false);
-          outro = true;
           hudFade = false;
         }
       },

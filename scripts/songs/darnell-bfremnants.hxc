@@ -1,14 +1,9 @@
 import funkin.modding.module.ModuleHandler;
 import funkin.play.song.Song;
 import funkin.save.Save;
-import funkin.play.PlayState;
-import funkin.util.SongSequence;
-import funkin.Conductor;
 
 class DarnellBFRemnantsMixSong extends Song
 {
-  var outro:Bool = false;
-
   public function new()
   {
     super('darnell',
@@ -28,51 +23,5 @@ class DarnellBFRemnantsMixSong extends Song
     var results:Array<String> = super.listAltInstrumentalIds(difficultyId, variationId);
     var hasBeatenRemnantsMix = Save.instance.hasBeatenSong(this.id, null, this.variation);
     if (hasBeatenRemnantsMix) return results;
-  }
-
-  function onCreate(event:ScriptEvent):Void
-  {
-    super.onCreate(event);
-
-    outro = false;
-  }
-
-  function onSongRetry(event:ScriptEvent)
-  {
-    super.onSongRetry(event);
-    sequence?.destroy();
-
-    if (outro) PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, false);
-  }
-
-  function onGameOver(event:ScriptEvent):Void
-  {
-    super.onGameOver(event);
-    sequence?.destroy();
-  }
-
-  function onCountdownStart(event:ScriptEvent):Void
-  {
-    super.onCountdownStart(event);
-
-    var sequenceData = [
-      {
-        time: Conductor.instance.getBeatTimeInMs(320) / 1000,
-        callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 0.1, false, null, false);
-          outro = true;
-        }
-      },
-    ];
-
-    sequence = new SongSequence(sequenceData);
-    sequence.startTime = 0;
-  }
-
-  function onDestroy(event:ScriptEvent):Void
-  {
-    super.onDestroy(event);
-
-    sequence?.destroy();
   }
 }

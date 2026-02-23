@@ -1,5 +1,4 @@
 import funkin.save.Save;
-import funkin.Preferences;
 import funkin.play.song.Song;
 import funkin.play.PlayState;
 import funkin.util.FlxTweenUtil;
@@ -10,7 +9,6 @@ import funkin.Conductor;
 
 class GlitcherRemnantsSong extends Song
 {
-  var fadeOut:Bool = false;
   var sequence:SongSequence;
 
   public function new()
@@ -27,33 +25,12 @@ class GlitcherRemnantsSong extends Song
     return false;
   }
 
-  function onCreate(event:ScriptEvent):Void
-  {
-    super.onCreate(event);
-
-    PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
-    PlayState.instance.camHUD.alpha = 0;
-    PlayState.instance.disableKeys = true;
-    fadeOut = false;
-  }
-
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
     sequence?.destroy();
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-
-    if (fadeOut)
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, false);
-      fadeOut = false;
-    }
-    else
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
-    }
   }
 
   function onGameOver(event:ScriptEvent):Void
@@ -61,17 +38,14 @@ class GlitcherRemnantsSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
-    fadeOut = false;
   }
 
   function onPause(event:ScriptEvent):Void
   {
     super.onPause(event);
 
-    PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
@@ -79,7 +53,6 @@ class GlitcherRemnantsSong extends Song
   {
     super.onResume(event);
 
-    PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
@@ -92,16 +65,13 @@ class GlitcherRemnantsSong extends Song
         time: 0,
         callback: () -> {
           PlayState.instance.camHUD.alpha = 0;
-          PlayState.instance.camCutscene.fade(0xFF000000, 4, true, null, false);
         }
       },
 
       {
         time: Conductor.instance.getBeatTimeInMs(14) / 1000,
         callback: () -> {
-          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-          PlayState.instance.disableKeys = false;
-          fadeOut = true;
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.5);
         }
       },
 
@@ -136,8 +106,7 @@ class GlitcherRemnantsSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(471) / 1000,
         callback: () -> {
-          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.5, {ease: FlxEase.linear});
-          PlayState.instance.disableKeys = true;
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.5);
         }
       },
     ];

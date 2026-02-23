@@ -4,7 +4,6 @@ import funkin.play.song.Song;
 import funkin.play.PlayState;
 import funkin.audio.FunkinSound;
 import funkin.graphics.FunkinSprite;
-import funkin.modding.module.ModuleHandler;
 import funkin.util.FlxTweenUtil;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxTween;
@@ -25,7 +24,6 @@ import funkin.Conductor;
  */
 class MILFRemnantsMixSong extends Song
 {
-  var fadeOut:Bool = false;
   var sequence:SongSequence;
 
   public function new()
@@ -151,9 +149,7 @@ class MILFRemnantsMixSong extends Song
     // Refresh the stage to reorganize props by z-index.
     PlayState.instance.currentStage.refresh();
 
-    PlayState.instance.camHUD.fade(0xFF000000, 0, false, null, false);
     PlayState.instance.disableKeys = true;
-    fadeOut = false;
   }
 
   /**
@@ -171,20 +167,7 @@ class MILFRemnantsMixSong extends Song
     this.hardResetSong();
     PlayState.instance.currentStage.refresh();
 
-    PlayState.instance.camCutscene?.stopFX();
-    PlayState.instance.camGame?.stopFX();
-
-    if (PlayState.instance.disableKeys) PlayState.instance.disableKeys = false;
-
-    if (fadeOut)
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, false);
-      fadeOut = false;
-    }
-    else
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
-    }
+    if (!PlayState.instance.disableKeys) PlayState.instance.disableKeys = true;
   }
 
   override function onGameOver(event:ScriptEvent):Void
@@ -195,10 +178,7 @@ class MILFRemnantsMixSong extends Song
     // Refresh the stage to reorganize props by z-index.
     PlayState.instance.currentStage.refresh();
 
-    PlayState.instance.camCutscene?.stopFX();
-    PlayState.instance.camGame?.stopFX();
     PlayState.instance.camHUD.alpha = 0;
-    fadeOut = false;
   }
 
   function onCountdownStart(event:ScriptEvent)
@@ -394,9 +374,6 @@ class MILFRemnantsMixSong extends Song
   {
     super.onPause(event);
 
-    FlxG.camera?.active = false;
-    PlayState.instance.camGame?.active = false;
-    PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
 
     if (limoTween != null)
@@ -410,9 +387,6 @@ class MILFRemnantsMixSong extends Song
   {
     super.onResume(event);
 
-    FlxG.camera?.active = true;
-    PlayState.instance.camGame?.active = true;
-    PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
 
     if (limoTween != null)
@@ -655,8 +629,6 @@ class MILFRemnantsMixSong extends Song
       {
         time: 0.25,
         callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 2.41, true, null, false);
-          PlayState.instance.camHUD.fade(0xFF000000, 0, true, null, false);
           PlayState.instance.camHUD.alpha = 0;
           PlayState.instance.disableKeys = false;
         }
@@ -665,9 +637,7 @@ class MILFRemnantsMixSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(8) / 1000,
         callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFFFFFFFF, 0.5, true, null, false);
           PlayState.instance.camHUD.alpha = 1;
-          fadeOut = true;
         }
       },
 
@@ -677,28 +647,6 @@ class MILFRemnantsMixSong extends Song
           var boyfriend:BaseCharacter = PlayState.instance?.currentStage?.getBoyfriend() ?? null;
           boyfriend.shouldAlternate = true;
           boyfriend.idleSuffix = '-limodance';
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(200) / 1000,
-        callback: () -> {
-          PlayState.instance.camGame.fade(0xFFFFFFFF, 0.5, true, null, false);
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(232) / 1000,
-        callback: () -> {
-          PlayState.instance.camGame.fade(0xFFFFFFFF, 0.5, true, null, false);
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(360) / 1000,
-        callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 1.33, false, null, false);
-          fadeOut = false;
         }
       },
 
@@ -721,33 +669,3 @@ class MILFRemnantsMixSong extends Song
     sequence?.destroy();
   }
 }
-
-/*
-  function onBeatHit(event:ScriptEvent):Void
-  {
-    super.onBeatHit(event);
-
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 8:
-        PlayState.instance.camCutscene.fade(0xFFFFFFFF, 0.5, true, null, false);
-        PlayState.instance.camHUD.alpha = 1;
-        fadeOut = true;
-      case 168:
-        var boyfriend:BaseCharacter = PlayState.instance?.currentStage?.getBoyfriend() ?? null;
-        boyfriend.shouldAlternate = true;
-        boyfriend.idleSuffix = '-limodance';
-      case 200:
-        PlayState.instance.camGame.fade(0xFFFFFFFF, 0.5, true, null, false);
-      case 232:
-        PlayState.instance.camGame.fade(0xFFFFFFFF, 0.5, true, null, false);
-      case 360:
-        PlayState.instance.camCutscene.fade(0xFF000000, 1.33, false, null, false);
-        fadeOut = false;
-      case 364:
-        PlayState.instance.disableKeys = true;
-    }
-  }
-  }
- */

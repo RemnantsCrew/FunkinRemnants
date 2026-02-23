@@ -135,7 +135,6 @@ class GrievingRemnantsSong extends Song
   {
     super.onCreate(event);
 
-    PlayState.instance.camHUD.fade(0xFF000000, 0, false, null, false);
     fadeOut = false;
     emotional = false;
 
@@ -169,19 +168,8 @@ class GrievingRemnantsSong extends Song
   {
     super.onSongRetry(event);
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.disableKeys = true;
-
-    if (fadeOut)
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, false);
-      fadeOut = false;
-    }
-    else
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
-    }
   }
 
   function onGameOver(event:ScriptEvent):Void
@@ -235,15 +223,6 @@ class GrievingRemnantsSong extends Song
       FlxTweenUtil.resumeTweensOf(i);
   }
 
-  function onSongStart(event:ScriptEvent):Void
-  {
-    super.onSongStart(event);
-
-    PlayState.instance.camCutscene.fade(0xFF000000, 3, true, null, false);
-    PlayState.instance.camHUD.fade(0xFF000000, 0, true, null, false);
-    PlayState.instance.camHUD.alpha = 0;
-  }
-
   function onNoteHit(event:HitNoteScriptEvent)
   {
     super.onNoteHit(event);
@@ -262,6 +241,13 @@ class GrievingRemnantsSong extends Song
     sequence?.destroy();
 
     var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(0) / 1000,
+        callback: () -> {
+          PlayState.instance.camHUD.alpha = 0;
+        }
+      },
+
       // Hi hi Hud
       {
         time: Conductor.instance.getBeatTimeInMs(26) / 1000,

@@ -7,16 +7,12 @@ import funkin.util.FlxTweenUtil;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-import flixel.FlxG;
 import funkin.util.SongSequence;
 import funkin.Conductor;
 
 class RemnantsPicoSong extends Song
 {
   var playedCutscene:Bool = false;
-
-  var fadeOut:Bool = false;
-  var fadeHud:Bool = false;
   var sequence:SongSequence;
 
   function new()
@@ -49,8 +45,6 @@ class RemnantsPicoSong extends Song
 
     PlayState.instance.camHUD.alpha = 0;
     PlayState.instance.disableKeys = true;
-    fadeOut = false;
-    fadeHud = false;
     playedCutscene = false;
   }
 
@@ -60,22 +54,10 @@ class RemnantsPicoSong extends Song
 
     if (PlayState.instance.disableKeys) PlayState.instance.disableKeys = false;
 
-    if (fadeOut)
-    {
-      PlayState.instance.camCutscene?.stopFX();
-      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, false);
-      fadeOut = false;
-    }
-
-    if (fadeHud)
+    if (PlayState.instance.camHUD.alpha > 0)
     {
       FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.5, {ease: FlxEase.linear});
-      fadeHud = false;
-    }
-    else
-    {
-      PlayState.instance.camHUD.alpha = 0;
+      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.5);
     }
   }
 
@@ -84,18 +66,14 @@ class RemnantsPicoSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
-    fadeOut = false;
-    fadeHud = false;
   }
 
   function onPause(event:ScriptEvent):Void
   {
     super.onPause(event);
 
-    PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
@@ -103,7 +81,6 @@ class RemnantsPicoSong extends Song
   {
     super.onResume(event);
 
-    PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
@@ -123,8 +100,6 @@ class RemnantsPicoSong extends Song
     {
       PlayState.instance.disableKeys = false;
     }
-
-    PlayState.instance.camHUD.alpha = 0;
   }
 
   function playCutscene():Void
@@ -196,16 +171,6 @@ class RemnantsPicoSong extends Song
         time: Conductor.instance.getBeatTimeInMs(12) / 1000,
         callback: () -> {
           FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 1.7);
-          fadeHud = true;
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(192) / 1000,
-        callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 6.8, false, null, false);
-          fadeOut = true;
-          fadeHud = false;
         }
       },
 
@@ -219,26 +184,14 @@ class RemnantsPicoSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(223) / 1000,
         callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 0.4, true, null, false);
           PlayState.instance.disableKeys = false;
-          fadeOut = false;
-          fadeHud = true;
         }
       },
 
       {
         time: Conductor.instance.getBeatTimeInMs(273) / 1000,
         callback: () -> {
-          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 1.7, {ease: FlxEase.linear});
-          fadeHud = false;
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(288) / 1000,
-        callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 1.7, false, null, false);
-          fadeOut = true;
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 1.7);
         }
       },
     ];

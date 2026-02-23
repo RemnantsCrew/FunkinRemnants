@@ -1,19 +1,13 @@
 import funkin.play.song.Song;
 import funkin.play.PlayState;
-import funkin.Preferences;
 import funkin.save.Save;
-import funkin.graphics.FunkinSprite;
 import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
-import flixel.FlxSprite;
-import flixel.FlxG;
 import funkin.util.SongSequence;
 import funkin.Conductor;
 
 class TormentorSong extends Song
 {
-  var fadeOut:Bool = false;
   var sequence:SongSequence;
 
   public function new()
@@ -34,10 +28,8 @@ class TormentorSong extends Song
   {
     super.onCreate(event);
 
-    PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
     PlayState.instance.camHUD.alpha = 0;
     PlayState.instance.disableKeys = true;
-    fadeOut = false;
   }
 
   function onSongRetry(event:ScriptEvent)
@@ -45,20 +37,9 @@ class TormentorSong extends Song
     super.onSongRetry(event);
     sequence?.destroy();
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
 
-    PlayState.instance.disableKeys = true;
-
-    if (fadeOut)
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, false);
-      fadeOut = false;
-    }
-    else
-    {
-      PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
-    }
+    if (!PlayState.instance.disableKeys) PlayState.instance.disableKeys = true;
   }
 
   function onGameOver(event:ScriptEvent):Void
@@ -66,17 +47,14 @@ class TormentorSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
-    fadeOut = false;
   }
 
   function onPause(event:ScriptEvent):Void
   {
     super.onPause(event);
 
-    PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
@@ -84,7 +62,6 @@ class TormentorSong extends Song
   {
     super.onResume(event);
 
-    PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
@@ -97,23 +74,13 @@ class TormentorSong extends Song
         time: 0,
         callback: () -> {
           PlayState.instance.camHUD.alpha = 0;
-          PlayState.instance.camCutscene.fade(0xFF000000, 3, true, null, false);
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(14) / 1000,
-        callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 0.15, false, null, false);
         }
       },
 
       {
         time: Conductor.instance.getBeatTimeInMs(16) / 1000,
         callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 0.15, true, null, false);
           PlayState.instance.disableKeys = false;
-          fadeOut = true;
         }
       },
 
@@ -127,9 +94,7 @@ class TormentorSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(320) / 1000,
         callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
           PlayState.instance.disableKeys = true;
-          fadeOut = false;
         }
       },
     ];

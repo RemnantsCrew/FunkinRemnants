@@ -17,6 +17,7 @@ class RemnantsOverlayHandler extends Module
 
   public var overlay:FunkinSprite;
   public var fadeTween:FlxTween;
+
   var isRetro:Bool = false;
 
   var firstEvent:SongEventData;
@@ -196,7 +197,8 @@ class RemnantsOverlayHandler extends Module
 
     if (isRetro)
     {
-      for (i in FlxG.cameras.list) i?.filters?.remove(colorMatrixFilter);
+      for (i in FlxG.cameras.list)
+        i?.filters?.remove(colorMatrixFilter);
       if (value == 0) return;
 
       var targetCameras:Array<FlxCamera> = [PlayState.instance.camGame];
@@ -209,7 +211,7 @@ class RemnantsOverlayHandler extends Module
         1, 0, 0, 0, value * matrixTarget,
         0, 1, 0, 0, value * matrixTarget,
         0, 0, 1, 0, value * matrixTarget,
-        0, 0, 0, 1, 0
+        0, 0, 0, 1,                    0
       ];
       colorMatrixFilter = new ColorMatrixFilter(matrix);
 
