@@ -103,4 +103,28 @@
 	<SubTexture name="Peace0009" x="140" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
 	<SubTexture name="Peace0010" x="140" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
 	<SubTexture name="Peace0011" x="140" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltL0000" x="210" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltL0001" x="210" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltL0002" x="280" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltL0003" x="280" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltL0004" x="280" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltL0005" x="280" y="256" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltU0000" x="0" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltU0001" x="0" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltU0002" x="70" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltU0003" x="70" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltU0004" x="70" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltU0005" x="70" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltD0000" x="140" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltD0001" x="140" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltD0002" x="210" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltD0003" x="210" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltD0004" x="210" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltD0005" x="210" y="320" width="70" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltR0000" x="280" y="320" width="71" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltR0001" x="280" y="320" width="71" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltR0002" x="0" y="384" width="72" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltR0003" x="0" y="384" width="72" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltR0004" x="0" y="384" width="72" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
+	<SubTexture name="AltR0005" x="0" y="384" width="72" height="64" frameX="0" frameY="0" frameWidth="70" frameHeight="64" />
 </TextureAtlas>

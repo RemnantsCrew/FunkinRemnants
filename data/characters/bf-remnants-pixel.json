@@ -47,6 +47,26 @@
       "offsets": [0, 0]
     },
     {
+      "name": "singUP-perfect",
+      "prefix": "AltU0",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT-perfect",
+      "prefix": "AltL0",
+      "offsets": [-2, 0]
+    },
+    {
+      "name": "singRIGHT-perfect",
+      "prefix": "AltR0",
+      "offsets": [2, 0]
+    },
+    {
+      "name": "singDOWN-perfect",
+      "prefix": "AltD0",
+      "offsets": [-2, 0]
+    },
+    {
       "name": "singUPmiss",
       "prefix": "MissU0",
       "offsets": [0, 0]
