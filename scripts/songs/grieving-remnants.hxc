@@ -363,6 +363,11 @@ class GrievingRemnantsSong extends Song
 
     if (emotional)
     {
+      FlxTween.cancelTweensOf(PlayState.instance.currentStage.getBoyfriend());
+      FlxTween.cancelTweensOf(PlayState.instance.currentStage.getGirlfriend());
+      FlxTween.cancelTweensOf(PlayState.instance.currentStage.getDad());
+      FlxTween.cancelTweensOf(PlayState.instance.currentStage.getNamedProp('TheGrievingLands'));
+
       PlayState.instance.currentStage.getNamedProp('TheGrievingLands').alpha = 1;
       PlayState.instance.currentStage.getGirlfriend().alpha = 1;
       PlayState.instance.currentStage.getBoyfriend().alpha = 1;
