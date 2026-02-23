@@ -6,10 +6,13 @@ import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.FlxG;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class RemnantsErectSong extends Song
 {
   var fadeOut:Bool = false;
+  var sequence:SongSequence;
 
   function new()
   {
@@ -71,48 +74,77 @@ class RemnantsErectSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     FlxG.camera.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
     fadeOut = false;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     FlxG.camera?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     FlxG.camera?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onSongStart(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onSongStart(event);
+    sequence?.destroy();
 
-    PlayState.instance.camCutscene.fade(0xFF000000, 1, true, null, false);
-    PlayState.instance.camHUD.alpha = 0;
+    var sequenceData = [
+      {
+        time: 0,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 1, true, null, false);
+          PlayState.instance.camHUD.alpha = 0;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(14) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.8, {ease: FlxEase.linear});
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(279) / 1000,
+        callback: () -> {
+          PlayState.instance.disableKeys = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(284) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
+          PlayState.instance.camHUD.alpha = 0;
+          fadeOut = false;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onDestroy(event:ScriptEvent):Void
   {
-    super.onBeatHit(event);
+    super.onDestroy(event);
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 14:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.8, {ease: FlxEase.linear});
-        fadeOut = true;
-      case 279:
-        PlayState.instance.disableKeys = true;
-      case 284:
-        PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, false);
-        PlayState.instance.camHUD.alpha = 0;
-        fadeOut = false;
-    }
+    sequence?.destroy();
   }
 }

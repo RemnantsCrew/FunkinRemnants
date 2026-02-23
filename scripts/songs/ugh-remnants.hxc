@@ -15,6 +15,8 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxTimer;
 import flixel.util.FlxTimerManager;
 import flixel.FlxG;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class UghRemnantsMixSong extends Song
 {
@@ -26,6 +28,7 @@ class UghRemnantsMixSong extends Song
 
   var cutsceneTimerManager:FlxTimerManager;
   var cutsceneMusic:FunkinSound;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -317,14 +320,12 @@ class UghRemnantsMixSong extends Song
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
+    sequence?.destroy();
 
     if (PlayState.instance.currentStage.scriptGet('storm0').alpha > 0
       && !RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.stormOff(0);
   }
 
-  /**
-   * Replay the cutscene after leaving the song.
-   */
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
@@ -334,11 +335,28 @@ class UghRemnantsMixSong extends Song
     cutsceneSkipped = false;
   }
 
-  function onBeatHit(event:SongTimeScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    if (RemnantsOptions.getPerformanceOption()) return;
+    sequence?.destroy();
 
-    if (PlayState.instance.isGameOverState || RemnantsOptions.getPerformanceOption()) return;
-    if (event.beat == 159) PlayState.instance.currentStage.stormOn(1);
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(159) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.stormOn(1);
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }

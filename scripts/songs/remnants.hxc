@@ -5,12 +5,15 @@ import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import funkin.play.cutscene.VideoCutscene;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class RemnantsSong extends Song
 {
   var hasPlayedIntro:Bool;
   var outro:Bool = false;
   var hudFade:Bool = false;
+  var sequence:SongSequence;
 
   function new()
   {
@@ -106,43 +109,62 @@ class RemnantsSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
     hudFade = false;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onSongEnd(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    PlayState.instance.camGame.visible = false;
+    sequence?.destroy();
+
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(14) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.8, {ease: FlxEase.smoothStepOut});
+          hudFade = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(272) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 0.8, false, null, false);
+          outro = true;
+          hudFade = false;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onDestroy(event:ScriptEvent):Void
   {
-    super.onBeatHit(event);
+    super.onDestroy(event);
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 14:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.8, {ease: FlxEase.smoothStepOut});
-        hudFade = true;
-      case 272:
-        PlayState.instance.camCutscene.fade(0xFF000000, 0.8, false, null, false);
-        outro = true;
-        hudFade = false;
-    }
+    sequence?.destroy();
   }
 }

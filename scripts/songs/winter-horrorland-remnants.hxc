@@ -18,6 +18,7 @@ import funkin.save.Save;
 import funkin.Conductor;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import funkin.util.SongSequence;
 
 class WinterHorrorlandRemnantsMixSong extends Song
 {
@@ -36,6 +37,7 @@ class WinterHorrorlandRemnantsMixSong extends Song
   var black:FunkinSprite;
 
   var redFilter:ShaderFilter;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -69,9 +71,9 @@ class WinterHorrorlandRemnantsMixSong extends Song
       black.alpha = 1;
       PlayState.instance.currentStage.getNamedProp('overlay').alpha = 0;
 
-      while (PlayState.instance.camHUD.filters.contains(redFilter))
+      while (PlayState.instance?.camHUD?.filters?.contains(redFilter) ?? false)
       {
-        PlayState.instance.camHUD.remove(redFilter);
+        PlayState.instance?.camHUD?.filters?.remove(redFilter);
       }
 
       FlxTween.tween(black, {alpha: 0}, 1, {ease: FlxEase.linear});
@@ -113,34 +115,31 @@ class WinterHorrorlandRemnantsMixSong extends Song
       cutsceneTimerManager.update(event.elapsed);
     }
 
-    if (!ModuleHandler.getModule('RemnantsBumpers').isPlaying)
+    if (FlxG.onMobile)
     {
-      if (FlxG.onMobile)
-      {
-        isMobilePauseButtonPressed = TouchUtil.overlapsComplex(PlayState.instance.pauseButton) && TouchUtil.justPressed;
-      }
+      isMobilePauseButtonPressed = TouchUtil.overlapsComplex(PlayState.instance.pauseButton) && TouchUtil.justPressed;
+    }
 
-      if (onSpookChristmas)
+    if (onSpookChristmas)
+    {
+      if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && !cutsceneSkipped)
       {
-        if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && !cutsceneSkipped)
+        if (!canSkipCutscene)
         {
-          if (!canSkipCutscene)
-          {
-            trace('cant skip yet!');
-            FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-            new FlxTimer().start(0.5, function(_) {
-              canSkipCutscene = true;
-              trace('can skip!');
-            });
-          }
+          trace('cant skip yet!');
+          FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+          new FlxTimer().start(0.5, function(_) {
+            canSkipCutscene = true;
+            trace('can skip!');
+          });
         }
       }
+    }
 
-      if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && canSkipCutscene && !cutsceneSkipped)
-      {
-        skipCutscene();
-        trace('Skipped cutscene!');
-      }
+    if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && canSkipCutscene && !cutsceneSkipped)
+    {
+      skipCutscene();
+      trace('Skipped cutscene!');
     }
   }
 
@@ -278,30 +277,48 @@ class WinterHorrorlandRemnantsMixSong extends Song
     FlxTweenUtil.resumeTweensOf(black);
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    sequence?.destroy();
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(222) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 1}, 0.8,
+            {
+              onComplete: (_) -> {
+                FlxTween.tween(black, {alpha: 0.5}, 3, {ease: FlxEase.linear});
+                PlayState.instance.currentStage.getNamedProp('overlay').alpha = 1;
+                PlayState.instance.camHUD.filters.push(redFilter);
+                overlay = true;
+              }
+            });
+        }
+      },
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 222: // Red time :)
-        FlxTween.tween(black, {alpha: 1}, 0.8,
-          {
-            ease: FlxEase.linear,
-            onComplete: (_) -> {
-              FlxTween.tween(black, {alpha: 0.5}, 3, {ease: FlxEase.linear});
-              PlayState.instance.currentStage.getNamedProp('overlay').alpha = 1;
-              PlayState.instance.camHUD.filters.push(redFilter);
-              overlay = true;
-            }
-          });
+      {
+        time: Conductor.instance.getBeatTimeInMs(254) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0}, 0.75, {ease: FlxEase.backIn});
+        }
+      },
 
-      case 254:
-        FlxTween.tween(black, {alpha: 0}, 0.75, {ease: FlxEase.backIn});
+      {
+        time: Conductor.instance.getBeatTimeInMs(351) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 1}, 0.37);
+        }
+      },
+    ];
 
-      case 351:
-        FlxTween.tween(black, {alpha: 1}, 0.37, {ease: FlxEase.linear});
-    }
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }

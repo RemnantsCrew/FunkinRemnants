@@ -12,6 +12,8 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxSort;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 /**
  * Hey, Eric here!
@@ -24,6 +26,7 @@ import flixel.FlxG;
 class MILFRemnantsMixSong extends Song
 {
   var fadeOut:Bool = false;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -149,6 +152,7 @@ class MILFRemnantsMixSong extends Song
     PlayState.instance.currentStage.refresh();
 
     PlayState.instance.camHUD.fade(0xFF000000, 0, false, null, false);
+    PlayState.instance.disableKeys = true;
     fadeOut = false;
   }
 
@@ -643,17 +647,82 @@ class MILFRemnantsMixSong extends Song
     hardResetLimo();
   }
 
-  function onSongStart(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onSongStart(event);
+    sequence?.destroy();
 
-    new FlxTimer().start(0.25, function() {
-      PlayState.instance.camCutscene.fade(0xFF000000, 2.41, true, null, false);
-      PlayState.instance.camHUD.fade(0xFF000000, 0, true, null, false);
-      PlayState.instance.camHUD.alpha = 0;
-    });
+    var sequenceData = [
+      {
+        time: 0.25,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 2.41, true, null, false);
+          PlayState.instance.camHUD.fade(0xFF000000, 0, true, null, false);
+          PlayState.instance.camHUD.alpha = 0;
+          PlayState.instance.disableKeys = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(8) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFFFFFFFF, 0.5, true, null, false);
+          PlayState.instance.camHUD.alpha = 1;
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(168) / 1000,
+        callback: () -> {
+          var boyfriend:BaseCharacter = PlayState.instance?.currentStage?.getBoyfriend() ?? null;
+          boyfriend.shouldAlternate = true;
+          boyfriend.idleSuffix = '-limodance';
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(200) / 1000,
+        callback: () -> {
+          PlayState.instance.camGame.fade(0xFFFFFFFF, 0.5, true, null, false);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(232) / 1000,
+        callback: () -> {
+          PlayState.instance.camGame.fade(0xFFFFFFFF, 0.5, true, null, false);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(360) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 1.33, false, null, false);
+          fadeOut = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(364) / 1000,
+        callback: () -> {
+          PlayState.instance.disableKeys = true;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
+  }
+}
+
+/*
   function onBeatHit(event:ScriptEvent):Void
   {
     super.onBeatHit(event);
@@ -680,4 +749,5 @@ class MILFRemnantsMixSong extends Song
         PlayState.instance.disableKeys = true;
     }
   }
-}
+  }
+ */

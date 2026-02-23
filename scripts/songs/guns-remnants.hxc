@@ -25,6 +25,7 @@ import funkin.audio.FunkinSound;
 import funkin.util.TouchUtil;
 import funkin.Conductor;
 import flixel.FlxG;
+import funkin.util.SongSequence;
 
 class GunsRemnantsMixSong extends Song
 {
@@ -40,6 +41,7 @@ class GunsRemnantsMixSong extends Song
   var ascension:Bool = false;
   var fadeOut:Bool = false;
   var fadeHud:Bool = false;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -300,9 +302,6 @@ class GunsRemnantsMixSong extends Song
     }
   }
 
-  /**
-   * Don't replay the cutscene between restarts.
-   */
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
@@ -359,6 +358,9 @@ class GunsRemnantsMixSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     FlxG.camera.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
@@ -375,8 +377,10 @@ class GunsRemnantsMixSong extends Song
     FlxTween.tween(PlayState.instance.currentStage.getBoyfriend(), {angle: 720}, 0.5, {ease: FlxEase.linear});
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     FlxG.camera?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
 
@@ -385,8 +389,10 @@ class GunsRemnantsMixSong extends Song
       FlxTweenUtil.pauseTweensOf(i);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     FlxG.camera?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
 
@@ -397,85 +403,154 @@ class GunsRemnantsMixSong extends Song
 
   function onSongEnd(event:ScriptEvent):Void
   {
+    super.onSongEnd(event);
+
     PlayState.instance.camGame.visible = false;
   }
 
-  function onSongStart(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    if (!fadeOut) return;
-    FlxG.camera.fade(0xFF000000, 1, true);
-    PlayState.instance.camHUD.alpha = 0;
-    fadeOut = false;
+    sequence?.destroy();
+
+    var sequenceData = [
+      {
+        time: 0,
+        callback: () -> {
+          if (!fadeOut) return;
+          FlxG.camera.fade(0xFF000000, 1, true);
+          PlayState.instance.camHUD.alpha = 0;
+          fadeOut = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(31) / 1000,
+        callback: () -> {
+          FlxG.camera.fade(0xFF000000, 0.25, false);
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(32) / 1000,
+        callback: () -> {
+          FlxG.camera.flash(0xFFFFFFFF, 0.5);
+          FlxG.camera.fade(0xFF000000, 0, true);
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.5, {ease: FlxEase.linear});
+          fadeOut = false;
+          fadeHud = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(127) / 1000,
+        callback: () -> {
+          FlxG.camera.fade(0xFF000000, 0.25, false);
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(128) / 1000,
+        callback: () -> {
+          FlxG.camera.flash(0xFFFFFFFF, 0.5);
+          FlxG.camera.fade(0xFF000000, 0, true);
+          fadeOut = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(223) / 1000,
+        callback: () -> {
+          FlxG.camera.fade(0xFF000000, 0.25, false);
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(224) / 1000,
+        callback: () -> {
+          FlxG.camera.flash(0xFFFFFFFF, 2.6);
+          FlxG.camera.fade(0xFF000000, 0, true);
+          fadeOut = false;
+
+          if (FlxG.random.bool(25)) // Ascension!
+          {
+            FlxTween.tween(PlayState.instance.currentStage.getDad(), {y: PlayState.instance.currentStage.getDad().originalPosition.y - 300}, 10.38,
+              {ease: FlxEase.smoothStepInOut});
+            FunkinSound.playOnce(Paths.sound('gameplay/secret/secret', "shared"), 1);
+            ascension = true;
+          }
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(256) / 1000,
+        callback: () -> {
+          if (!ascension) return;
+          FlxTween.tween(PlayState.instance.currentStage.getBoyfriend(), {y: PlayState.instance.currentStage.getBoyfriend().originalPosition.y - 290}, 9.41,
+            {ease: FlxEase.smoothStepInOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(285) / 1000,
+        callback: () -> {
+          if (!ascension) return;
+          FlxTween.tween(PlayState.instance.currentStage.getDad(), {y: PlayState.instance.currentStage.getDad().originalPosition.y}, 1,
+            {ease: FlxEase.smoothStepInOut});
+
+          FlxTween.tween(PlayState.instance.currentStage.getBoyfriend(), {y: PlayState.instance.currentStage.getBoyfriend().originalPosition.y}, 1,
+            {
+              ease: FlxEase.smoothStepInOut,
+              onComplete: (_) -> {
+                ascension = false;
+              }
+            });
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(416) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 3,
+            {
+              ease: FlxEase.smoothStepInOut,
+              onComplete: (_) -> {
+                fadeHud = false;
+              }
+            });
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(425) / 1000,
+        callback: () -> {
+          FlxG.camera.fade(0xFF000000, 5, false);
+          fadeOut = true;
+        }
+      },
+    ];
+
+    if (!RemnantsOptions.getPerformanceOption())
+    {
+      sequenceData.push(
+        {
+          time: Conductor.instance.getBeatTimeInMs(224) / 1000,
+          callback: () -> {
+            PlayState.instance.currentStage.stormOff(2.6);
+          }
+        });
+    }
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onDestroy(event:ScriptEvent):Void
   {
-    super.onBeatHit(event);
+    super.onDestroy(event);
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 31:
-        FlxG.camera.fade(0xFF000000, 0.25, false);
-        fadeOut = true;
-      case 32:
-        FlxG.camera.flash(0xFFFFFFFF, 0.5);
-        FlxG.camera.fade(0xFF000000, 0, true);
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-        fadeOut = false;
-        fadeHud = true;
-      case 127:
-        FlxG.camera.fade(0xFF000000, 0.25, false);
-        fadeOut = true;
-      case 128:
-        FlxG.camera.flash(0xFFFFFFFF, 0.5);
-        FlxG.camera.fade(0xFF000000, 0, true);
-        fadeOut = false;
-      case 223:
-        FlxG.camera.fade(0xFF000000, 0.25, false);
-        fadeOut = true;
-      case 224:
-        FlxG.camera.flash(0xFFFFFFFF, 2.6);
-        FlxG.camera.fade(0xFF000000, 0, true);
-        fadeOut = false;
-
-        if (!RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.stormOff(2.6);
-
-        if (FlxG.random.bool(25)) // Ascension!
-        {
-          FlxTween.tween(PlayState.instance.currentStage.getDad(), {y: PlayState.instance.currentStage.getDad().originalPosition.y - 300}, 10.38,
-            {ease: FlxEase.smoothStepInOut});
-          FunkinSound.playOnce(Paths.sound('gameplay/secret/secret', "shared"), 1);
-          ascension = true;
-        }
-      case 256:
-        if (!ascension) return;
-        FlxTween.tween(PlayState.instance.currentStage.getBoyfriend(), {y: PlayState.instance.currentStage.getBoyfriend().originalPosition.y - 290}, 9.41,
-          {ease: FlxEase.smoothStepInOut});
-
-      case 285:
-        if (!ascension) return;
-        FlxTween.tween(PlayState.instance.currentStage.getDad(), {y: PlayState.instance.currentStage.getDad().originalPosition.y}, 1,
-          {ease: FlxEase.smoothStepInOut});
-
-        FlxTween.tween(PlayState.instance.currentStage.getBoyfriend(), {y: PlayState.instance.currentStage.getBoyfriend().originalPosition.y}, 1,
-          {
-            ease: FlxEase.smoothStepInOut,
-            onComplete: (_) -> {
-              ascension = false;
-            }
-          });
-      case 416:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 3,
-          {
-            ease: FlxEase.smoothStepInOut,
-            onComplete: (_) -> {
-              fadeHud = false;
-            }
-          });
-      case 425:
-        FlxG.camera.fade(0xFF000000, 5, false);
-        fadeOut = true;
-    }
+    sequence?.destroy();
   }
 }

@@ -25,6 +25,7 @@ import funkin.graphics.FunkinSprite;
 import funkin.audio.FunkinSound;
 import funkin.util.TouchUtil;
 import funkin.Preferences;
+import funkin.util.SongSequence;
 
 class StressRemnantsMixSong extends Song
 {
@@ -40,6 +41,7 @@ class StressRemnantsMixSong extends Song
   var cutsceneConductor:Conductor;
   var cutsceneTimerManager:FlxTimerManager;
   var cutsceneMusic:FunkinSound;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -51,9 +53,6 @@ class StressRemnantsMixSong extends Song
     hasPlayedCutscene = false;
   }
 
-  /**
-   * Replay the cutscene after leaving the song.
-   */
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
@@ -623,6 +622,7 @@ class StressRemnantsMixSong extends Song
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
+    sequence?.destroy();
 
     if (PlayState.instance.currentStage.scriptGet('storm0').alpha > 0
       && !RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.stormOff(0);
@@ -643,19 +643,41 @@ class StressRemnantsMixSong extends Song
     }
   }
 
-  function onBeatHit(event:SongTimeScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    sequence?.destroy();
 
-    if (PlayState.instance.isGameOverState || RemnantsOptions.getPerformanceOption()) return;
-    switch (event.beat)
-    {
-      case 96:
-        PlayState.instance.currentStage.stormOn(1);
-      case 160:
-        PlayState.instance.currentStage.stormOff(1);
-      case 224:
-        PlayState.instance.currentStage.stormOn(1);
-    }
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(96) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.stormOn(1);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(160) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.stormOff(1);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(224) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.stormOn(1);
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }

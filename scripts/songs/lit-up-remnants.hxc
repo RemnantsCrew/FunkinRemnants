@@ -233,7 +233,7 @@ class LitUpRemnantsMixSong extends Song
 
     var sequenceData = [
       {
-        time: 323 * (Conductor.instance.beatLengthMs / 1000),
+        time: Conductor.instance.getBeatTimeInMs(323) / 1000,
         callback: () -> {
           PlayState.instance.camCutscene.fade(0xFF000000, 9.29, false, null, false);
           FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.98,
@@ -250,20 +250,12 @@ class LitUpRemnantsMixSong extends Song
 
     if (!RemnantsOptions.getPerformanceOption())
     {
-      sequenceData.push(
-        {
-          time: 96 * (Conductor.instance.beatLengthMs / 1000),
-          callback: () -> {
-            mistOn(3);
-          }
-        });
-      sequenceData.push(
-        {
-          time: 160 * (Conductor.instance.beatLengthMs / 1000),
-          callback: () -> {
-            mistOff(3);
-          }
-        });
+      sequenceData.push({time: Conductor.instance.getBeatTimeInMs(96) / 1000, callback: () -> {
+        mistOn(3);
+      }});
+      sequenceData.push({time: Conductor.instance.getBeatTimeInMs(160) / 1000, callback: () -> {
+        mistOff(3);
+      }});
     }
 
     sequence = new SongSequence(sequenceData);

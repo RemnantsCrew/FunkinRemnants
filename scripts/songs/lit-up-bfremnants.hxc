@@ -7,6 +7,8 @@ import flixel.addons.display.FlxBackdrop;
 import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class LitUpBFRemnantsMixSong extends Song
 {
@@ -17,6 +19,7 @@ class LitUpBFRemnantsMixSong extends Song
   var mist4:FlxBackdrop;
   var mist5:FlxBackdrop;
   var mist6:FlxBackdrop;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -196,29 +199,77 @@ class LitUpBFRemnantsMixSong extends Song
       FlxTweenUtil.resumeTweensOf(scriptGet('mist' + i));
   }
 
-  function onBeatHit(event:SongTimeScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    if (RemnantsOptions.getPerformanceOption()) return;
+    sequence?.destroy();
 
-    if (PlayState.instance.isGameOverState || RemnantsOptions.getPerformanceOption()) return;
-    switch (event.beat)
-    {
-      case 126:
-        mistOn(2);
-      case 158:
-        mistOff(2);
-      case 174:
-        mistOn(2);
-      case 192:
-        mistOff(2);
-      case 286:
-        mistOn(2);
-      case 300:
-        mistOff(2.5);
-      case 325:
-        mistOn(3);
-      case 348:
-        mistOff(2.5);
-    }
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(126) / 1000,
+        callback: () -> {
+          mistOn(2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(158) / 1000,
+        callback: () -> {
+          mistOff(2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(174) / 1000,
+        callback: () -> {
+          mistOn(2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(192) / 1000,
+        callback: () -> {
+          mistOff(2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(286) / 1000,
+        callback: () -> {
+          mistOn(2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(300) / 1000,
+        callback: () -> {
+          mistOff(2.5);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(325) / 1000,
+        callback: () -> {
+          mistOn(3);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(348) / 1000,
+        callback: () -> {
+          mistOff(2.5);
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }

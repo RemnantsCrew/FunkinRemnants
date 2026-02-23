@@ -150,8 +150,10 @@ class TutorialRemnantsMixSong extends Song
     }
   }
 
-  public function onSongRetry(event:ScriptEvent):Void
+  function onSongRetry(event:ScriptEvent)
   {
+    super.onSongRetry(event);
+
     PlayState.instance.disableKeys = true;
 
     if (black.alpha != 1 && !ending)
@@ -183,6 +185,8 @@ class TutorialRemnantsMixSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+
     PlayState.instance.camHUD.alpha = 0;
     ending = true;
   }

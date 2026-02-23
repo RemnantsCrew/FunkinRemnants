@@ -6,10 +6,13 @@ import funkin.play.PlayState;
 import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class SatinPantiesRemnantsMixSong extends Song
 {
   var outro:Bool = false;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -54,45 +57,67 @@ class SatinPantiesRemnantsMixSong extends Song
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
+    sequence?.destroy();
 
     PlayState.instance.camCutscene?.stopFX();
     PlayState.instance.camHUD.alpha = 0;
     outro = true;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    sequence?.destroy();
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 72:
-        var boyfriend:BaseCharacter = PlayState.instance?.currentStage?.getBoyfriend() ?? null;
-        boyfriend.shouldAlternate = true;
-        boyfriend.idleSuffix = '-limodance';
-      case 176:
-        PlayState.instance.camCutscene.fade(0xFF000000, 4.2, false, null, false);
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 1,
-          {
-            ease: FlxEase.linear,
-            onComplete: function(_) {
-              PlayState.instance.disableKeys = true;
-            }
-          });
-        outro = true;
-    }
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(72) / 1000,
+        callback: () -> {
+          var boyfriend:BaseCharacter = PlayState.instance?.currentStage?.getBoyfriend() ?? null;
+          boyfriend.shouldAlternate = true;
+          boyfriend.idleSuffix = '-limodance';
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(176) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 4.2, false, null, false);
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 1,
+            {
+              ease: FlxEase.linear,
+              onComplete: function(_) {
+                PlayState.instance.disableKeys = true;
+              }
+            });
+          outro = true;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }
