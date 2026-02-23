@@ -1,0 +1,12 @@
+package remnants.notekinds.battle;
+
+import funkin.play.notes.notekind.NoteKind;
+
+class PerfectNoteKind extends NoteKind
+{
+  public function new()
+  {
+    super('perfect', 'Perfect');
+    this.suffix = "perfect";
+  }
+}

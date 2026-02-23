@@ -207,20 +207,7 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
         case "censor":
           holdTimer = 0;
           this.playSingAnimation(event.note.noteData.getDirection(), false, 'censor');
-        case "perfect":
-          holdTimer = 0;
-          this.playSingAnimation(event.note.noteData.getDirection(), false, 'perfect');
-        case "bf-prep":
-          holdTimer = 0;
-          this.playAnimation('preAttack', true, false);
-          return;
-        case "bf-attack":
-          holdTimer = 0;
-          this.playAnimation('attack', true, false);
-          return;
-        case "bf-dodge":
-          holdTimer = 0;
-          this.playAnimation('dodge', true, false);
+        case "bf-prep", "bf-attack", "bf-dodge":
           return;
         default:
           super.onNoteHit(event);

@@ -7,6 +7,7 @@ import funkin.play.PlayState;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import openfl.filters.ColorMatrixFilter;
+import flixel.math.FlxMath;
 import funkin.Conductor;
 import flixel.FlxG;
 import Std;
@@ -103,11 +104,16 @@ class RemnantsOverlayHandler extends Module
     var targetAlpha:Float = 0;
     var targetCamera:FlxCamera = PlayState.instance?.camCutscene;
 
+    var retroSteps:Float = 5;
+    isRetro = false;
+
     if (firstEvent != null && (PlayState.instance?.startTimestamp ?? 1) <= 0)
     {
       var white:Bool = firstEvent.getBool("white") ?? false;
       var hud:Bool = firstEvent.getBool("hud") ?? true;
+
       isRetro = firstEvent.getBool("retro") ?? false;
+      retroSteps = firstEvent.getFloat("retroSteps") ?? 5;
 
       targetAlpha = firstEvent.getFloat('startOpacity') ?? 0;
       targetColor = white ? 0xFFFFFFFF : 0xFF000000;
@@ -120,21 +126,26 @@ class RemnantsOverlayHandler extends Module
     overlay.cameras = [targetCamera];
     overlay.color = targetColor;
 
-    if (targetAlpha != 0 || !restartTween)
-    {
-      fadeTween?.cancel();
-      fadeTween = null;
+    fadeTween?.update(FlxG.sound.music?.length ?? 0); // Not the max, but it works.
+    fadeTween?.manager?.update(0);
 
-      setOverlayAlpha(targetAlpha);
-      return;
+    if (restartTween)
+    {
+      var editedEase:Float->Float = (value:Float) -> {
+      var easeVal:Float = FlxEase.expoIn(value);
+        if (isRetro) easeVal = Math.floor(easeVal * retroSteps) / retroSteps;
+
+        return easeVal;
+      };
+
+      fadeTween = FlxTween.num(currentAlpha, targetAlpha, 0.5,
+        {
+          ease: editedEase
+        }, setOverlayAlpha);
     }
     else
     {
-      fadeTween?.cancel();
-      fadeTween = FlxTween.num(currentAlpha, targetAlpha, 0.5,
-        {
-          ease: FlxEase.expoIn
-        }, setOverlayAlpha);
+      setOverlayAlpha(targetAlpha);
     }
 
     restartTween = true;

@@ -23,32 +23,6 @@ class BFRemnantsOpponentCharacter extends MultiAnimateAtlasCharacter
     flipCensor();
   }
 
-  function onNoteHit(event:HitNoteScriptEvent)
-  {
-    if (event.eventCanceled) return;
-    if (!event.note.noteData.getMustHitNote() && characterType == CharacterType.DAD)
-    {
-      switch (event.note.kind)
-      {
-        case "censor":
-          holdTimer = 0;
-          this.playSingAnimation(event.note.noteData.getDirection(), false, 'censor');
-
-        case "perfect":
-          holdTimer = 0;
-          this.playSingAnimation(event.note.noteData.getDirection(), false, 'perfect');
-
-        case "miss":
-          holdTimer = 0;
-          this.playSingAnimation(event.note.noteData.getDirection(), false, 'miss');
-          event.cancelEvent();
-
-        default:
-          super.onNoteHit(event);
-      }
-    }
-  }
-
   function replaceWithFlipped():Void
   {
     var collections:Array<FlxAnimateFrames> = this.library?.addedCollections?.copy() ?? [];

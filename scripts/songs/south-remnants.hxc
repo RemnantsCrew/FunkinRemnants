@@ -1,5 +1,6 @@
 import funkin.play.song.Song;
 import funkin.play.PlayState;
+import funkin.modding.module.ModuleHandler;
 import funkin.save.Save;
 import funkin.graphics.FunkinSprite;
 import funkin.util.FlxTweenUtil;
@@ -151,12 +152,16 @@ class SouthRemnantsMixSong extends Song
 
       PlayState.instance?.camHUD?.visible = false;
 
+      // cannibalism
+      ModuleHandler.getModule("RemnantsOverlayHandler")?.fadeTween?.cancel();
+      var overlay:FunkinSprite = ModuleHandler.getModule("RemnantsOverlayHandler").overlay;
+      overlay.visible = true;
+
       mosnerCutsceneAudio.play();
 
-      /* Til save monser plz
-        black.color = 0xFFFFFFFF;
-        FlxTween.tween(black, {alpha: 0}, 6 * (1 / 24));
-       */
+      overlay.color = 0xFFFFFFFF;
+      overlay.alpha = 1;
+      FlxTween.tween(overlay, {alpha: 0}, 6 * (1 / 24));
 
       var currentStage:Stage = PlayState.instance?.currentStage;
       currentStage?.changeAmbiance(true, 0.0001);
@@ -200,12 +205,11 @@ class SouthRemnantsMixSong extends Song
 
       currentStage?.refresh();
 
-      /* Water water more fixes please!
-        FlxTimer.wait(121 * (1 / 24), () -> {
-          FlxTween.tween(black, {alpha: 1}, 15 * (1 / 24));
-          black.color = 0xFF000000;
-        });
-       */
+      FlxTimer.wait(121 * (1 / 24), () -> {
+        FlxTween.tween(overlay, {alpha: 1}, 15 * (1 / 24));
+        overlay.color = 0xFF000000;
+      });
+
 
       FlxTimer.wait(148 * (1 / 24), () -> {
         mosner.alpha = 0;
@@ -217,7 +221,7 @@ class SouthRemnantsMixSong extends Song
 
         FlxTween.tween(mosner, {alpha: 0.3}, 6 * (1 / 24));
 
-        // black.alpha = 0; // Monser needs help
+        overlay.alpha = 0;
         currentStage?.remove(mosner);
         currentStage?.visible = false;
       });
