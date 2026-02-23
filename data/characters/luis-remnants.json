@@ -13,7 +13,7 @@
   },
   "cameraOffsets": [0, 0],
   "offsets": [0, 0],
-  "flipX": true,
+  "flipX": false,
   "atlasSettings": {
     "useRenderTexture": true
   },
@@ -44,23 +44,46 @@
       "offsets": [0, 0]
     },
     {
+      "name": "singLEFTmiss",
+      "prefix": "Left Miss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singDOWNmiss",
+      "prefix": "Down Miss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singUPmiss",
+      "prefix": "Up Miss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHTmiss",
+      "prefix": "Right Miss",
+      "offsets": [0, 0]
+    },
+    {
       "name": "firstDeath",
       "assetPath": "shared:characters/luis-remnants-death",
       "prefix": "Start",
-      "offsets": [0, 0]
+      "offsets": [0, 0],
+      "flipX": true
     },
     {
       "name": "deathLoop",
       "assetPath": "shared:characters/luis-remnants-death",
       "prefix": "Loop",
       "offsets": [0, 0],
-      "looped": true
+      "looped": true,
+      "flipX": true
     },
     {
       "name": "deathConfirm",
       "assetPath": "shared:characters/luis-remnants-death",
       "prefix": "End",
-      "offsets": [0, 0]
+      "offsets": [0, 0],
+      "flipX": true
     }
   ]
 }
