@@ -22,15 +22,20 @@ class RemnantsAlbum extends Album
   {
     var curSelectedFreeplaySong:FreeplaySongData = FlxG.state.subState.currentCapsule.freeplayData;
 
-    var curSongAlbumVariations:Dynamic = ReflectUtil.getProperty(albumArtJsonObj, curSelectedFreeplaySong.songId);
-    var curVariationAlbum:String = ReflectUtil.getProperty(curSongAlbumVariations, curSelectedFreeplaySong.curVariation);
-
-    var albumPath:String = 'freeplay/albumRoll/' + curVariationAlbum;
-    if (curVariationAlbum != null && Assets.exists(Paths.image(albumPath)))
+    var albumPath:String = 'freeplay/albumRoll/' + getRemnantsAlbumAssetKey(curSelectedFreeplaySong.songId, curSelectedFreeplaySong.curVariation);
+    if (Assets.exists(Paths.image(albumPath)))
     {
       return albumPath;
     }
 
     return _data?.albumArtAsset ?? 'freeplay/albumRoll/remnants-placeholder';
+  }
+
+  public function getRemnantsAlbumAssetKey(songId:String, songVariation:String):String
+  {
+    var curSongAlbumVariations:Dynamic = ReflectUtil.getProperty(albumArtJsonObj, songId);
+    var curVariationAlbum:String = ReflectUtil.getProperty(curSongAlbumVariations, songVariation);
+
+    return curVariationAlbum ?? 'remnants-placeholder';
   }
 }
