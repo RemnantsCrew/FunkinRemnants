@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+
+  "backdrop": {
+    "type": "solid",
+    "fadeTime": 4.15,
+    "color": "#B3B3DFD8"
+  },
+
+  "music": {
+    "asset": "",
+    "fadeTime": 0,
+    "looped": false
+  },
+
+  "outro": {
+    "type": "fade",
+    "fadeTime": 1.0
+  },
+
+  "dialogue": [
+    {
+      "speaker": "roxanne-crossed-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "left",
+
+      "text": ["are we done yet?"]
+    },
+    {
+      "speaker": "luis-mad-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "right",
+
+      "text": ["ghh..."]
+    },
+    {
+      "speaker": "luis-yell-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "right-loud",
+
+      "text": ["NO!"]
+    },
+    {
+      "speaker": "roxanne-shock-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "left",
+
+      "text": ["!"]
+    },
+    {
+      "speaker": "roxanne-worry-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "left",
+
+      "text": [
+        "you...",
+        "I've...",
+        "never heard your voice crack like that before..."
+      ]
+    },
+    {
+      "speaker": "luis-mad-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "right",
+
+      "text": ["another round!"]
+    },
+    {
+      "speaker": "roxanne-worry-remnants",
+      "speakerAnimation": "talk",
+      "box": "remnants",
+      "boxAnimation": "left",
+
+      "text": ["..."]
+    }
+  ]
+}

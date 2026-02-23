@@ -1,0 +1,24 @@
+import funkin.play.cutscene.dialogue.DialogueBox;
+import funkin.audio.FunkinSound;
+
+class RemnantsDialogueBox extends DialogueBox
+{
+  function new()
+  {
+    super('remnants');
+  }
+
+  override function applyAnimationOffsets(name:String):Void
+  {
+    var textX:Float = super.textDisplay.x;
+    var textY:Float = super.textDisplay.y;
+    super.applyAnimationOffsets(name);
+    super.textDisplay.setPosition(textX, textY);
+  }
+
+  override public function onDialogueLine(event:DialogueScriptEvent):Void
+  {
+    FunkinSound.playOnce(Paths.sound('clickText'), 0.6);
+    super.onDialogueLine(event);
+  }
+}

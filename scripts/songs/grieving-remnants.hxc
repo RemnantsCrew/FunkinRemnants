@@ -7,6 +7,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import funkin.Preferences;
 import funkin.audio.FunkinSound;
+import flixel.util.FlxTimer;
 import flixel.FlxG;
 import funkin.mobile.input.ControlsHandler;
 import funkin.util.SongSequence;
@@ -14,7 +15,8 @@ import funkin.Conductor;
 
 class GrievingRemnantsSong extends Song
 {
-  var utterShock:Bool = FlxG.random.bool(1);
+  var utterShock:Bool = false;
+  var playedDialogue:Bool = false;
 
   var fadeOut:Bool = false;
   var emotional:Bool = false;
@@ -38,7 +40,17 @@ class GrievingRemnantsSong extends Song
   {
     super.onCountdownStart(event);
 
-    if (RemnantsBumpers.playedBumper)
+    if (!playedDialogue)
+    {
+      trace('Pausing countdown to play dialogue... (`grieving-remnants`)');
+      playedDialogue = true;
+      event.cancel();
+
+      FlxTimer.wait(1, () -> {
+        PlayState.instance.startConversation('grieving-remnants');
+      });
+    }
+    else
     {
       PlayState.instance.disableKeys = true;
     }
@@ -434,20 +446,19 @@ class GrievingRemnantsSong extends Song
         PlayState.instance.currentStage.getNamedProp('Sleeping').setPosition(2600, -600);
       }
     }
+
+    utterShock = FlxG.random.bool(1);
   }
 
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
 
-    if (utterShock)
-    {
-      PlayState.instance.currentStage.getDad().playAnimation("shocked", true, true);
-    }
-
     PlayState.instance.camHUD.fade(0xFF000000, 0, false, null, false);
     fadeOut = false;
     emotional = false;
+
+    playedDialogue = false;
 
     if (!FlxG.onMobile) // Move pop ups
     {
@@ -560,7 +571,8 @@ class GrievingRemnantsSong extends Song
     if (PlayState.instance.currentStage == null) return;
     if (!event.note.noteData.getMustHitNote() && utterShock)
     {
-      event.cancelEvent();
+      event.cancel();
+      PlayState.instance.currentStage.getDad().playAnimation("shocked", false, true);
       PlayState.instance.vocals.opponentVolume = 0;
     }
   }

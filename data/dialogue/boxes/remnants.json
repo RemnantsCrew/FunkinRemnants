@@ -5,13 +5,13 @@
   "isPixel": true,
   "flipX": false,
   "flipY": false,
-  "offsets": [-660, -340],
-  "scale": 5.4,
+  "offsets": [-600, 0],
+  "scale": 1,
 
   "text": {
-    "offsets": [225, 450],
-    "width": 900,
-    "color": "#C0DFDE",
+    "offsets": [70, 120],
+    "width": 950,
+    "color": "#FFFFFF",
     "fontFamily": "Pixel Arial 11 Bold",
     "shadowColor": "#D89494",
     "shadowWidth": 2
@@ -19,26 +19,34 @@
 
   "animations": [
     {
-      "name": "enter",
-      "prefix": "speech bubble normal open",
-      "offsets": [0, 0],
-      "frameRate": 24
-    },
-    {
-      "name": "idle",
+      "name": "left",
       "prefix": "speech bubble normal0",
-      "offsets": [0, 0]
-    },
-    {
-      "name": "enter-loud",
-      "prefix": "speech bubble loud open",
+      "looped": true,
+      "flipX": true,
       "offsets": [0, 0],
       "frameRate": 24
     },
     {
-      "name": "idle-loud",
+      "name": "right",
+      "prefix": "speech bubble normal0",
+      "looped": true,
+      "offsets": [0, -5],
+      "frameRate": 24
+    },
+    {
+      "name": "left-loud",
       "prefix": "speech bubble loud0",
-      "offsets": [0, 0]
+      "looped": true,
+      "flipX": true,
+      "offsets": [-25, -75],
+      "frameRate": 24
+    },
+    {
+      "name": "right-loud",
+      "prefix": "speech bubble loud0",
+      "looped": true,
+      "offsets": [-25, -75],
+      "frameRate": 24
     }
   ]
 }
