@@ -1295,7 +1295,7 @@
         "white": false,
         "retroSteps": 5,
         "startOpacity": 0,
-        "instantFadeReset": true,
+        "restartTween": false,
         "duration": 108,
         "ease": "smootherStep",
         "retro": false,

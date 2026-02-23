@@ -10,11 +10,11 @@
       "t": 0,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "linear",
-        "char": 1
+        "char": 1,
+        "ease": "linear"
       }
     },
     {
@@ -23,31 +23,31 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "zoom": 1.1,
         "easeDir": "In",
+        "mode": "stage"
+      }
+    },
+    {
+      "t": 1714.28571428571,
+      "e": "ZoomCamera",
+      "v": {
+        "duration": 4,
+        "ease": "cube",
         "mode": "stage",
-        "zoom": 1.1
-      }
-    },
-    {
-      "t": 1714.28571428571,
-      "e": "ZoomCamera",
-      "v": {
-        "duration": 4,
-        "ease": "cube",
         "zoom": 1.15,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
       "t": 1714.28571428571,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "smoothStep",
         "char": 2,
+        "ease": "smoothStep",
         "easeDir": "Out"
       }
     },
@@ -55,11 +55,11 @@
       "t": 3428.57142857143,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "smoothStep",
         "char": 0,
+        "ease": "smoothStep",
         "easeDir": "Out"
       }
     },
@@ -69,20 +69,20 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "mode": "stage",
         "zoom": 1.2,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
       "t": 5142.85714285714,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "smoothStep",
         "char": 2,
+        "ease": "smoothStep",
         "easeDir": "Out"
       }
     },
@@ -92,9 +92,9 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "mode": "stage",
         "zoom": 1.25,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
@@ -111,20 +111,20 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "mode": "stage",
         "zoom": 1,
-        "easeDir": "Out",
-        "mode": "stage"
+        "easeDir": "Out"
       }
     },
     {
       "t": 6857.14285714286,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
         "char": 1,
+        "ease": "CLASSIC",
         "easeDir": "In"
       }
     },
@@ -132,33 +132,33 @@
       "t": 8785.71428571429,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 10500,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 11357.1428571429,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -167,20 +167,20 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "zoom": 1.15,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 1.15
+        "mode": "stage"
       }
     },
     {
       "t": 13928.5714285714,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -189,42 +189,42 @@
       "v": {
         "duration": 2.5,
         "ease": "quart",
+        "easeDir": "Out",
         "mode": "stage",
-        "zoom": 1,
-        "easeDir": "Out"
+        "zoom": 1
       }
     },
     {
       "t": 15642.8571428571,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 17357.1428571429,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 19071.4285714286,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -241,53 +241,53 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "zoom": 0.85,
         "easeDir": "Out",
-        "mode": "stage",
-        "zoom": 0.85
+        "mode": "stage"
       }
     },
     {
       "t": 20785.7142857143,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 22500,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 24214.2857142857,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 25928.5714285714,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -296,9 +296,9 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "mode": "stage",
         "zoom": 1.05,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
@@ -307,31 +307,31 @@
       "v": {
         "duration": 5.5,
         "ease": "cube",
+        "zoom": 0.85,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 0.85
+        "mode": "stage"
       }
     },
     {
       "t": 27642.8571428571,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 29357.1428571429,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -340,9 +340,9 @@
       "v": {
         "duration": 3,
         "ease": "cube",
+        "zoom": 0.95,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 0.95
+        "mode": "stage"
       }
     },
     {
@@ -351,9 +351,9 @@
       "v": {
         "duration": 3,
         "ease": "cube",
+        "zoom": 1.05,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 1.05
+        "mode": "stage"
       }
     },
     {
@@ -362,9 +362,9 @@
       "v": {
         "duration": 3,
         "ease": "back",
+        "zoom": 1.1,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 1.1
+        "mode": "stage"
       }
     },
     {
@@ -381,24 +381,90 @@
       "v": {
         "duration": 4,
         "ease": "quad",
+        "mode": "stage",
         "zoom": 0.9,
-        "easeDir": "Out",
-        "mode": "stage"
+        "easeDir": "Out"
       }
     },
     {
       "t": 34500,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 36857.1428571429,
+      "e": "ZoomCamera",
+      "v": {
+        "duration": 2,
+        "ease": "smoothStep",
+        "mode": "stage",
+        "zoom": 0.95,
+        "easeDir": "In"
+      }
+    },
+    {
+      "t": 37285.7142857143,
+      "e": "ZoomCamera",
+      "v": {
+        "duration": 2,
+        "ease": "smoothStep",
+        "mode": "stage",
+        "zoom": 1,
+        "easeDir": "In"
+      }
+    },
+    {
+      "t": 40285.7142857143,
+      "e": "ZoomCamera",
+      "v": {
+        "duration": 2,
+        "ease": "smoothStep",
+        "mode": "stage",
+        "zoom": 1.05,
+        "easeDir": "In"
+      }
+    },
+    {
+      "t": 40714.2857142857,
+      "e": "ZoomCamera",
+      "v": {
+        "duration": 2,
+        "ease": "smoothStep",
+        "mode": "stage",
+        "zoom": 1.1,
+        "easeDir": "In"
+      }
+    },
+    {
+      "t": 41357.1428571429,
+      "e": "ZoomCamera",
+      "v": {
+        "duration": 2,
+        "ease": "smoothStep",
+        "easeDir": "In",
+        "mode": "stage",
+        "zoom": 0.9
+      }
+    },
+    {
+      "t": 41357.1428571429,
+      "e": "FocusCamera",
+      "v": {
+        "duration": 4,
+        "x": 0,
+        "y": 0,
+        "char": 0,
+        "ease": "CLASSIC"
+      }
+    },
+    {
+      "t": 43071.4285714286,
       "e": "ZoomCamera",
       "v": {
         "duration": 2,
@@ -409,80 +475,14 @@
       }
     },
     {
-      "t": 37285.7142857143,
-      "e": "ZoomCamera",
-      "v": {
-        "duration": 2,
-        "ease": "smoothStep",
-        "zoom": 1,
-        "easeDir": "In",
-        "mode": "stage"
-      }
-    },
-    {
-      "t": 40285.7142857143,
-      "e": "ZoomCamera",
-      "v": {
-        "duration": 2,
-        "ease": "smoothStep",
-        "zoom": 1.05,
-        "easeDir": "In",
-        "mode": "stage"
-      }
-    },
-    {
-      "t": 40714.2857142857,
-      "e": "ZoomCamera",
-      "v": {
-        "duration": 2,
-        "ease": "smoothStep",
-        "zoom": 1.1,
-        "easeDir": "In",
-        "mode": "stage"
-      }
-    },
-    {
-      "t": 41357.1428571429,
-      "e": "ZoomCamera",
-      "v": {
-        "duration": 2,
-        "ease": "smoothStep",
-        "mode": "stage",
-        "zoom": 0.9,
-        "easeDir": "In"
-      }
-    },
-    {
-      "t": 41357.1428571429,
-      "e": "FocusCamera",
-      "v": {
-        "x": 0,
-        "duration": 4,
-        "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
-      }
-    },
-    {
-      "t": 43071.4285714286,
-      "e": "ZoomCamera",
-      "v": {
-        "duration": 2,
-        "ease": "smoothStep",
-        "easeDir": "In",
-        "mode": "stage",
-        "zoom": 0.95
-      }
-    },
-    {
       "t": 44785.7142857143,
       "e": "ZoomCamera",
       "v": {
         "duration": 2,
         "ease": "smoothStep",
+        "mode": "stage",
         "zoom": 1,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
@@ -491,9 +491,9 @@
       "v": {
         "duration": 2,
         "ease": "smoothStep",
+        "zoom": 1.05,
         "mode": "stage",
-        "easeDir": "In",
-        "zoom": 1.05
+        "easeDir": "In"
       }
     },
     {
@@ -510,31 +510,31 @@
       "v": {
         "duration": 2,
         "ease": "smoothStep",
+        "mode": "stage",
         "zoom": 1,
-        "easeDir": "Out",
-        "mode": "stage"
+        "easeDir": "Out"
       }
     },
     {
       "t": 48214.2857142857,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 54857.1428571429,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -543,19 +543,19 @@
       "v": {
         "duration": 64,
         "ease": "smoothStep",
+        "mode": "stage",
         "zoom": 1.4,
-        "easeDir": "Out",
-        "mode": "stage"
+        "easeDir": "Out"
       }
     },
     {
       "t": 61714.2857142857,
       "e": "ZoomCamera",
       "v": {
-        "ease": "linear",
         "duration": 4,
-        "zoom": 1,
-        "mode": "stage"
+        "ease": "linear",
+        "mode": "stage",
+        "zoom": 1
       }
     },
     {
@@ -570,33 +570,33 @@
       "t": 61714.2857142857,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 68571.4285714286,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 75428.5714285714,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -612,14 +612,15 @@
       "e": "RemnantsOverlay",
       "v": {
         "endOpacity": 1,
-        "startOpacity": 0,
-        "retroSteps": 5,
         "white": false,
+        "retroSteps": 5,
+        "startOpacity": 0,
+        "restartTween": false,
         "duration": 64,
         "retro": false,
         "ease": "linear",
-        "hud": true,
-        "easeDir": "In"
+        "easeDir": "In",
+        "hud": true
       }
     },
     {
@@ -628,20 +629,20 @@
       "v": {
         "duration": 60,
         "ease": "linear",
+        "mode": "stage",
         "zoom": 0.6,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
       "t": 82285.7142857143,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
         "char": 0,
+        "ease": "CLASSIC",
         "easeDir": "In"
       }
     },
@@ -650,14 +651,15 @@
       "e": "RemnantsOverlay",
       "v": {
         "endOpacity": 0,
-        "startOpacity": 1,
-        "retroSteps": 5,
         "white": false,
+        "retroSteps": 5,
+        "startOpacity": 1,
+        "restartTween": true,
         "duration": 4,
         "retro": false,
         "ease": "quart",
-        "hud": true,
-        "easeDir": "In"
+        "easeDir": "In",
+        "hud": true
       }
     },
     {
@@ -665,19 +667,19 @@
       "e": "SetCameraBop",
       "v": {
         "rate": 2,
-        "intensity": 3.015,
-        "offset": 0
+        "offset": 0,
+        "intensity": 3.015
       }
     },
     {
       "t": 95571.4285714286,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "INSTANT",
         "char": 1,
+        "ease": "INSTANT",
         "easeDir": "In"
       }
     },
@@ -687,9 +689,9 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "easeDir": "In",
         "mode": "stage",
-        "zoom": 1,
-        "easeDir": "In"
+        "zoom": 1
       }
     },
     {
@@ -698,9 +700,9 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "easeDir": "In",
         "mode": "stage",
-        "zoom": 1.05,
-        "easeDir": "In"
+        "zoom": 1.05
       }
     },
     {
@@ -709,9 +711,9 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "zoom": 1.1,
         "mode": "stage",
-        "easeDir": "In",
-        "zoom": 1.1
+        "easeDir": "In"
       }
     },
     {
@@ -720,20 +722,20 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "easeDir": "In",
         "mode": "stage",
-        "zoom": 1.15,
-        "easeDir": "In"
+        "zoom": 1.15
       }
     },
     {
       "t": 102857.142857143,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -742,9 +744,9 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "zoom": 1,
         "mode": "stage",
-        "easeDir": "In",
-        "zoom": 1
+        "easeDir": "In"
       }
     },
     {
@@ -753,9 +755,9 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "easeDir": "In",
         "mode": "stage",
-        "zoom": 1.05,
-        "easeDir": "In"
+        "zoom": 1.05
       }
     },
     {
@@ -764,9 +766,9 @@
       "v": {
         "duration": 4,
         "ease": "quart",
+        "zoom": 1.1,
         "mode": "stage",
-        "easeDir": "In",
-        "zoom": 1.1
+        "easeDir": "In"
       }
     },
     {
@@ -775,9 +777,9 @@
       "v": {
         "duration": 3,
         "ease": "quart",
+        "zoom": 1.125,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 1.125
+        "mode": "stage"
       }
     },
     {
@@ -786,9 +788,9 @@
       "v": {
         "duration": 3,
         "ease": "quart",
+        "zoom": 1.15,
         "easeDir": "In",
-        "mode": "stage",
-        "zoom": 1.15
+        "mode": "stage"
       }
     },
     {
@@ -797,9 +799,9 @@
       "v": {
         "duration": 3,
         "ease": "quart",
+        "mode": "stage",
         "zoom": 1.175,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
@@ -808,9 +810,9 @@
       "v": {
         "duration": 3,
         "ease": "quart",
+        "mode": "stage",
         "zoom": 1.2,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
@@ -818,8 +820,8 @@
       "e": "SetCameraBop",
       "v": {
         "rate": 4,
-        "intensity": 1.015,
-        "offset": 0
+        "offset": 0,
+        "intensity": 1.015
       }
     },
     {
@@ -828,31 +830,31 @@
       "v": {
         "duration": 4,
         "ease": "cube",
+        "mode": "stage",
         "zoom": 1,
-        "easeDir": "Out",
-        "mode": "stage"
+        "easeDir": "Out"
       }
     },
     {
       "t": 109714.285714286,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 1
+        "char": 1,
+        "ease": "CLASSIC"
       }
     },
     {
       "t": 113142.857142857,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
-        "char": 0
+        "char": 0,
+        "ease": "CLASSIC"
       }
     },
     {
@@ -861,21 +863,37 @@
       "v": {
         "duration": 92,
         "ease": "linear",
+        "mode": "stage",
         "zoom": 0.75,
-        "easeDir": "In",
-        "mode": "stage"
+        "easeDir": "In"
       }
     },
     {
       "t": 117000,
       "e": "FocusCamera",
       "v": {
-        "x": 0,
         "duration": 4,
+        "x": 0,
         "y": 0,
-        "ease": "CLASSIC",
         "char": 2,
+        "ease": "CLASSIC",
         "easeDir": "In"
+      }
+    },
+    {
+      "t": 123428.571428571,
+      "e": "RemnantsOverlay",
+      "v": {
+        "endOpacity": 1,
+        "white": false,
+        "retroSteps": 5,
+        "startOpacity": 0,
+        "restartTween": false,
+        "duration": 16,
+        "retro": false,
+        "ease": "linear",
+        "easeDir": "In",
+        "hud": true
       }
     },
     {
@@ -884,24 +902,9 @@
       "v": {
         "duration": 16,
         "ease": "linear",
+        "mode": "stage",
         "zoom": 0.6,
-        "easeDir": "Out",
-        "mode": "stage"
-      }
-    },
-    {
-      "t": 123428.571428571,
-      "e": "RemnantsOverlay",
-      "v": {
-        "endOpacity": 1,
-        "startOpacity": 0,
-        "retroSteps": 5,
-        "white": false,
-        "duration": 16,
-        "retro": false,
-        "ease": "linear",
-        "hud": true,
-        "easeDir": "In"
+        "easeDir": "Out"
       }
     }
   ],
@@ -6618,5 +6621,5 @@
     ],
     "nightmare": []
   },
-  "generatedBy": "Friday Night Funkin' - v0.8.1"
+  "generatedBy": "Friday Night Funkin' - v0.8.2 (develop : a8e4490) PROTOTYPE"
 }
