@@ -1,6 +1,7 @@
 import funkin.ui.freeplay.FreeplayState;
 import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.data.song.SongRegistry;
+import funkin.play.PlayState;
 import funkin.save.Save;
 import StringTools;
 
@@ -66,5 +67,11 @@ class RemnantsContentUtil
 
     Save.instance.modOptions.set('lastRemnantsChar', FreeplayState.rememberedCharacterId);
     Save.instance.flush();
+  }
+
+  public static function isRemnantsSong():Bool
+  {
+    var longAssName:String = [for (i in PlayState.instance?.currentStage?.characters ?? []) i.characterId].join('-');
+    return StringTools.contains(longAssName, 'remnants');
   }
 }

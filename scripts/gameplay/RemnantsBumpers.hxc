@@ -87,6 +87,12 @@ class RemnantsBumpers extends Module
   {
     super.onCountdownStart(event);
 
+    if (!RemnantsContentUtil.isRemnantsSong())
+    {
+      trace("The current song is not a 'Remnants Mix', skipping the bumper...");
+      return;
+    }
+
     trace("Attempting to play the bumper...");
     if (setupBumper())
     {

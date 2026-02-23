@@ -15,8 +15,6 @@ class RemnantsDiscordHelper extends Module
   var lastAlbum:String = null;
   var lastIcon:String = null;
 
-  var isRemnantsSong(get, never):Bool;
-
   override public function onUpdate(event:UpdateScriptEvent):Void
   {
     super.onUpdate(event);
@@ -40,7 +38,7 @@ class RemnantsDiscordHelper extends Module
 
   function updateAlbum():Void
   {
-    if (!isRemnantsSong) return;
+    if (!RemnantsContentUtil.isRemnantsSong()) return;
 
     var album:String = 'album-' + (PlayState.instance?.currentChart?.album ?? 'remnants-general');
     PlayState.instance.discordRPCAlbum = ASSETS_URL + album + RAW_EXTENSION;
@@ -48,15 +46,9 @@ class RemnantsDiscordHelper extends Module
 
   function updateIcon():Void
   {
-    if (!isRemnantsSong) return;
+    if (!RemnantsContentUtil.isRemnantsSong()) return;
 
     var healthIcon:String = 'icon-' + (PlayState.instance?.currentStage?.getDad()?._data?.healthIcon?.id ?? 'bf-remnants');
     PlayState.instance.discordRPCIcon = ASSETS_URL + healthIcon + RAW_EXTENSION;
-  }
-
-  function get_isRemnantsSong():Bool
-  {
-    var longAssName:String = [for (i in PlayState.instance?.currentStage?.characters ?? []) i.characterId].join('-');
-    return StringTools.contains(longAssName, 'remnants');
   }
 }
