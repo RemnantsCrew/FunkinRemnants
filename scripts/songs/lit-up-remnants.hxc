@@ -45,49 +45,6 @@ class LitUpRemnantsMixSong extends Song
     if (hasBeatenRemnantsMix) return results;
   }
 
-  function onCountdownStart(event:ScriptEvent):Void
-  {
-    super.onCountdownStart(event);
-
-    var sequenceData = [
-      {
-        time: 323 * (Conductor.instance.beatLengthMs / 1000),
-        callback: () -> {
-          PlayState.instance.camCutscene.fade(0xFF000000, 9.29, false, null, false);
-          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.98,
-            {
-              ease: FlxEase.smootherStepIn,
-              onComplete: function(_) {
-                PlayState.instance.disableKeys = true;
-              }
-            });
-          outro = true;
-        }
-      },
-    ];
-
-    if (!RemnantsOptions.getPerformanceOption())
-    {
-      sequenceData.push(
-        {
-          time: 96 * (Conductor.instance.beatLengthMs / 1000),
-          callback: () -> {
-            mistOn(3);
-          }
-        });
-      sequenceData.push(
-        {
-          time: 160 * (Conductor.instance.beatLengthMs / 1000),
-          callback: () -> {
-            mistOff(3);
-          }
-        });
-    }
-
-    sequence = new SongSequence(sequenceData);
-    sequence.startTime = 0;
-  }
-
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
@@ -218,7 +175,6 @@ class LitUpRemnantsMixSong extends Song
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
-    sequence?.destroy();
 
     if (mist0.alpha > 0 && !RemnantsOptions.getPerformanceOption()) mistOff(1);
 
@@ -247,8 +203,10 @@ class LitUpRemnantsMixSong extends Song
     if (mist0.alpha > 0 && !RemnantsOptions.getPerformanceOption()) mistOff(0);
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
 
@@ -257,14 +215,51 @@ class LitUpRemnantsMixSong extends Song
       FlxTweenUtil.pauseTweensOf(scriptGet('mist' + i));
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
 
     if (RemnantsOptions.getPerformanceOption()) return;
     for (i in 0...7)
       FlxTweenUtil.resumeTweensOf(scriptGet('mist' + i));
+  }
+
+  function onSongLoaded(event:SongLoadScriptEvent)
+  {
+    sequence?.destroy();
+
+    var sequenceData = [
+      {
+        time: 323 * (Conductor.instance.beatLengthMs / 1000),
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 9.29, false, null, false);
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.98,
+            {
+              ease: FlxEase.smootherStepIn,
+              onComplete: function(_) {
+                PlayState.instance.disableKeys = true;
+              }
+            });
+          outro = true;
+        }
+      },
+    ];
+
+    if (!RemnantsOptions.getPerformanceOption())
+    {
+      sequenceData.push({time: 96 * (Conductor.instance.beatLengthMs / 1000), callback: () -> {
+        mistOn(3);
+      }});
+      sequenceData.push({time: 160 * (Conductor.instance.beatLengthMs / 1000), callback: () -> {
+        mistOff(3);
+      }});
+    }
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
   function onDestroy(event:ScriptEvent):Void

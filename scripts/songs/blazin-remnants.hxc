@@ -11,6 +11,7 @@ import funkin.save.Save;
 class BlazinRemnantsMixSong extends Song
 {
   var gigacut:Bool = false;
+  var gigadone:Bool = false;
 
   public function new()
   {
@@ -30,6 +31,14 @@ class BlazinRemnantsMixSong extends Song
     this.hasHidden = false;
     this.hasPlayedCutscene = false;
     gigacut = false;
+    gigadone = false;
+  }
+
+  function onCountdownStart(event:ScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+
+    gigacut = FlxG.random.bool(25);
   }
 
   function onDestroy(event:ScriptEvent):Void
@@ -87,7 +96,7 @@ class BlazinRemnantsMixSong extends Song
   {
     if (picoTimer != null) picoTimer.cancel(); // KILL IT!
 
-    if (!gigacut) return;
+    if (!gigadone) return;
     FlxG.camera.fade(0xFF000000, 1, true);
     PlayState.instance.disableKeys = false;
     PlayState.instance.currentStage.getDad().velocity.y = 0;
@@ -95,17 +104,7 @@ class BlazinRemnantsMixSong extends Song
     PlayState.instance.currentStage.getBoyfriend().velocity.y = 0;
     PlayState.instance.currentStage.getBoyfriend().velocity.x = 0;
     PlayState.instance.currentStage.getBoyfriend().visible = true;
-    gigacut = false;
-  }
-
-  function onBeatHit(event:ScriptEvent):Void // Sets up super awesome easter egg
-  {
-    super.onBeatHit(event);
-
-    if (event.beat == 343)
-    {
-      gigacut = FlxG.random.bool(25);
-    }
+    gigadone = false;
   }
 
   function onNoteHit(event:HitNoteScriptEvent):Void // Super awesome easter egg good ending
@@ -120,6 +119,7 @@ class BlazinRemnantsMixSong extends Song
         FunkinSound.playOnce(Paths.sound('gameplay/secret/goodEnd'), 1);
         FunkinSound.playOnce(Paths.sound('gameplay/secret/secret', "shared"), 1);
         gigaPicoPunch();
+        gigadone = true;
     }
   }
 
@@ -146,6 +146,7 @@ class BlazinRemnantsMixSong extends Song
 
         gigaDarnellPunch();
         PlayState.instance.disableKeys = true;
+        gigadone = true;
 
         picoTimer = new FlxTimer().start(3, function() {
           PlayState.instance.disableKeys = false;
@@ -213,6 +214,7 @@ class BlazinRemnantsMixSong extends Song
   override function onPause(event:ScriptEvent):Void
   {
     super.onPause(event);
+
     if (fadeTween != null) fadeTween.active = false;
     if (picoTimer != null) picoTimer.active = false; // PAUSE IT!
   }
@@ -220,6 +222,7 @@ class BlazinRemnantsMixSong extends Song
   override function onResume(event:ScriptEvent):Void
   {
     super.onResume(event);
+
     if (fadeTween != null) fadeTween.active = true;
     if (picoTimer != null) picoTimer.active = true; // RESUME IT!
   }

@@ -5,6 +5,8 @@ import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.FlxG;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class PlaytimeRemnantsSong extends Song
 {
@@ -53,63 +55,111 @@ class PlaytimeRemnantsSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
     fadeOut = false;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onCountdownStart(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onCountdownStart(event);
+    sequence?.destroy();
 
-    PlayState.instance.camHUD.alpha = 0;
-    PlayState.instance.currentStage.getNamedProp('Overlay').alpha = 0.4;
+    var sequenceData = [
+      {
+        time: 0,
+        callback: () -> {
+          PlayState.instance.camHUD.alpha = 0;
+          PlayState.instance.camCutscene.fade(0xFF000000, 5, true, null, false);
+
+          if (PlayState.instance.currentStage.getNamedProp('Overlay').alpha != 0.4)
+          {
+            FlxTween.cancelTweensOf(PlayState.instance.currentStage.getNamedProp('Overlay'));
+            PlayState.instance.currentStage.getNamedProp('Overlay').alpha = 0.4;
+          }
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(27) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 2.1, {ease: FlxEase.smootherStepInOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(31) / 1000,
+        callback: () -> {
+          PlayState.instance.camHUD.alpha = 0;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(32) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.54);
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(96) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 1}, 4.36, {ease: FlxEase.sineInOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(128) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 0.4}, 4.36, {ease: FlxEase.sineInOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(160) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 0.75}, 3.27, {ease: FlxEase.cubeOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(192) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 0.54, false, null, false);
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 1}, 0.54);
+          fadeOut = false;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
-  function onSongStart(event:ScriptEvent):Void
+  function onDestroy(event:ScriptEvent):Void
   {
-    super.onSongStart(event);
+    super.onDestroy(event);
 
-    PlayState.instance.camCutscene.fade(0xFF000000, 5, true, null, false);
-  }
-
-  function onBeatHit(event:ScriptEvent):Void
-  {
-    super.onBeatHit(event);
-
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 27:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 2.1, {ease: FlxEase.smootherStepInOut});
-      case 31:
-        PlayState.instance.camHUD.alpha = 0;
-      case 32:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.54, {ease: FlxEase.linear});
-        fadeOut = true;
-      case 96:
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 1}, 4.36, {ease: FlxEase.sineInOut});
-      case 128:
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 0.4}, 4.36, {ease: FlxEase.sineInOut});
-      case 160:
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 0.75}, 3.27, {ease: FlxEase.cubeOut});
-      case 192:
-        PlayState.instance.camCutscene.fade(0xFF000000, 0.54, false, null, false);
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('Overlay'), {alpha: 1}, 0.54, {ease: FlxEase.linear});
-        fadeOut = false;
-    }
+    sequence?.destroy();
   }
 }

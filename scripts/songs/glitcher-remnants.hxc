@@ -5,10 +5,13 @@ import funkin.play.PlayState;
 import funkin.util.FlxTweenUtil;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class GlitcherRemnantsSong extends Song
 {
   var fadeOut:Bool = false;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -37,6 +40,7 @@ class GlitcherRemnantsSong extends Song
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
+    sequence?.destroy();
 
     PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
@@ -54,60 +58,98 @@ class GlitcherRemnantsSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
     fadeOut = false;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onCountdownStart(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onCountdownStart(event);
+    sequence?.destroy();
 
-    PlayState.instance.camHUD.alpha = 0;
+    var sequenceData = [
+      {
+        time: 0,
+        callback: () -> {
+          PlayState.instance.camHUD.alpha = 0;
+          PlayState.instance.camCutscene.fade(0xFF000000, 4, true, null, false);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(14) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.5, {ease: FlxEase.linear});
+          PlayState.instance.disableKeys = false;
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(143) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.changeAmbiance(true, 0.2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(207) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.changeAmbiance(false, 0.2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(271) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.changeAmbiance(true, 0.2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(335) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.changeAmbiance(false, 0.2);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(471) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.5, {ease: FlxEase.linear});
+          PlayState.instance.disableKeys = true;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
-  function onSongStart(event:ScriptEvent):Void
+  function onDestroy(event:ScriptEvent):Void
   {
-    super.onSongStart(event);
+    super.onDestroy(event);
 
-    PlayState.instance.camCutscene.fade(0xFF000000, 4, true, null, false);
-  }
-
-  function onBeatHit(event:ScriptEvent):Void
-  {
-    super.onBeatHit(event);
-
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 14:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-        PlayState.instance.disableKeys = false;
-        fadeOut = true;
-      case 143:
-        PlayState.instance.currentStage.changeAmbiance(true, 0.2);
-      case 207:
-        PlayState.instance.currentStage.changeAmbiance(false, 0.2);
-      case 271:
-        PlayState.instance.currentStage.changeAmbiance(true, 0.2);
-      case 335:
-        PlayState.instance.currentStage.changeAmbiance(false, 0.2);
-      case 471:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.5, {ease: FlxEase.linear});
-        PlayState.instance.disableKeys = true;
-    }
+    sequence?.destroy();
   }
 }

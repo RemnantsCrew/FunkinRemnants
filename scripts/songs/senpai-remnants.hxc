@@ -51,27 +51,24 @@ class SenpaiRemnantsMixSong extends Song
 
     // Skip the cutscene if we're playtesting in the Chart Editor.
     if (PlayState.instance.isChartingMode && !hasPlayedDialogue) hasPlayedDialogue = true;
-    if (RemnantsBumpers.playedBumper)
+    if (!hasPlayedDialogue)
     {
-      if (!hasPlayedDialogue)
+      trace('Pausing countdown to play dialogue.');
+
+      if (bgSprite == null)
       {
-        trace('Pausing countdown to play dialogue.');
-
-        if (bgSprite == null)
-        {
-          bgSprite = new FunkinSprite(0, 0);
-          bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
-          bgSprite.cameras = [PlayState.instance.camCutscene];
-          bgSprite.zIndex = -10000;
-          PlayState.instance.add(bgSprite);
-          PlayState.instance.refresh();
-        }
-
-        hasPlayedDialogue = true;
-
-        event.cancel(); // CANCEL THE COUNTDOWN!
-        transitionToDialogue();
+        bgSprite = new FunkinSprite(0, 0);
+        bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
+        bgSprite.cameras = [PlayState.instance.camCutscene];
+        bgSprite.zIndex = -10000;
+        PlayState.instance.add(bgSprite);
+        PlayState.instance.refresh();
       }
+
+      hasPlayedDialogue = true;
+
+      event.cancel(); // CANCEL THE COUNTDOWN!
+      transitionToDialogue();
     }
   }
 

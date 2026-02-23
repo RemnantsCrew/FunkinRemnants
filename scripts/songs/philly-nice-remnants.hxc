@@ -4,12 +4,15 @@ import funkin.play.PlayState;
 import funkin.save.Save;
 import funkin.graphics.FunkinSprite;
 import funkin.util.FlxTweenUtil;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
 class PhillyNiceRemnantsMixSong extends Song
 {
   var fadeOut:Bool = false;
+  var sequence:SongSequence;
 
   public function new()
   {
@@ -53,44 +56,83 @@ class PhillyNiceRemnantsMixSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     PlayState.instance.camCutscene?.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
     fadeOut = false;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     PlayState.instance.camCutscene?.active = false;
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     PlayState.instance.camCutscene?.active = true;
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    sequence?.destroy();
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 3:
-        PlayState.instance.camCutscene.fade(0xFF000000, 1.72, true, null, false);
-        PlayState.instance.camHUD.fade(0xFF000000, 0, true, null, false);
-        PlayState.instance.camHUD.alpha = 0;
-      case 6:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.69, {ease: FlxEase.linear});
-      case 75:
-        fadeOut = true;
-      case 328:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.74, {ease: FlxEase.smootherStepOut});
-        fadeOut = false;
-      case 352:
-        PlayState.instance.camCutscene.fade(0xFF000000, 2.74, false, null, false);
-    }
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(3) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 1.72, true, null, false);
+          PlayState.instance.camHUD.fade(0xFF000000, 0, true, null, false);
+          PlayState.instance.camHUD.alpha = 0;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(6) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 0.69);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(75) / 1000,
+        callback: () -> {
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(328) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.74, {ease: FlxEase.smootherStepOut});
+          fadeOut = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(352) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 2.74, false, null, false);
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }

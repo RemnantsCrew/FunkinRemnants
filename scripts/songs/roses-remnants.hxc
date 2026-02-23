@@ -13,6 +13,8 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 import funkin.mobile.input.ControlsHandler;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class RosesRemnantsMixSong extends Song
 {
@@ -22,6 +24,7 @@ class RosesRemnantsMixSong extends Song
   var fadeOut:Bool = false;
   var outro:Bool = false;
   var color:Bool = false;
+  var sequence:SongSequence;
 
   var colorTweens:Array<FlxTween> = [];
 
@@ -50,41 +53,38 @@ class RosesRemnantsMixSong extends Song
     // Skip the cutscene if we're playtesting in the Chart Editor.
     if (PlayState.instance.isChartingMode && !hasPlayedCutscene) hasPlayedCutscene = true;
 
-    if (RemnantsBumpers.playedBumper)
+    if (!hasPlayedCutscene)
     {
-      if (!hasPlayedCutscene)
+      trace('Pausing countdown to play cutscene.');
+
+      if (bgSprite == null)
       {
-        trace('Pausing countdown to play cutscene.');
+        bgSprite = new FunkinSprite();
+        bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
+        bgSprite.cameras = [PlayState.instance.camCutscene];
+        bgSprite.zIndex = -10000;
+        PlayState.instance.add(bgSprite);
+        PlayState.instance.refresh();
+      }
 
-        if (bgSprite == null)
-        {
-          bgSprite = new FunkinSprite();
-          bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
-          bgSprite.cameras = [PlayState.instance.camCutscene];
-          bgSprite.zIndex = -10000;
-          PlayState.instance.add(bgSprite);
-          PlayState.instance.refresh();
-        }
+      hasPlayedCutscene = true;
+      event.cancel(); // CANCEL THE COUNTDOWN!
 
-        hasPlayedCutscene = true;
-        event.cancel(); // CANCEL THE COUNTDOWN!
+      // Play a SFX
+      FunkinSound.playOnce(Paths.sound('ANGRY_TEXT_BOX'), 1.0);
+      HapticUtil.vibrate(0.1, 0.5, 1, 1);
+      PlayState.instance.disableKeys = true;
 
-        // Play a SFX
-        FunkinSound.playOnce(Paths.sound('ANGRY_TEXT_BOX'), 1.0);
-        HapticUtil.vibrate(0.1, 0.5, 1, 1);
-        PlayState.instance.disableKeys = true;
-
-        if (bgSprite != null)
-        {
-          FlxTween.tween(bgSprite, {alpha: 0}, 0.15, {startDelay: 0.1}, function() {
-            bgSprite.visible = false;
-          });
-        }
-
-        new FlxTimer().start(2, _ -> {
-          startDialogue();
+      if (bgSprite != null)
+      {
+        FlxTween.tween(bgSprite, {alpha: 0}, 0.15, {startDelay: 0.1}, function() {
+          bgSprite.visible = false;
         });
       }
+
+      new FlxTimer().start(2, _ -> {
+        startDialogue();
+      });
     }
   }
 
@@ -214,14 +214,11 @@ class RosesRemnantsMixSong extends Song
     Countdown.performCountdown();
   }
 
-  function onDestroy(event:ScriptEvent):Void
-  {
-    while (colorTweens.length > 0)
-      colorTweens.shift()?.cancel();
-  }
-
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     fadeOut = false;
 
     if (outro)
@@ -295,108 +292,154 @@ class RosesRemnantsMixSong extends Song
     PlayState.instance.camGame.fade(0xFF000000, 0, true, null, false);
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    super.onBeatHit(event);
+    sequence?.destroy();
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 30:
-        RetroCameraFade.fadeToBlack(PlayState.instance.camGame, 10, 2);
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(30) / 1000,
+        callback: () -> {
+          RetroCameraFade.fadeToBlack(PlayState.instance.camGame, 10, 2);
+        }
+      },
 
-      case 34:
-        RetroCameraFade.fadeBlack(PlayState.instance.camGame, 5, 0.25);
-        PlayState.instance.currentStage.getNamedProp('black').alpha = 0;
-        fadeOut = true;
+      {
+        time: Conductor.instance.getBeatTimeInMs(34) / 1000,
+        callback: () -> {
+          RetroCameraFade.fadeBlack(PlayState.instance.camGame, 5, 0.25);
+          PlayState.instance.currentStage.getNamedProp('black').alpha = 0;
+          fadeOut = true;
+        }
+      },
 
-      case 98:
-        PlayState.instance.currentStage.getNamedProp('black').zIndex = 75;
-        PlayState.instance.currentStage.refresh();
+      {
+        time: Conductor.instance.getBeatTimeInMs(98) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.getNamedProp('black').zIndex = 75;
+          PlayState.instance.currentStage.refresh();
 
-        PlayState.instance.currentStage.getNamedProp('black').alpha = 1;
-        PlayState.instance.currentStage.getNamedProp('freaks').alpha = 0;
-        PlayState.instance.currentStage.getNamedProp('freaksColor').alpha = 1;
-        PlayState.instance.currentStage.getBoyfriend().colorTransform.color = 0xFF40B5DF;
-        PlayState.instance.currentStage.getGirlfriend().colorTransform.color = 0xFFDB2C5B;
-        PlayState.instance.currentStage.getDad().colorTransform.color = 0xFFFFAA6F;
-        PlayState.instance.iconP1.colorTransform.color = 0xFF40B5DF;
-        PlayState.instance.iconP2.colorTransform.color = 0xFFFFAA6F;
-        color = true;
+          PlayState.instance.currentStage.getNamedProp('black').alpha = 1;
+          PlayState.instance.currentStage.getNamedProp('freaks').alpha = 0;
+          PlayState.instance.currentStage.getNamedProp('freaksColor').alpha = 1;
+          PlayState.instance.currentStage.getBoyfriend().colorTransform.color = 0xFF40B5DF;
+          PlayState.instance.currentStage.getGirlfriend().colorTransform.color = 0xFFDB2C5B;
+          PlayState.instance.currentStage.getDad().colorTransform.color = 0xFFFFAA6F;
+          PlayState.instance.iconP1.colorTransform.color = 0xFF40B5DF;
+          PlayState.instance.iconP2.colorTransform.color = 0xFFFFAA6F;
+          color = true;
+        }
+      },
 
-      case 162:
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('skyEvil'), {alpha: 1}, 7.05, {ease: FlxEase.backIn});
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('sky'), {alpha: 0}, 7.05, {ease: FlxEase.backIn});
+      {
+        time: Conductor.instance.getBeatTimeInMs(162) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('skyEvil'), {alpha: 1}, 7.05, {ease: FlxEase.backIn});
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('sky'), {alpha: 0}, 7.05, {ease: FlxEase.backIn});
 
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('black'), {alpha: 0}, 7.05, {ease: FlxEase.linear});
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('freaks'), {alpha: 1}, 7.05,
-          {
-            ease: FlxEase.linear,
-            onComplete: (_) -> {
-              PlayState.instance.currentStage.getNamedProp('freaksColor').alpha = 0;
-              color = false;
-            }
-          });
-
-        var thingies:Array<FlxSprite> = [for (i in PlayState.instance.currentStage.characters.iterator()) i];
-
-        thingies.push(PlayState.instance.iconP1);
-        thingies.push(PlayState.instance.iconP2);
-
-        for (char in thingies)
-        {
-          var originalValues:Array<Float> = [
-            char.colorTransform.redOffset,
-            char.colorTransform.greenOffset,
-            char.colorTransform.blueOffset
-          ];
-
-          colorTweens.push(FlxTween.num(0, 1, 7.05,
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('black'), {alpha: 0}, 7.05, {ease: FlxEase.linear});
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('freaks'), {alpha: 1}, 7.05,
             {
               ease: FlxEase.linear,
-              onComplete: (t:FlxTween) -> {
-                colorTweens.remove(t);
+              onComplete: (_) -> {
+                PlayState.instance.currentStage.getNamedProp('freaksColor').alpha = 0;
+                color = false;
               }
-            }, (value:Float) -> {
-              char.colorTransform.redOffset = originalValues[0] * (1 - value);
-              char.colorTransform.greenOffset = originalValues[1] * (1 - value);
-              char.colorTransform.blueOffset = originalValues[2] * (1 - value);
+            });
 
-              char.colorTransform.redMultiplier = value;
-              char.colorTransform.greenMultiplier = value;
-              char.colorTransform.blueMultiplier = value;
-            }));
-        }
+          var thingies:Array<FlxSprite> = [for (i in PlayState.instance.currentStage.characters.iterator()) i];
 
-      case 225:
-        RetroCameraFade.fadeToBlack(PlayState.instance.camGame, 5, 0.4);
-        fadeOut = false;
+          thingies.push(PlayState.instance.iconP1);
+          thingies.push(PlayState.instance.iconP2);
 
-      case 226:
-        PlayState.instance.currentStage.getNamedProp('black').zIndex = 110;
-        PlayState.instance.currentStage.refresh();
-
-        PlayState.instance.currentStage.getNamedProp('black').alpha = 0.9;
-        RetroCameraFade.fadeBlack(PlayState.instance.camGame, 5, 0.4);
-
-      case 229:
-        FlxTween.tween(PlayState.instance.currentStage.getNamedProp('black'), {alpha: 0}, 0.55, {ease: FlxEase.backIn});
-        fadeOut = true;
-
-      case 278:
-        RetroCameraFade.fadeToBlack(PlayState.instance.camGame, 10, 2);
-        fadeOut = false;
-        outro = true;
-
-      case 282:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.2,
+          for (char in thingies)
           {
-            ease: FlxEase.linear,
-            onComplete: (_) -> {
-              PlayState.instance.camGame.fade(0xFF000000, 0, false, null, false);
-              PlayState.instance.disableKeys = true;
-            }
-          });
-    }
+            var originalValues:Array<Float> = [
+              char.colorTransform.redOffset,
+              char.colorTransform.greenOffset,
+              char.colorTransform.blueOffset
+            ];
+
+            colorTweens.push(FlxTween.num(0, 1, 7.05,
+              {
+                ease: FlxEase.linear,
+                onComplete: (t:FlxTween) -> {
+                  colorTweens.remove(t);
+                }
+              }, (value:Float) -> {
+                char.colorTransform.redOffset = originalValues[0] * (1 - value);
+                char.colorTransform.greenOffset = originalValues[1] * (1 - value);
+                char.colorTransform.blueOffset = originalValues[2] * (1 - value);
+
+                char.colorTransform.redMultiplier = value;
+                char.colorTransform.greenMultiplier = value;
+                char.colorTransform.blueMultiplier = value;
+              }));
+          }
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(225) / 1000,
+        callback: () -> {
+          RetroCameraFade.fadeToBlack(PlayState.instance.camGame, 5, 0.4);
+          fadeOut = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(226) / 1000,
+        callback: () -> {
+          PlayState.instance.currentStage.getNamedProp('black').zIndex = 110;
+          PlayState.instance.currentStage.refresh();
+
+          PlayState.instance.currentStage.getNamedProp('black').alpha = 0.9;
+          RetroCameraFade.fadeBlack(PlayState.instance.camGame, 5, 0.4);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(229) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('black'), {alpha: 0}, 0.55, {ease: FlxEase.backIn});
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(278) / 1000,
+        callback: () -> {
+          RetroCameraFade.fadeToBlack(PlayState.instance.camGame, 10, 2);
+          fadeOut = false;
+          outro = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(282) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.2,
+            {
+              ease: FlxEase.linear,
+              onComplete: (_) -> {
+                PlayState.instance.camGame.fade(0xFF000000, 0, false, null, false);
+                PlayState.instance.disableKeys = true;
+              }
+            });
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+    sequence?.destroy();
+
+    while (colorTweens.length > 0)
+      colorTweens.shift()?.cancel();
   }
 }

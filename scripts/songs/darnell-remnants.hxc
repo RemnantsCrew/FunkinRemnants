@@ -79,26 +79,23 @@ class DarnellRemnantsMixSong extends Song
 
     // Skip the cutscene if we're playtesting in the Chart Editor.
     if (PlayState.instance.isChartingMode && !hasPlayedCutscene) hasPlayedCutscene = true;
-    if (RemnantsBumpers.playedBumper)
+    if (!hasPlayedCutscene)
     {
-      if (!hasPlayedCutscene)
+      hasPlayedCutscene = true;
+      event.cancel();
+
+      if (bgSprite == null)
       {
-        hasPlayedCutscene = true;
-        event.cancel();
-
-        if (bgSprite == null)
-        {
-          bgSprite = new FunkinSprite();
-          bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
-          bgSprite.cameras = [PlayState.instance.camCutscene];
-          bgSprite.zIndex = -10000;
-          PlayState.instance.add(bgSprite);
-          PlayState.instance.refresh();
-        }
-
-        PlayState.instance.camHUD.visible = false;
-        introCutscene();
+        bgSprite = new FunkinSprite();
+        bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
+        bgSprite.cameras = [PlayState.instance.camCutscene];
+        bgSprite.zIndex = -10000;
+        PlayState.instance.add(bgSprite);
+        PlayState.instance.refresh();
       }
+
+      PlayState.instance.camHUD.visible = false;
+      introCutscene();
     }
   }
 

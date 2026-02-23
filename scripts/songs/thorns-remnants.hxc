@@ -66,7 +66,6 @@ class ThornsRemnantsMixSong extends Song
 
     // Skip the cutscene if we're playtesting in the Chart Editor.
     if (PlayState.instance.isChartingMode && !hasPlayedCutscene) hasPlayedCutscene = true;
-    if (RemnantsBumpers.playedBumper)
     {
       if (!hasPlayedCutscene)
       {
@@ -445,34 +444,31 @@ class ThornsRemnantsMixSong extends Song
       cutsceneTimerManager.update(event.elapsed);
     }
 
-    if (!ModuleHandler.getModule('RemnantsBumpers').isPlaying)
+    if (FlxG.onMobile)
     {
-      if (FlxG.onMobile)
-      {
-        isMobilePauseButtonPressed = TouchUtil.overlapsComplex(PlayState.instance.pauseButton) && TouchUtil.justPressed;
-      }
+      isMobilePauseButtonPressed = TouchUtil.overlapsComplex(PlayState.instance.pauseButton) && TouchUtil.justPressed;
+    }
 
-      if (PlayState.instance.isInCutscene)
+    if (PlayState.instance.isInCutscene)
+    {
+      if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && !cutsceneSkipped)
       {
-        if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && !cutsceneSkipped)
+        if (!canSkipCutscene)
         {
-          if (!canSkipCutscene)
-          {
-            trace('cant skip yet!');
-            FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-            new FlxTimer().start(0.5, function(_) {
-              canSkipCutscene = true;
-              trace('can skip!');
-            });
-          }
+          trace('cant skip yet!');
+          FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+          new FlxTimer().start(0.5, function(_) {
+            canSkipCutscene = true;
+            trace('can skip!');
+          });
         }
       }
+    }
 
-      if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && canSkipCutscene && !cutsceneSkipped)
-      {
-        skipCutscene();
-        trace('Skipped cutscene!');
-      }
+    if ((PlayState.instance.controls.CUTSCENE_ADVANCE || isMobilePauseButtonPressed) && canSkipCutscene && !cutsceneSkipped)
+    {
+      skipCutscene();
+      trace('Skipped cutscene!');
     }
   }
 }

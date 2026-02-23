@@ -9,11 +9,14 @@ import flixel.FlxG;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import funkin.audio.FunkinSound;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class SouthRemnantsMixSong extends Song
 {
   var black:FunkinSprite;
   var fadeOut:Bool = false;
+  var sequence:SongSequence;
 
   var hasPlayedMonsterCutscene:Bool = false;
   var mosnerCutsceneAudio:FunkinSound;
@@ -66,8 +69,8 @@ class SouthRemnantsMixSong extends Song
 
     if (fadeOut)
     {
-      FlxTween.tween(black, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.5, {ease: FlxEase.linear});
+      FlxTween.tween(black, {alpha: 1}, 0.5);
+      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.5);
       fadeOut = false;
     }
     else
@@ -78,78 +81,164 @@ class SouthRemnantsMixSong extends Song
 
   function onGameOver(event:ScriptEvent):Void
   {
+    super.onGameOver(event);
+    sequence?.destroy();
+
     FlxG.camera.stopFX();
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
     PlayState.instance.camHUD.alpha = 0;
     fadeOut = false;
   }
 
-  function onPause()
+  function onPause(event:ScriptEvent):Void
   {
+    super.onPause(event);
+
     FlxG.camera?.active = false;
     FlxTweenUtil.pauseTweensOf(black);
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
   }
 
-  function onResume()
+  function onResume(event:ScriptEvent):Void
   {
+    super.onResume(event);
+
     FlxG.camera?.active = true;
     FlxTweenUtil.resumeTweensOf(black);
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
-  function onSongStart(event:ScriptEvent):Void
+  function onSongLoaded(event:SongLoadScriptEvent)
   {
-    FlxTween.tween(black, {alpha: 0.5}, 5.64, {ease: FlxEase.smootherStepOut});
+    sequence?.destroy();
+
+    var sequenceData = [
+      {
+        time: 0,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.5}, 5.64, {ease: FlxEase.smootherStepOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(29) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 1);
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(32) / 1000,
+        callback: () -> {
+          FlxG.camera.flash(0xFFFFFFFF, 0.5);
+          PlayState.instance.currentStage.changeAmbiance(true, 0.0001);
+          black.alpha = 0;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(61) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.7}, 0.35, {ease: FlxEase.backIn});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(64) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0}, 1);
+          PlayState.instance.currentStage.changeAmbiance(false, 1);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(96) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.5}, 1);
+          PlayState.instance.currentStage.changeAmbiance(true, 1);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(123) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.7}, 0.3);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(128) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.5}, 1);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(155) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.7}, 0.3);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(157) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.9}, 1);
+          fadeOut = false;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(160) / 1000,
+        callback: () -> {
+          FlxG.camera.flash(0xFFFFFFFF, 0.5);
+          black.alpha = 0.5;
+          fadeOut = true;
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(192) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0}, 1);
+          PlayState.instance.currentStage.changeAmbiance(false, 1);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(222) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0.7}, 0.3);
+          PlayState.instance.currentStage.changeAmbiance(true, 0.3);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(224) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 0}, 0.5);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(239) / 1000,
+        callback: () -> {
+          FlxTween.tween(black, {alpha: 1}, 0.5);
+          fadeOut = false;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onDestroy(event:ScriptEvent):Void
   {
-    super.onBeatHit();
+    super.onDestroy(event);
 
-    if (PlayState.instance.isGameOverState) return;
-    switch (event.beat)
-    {
-      case 29:
-        FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, 1, {ease: FlxEase.linear});
-        fadeOut = true;
-      case 32:
-        FlxG.camera.flash(0xFFFFFFFF, 0.5);
-        PlayState.instance.currentStage.changeAmbiance(true, 0.0001);
-        black.alpha = 0;
-      case 61:
-        FlxTween.tween(black, {alpha: 0.7}, 0.35, {ease: FlxEase.backIn});
-      case 64:
-        FlxTween.tween(black, {alpha: 0}, 1, {ease: FlxEase.linear});
-        PlayState.instance.currentStage.changeAmbiance(false, 1);
-      case 96:
-        FlxTween.tween(black, {alpha: 0.5}, 1, {ease: FlxEase.linear});
-        PlayState.instance.currentStage.changeAmbiance(true, 1);
-      case 123:
-        FlxTween.tween(black, {alpha: 0.7}, 0.3, {ease: FlxEase.linear});
-      case 128:
-        FlxTween.tween(black, {alpha: 0.5}, 1, {ease: FlxEase.linear});
-      case 155:
-        FlxTween.tween(black, {alpha: 0.7}, 0.3, {ease: FlxEase.linear});
-      case 157:
-        FlxTween.tween(black, {alpha: 0.9}, 1, {ease: FlxEase.linear});
-        fadeOut = false;
-      case 160:
-        FlxG.camera.flash(0xFFFFFFFF, 0.5);
-        black.alpha = 0.5;
-        fadeOut = true;
-      case 192:
-        FlxTween.tween(black, {alpha: 0}, 1, {ease: FlxEase.linear});
-        PlayState.instance.currentStage.changeAmbiance(false, 1);
-      case 222:
-        FlxTween.tween(black, {alpha: 0.7}, 0.3, {ease: FlxEase.linear});
-        PlayState.instance.currentStage.changeAmbiance(true, 0.3);
-      case 224:
-        FlxTween.tween(black, {alpha: 0}, 0.5, {ease: FlxEase.linear});
-      case 239:
-        FlxTween.tween(black, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-        fadeOut = false;
-    }
+    sequence?.destroy();
   }
 
   override public function onSongEnd(event:ScriptEvent):Void

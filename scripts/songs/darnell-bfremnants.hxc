@@ -2,9 +2,13 @@ import funkin.modding.module.ModuleHandler;
 import funkin.play.song.Song;
 import funkin.save.Save;
 import funkin.play.PlayState;
+import funkin.util.SongSequence;
+import funkin.Conductor;
 
 class DarnellBFRemnantsMixSong extends Song
 {
+  var outro:Bool = false;
+
   public function new()
   {
     super('darnell',
@@ -29,25 +33,46 @@ class DarnellBFRemnantsMixSong extends Song
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
+
+    outro = false;
   }
 
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
+    sequence?.destroy();
 
-    PlayState.instance.camGame.visible = true;
-    PlayState.instance.camHUD.visible = true;
+    if (outro) PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, false);
   }
 
-  function onBeatHit(event:ScriptEvent):Void
+  function onGameOver(event:ScriptEvent):Void
   {
-    super.onBeatHit(event);
+    super.onGameOver(event);
+    sequence?.destroy();
+  }
 
-    if (PlayState.instance.isGameOverState) return;
-    if (event.beat == 320)
-    {
-      PlayState.instance.camGame.visible = false;
-      PlayState.instance.camHUD.visible = false;
-    }
+  function onCountdownStart(event:ScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+
+    var sequenceData = [
+      {
+        time: Conductor.instance.getBeatTimeInMs(320) / 1000,
+        callback: () -> {
+          PlayState.instance.camCutscene.fade(0xFF000000, 0.1, false, null, false);
+          outro = true;
+        }
+      },
+    ];
+
+    sequence = new SongSequence(sequenceData);
+    sequence.startTime = 0;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
   }
 }

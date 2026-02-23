@@ -113,11 +113,7 @@ class TutorialRemnantsMixSong extends Song
     super.onCountdownStart(event);
 
     if (PlayState.instance.camHUD.alpha < 1) PlayState.instance.camHUD.alpha = 1;
-
-    if (RemnantsBumpers.playedBumper)
-    {
-      PlayState.instance.disableKeys = true;
-    }
+    PlayState.instance.disableKeys = true;
   }
 
   public function onSongEvent(event:SongEventScriptEvent)
