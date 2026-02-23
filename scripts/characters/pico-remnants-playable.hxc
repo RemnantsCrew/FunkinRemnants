@@ -293,7 +293,7 @@ class PicoRemnantsPlayerCharacter extends MultiAnimateAtlasCharacter
       // force the deathloop to play in here, since we are starting the music early it
       // doesn't check this in gameover substate !
       // also no animation suffix 🤔
-      playAnimation('deathLoop');
+      playAnimation('deathLoop', false, false);
     }
 
     if (name == "cock" && frameNumber == 3)

@@ -260,7 +260,7 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
 
     if (name == 'firstDeath-explosion' && !debug)
     {
-      playAnimation('deathLoop-explosion', true);
+      playAnimation('deathLoop-explosion', true, false);
     }
 
     if (name == 'hitCan' && PlayState.instance.health > 0.0 && !PlayState.instance.isPlayerDying)
