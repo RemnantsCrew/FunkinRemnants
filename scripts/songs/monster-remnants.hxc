@@ -93,6 +93,7 @@ class MonsterRemnantsMixSong extends Song
       {
         time: 0,
         callback: () -> {
+          PlayState.instance.currentStage.changeAmbiance(true, 0.0001);
           if (PlayState.instance.camHUD.alpha != 1) PlayState.instance.camHUD.alpha = 1;
         }
       },
