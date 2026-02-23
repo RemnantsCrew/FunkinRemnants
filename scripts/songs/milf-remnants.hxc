@@ -579,7 +579,8 @@ class MILFRemnantsMixSong extends Song
     {
       trace("Player dodged!");
       FunkinSound.playOnce(Paths.soundRandom('Light_Pass_Head_', 1, 4), 1.0);
-      PlayState.instance.currentStage.getBoyfriend().playAnimation('singDOWN', true, true);
+      PlayState.instance.currentStage.getBoyfriend().playSingAnimation(1, false, '');
+      PlayState.instance.currentStage.getBoyfriend().holdTimer = 0;
     }
     else
     {
@@ -593,7 +594,7 @@ class MILFRemnantsMixSong extends Song
       FlxG.camera.fade(0x70FFFFFF, 0.6, true);
 
       // Play the miss animation.
-      PlayState.instance.currentStage.getBoyfriend().playAnimation('hit', true, true);
+      PlayState.instance.currentStage.getBoyfriend().playAnimation('hit', true, false);
     }
   }
 

@@ -191,13 +191,6 @@
       "offsets": [0, 0]
     },
     {
-      "name": "hit-hold",
-      "prefix": "Hurt",
-      "frameIndices": [10, 11],
-      "looped": true,
-      "offsets": [0, 0]
-    },
-    {
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "firstDeath",
       "prefix": "Death",

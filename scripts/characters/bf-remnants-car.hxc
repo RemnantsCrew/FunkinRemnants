@@ -44,4 +44,15 @@ class BoyfriendRemnantsCarCharacter extends MultiAnimateAtlasCharacter
       HapticUtil.vibrate(0, 0.1, 0.1, 1);
     }
   }
+
+  function onNoteMiss(event:NoteScriptEvent)
+  {
+    // Override the miss note animation.
+    switch (event.note.kind)
+    {
+      case "week4-lightpole":
+      default:
+        super.onNoteMiss(event);
+    }
+  }
 }
