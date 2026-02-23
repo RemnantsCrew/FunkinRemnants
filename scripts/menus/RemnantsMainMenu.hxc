@@ -1,7 +1,9 @@
-import funkin.modding.module.Module;
+import funkin.modding.module.ModuleHandler;
 import funkin.ui.mainmenu.MainMenuState;
+import funkin.modding.module.Module;
 import funkin.graphics.FunkinSprite;
 import funkin.ui.title.TitleState;
+import funkin.util.WindowUtil;
 import flixel.util.FlxTimer;
 import funkin.ui.UIState;
 import funkin.save.Save;
@@ -37,7 +39,10 @@ class RemnantsMainMenu extends Module
     // I don't like going back to the title instantly....
     backSpaced = true;
     backSpr.animation.play('press', true);
-    backSpr.setPosition(FlxG.width - backSpr.width, FlxG.height - backSpr.height);
+
+    // If the plush button is absent, we apply the offset normally.
+    var qtPlush = ModuleHandler.getModule("QtPlushMenuButton")?.plushButton;
+    backSpr.setPosition(FlxG.width - backSpr.width, qtPlush == null ? FlxG.height - backSpr.height : 0);
 
     FlxTimer.wait(0.5, () -> {
       FlxG.switchState(() -> new TitleState());
@@ -72,11 +77,34 @@ class RemnantsMainMenu extends Module
       backSpr.animation.addByPrefix('press', 'backspace PRESSED', 24, false);
       backSpr.animation.addByPrefix('idle', 'backspace to exit', 24, true);
       backSpr.animation.play('idle', true);
-      backSpr.setPosition(FlxG.width - backSpr.width + 15, FlxG.height - backSpr.height + 50);
+
+      // QT Plush Button appears on top of the back button.
+      // So we just move our button to the top corner instead!
+      // This only happens if the button exists in the user's build.
+      var qtPlush = ModuleHandler.getModule("QtPlushMenuButton")?.plushButton;
+      backSpr.setPosition(FlxG.width - backSpr.width + 15, qtPlush == null ? FlxG.height - backSpr.height + 50 : 50);
+
       backSpr.scrollFactor.set();
       state.add(backSpr);
 
       backSpaced = false;
+    }
+
+    // Only change the merch sprite if the user has upgraded.
+    if (state.hasUpgraded)
+    {
+      var merchItem:FlxSprite = state.menuItems.getItem('merch');
+
+      var prevAnim:String = merchItem?.animation?.curAnim?.name;
+      var item = FlxG.random.bool(50) ? 'kickstarter' : FlxG.random.bool(50) ? 'goodies' : 'donate';
+
+      merchItem.frames = Paths.getSparrowAtlas('mainMenu/' + item);
+      merchItem.animation.addByPrefix('idle', item + ' idle', 24);
+      merchItem.animation.addByPrefix('selected', item + ' selected', 24);
+      merchItem.changeAnim(prevAnim);
+
+      // Replace the callback so it opens or the kickstarter, or itch.io instead of the merch page.
+      merchItem.callback = item == 'donate' ? selectDonate : item == 'goodies' ? selectGoodies : selectKickstarter;
     }
 
     if (Save.instance.modOptions.exists('seenRemnantsCredits')) return;
@@ -90,6 +118,27 @@ class RemnantsMainMenu extends Module
     newCredits.scale.set(1.25, 1.25);
     newCredits.updateHitbox();
     state.add(newCredits);
+  }
+
+  function selectDonate()
+  {
+    // Can't use Referral so it might not work on HTML5.
+    WindowUtil.openURL("https://ninja-muffin24.itch.io/funkin");
+    FlxG.state?.uiStateMachine?.transition(UIState.Idle);
+  }
+
+  function selectKickstarter()
+  {
+    // Can't use Referral so it might not work on HTML5.
+    WindowUtil.openURL("https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game");
+    FlxG.state?.uiStateMachine?.transition(UIState.Idle);
+  }
+
+  function selectGoodies()
+  {
+    // Can't use Referral so it might not work on HTML5.
+    WindowUtil.openURL("https://www.goodsmile.info/en/product/13980/Nendoroid+Boyfriend.html");
+    FlxG.state?.uiStateMachine?.transition(UIState.Idle);
   }
 
   override function onUpdate(event:UpdateScriptEvent)
