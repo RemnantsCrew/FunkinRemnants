@@ -30,9 +30,9 @@ class RemnantsOverlayHandler extends Module
     overlay = new FunkinSprite();
     overlay.makeSolidColor(FlxG.width * 1.2, FlxG.height * 1.2, 0xFFFFFFFF);
     overlay.screenCenter();
-    overlay.cameras = [PlayState.instance.camHUD];
+    overlay.cameras = [PlayState.instance.camCutscene];
     overlay.alpha = 0;
-    overlay.zIndex = 0;
+    overlay.zIndex = -100;
     PlayState.instance.add(overlay);
 
     if (firstEvent != null)
@@ -43,7 +43,7 @@ class RemnantsOverlayHandler extends Module
       var hud:Bool = firstEvent.getBool("hud") ?? true;
 
       overlay.color = white ? 0xFFFFFFFF : 0xFF000000;
-      overlay.zIndex = hud ? 1500 : 0;
+      overlay.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
       overlay.alpha = startAlpha;
 
       PlayState.instance.refresh();
@@ -73,12 +73,15 @@ class RemnantsOverlayHandler extends Module
 
     firstEvent = null;
 
-    if ((overlayEvents[0]?.time ?? 1) <= 0)
+    while (overlayEvents.length > 0)
     {
-      firstEvent = overlayEvents[0];
+      var event:SongEventData = overlayEvents.shift();
+      if (event.time <= 0)
+      {
+        firstEvent = event;
+        break;
+      }
     }
-
-    PlayState.instance.refresh();
   }
 
   override public function onSongRetry(event:ScriptEvent):Void
@@ -89,9 +92,9 @@ class RemnantsOverlayHandler extends Module
 
     var targetColor:Int = 0xFFFFFFFF;
     var targetAlpha:Float = 0;
-    var targetZIndex:Int = 0;
+    var targetCamera:FlxCamera = PlayState.instance?.camCutscene;
 
-    if (firstEvent != null && (PlayState?.instance?.startTimestamp ?? 1) <= 0)
+    if (firstEvent != null && (PlayState.instance?.startTimestamp ?? 1) <= 0)
     {
       var white:Bool = firstEvent.getBool("white") ?? false;
       var hud:Bool = firstEvent.getBool("hud") ?? true;
@@ -99,14 +102,13 @@ class RemnantsOverlayHandler extends Module
       targetAlpha = firstEvent.getFloat('startOpacity') ?? 0;
       targetColor = white ? 0xFFFFFFFF : 0xFF000000;
 
-      targetZIndex = hud ? 1500 : 0;
+      if (!hud) targetCamera = PlayState.instance?.camHUD;
     }
 
     var currentAlpha:Float = overlay.alpha;
     var currentColor:Int = overlay.color;
 
-    overlay.zIndex = targetZIndex;
-    PlayState.instance.refresh();
+    overlay.cameras = [targetCamera];
 
     if (fadeTween != null)
     {
@@ -180,9 +182,7 @@ class RemnantsOverlayHandler extends Module
       });
 
     overlay.color = white ? 0xFFFFFFFF : 0xFF000000;
-    overlay.zIndex = hud ? 1500 : 0;
-
-    PlayState.instance.refresh();
+    overlay.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
   }
 
   override public function onPause(event:PauseScriptEvent):Void
