@@ -21,7 +21,8 @@ class RemnantsDialogueBox extends DialogueBox
     super.loadText();
 
     this.textDisplay.sounds = [
-      for (i in 0...4) FunkinSound.load(Paths.sound('dialogueNoises/GF_' + (i + 1)), 0.6)
+      for (i in 0...4)
+        FunkinSound.load(Paths.sound('dialogueNoises/GF_' + (i + 1)), 0.6)
     ];
   }
 
