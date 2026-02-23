@@ -6,6 +6,7 @@
 ../../.gitattributes
 ../../.gitignore
 ../../.prettierrc.js
+../../LICENSE
 ../../astc-compression-data.json
 ../../hxformat.json
 ../../README.md
