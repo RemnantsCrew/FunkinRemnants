@@ -1,5 +1,5 @@
 MOD_ROOT="../../.."
-ZIP_NAME="FunkinRemnants.zip"
+MOD_NAME="FunkinRemnants"
 EXCLUDE_LIST="modpackExcludeList.txt"
 
 rm -fr modpack
@@ -12,21 +12,45 @@ rm -fr modpack
   cp "$file" "$modpackFile"
 done
 
-if command -v 7z > /dev/null 2>&1
-then
-  rm "$ZIP_NAME"
-  7z a -tzip "$ZIP_NAME" ./modpack/*
-  rm -fr modpack
+zipModpack() {
+  local name=$1
+  rm "$name"
 
-  echo "Done! The modpack is contained in $ZIP_NAME."
-elif command -v powershell > /dev/null 2>&1
-then
-  rm "$ZIP_NAME"
-  powershell -Command "Compress-Archive -Path './modpack/*' -DestinationPath '$ZIP_NAME'"
-  rm -fr modpack
+  if command -v 7z > /dev/null 2>&1
+  then
+    7z a -tzip "$name" ./modpack/*
+  elif command -v powershell > /dev/null 2>&1
+  then
+    powershell -Command "Compress-Archive -Path './modpack/*' -DestinationPath '$name'"
+  else
+    echo "Error! Cannot bundle the modpack!"
+    exit 1
+  fi
+}
 
-  echo "Done! The modpack is contained in $ZIP_NAME."
-else
-  echo "7z and PowerShell are not installed! Cannot bundle the modpack into a zip automatically."
-  echo "Done! The modpack is contained in the modpack folder."
+# zipModpack "$MOD_NAME.zip"
+
+if command -v haxelib > /dev/null 2>&1
+then
+  cwd="$(pwd)"
+  echo "$cwd"
+  folderPath="$cwd/modpack"
+  cd "$MOD_ROOT"
+
+  rm -fr astc-textures
+  haxelib --quiet --always git astc-compressor https://github.com/KarimAkra/astc-compressor develop
+  haxelib --global run astc-compressor compress-from-json -json ./astc-compression-data.json
+
+  find "astc-textures/" -name "*.astc" -type f | while read -r file; do
+    echo "$file"
+    normalFileLoc="$folderPath/${file#astc-textures/}"
+
+    mv "$file" "$normalFileLoc"
+    rm "${normalFileLoc%.*}.png"
+  done
+
+  cd "$cwd"
+  zipModpack "$MOD_NAME-MOBILE.zip"
 fi
+
+rm -fr modpack

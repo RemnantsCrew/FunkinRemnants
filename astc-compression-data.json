@@ -47,6 +47,7 @@
     }
   ],
   "excludes": [
+    "extras/",
     "images/freeplay/",
     "images/icons/",
     "shared/images/characters/bfPixel-remnants.png",

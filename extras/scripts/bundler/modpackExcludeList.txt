@@ -1,6 +1,7 @@
 ../../.git
 ../../.github
 ../../.vscode
+../../astc-textures
 ../../extras
 ../../.editorconfig
 ../../.gitattributes
