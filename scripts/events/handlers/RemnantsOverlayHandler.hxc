@@ -244,6 +244,12 @@ class RemnantsOverlayHandler extends Module
     }
   }
 
+  override public function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+    restartTween = false;
+  }
+
   override public function onPause(event:PauseScriptEvent):Void
   {
     fadeTween?.active = false;
