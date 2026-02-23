@@ -99,7 +99,7 @@ class RemnantsOverlayHandler extends Module
 
     if (overlay == null) return;
 
-    var targetColor:Int = 0xFFFFFFFF;
+    var targetColor:Int = overlay.color;
     var targetAlpha:Float = 0;
     var targetCamera:FlxCamera = PlayState.instance?.camCutscene;
 
@@ -115,12 +115,14 @@ class RemnantsOverlayHandler extends Module
       if (!hud) targetCamera = PlayState.instance?.camHUD;
     }
 
+    instantFadeReset = false;
+
     var currentAlpha:Float = overlay.alpha;
 
     overlay.cameras = [targetCamera];
     overlay.color = targetColor;
 
-    if (fadeTween != null || instantFadeReset)
+    if (targetAlpha != 0 || instantFadeReset)
     {
       fadeTween?.cancel();
       fadeTween = null;
@@ -152,6 +154,7 @@ class RemnantsOverlayHandler extends Module
 
     var white:Bool = data.getBool("white") ?? false;
     var hud:Bool = data.getBool("hud") ?? true;
+    instantFadeReset = data.getBool("instantFadeReset") ?? false;
 
     var duration:Float = data.getFloat('duration') ?? 4;
     var ease:String = data.getString('ease') ?? 'linear';

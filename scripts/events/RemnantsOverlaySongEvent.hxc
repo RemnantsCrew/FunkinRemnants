@@ -79,6 +79,12 @@ class RemnantsOverlaySongEvent extends SongEvent
         type: "bool"
       },
       {
+        name: "instantFadeReset",
+        title: "Don't Tween on Restart?",
+        defaultValue: false,
+        type: "bool"
+      },
+      {
         name: 'duration',
         title: 'Duration',
         defaultValue: 4,
