@@ -23,6 +23,11 @@ class DarnellRemnantsCharacter extends AnimateAtlasCharacter
       FunkinMemory.cacheSound(Paths.sound(snd, "weekend1"));
     }
 
+    FlxG.signals.postUpdate.addOnce(checkAbotArm);
+  }
+
+  function checkAbotArm():Void
+  {
     var hasAbot:Bool = false;
     try
     {
