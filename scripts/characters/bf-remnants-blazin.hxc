@@ -10,6 +10,8 @@ import StringTools;
 
 class BFRemnantsBlazinCharacter extends AnimateAtlasCharacter
 {
+  var flickerTimers:Array<FlxTimer> = [];
+
   function new()
   {
     super('bf-remnants-blazin');
@@ -38,6 +40,15 @@ class BFRemnantsBlazinCharacter extends AnimateAtlasCharacter
     holdTimer = 0;
 
     if (!StringTools.startsWith(event?.note?.kind ?? '', 'weekend-1-')) return;
+
+    while (flickerTimers.length > 0)
+    {
+      var tmr:Null<FlxTimer> = flickerTimers.shift();
+      tmr.cancel();
+
+      this.color = 0xFFFFFFFF;
+      this.blend = null;
+    }
 
     // SPECIAL CASE: If BF hits a poor note at low health (at 30% chance),
     // BF may instead punch high (but Darnell will duck below BF to attempt an uppercut)
@@ -140,6 +151,13 @@ class BFRemnantsBlazinCharacter extends AnimateAtlasCharacter
   function onNoteMiss(event:NoteScriptEvent)
   {
     holdTimer = 0;
+
+    while(flickerTimers.length > 0)
+    {
+      flickerTimers.shift()?.cancel();
+      this.blend = null;
+      this.color = 0xFFFFFFFF;
+    }
 
     // SPECIAL CASE: Darnell prepared to uppercut last time and BF missed! FINISH HIM!
     if (isDarnellInUppercut())
@@ -352,13 +370,13 @@ class BFRemnantsBlazinCharacter extends AnimateAtlasCharacter
 
       for (blendMode in 0...blendAnims.length)
       {
-        new FlxTimer().start(blendMode / 60, function(_) {
+        flickerTimers.push(new FlxTimer().start(blendMode / 60, function(_) {
           if (blendAnims[blendMode] != 10) this.color = 0xFF0000FF;
           else
             this.color = 0xFFFFFFFF;
 
           this.blend = blendAnims[blendMode];
-        });
+        }));
       }
     }
 
