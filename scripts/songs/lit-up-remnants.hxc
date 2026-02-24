@@ -38,13 +38,6 @@ class LitUpRemnantsMixSong extends Song
     return false;
   }
 
-  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-  {
-    var results:Array<String> = super.listAltInstrumentalIds(difficultyId, variationId);
-    var hasBeatenRemnantsMix = Save.instance.hasBeatenSong(this.id, null, this.variation);
-    if (hasBeatenRemnantsMix) return results;
-  }
-
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
