@@ -1,11 +1,22 @@
 import funkin.play.cutscene.dialogue.DialogueBox;
 import funkin.audio.FunkinSound;
+import funkin.play.PlayState;
 
 class RemnantsDialogueBox extends DialogueBox
 {
+  var luisText:FunkinSound;
+  var roxanneText:FunkinSound;
+
   function new()
   {
     super('remnants');
+  }
+
+  override public function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+    luisText = FunkinSound.load(Paths.sound('dialogueNoises/luisText'), 0.6);
+    roxanneText = FunkinSound.load(Paths.sound('dialogueNoises/roxanneText'), 0.6);
   }
 
   override function applyAnimationOffsets(name:String):Void
@@ -19,16 +30,30 @@ class RemnantsDialogueBox extends DialogueBox
   override function loadText():Void
   {
     super.loadText();
+    this.textDisplay.sounds = null;
+  }
 
-    this.textDisplay.sounds = [
-      for (i in 0...4)
-        FunkinSound.load(Paths.sound('dialogueNoises/GF_' + (i + 1)), 0.6)
-    ];
+  override public function setText(newText:String):Void
+  {
+    changeTextVoice(PlayState.instance?.currentConversation);
+    super.setText(newText);
   }
 
   override public function onDialogueLine(event:DialogueScriptEvent):Void
   {
     FunkinSound.playOnce(Paths.sound('clickText'), 0.6);
     super.onDialogueLine(event);
+  }
+
+  function changeTextVoice(conversation:Conversation)
+  {
+    this.textDisplay.sounds = switch(conversation.currentSpeaker?.id) {
+      case 'luis-remnants':
+        [luisText];
+      case 'roxanne-remnants':
+        [roxanneText];
+      default:
+        null;
+    }
   }
 }
