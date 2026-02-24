@@ -362,11 +362,11 @@ class RosesRemnantsMixSong extends Song
         callback: () -> {
           if (!FlxG.random.bool(25)) // Sunflower Real
           {
-            PlayState.instance.currentStage.getDad().playAnimation('sentpajim', true, false);
+            PlayState.instance.currentStage.getDad().playAnimation('sentpajim', true, true);
           }
           else
           {
-            PlayState.instance.currentStage.getDad().playAnimation('suntpajim', true, false);
+            PlayState.instance.currentStage.getDad().playAnimation('suntpajim', true, true);
           }
         }
       },
@@ -381,7 +381,13 @@ class RosesRemnantsMixSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(282) / 1000,
         callback: () -> {
-          PlayState.instance.disableKeys = true;
+            FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 0.2,
+            {
+              onComplete: (_) -> {
+                PlayState.instance.camGame.fade(0xFF000000, 0, false, null, false);
+                PlayState.instance.disableKeys = true;
+              }
+            });
         }
       },
     ];
