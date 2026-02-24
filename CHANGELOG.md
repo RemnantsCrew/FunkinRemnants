@@ -7,11 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.2] - (2026-02-24)
 
+### Added
+
+- Added Custom "introText" that appears on Remnants Menu Boot.
+
 ### Fixes
 
-- Fixed Girlfriend Not Rendering Correctly on Boyfriend's "Good" Results Screen
+- Fixed Girlfriend Not Rendering Correctly on Boyfriend's "Good" Results Screen.
+- Fixed Results Fading in from Yellow on Specific Ranks.
+- Fixed Results Background Not Using "flashColor" as Intended.
+- Fixed Date on the 1.0.1 Changelog since it was a day behind.
 
+### Removed
 
+- Removed Girlfriend's Sparrow Spritesheet for her "Car" Variation since it went Unused.
 
 ## [1.0.1] - (2026-02-24)
 
