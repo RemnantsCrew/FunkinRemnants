@@ -59,18 +59,6 @@ class GunsRemnantsMixSong extends Song
     return false;
   }
 
-  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-  {
-    var results:Array<String> = super.listAltInstrumentalIds(difficultyId, variationId);
-    var hasBeatenRemnantsMix = Save.instance.hasBeatenSong(this.id, null, this.variation);
-    if (difficultyId == 'easy' || difficultyId == 'normal' || difficultyId == 'hard')
-    {
-      var hasBeatenPicoMix = Save.instance.hasBeatenSong(this.id, null, 'pico');
-      if (!hasBeatenPicoMix) results.remove('pico');
-    }
-    if (hasBeatenRemnantsMix) return results;
-  }
-
   public override function onCountdownStart(event:CountdownScriptEvent):Void
   {
     super.onCountdownStart(event);
