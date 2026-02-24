@@ -44,7 +44,6 @@ class RemnantsPicoSong extends Song
     super.onCreate(event);
 
     PlayState.instance.camHUD.alpha = 0;
-    PlayState.instance.disableKeys = true;
     playedCutscene = false;
   }
 
@@ -96,15 +95,12 @@ class RemnantsPicoSong extends Song
       playCutscene();
       playedCutscene = true;
     }
-    else
-    {
-      PlayState.instance.disableKeys = false;
-    }
   }
 
   function playCutscene():Void
   {
     PlayState.instance.tweenCameraToPosition(620, 515.5, 0);
+    PlayState.instance.disableKeys = true;
 
     var cutsceneMusic:FunkinSound = FunkinSound.load(Paths.music("freeplayRandom-remnants/freeplayRandom-remnants"), 0.0, true);
     var cutsceneAudio:FunkinSound = FunkinSound.load(Paths.sound('gameplay/cutscene/remnants-pico-cutscene'), 1.0);
@@ -158,6 +154,7 @@ class RemnantsPicoSong extends Song
         });
 
         PlayState.instance.startCountdown();
+        PlayState.instance.disableKeys = false;
       });
     });
   }

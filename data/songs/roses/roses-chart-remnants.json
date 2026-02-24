@@ -53,7 +53,7 @@
         "ease": "linear",
         "retro": true,
         "easeDir": "In",
-        "hud": false
+        "hud": true
       }
     },
     {
@@ -1719,7 +1719,7 @@
         "ease": "sine",
         "retro": true,
         "easeDir": "Out",
-        "hud": true
+        "hud": false
       }
     },
     {

@@ -25,10 +25,9 @@ class CocoaRemnantsMixSong extends Song
     return false;
   }
 
-  function onCreate(event:ScriptEvent):Void
+  function onCountdownStart(event:CountdownScriptEvent):Void
   {
-    super.onCreate(event);
-
+    super.onCountdownStart(event);
     PlayState.instance.disableKeys = true;
   }
 
@@ -37,7 +36,6 @@ class CocoaRemnantsMixSong extends Song
     super.onSongRetry(event);
 
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-    if (!PlayState.instance.disableKeys) PlayState.instance.disableKeys = true;
   }
 
   function onGameOver(event:ScriptEvent):Void

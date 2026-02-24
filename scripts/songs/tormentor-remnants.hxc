@@ -24,12 +24,17 @@ class TormentorSong extends Song
     return false;
   }
 
+  function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCreate(event);
+    PlayState.instance.disableKeys = true;
+  }
+
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
 
     PlayState.instance.camHUD.alpha = 0;
-    PlayState.instance.disableKeys = true;
   }
 
   function onSongRetry(event:ScriptEvent)
@@ -38,8 +43,6 @@ class TormentorSong extends Song
     sequence?.destroy();
 
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-
-    if (!PlayState.instance.disableKeys) PlayState.instance.disableKeys = true;
   }
 
   function onGameOver(event:ScriptEvent):Void

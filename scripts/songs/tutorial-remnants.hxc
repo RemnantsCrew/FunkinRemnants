@@ -150,8 +150,6 @@ class TutorialRemnantsMixSong extends Song
   {
     super.onSongRetry(event);
 
-    PlayState.instance.disableKeys = true;
-
     if (black.alpha != 1 && !ending)
     {
       black.alpha = 0;

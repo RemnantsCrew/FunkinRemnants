@@ -169,7 +169,6 @@ class GrievingRemnantsSong extends Song
     super.onSongRetry(event);
 
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-    PlayState.instance.disableKeys = true;
   }
 
   function onGameOver(event:ScriptEvent):Void

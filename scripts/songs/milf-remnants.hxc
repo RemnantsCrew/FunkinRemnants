@@ -148,8 +148,6 @@ class MILFRemnantsMixSong extends Song
 
     // Refresh the stage to reorganize props by z-index.
     PlayState.instance.currentStage.refresh();
-
-    PlayState.instance.disableKeys = true;
   }
 
   /**
@@ -166,8 +164,6 @@ class MILFRemnantsMixSong extends Song
     // Properly reset lights and collision when restarting the song.
     this.hardResetSong();
     PlayState.instance.currentStage.refresh();
-
-    if (!PlayState.instance.disableKeys) PlayState.instance.disableKeys = true;
   }
 
   override function onGameOver(event:ScriptEvent):Void
@@ -186,6 +182,7 @@ class MILFRemnantsMixSong extends Song
     super.onCountdownStart(event);
 
     // Properly reset lights and collision when restarting the song.
+    PlayState.instance.disableKeys = true;
     this.hardResetSong();
   }
 
