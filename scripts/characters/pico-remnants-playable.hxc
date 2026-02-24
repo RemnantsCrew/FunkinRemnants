@@ -378,7 +378,7 @@ class PicoRemnantsPlayerCharacter extends MultiAnimateAtlasCharacter
   /**
    * Play the animations where Pico shoots the can successfully.
    */
-  function playFireGunAnim(hip:Bool):Void
+  function playFireGunAnim():Void
   {
     if (FlxG.random.bool(50))
     {

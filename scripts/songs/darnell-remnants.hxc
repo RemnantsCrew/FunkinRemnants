@@ -199,12 +199,12 @@ class DarnellRemnantsMixSong extends Song
       fireLight.volume = 1;
       fireLight.play(false);
 
-      PlayState.instance.currentStage.getDad().playAnimation('lightCan', true);
+      PlayState.instance.currentStage.getDad().playAnimation('lightCan', true, false);
     });
 
     // pico cocks his gun, camera shifts to his side to show this
     new FlxTimer(cutsceneTimerManager).start(cutsceneDelay + 4, function(_) {
-      PlayState.instance.currentStage.getBoyfriend().playAnimation('cock', true);
+      PlayState.instance.currentStage.getBoyfriend().playAnimation('cock', true, false);
       PlayState.instance.tweenCameraToPosition(darnellPos[0] + 180, darnellPos[1], 0.4, FlxEase.backOut);
 
       gunCock = FunkinSound.load(Paths.sound('Gun_Prep'), 1);
@@ -214,7 +214,7 @@ class DarnellRemnantsMixSong extends Song
 
     // darnell kicks the can up
     new FlxTimer(cutsceneTimerManager).start(cutsceneDelay + 4.4, function(_) {
-      PlayState.instance.currentStage.getDad().playAnimation('kickCan', true);
+      PlayState.instance.currentStage.getDad().playAnimation('kickCan', true, false);
 
       canKnee = FunkinSound.load(Paths.sound('Kick_Can_UP'), 1);
       canKnee.volume = 1;
@@ -226,7 +226,7 @@ class DarnellRemnantsMixSong extends Song
 
     // darnell knees the can forward
     new FlxTimer(cutsceneTimerManager).start(cutsceneDelay + 4.9, function(_) {
-      PlayState.instance.currentStage.getDad().playAnimation('kneeCan', true);
+      PlayState.instance.currentStage.getDad().playAnimation('kneeCan', true, false);
 
       canKick = FunkinSound.load(Paths.sound('Kick_Can_FORWARD'), 1);
       canKick.volume = 1;
@@ -259,7 +259,7 @@ class DarnellRemnantsMixSong extends Song
 
     // darnell laughs
     new FlxTimer(cutsceneTimerManager).start(cutsceneDelay + 5.9, function(_) {
-      PlayState.instance.currentStage.getDad().playAnimation('laughCutscene', true);
+      PlayState.instance.currentStage.getDad().playAnimation('laughCutscene', true, false);
 
       darnellLaugh = FunkinSound.load(Paths.sound('cutscene/remnants/darnell_laugh'), 0.6);
       darnellLaugh.volume = 0.6;
@@ -268,7 +268,7 @@ class DarnellRemnantsMixSong extends Song
 
     // nene spits and laughs
     new FlxTimer(cutsceneTimerManager).start(cutsceneDelay + 6.2, function(_) {
-      PlayState.instance.currentStage.getGirlfriend().playAnimation('laughCutscene', true);
+      PlayState.instance.currentStage.getGirlfriend().playAnimation('laughCutscene', true, false);
 
       neneLaugh = FunkinSound.load(Paths.sound('cutscene/remnants/nene_laugh'), 0.6);
       neneLaugh.volume = 0.6;
