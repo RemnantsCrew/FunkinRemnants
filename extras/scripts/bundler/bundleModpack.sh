@@ -28,7 +28,7 @@ zipModpack() {
   fi
 }
 
-# zipModpack "$MOD_NAME.zip"
+zipModpack "$MOD_NAME.zip"
 
 if command -v haxelib > /dev/null 2>&1
 then
