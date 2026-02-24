@@ -26,7 +26,7 @@
       "name": "sad",
       "prefix": "gf sad0",
       "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      "offsets": [7, -12]
+      "offsets": [9, -17]
     },
     {
       "name": "cheer",
@@ -42,12 +42,12 @@
       "name": "drop70",
       "prefix": "gf sad0",
       "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      "offsets": [7, -12]
+      "offsets": [9, -17]
     },
     {
       "name": "scared",
       "prefix": "GF FEAR",
-      "offsets": [7, -8]
+      "offsets": [9, -8]
     }
   ]
 }
