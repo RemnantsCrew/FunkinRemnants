@@ -18,7 +18,7 @@
       "instrumental": "bfremnants",
       "playerVocals": ["bf-remnants"],
       "opponentVocals": ["darnell-remnants"],
-      "altInstrumentals": ["", "remnants"]
+      "altInstrumentals": []
     },
     "stage": "phillyStreetsRemnants",
     "noteStyle": "funkin",
