@@ -9,7 +9,7 @@ class RemnantsOptions extends Module
 {
   public function new()
   {
-    super('remnantsOptions', 1000, {state: OptionsState});
+    super('remnantsOptions');
   }
 
   // Constants to prevent long code...
