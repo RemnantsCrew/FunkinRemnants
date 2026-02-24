@@ -102,13 +102,6 @@ class GlitcherRemnantsSong extends Song
           PlayState.instance.currentStage.changeAmbiance(false, 0.2);
         }
       },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(471) / 1000,
-        callback: () -> {
-          FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, 2.5);
-        }
-      },
     ];
 
     sequence = new SongSequence(sequenceData);
