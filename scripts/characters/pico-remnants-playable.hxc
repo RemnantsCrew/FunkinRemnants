@@ -222,6 +222,18 @@ class PicoRemnantsPlayerCharacter extends MultiAnimateAtlasCharacter
     }
   }
 
+  public override function getDeathCameraOffsets():Array<Float>
+  {
+    var result = super.getDeathCameraOffsets();
+
+    if (GameOverSubState.blueBallSuffix == '-pico-explode-remnants')
+    {
+      return [result[0] - 125, result[1] + 75];
+    }
+
+    return [result[0], result[1]];
+  }
+
   function doExplosionDeath():Void
   {
     if (picoFlicker != null)
@@ -231,9 +243,6 @@ class PicoRemnantsPlayerCharacter extends MultiAnimateAtlasCharacter
 
     // Suffixed death sound will already play.
     GameOverSubState.instance.targetCameraZoom = 0.8;
-
-    // Move the camera to center pico.
-    GameOverSubState.instance.cameraFollowPoint.x += 50;
 
     HapticUtil.vibrate(0, 0.5);
 

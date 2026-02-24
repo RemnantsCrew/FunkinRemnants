@@ -8,8 +8,8 @@
     "id": "bf-remnants"
   },
   "death": {
-    "cameraZoom": 0.8,
-    "cameraOffsets": [20, -150]
+    "cameraZoom": 0.85,
+    "cameraOffsets": [-25, -145]
   },
   "animations": [
     {

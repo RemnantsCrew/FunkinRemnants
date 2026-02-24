@@ -3,8 +3,8 @@
   "offsets": [0, 0],
   "applyStageMatrix": false,
   "death": {
-    "cameraZoom": 0.85,
-    "cameraOffsets": [10, -85]
+    "cameraZoom": 0.95,
+    "cameraOffsets": [0, -75]
   },
   "startingAnimation": "idle",
   "assetPath": "shared:characters/bf-remnants/mind",

@@ -14,7 +14,7 @@
   "offsets": [-53, 8],
   "death": {
     "cameraZoom": 0.85,
-    "cameraOffsets": [245, 75]
+    "cameraOffsets": [70, 25]
   },
   "healthIcon": {
     "id": "bf-remnants"

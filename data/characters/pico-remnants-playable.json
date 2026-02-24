@@ -9,7 +9,7 @@
   "cameraOffsets": [27, 30.5],
   "death": {
     "cameraZoom": 1,
-    "cameraOffsets": [0, -100]
+    "cameraOffsets": [135, -125]
   },
   "atlasSettings": {
     "swfMode": false
