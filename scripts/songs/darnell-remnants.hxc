@@ -170,7 +170,7 @@ class DarnellRemnantsMixSong extends Song
       PlayState.instance.currentStage.refresh();
       newCan.visible = false;
     }
-    PlayState.instance.currentStage.getBoyfriend().playAnimation('intro1', true);
+    PlayState.instance.currentStage.getBoyfriend().playAnimation('intro1', true, false);
 
     // camera sets up, pico does his animation showing him pissed
     new FlxTimer(cutsceneTimerManager).start(0.1, function(_) {
