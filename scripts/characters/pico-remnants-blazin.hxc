@@ -11,6 +11,8 @@ import StringTools;
 
 class PicoRemnantsBlazinCharacter extends AnimateAtlasCharacter
 {
+  var flickerTimers:Array<FlxTimer> = [];
+
   function new()
   {
     super('pico-remnants-blazin');
@@ -43,9 +45,9 @@ class PicoRemnantsBlazinCharacter extends AnimateAtlasCharacter
 
     if (!StringTools.startsWith(event?.note?.kind ?? '', 'weekend-1-')) return;
 
-    while (blockEffectTimers.length > 0)
+    while (flickerTimers.length > 0)
     {
-      var tmr:Null<FlxTimer> = blockEffectTimers.shift();
+      var tmr:Null<FlxTimer> = flickerTimers.shift();
       tmr.cancel();
 
       this.color = 0xFFFFFFFF;
@@ -175,6 +177,15 @@ class PicoRemnantsBlazinCharacter extends AnimateAtlasCharacter
   function onNoteMiss(event:NoteScriptEvent)
   {
     holdTimer = 0;
+
+    while (flickerTimers.length > 0)
+    {
+      var tmr:Null<FlxTimer> = flickerTimers.shift();
+      tmr.cancel();
+
+      this.color = 0xFFFFFFFF;
+      this.blend = null;
+    }
 
     // SPECIAL CASE: Darnell prepared to uppercut last time and Pico missed! FINISH HIM!
     if (isDarnellInUppercut())
@@ -363,9 +374,10 @@ class PicoRemnantsBlazinCharacter extends AnimateAtlasCharacter
     if (judgement == 'sick')
     {
       var blendAnims:Array<Int> = [10, 0, 10, 0, 0, 10, 0, 0, 10, 0, 10];
+
       for (blendMode in 0...blendAnims.length)
       {
-        blockEffectTimers.push(new FlxTimer().start(blendMode / 60, function(_) {
+        flickerTimers.push(new FlxTimer().start(blendMode / 60, function(_) {
           if (blendAnims[blendMode] != 10) this.color = 0xFF0000FF;
           else
             this.color = 0xFFFFFFFF;
