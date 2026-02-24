@@ -13,6 +13,10 @@
     "cameraOffsets": [1150, 1020],
     "cameraZoom": 0.8
   },
+  "atlasSettings": {
+    "cacheOnLoad": true,
+    "useRenderTexture": true
+  },
   "offsets": [671, 520],
   "animations": [
     {
