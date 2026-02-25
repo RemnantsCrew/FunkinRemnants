@@ -3,29 +3,32 @@ MOD_NAME="FunkinRemnants"
 EXCLUDE_LIST="modpackExcludeList.txt"
 
 rm -fr modpack
+mkdir -p "modpack"
 
-(find "$MOD_ROOT" -type f | grep -v -f "$EXCLUDE_LIST") | while read -r file; do
-  modpackFile="modpack/${file#$MOD_ROOT/}"
-  echo "$modpackFile"
-
-  mkdir -p "$(dirname "$modpackFile")"
-  cp "$file" "$modpackFile"
-done
+echo "Moving and excluding files..."
+tar -C "$MOD_ROOT" --exclude-vcs --checkpoint=.100 -X "$EXCLUDE_LIST" -cf - . | tar -C "modpack" -xf -
+echo "Done!"
 
 zipModpack() {
   local name=$1
-  rm "$name"
+
+  echo "Zipping $name..."
+  rm -f "$name"
 
   if command -v 7z > /dev/null 2>&1
   then
+    echo "NOTICE: Using 7z"
     7z a -tzip "$name" ./modpack/*
-  elif command -v powershell > /dev/null 2>&1
+  elif command -v tar > /dev/null 2>&1
   then
-    powershell -Command "Compress-Archive -Path './modpack/*' -DestinationPath '$name'"
-  else
+    echo "NOTICE: Using tar (Using 7z is highly recommended!)"
+    tar -caf "$name" -C "./modpack" --checkpoint=.100 .
+    else
     echo "Error! Cannot bundle the modpack!"
     exit 1
   fi
+
+  echo "Done!"
 }
 
 zipModpack "$MOD_NAME.zip"
@@ -33,7 +36,6 @@ zipModpack "$MOD_NAME.zip"
 if command -v haxelib > /dev/null 2>&1
 then
   cwd="$(pwd)"
-  echo "$cwd"
   folderPath="$cwd/modpack"
   cd "$MOD_ROOT"
 
@@ -41,13 +43,17 @@ then
   haxelib --quiet --always git astc-compressor https://github.com/KarimAkra/astc-compressor develop
   haxelib --global run astc-compressor compress-from-json -json ./astc-compression-data.json
 
-  find "astc-textures/" -name "*.astc" -type f | while read -r file; do
-    echo "$file"
-    normalFileLoc="$folderPath/${file#astc-textures/}"
+  find "astc-textures/" -type f -name "*.astc" | while read -r file; do
+    relPath="${file#astc-textures/}"
+    basePath="${relPath%.astc}"
 
-    mv "$file" "$normalFileLoc"
-    rm "${normalFileLoc%.*}.png"
+    echo "$relPath"
+
+    mv "$file" "$folderPath/$relPath"
+    rm -f "$folderPath/$basePath.png"
   done
+
+  rm -fr astc-textures
 
   cd "$cwd"
   zipModpack "$MOD_NAME-MOBILE.zip"
