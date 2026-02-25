@@ -9,13 +9,22 @@ class LastRemnantsCharHelper extends Module
     super('lastRemnantsCharHelper', 0);
   }
 
+  var dontActivate:Bool;
+
+  public function onDestroy(event:ScriptEvent):Void
+  {
+    dontActivate = true; // Dont allow the onExit code to run
+  }
+  
   public function onCreate(event:ScriptEvent):Void
   {
     RemnantsContentUtil.loadLastRemnantsChar();
 
+    dontActivate = false;
     if (!ModStore.stores.exists('lastRemnantsCharHelperInit'))
     {
       Application.current.onExit.add((exitCode) -> {
+        if (dontActivate ?? true) return; // No more NOR
         RemnantsContentUtil.saveLastRemnantsChar();
         trace('Saved Remnants(?) Char!');
       });
