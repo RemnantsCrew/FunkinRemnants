@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 
-- Updated Santa to fully use Adobe Animate Atlases.
+- Updated Santa to Fully Use Adobe Animate Atlases.
 
 ### Fixes
 
