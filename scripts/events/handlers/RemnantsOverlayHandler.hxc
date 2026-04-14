@@ -3,7 +3,6 @@ package funkin.remnants.events.handlers;
 import funkin.play.event.SongEvent;
 import funkin.util.ReflectUtil;
 import openfl.filters.ColorMatrixFilter;
-import Std;
 
 class RemnantsOverlayHandler extends Module
 {

@@ -6,7 +6,6 @@ import funkin.ui.title.TitleState;
 import funkin.util.WindowUtil;
 import funkin.ui.UIState;
 import flixel.FlxSprite;
-import Std;
 
 using StringTools;
 

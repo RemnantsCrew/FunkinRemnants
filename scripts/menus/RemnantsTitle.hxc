@@ -3,7 +3,6 @@ package funkin.remnants.menus;
 import flixel.FlxSprite;
 import funkin.ui.FullScreenScaleMode;
 import funkin.ui.title.TitleState;
-import Std;
 
 class RemnantsTitle extends Module
 {

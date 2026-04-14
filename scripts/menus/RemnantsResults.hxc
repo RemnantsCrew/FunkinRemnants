@@ -10,7 +10,6 @@ import flixel.effects.FlxFlicker;
 import flixel.math.FlxBasePoint;
 import funkin.play.ResultState;
 import StringTools;
-import Std;
 
 class RemnantsResults extends Module
 {
