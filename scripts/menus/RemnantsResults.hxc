@@ -1,252 +1,233 @@
 package funkin.remnants.menus;
 
-import flixel.FlxSprite;
-import flixel.util.FlxGradient;
-import flixel.group.FlxTypedGroup;
-import flixel.addons.display.FlxBackdrop;
 import flixel.graphics.frames.FlxBitmapFont;
-import funkin.graphics.FunkinCamera;
-import flixel.effects.FlxFlicker;
-import flixel.math.FlxBasePoint;
+import funkin.play.scoring.ScoringRank;
+import flixel.group.FlxTypedGroup;
+import flixel.util.FlxGradient;
 import funkin.play.ResultState;
+import flixel.math.FlxPoint;
+import flixel.util.FlxColor;
 
 class RemnantsResults extends Module
 {
-  var gradBG:FlxGradient;
-  var codeWasRun:Bool = false;
-  var addedVerText:Bool = false;
-  var addedHorText:Bool = false;
+  public var resultState(get, never):ResultState;
+
+  var isPico(get, never):Bool;
 
   public function new()
   {
-    super('remnantsResults');
+    super('remnantsResults', 1000, {state: ResultState});
   }
 
-  override function onStateChangeEnd(event:ScriptEvent):Void
+  override public function onSubStateOpenEnd(event:SubStateScriptEvent):Void
   {
-    super.onStateChangeEnd(event);
-    addedVerText = false;
-    addedHorText = false;
-    codeWasRun = false;
+    super.onSubStateOpenEnd(event);
+    if (resultState != event.targetState) return;
+
+    final flashColor:FlxColor = isPico ? 0xFF00591D : 0xFF000D59;
+    resultState.bgFlash?.makeGraphic(FlxG.width, FlxG.height, flashColor);
+
+    setupGradients();
+    setupMiscellaneous();
+    setupTallies();
+    setupClearPercentages();
+    setupSongFont();
+    setupScroll();
   }
 
-  override function onSubStateCloseEnd(event:ScriptEvent):Void
+  public function setupGradients():Void
   {
-    super.onSubStateCloseEnd(event);
-    addedVerText = false;
-    addedHorText = false;
-    codeWasRun = false;
+    final gradientColor:FlxColor = isPico ? 0xFF003300 : 0xFF000C33;
+    final data:BitmapData = FlxGradient.createGradientBitmapData(1, FlxG.height, [0xFF000000, gradientColor], 90);
+
+    final bg:FlxSprite = findByZ(10);
+    if (bg == null) return;
+
+    bg.pixels = data;
+    bg.color = FlxColor.BLACK;
+
+    bg.scale.x = FlxG.width;
+    bg.updateHitbox();
+
+    FlxTween.color(bg, 1.0, FlxColor.BLACK, FlxColor.WHITE, {ease: FlxEase.quartInOut});
   }
 
-  override function onUpdate(event:UpdateScriptEvent)
+  public function setupMiscellaneous():Void
   {
-    super.onUpdate(event);
+    // Falling Sound System
+    final soundSystem:FunkinSprite = findByZ(1100);
+    soundSystem?.frames = Paths.getSparrowAtlas("resultScreen/soundSystem-remnants");
+    soundSystem?.animation.addByPrefix("idle", "sound system", 24, false);
 
-    // This doesn't works on the results debug if the mode is Freeplay or Story... (Debug works btw)
-    if (Std.isOfType(FlxG.state?.subState, ResultState) && FlxG.state?.subState?.playerCharacterId?.contains('remnants'))
+    // Difficulty Sprite
+    var diffSpr:String = 'diff_' + resultState.params?.difficultyId ?? Constants.DEFAULT_DIFFICULTY;
+    resultState.difficulty.loadGraphic(Paths.image('resultScreen/$diffSpr-remnants'));
+
+    // Results Text
+    final resultsAnim:FunkinSprite = resultState.resultsAnim;
+    resultsAnim?.frames = Paths.getSparrowAtlas("resultScreen/resultsText-remnants");
+    resultsAnim?.animation.addByPrefix("result", "results instance 1", 24, false);
+  }
+
+  public function setupTallies():Void
+  {
+    // Ratings
+    final ratingsPopin:FunkinSprite = resultState.ratingsPopin;
+    ratingsPopin?.frames = Paths.getSparrowAtlas("resultScreen/ratingsPopin-remnants");
+    ratingsPopin?.animation.addByPrefix("idle", "Categories", 24, false);
+
+    // Score Text
+    final scorePopin:FunkinSprite = resultState.scorePopin;
+    scorePopin?.frames = Paths.getSparrowAtlas("resultScreen/scorePopin-remnants");
+    scorePopin?.animation.addByPrefix("score", "tally score", 24, false);
+
+    // Highscore Text
+    final highscoreNew:FlxSprite = resultState.highscoreNew;
+    highscoreNew?.frames = Paths.getSparrowAtlas("resultScreen/highscoreNew-remnants");
+    highscoreNew?.animation.addByPrefix("new", "highscoreAnim0", 24, false);
+
+    // Tallie Numbers
+    final ratingGrp:FlxTypedGroup = findByZ(1200, FlxTypedGroup);
+    for (i in 0...(ratingGrp?.members?.length ?? 0))
     {
-      var curState = FlxG.state?.subState;
-      var isPico:Bool = curState?.playerCharacterId?.contains('pico');
+      waitWithPreDraw((0.3 * i) + 1.20, () -> {
+        var tallie:TallyCounter = ratingGrp.members[i];
 
-      var flashColor:Int = isPico ? 0xFF00591D : 0xFF000D59;
-      var gradientColor:Int = isPico ? 0xFF003300 : 0xFF000C33;
-
-      if (!codeWasRun)
-      {
-        codeWasRun = true;
-
-        // Cool Gradient BG
-        gradBG = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height, [0xFF000000, gradientColor], 90);
-        gradBG.cameras = [curState.cameraBG];
-        gradBG.scrollFactor.set();
-        gradBG.zIndex = 11;
-
-        gradBG.alpha = 0.000001;
-        FlxTween.tween(gradBG, {alpha: 1}, 1.0, {ease: FlxEase.quartInOut});
-
-        curState.insert(curState.members.indexOf(curState.bgFlash), gradBG);
-        curState.bgFlash?.makeGraphic(FlxG.width, FlxG.height, flashColor);
-
-        // Score Text
-        var scorePopin = curState.scorePopin;
-        scorePopin.frames = Paths.getSparrowAtlas("resultScreen/scorePopin-remnants");
-        scorePopin.animation.addByPrefix("score", "tally score", 24, false);
-        scorePopin.visible = false;
-
-        // Song Font
-        var songText:String = curState.songName.text;
-        var fontLetters:String = "AaBbCcDdEeFfGgHhiIJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz:1234567890";
-        curState.songName.font = FlxBitmapFont.fromMonospace(Paths.image("resultScreen/tardlingSpritesheet-remnants"), fontLetters, FlxBasePoint.get(49, 62));
-        curState.songName.text = "i fucked up";
-        curState.songName.text = songText;
-
-        // Difficulty Sprite
-        var diffSpr:String = 'diff_' + curState.params?.difficultyId ?? Constants.DEFAULT_DIFFICULTY;
-        curState.difficulty.loadGraphic(Paths.image("resultScreen/" + diffSpr + "-remnants"));
-
-        // Highscore Text
-        var highscoreNew = curState.highscoreNew;
-        highscoreNew.frames = Paths.getSparrowAtlas("resultScreen/highscoreNew-remnants");
-        highscoreNew.animation.addByPrefix("new", "highscoreAnim0", 24, false);
-        highscoreNew.visible = false;
-
-        // Ratings Popin
-        var ratingsPopin = curState.ratingsPopin;
-        ratingsPopin.frames = Paths.getSparrowAtlas("resultScreen/ratingsPopin-remnants");
-        ratingsPopin.animation.addByPrefix("idle", "Categories", 24, false);
-        ratingsPopin.visible = false;
-
-        // Results Text
-        var resultsAnim = curState.resultsAnim;
-        resultsAnim.frames = Paths.getSparrowAtlas("resultScreen/resultsText-remnants");
-        resultsAnim.animation.addByPrefix("result", "results instance 1", 24, false);
-        resultsAnim.visible = false;
-
-        // Clear Percentage (Small)
-        var clearPercentSmall = curState.clearPercentSmall;
-        clearPercentSmall.members[0].loadGraphic(Paths.image('resultScreen/clearPercent/clearPercentTextSmall-remnants'));
-
-        // Clear Percentage Numbers (Small)
-        new FlxTimer().start((curState?.rank == "EXCELLENT" ? (97 / 24) : (95 / 24)) + 0.15, _ -> {
-          for (num in 1...clearPercentSmall.members.length)
-          {
-            var numb = clearPercentSmall?.members[num];
-            var leAnim = numb?.animation?.curAnim?.name;
-            numb?.frames = Paths.getSparrowAtlas('resultScreen/clearPercent/clearPercentNumberSmall-remnants');
-
-            for (i in 0...10)
+        FlxTween.globalManager.forEachTweensOf(tallie, null, (twn:FlxTween) -> {
+          var numsDone:Array<TallyNumber> = [];
+          twn.onUpdate = _ -> {
+            for (num in tallie.members)
             {
-              numb?.animation.addByPrefix(i, 'number $i ', 24, false);
-            }
+              if (numsDone.contains(num)) continue;
 
-            // Replay the animation.
-            numb?.animation?.play(leAnim, true);
-            numb?.updateHitbox();
-          }
+              final currentAnimation:String = num.animation?.curAnim?.name ?? '0';
+              num.frames = Paths.getSparrowAtlas("resultScreen/tallieNumber-remnants");
+
+              for (i in 0...10)
+              {
+                num.animation.addByPrefix(i, '$i small', 24, false);
+              }
+
+              num.animation.play(currentAnimation, true);
+              num.updateHitbox();
+              numsDone.push(num);
+            }
+          };
         });
-
-        // Yellow BG, Tallie Numbers & Sound System
-        for (object in curState.members)
-        {
-          // Yellow BG
-          if (object?.zIndex == 10)
-          {
-            object?.color = 0xFF000000;
-          }
-
-          // Tallie Numbers
-          if (object?.zIndex == 1200 && (Std.isOfType(object, FlxTypedGroup)))
-          {
-            for (ind => rating in object.members)
-            {
-              new FlxTimer().start((0.3 * ind) + 1.205, _ -> {
-                for (i in 0...object.members.length)
-                {
-                  var tallie = object.members[i];
-                  FlxTween.tween(rating, {curNumber: rating.neededNumber}, 0.5,
-                    {
-                      ease: FlxEase.quartOut,
-                      onUpdate: function(twn) {
-                        for (num in tallie.members)
-                        {
-                          if (num?.frames != Paths.getSparrowAtlas("resultScreen/tallieNumber-remnants"))
-                          {
-                            num?.frames = Paths.getSparrowAtlas("resultScreen/tallieNumber-remnants");
-                            for (i in 0...10)
-                            {
-                              num?.animation.addByPrefix(i, '$i small', 24, false);
-                            }
-                            num?.updateHitbox();
-                          }
-                        }
-                      }
-                    });
-                }
-              });
-            }
-          }
-
-          // Sound System
-          if (object?.zIndex == 1100 && Std.isOfType(object, FlxSprite))
-          {
-            object.frames = Paths.getSparrowAtlas("resultScreen/soundSystem-remnants");
-            object.animation.addByPrefix("idle", "sound system", 24, false);
-          }
-        }
-      }
-
-      // Due to the ranking texts not being public, this is the only way i know to access them.
-      for (prop in curState.members)
-      {
-        // Vertical Text.
-        if (prop?.zIndex == 990 && !addedVerText)
-        {
-          prop?.alpha = 0;
-          if (prop == null) addedVerText = false;
-          else
-          {
-            var rankTextVert:FlxBackdrop = new FlxBackdrop(null, 0x10, 0, 30);
-            rankTextVert.loadGraphic(Paths.image(formatPath(prop?.graphic?.assetsKey) + "-remnants"));
-            rankTextVert.x = FlxG.width - 44;
-            rankTextVert.zIndex = 990;
-            rankTextVert.y = 100;
-            curState.add(rankTextVert);
-
-            FlxFlicker.flicker(rankTextVert, 2 / 24 * 3, 2 / 24, true);
-
-            // Scrolling.
-            new FlxTimer().start(30 / 24, _ -> {
-              rankTextVert.velocity.y = -80;
-            });
-
-            curState.refresh(); // Apply z-index
-            addedVerText = true;
-          }
-        }
-
-        // Horizontal Text.
-        if (curState.cameraScroll != null && prop?.zIndex == 100 && !addedHorText)
-        {
-          curState.cameraScroll.alpha = 0;
-
-          if (prop == null) addedHorText = false;
-          else
-          {
-            addedHorText = true;
-
-            remnantsScroll = new FunkinCamera('resultsScrollRemnants', 0, 0, FlxG.width, Math.round(FlxG.height * 1.2));
-            remnantsScroll.canvas.rotation = -3.8;
-            remnantsScroll.bgColor = 0x00000000;
-            remnantsScroll.alpha = 0.5;
-
-            FlxG.cameras.insert(remnantsScroll, curState.members.indexOf(curState.cameraScroll) - 1, false);
-            curState.refresh(); // Apply z-index
-
-            for (i in 0...12)
-            {
-              var rankTextBack:FlxBackdrop = new FlxBackdrop(null, 0x01, 10, 0);
-              rankTextBack.loadGraphic(Paths.image(formatPath(prop?.graphic?.assetsKey) + "-remnants"));
-              rankTextBack.y = 50 + (135 * i / 2) + 10;
-              rankTextBack.cameras = [remnantsScroll];
-              rankTextBack.x = FlxG.width / 2 - 320;
-              rankTextBack.angle = -0.01;
-              rankTextBack.zIndex = 100;
-              curState.add(rankTextBack);
-              curState.refresh(); // Apply z-index
-
-              // Scrolling.
-              rankTextBack.velocity.x = (i % 2 == 0) ? -7.0 : 7.0;
-            }
-          }
-        }
-      }
+      });
     }
   }
 
-  function formatPath(rawPath:String)
+  public function setupClearPercentages():Void
   {
-    var format = rawPath.replace('shared:assets/shared/images/', ''); // Remove the first part.
-    var format2 = format.replace('.png', ''); // Remove the .png and throw the results.
-    return format2;
+    function setup(clearPercent:ClearPercentCounter):Void
+    {
+      var realNumber:Int = clearPercent.curNumber;
+      var realNumberChanged:Bool = clearPercent.numberChanged;
+
+      clearPercent.curNumber = 100;
+      clearPercent.drawNumbers();
+
+      // Percent Text
+      final clearPercentText:FunkinSprite = clearPercent.members[0];
+      clearPercentText.loadTexture('resultScreen/clearPercent/clearPercentText${clearPercent.small ? 'Small' : ''}-remnants');
+
+      // Percent Numbers
+      for (number in clearPercent.members)
+      {
+        if (clearPercentText == number) continue;
+
+        final currentAnimation:String = number.animation?.curAnim?.name ?? '0';
+        final digitIndex:Int = clearPercent.members.indexOf(number);
+        final variant:Bool = digitIndex >= 2;
+
+        number.frames = Paths.getSparrowAtlas('resultScreen/clearPercent/clearPercentNumber${clearPercent.small ? 'Small' : variant ? 'Right' : 'Left'}-remnants');
+
+        for (i in 0...10)
+        {
+          number.animation.addByPrefix('$i', 'number $i ', 24, false);
+        }
+
+        number.animation.play(currentAnimation, true);
+        number.updateHitbox();
+      }
+
+      clearPercent.curNumber = realNumber;
+      clearPercent.numberChanged = realNumberChanged;
+    }
+
+    setup(resultState.clearPercentSmall);
+
+    waitWithPreDraw(37 / 24, () -> {
+      final clearPercentCounter:ClearPercentCounter = findByZ(450);
+      if (clearPercentCounter != null) setup(clearPercentCounter);
+    });
+  }
+
+  public function setupSongFont():Void
+  {
+    final fontLetters:String = 'AaBbCcDdEeFfGgHhiIJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz:1234567890';
+    resultState.songName.font = FlxBitmapFont.fromMonospace(Paths.image('resultScreen/tardlingSpritesheet-remnants'), fontLetters, FlxPoint.get(49, 62));
+
+    final songText:String = resultState.songName.text;
+    resultState.songName.text = '';
+    resultState.songName.text = songText;
+  }
+
+  public function setupScroll():Void
+  {
+    final verTextAsset:String = ScoringRank.getVerTextAsset(resultState.rank);
+    final horTextAsset:String = ScoringRank.getHorTextAsset(resultState.rank);
+
+    waitWithPreDraw(ScoringRank.getFlashDelay(resultState.rank), () -> {
+      final rankTextVert:FlxBackdrop = findByZ(990);
+      rankTextVert?.loadGraphic(Paths.image('${verTextAsset}-remnants'));
+
+      final rankTextBacks:Array<FlxBackdrop> = findAllByZ(100);
+      for (backdrop in rankTextBacks)
+      {
+        backdrop?.loadGraphic(Paths.image('${horTextAsset}-remnants'));
+        backdrop?.alpha = 0.5;
+      }
+    });
+  }
+
+  function findByZ(zIndex:Int, ?classType:Dynamic = null):FlxBasic
+  {
+    var allOfThem:Array<FlxBasic> = findAllByZ(zIndex, classType);
+
+    return allOfThem[0];
+  }
+
+  function findAllByZ(zIndex:Int, ?classType:Dynamic = null):Array<FlxBasic>
+  {
+    return [
+      for (member in resultState?.members ?? [])
+      {
+        if (member.zIndex != zIndex) continue;
+        if (classType != null && !Std.isOfType(member, classType)) continue;
+
+        member;
+      }
+    ];
+  }
+
+  function waitWithPreDraw(time:Float, callback:Void->Void):Void
+  {
+    FlxTimer.wait(time, () -> FlxG.signals.preDraw.addOnce(callback));
+  }
+
+  function get_resultState():ResultState
+  {
+    var subState:FlxSubstate = FlxG.state?.subState;
+
+    if (!Std.isOfType(subState, ResultState) || !subState.playerCharacterId.contains('remnants')) return null;
+
+    return subState;
+  }
+
+  function get_isPico():Bool
+  {
+    return resultState?.playerCharacterId.contains('pico') ?? false;
   }
 }
