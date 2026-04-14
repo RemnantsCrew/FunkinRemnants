@@ -5,6 +5,7 @@ import funkin.play.scoring.ScoringRank;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxGradient;
 import funkin.play.ResultState;
+import funkin.util.ReflectUtil;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 
@@ -19,20 +20,41 @@ class RemnantsResults extends Module
     super('remnantsResults', 1000, {state: ResultState});
   }
 
-  override public function onSubStateOpenEnd(event:SubStateScriptEvent):Void
+  override public function onStateChangeEnd(event:StateChangeScriptEvent):Void
   {
-    super.onSubStateOpenEnd(event);
+    super.onStateChangeEnd(event);
     if (resultState != event.targetState) return;
 
-    final flashColor:FlxColor = isPico ? 0xFF00591D : 0xFF000D59;
-    resultState.bgFlash?.makeGraphic(FlxG.width, FlxG.height, flashColor);
-
+    setupFlash();
     setupGradients();
     setupMiscellaneous();
     setupTallies();
     setupClearPercentages();
     setupSongFont();
     setupScroll();
+  }
+
+  override public function onSubStateOpenEnd(event:SubStateScriptEvent):Void
+  {
+    super.onSubStateOpenEnd(event);
+    if (resultState != event.targetState) return;
+
+    setupFlash();
+    setupGradients();
+    setupMiscellaneous();
+    setupTallies();
+    setupClearPercentages();
+    setupSongFont();
+    setupScroll();
+  }
+
+  public function setupFlash():Void
+  {
+    final flashColor:FlxColor = isPico ? 0xFF00591D : 0xFF000D59;
+
+    resultState.bgFlash?.makeGraphic(1, 1, flashColor);
+    resultState.bgFlash?.scale.set(FlxG.width, FlxG.height);
+    resultState.bgFlash?.updateHitbox();
   }
 
   public function setupGradients():Void
@@ -219,11 +241,31 @@ class RemnantsResults extends Module
 
   function get_resultState():ResultState
   {
-    var subState:FlxSubstate = FlxG.state?.subState;
+    var states:Array<FlxState> = [FlxG.state];
+    while (states.length > 0)
+    {
+      var state:FlxState = states[0];
+      if (state == null)
+      {
+        states.shift();
+        continue;
+      }
 
-    if (!Std.isOfType(subState, ResultState) || !subState.playerCharacterId.contains('remnants')) return null;
+      if (Std.isOfType(state, ResultState)) break;
+      else if (state.subState != null)
+      {
+        states.shift();
+        states.push(state.subState);
+      }
+    }
 
-    return subState;
+    if (states[0]?.playerCharacterId.contains('remnants') ?? false)
+    {
+      // Even though we are in results, this should still not play unless it's a remnants character!
+      return states[0];
+    }
+
+    return null;
   }
 
   function get_isPico():Bool
