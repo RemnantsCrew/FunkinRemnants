@@ -1,13 +1,22 @@
 package funkin.remnants.utils;
 
-import funkin.ui.freeplay.FreeplayState;
 import funkin.data.freeplay.player.PlayerRegistry;
+import funkin.ui.freeplay.FreeplayState;
 import funkin.data.song.SongRegistry;
 
 class RemnantsContentUtil
 {
+  public static var songList(get, never):Array<String>;
+
   public static function remnantsContentEnabled():Bool
   {
+    // If PlayState is active, check if the current "player" is Funkin' their Remnants.
+    if (PlayState.instance != null)
+    {
+      var playerCharacterId:String = PlayerRegistry.instance.getCharacterOwnerId(PlayState.instance?.currentChart?.characters.player);
+      return playerCharacterId.contains('remnants');
+    }
+
     // Look through all new characters + the current selected character.
     // If one of them is Funkin' their Remnants, enable remnants content.
     var characters:Array<String> = PlayerRegistry.instance.listNewCharacters();
@@ -29,7 +38,8 @@ class RemnantsContentUtil
 
       for (variation in song.variations)
       {
-        if (!songID.contains('remnants') && !variation.contains('remnants')) continue;
+        var saveID:String = '$songID${variation != Constants.DEFAULT_VARIATION ? '-$variation' : ''}';
+        if (!songList.contains(saveID)) continue;
 
         var difficultyList:String = song.listDifficulties(variation, null, true, false);
 
@@ -70,7 +80,23 @@ class RemnantsContentUtil
 
   public static function isRemnantsSong():Bool
   {
-    var longAssName:String = [for (i in PlayState.instance?.currentStage?.characters ?? []) i.characterId].join('-');
-    return longAssName.contains('remnants');
+    var songID:String = PlayState.instance?.currentSong?.id;
+    var variation:String = PlayState.instance?.currentChart?.variation;
+
+    var saveID:String = '${songID}${variation != Constants.DEFAULT_VARIATION ? '-$variation' : ''}';
+    return songList.contains(saveID);
+  }
+
+  static var _songList:Array<String> = null;
+
+  static function get_songList():Array<String>
+  {
+    if (_songList == null)
+    {
+      var fullText:String = Assets.getText(Paths.txt('ui/remnants-songlist'));
+      _songList = fullText.trim().split('\n').map(i -> i.trim());
+    }
+
+    return _songList;
   }
 }
