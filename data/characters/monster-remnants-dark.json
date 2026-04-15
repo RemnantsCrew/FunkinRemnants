@@ -1,135 +1,110 @@
 {
   "version": "1.0.0",
   "name": "Remnants Monster (Dark)",
-  "assetPath": "characters/monster-remnants_dark",
-  "healthIcon": { "id": "monster-remnants" },
-  "offsets": [-6.5, 0.3],
-  "cameraOffsets": [7, 0],
+  "assetPath": "shared:characters/monster-remnants/dark",
+  "renderType": "animateatlas",
+  "offsets": [0.3, 3],
+  "cameraOffsets": [-0.1, 39.5],
+  "healthIcon": {
+    "id": "monster-remnants"
+  },
   "atlasSettings": {
     "useRenderTexture": true
   },
   "animations": [
     {
       "name": "idle",
-      "prefix": "monster idle"
+      "prefix": "Idle"
     },
     {
       "name": "idle-hold",
-      "prefix": "monster idle",
+      "prefix": "Idle",
       "looped": true,
-      "frameIndices": [11, 12, 13, 14]
+      "frameIndices": [11, 12, 13]
     },
     {
       "name": "singRIGHT",
-      "prefix": "Monster Right note0",
-      "offsets": [-35, -1]
+      "prefix": "Right"
     },
     {
       "name": "singRIGHT-hold",
-      "prefix": "Monster Right note0",
+      "prefix": "Right",
       "looped": true,
-      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      "offsets": [-35, -1]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
     },
     {
       "name": "singRIGHT-calm",
-      "prefix": "Monster Right note calm",
-      "offsets": [-35, -3]
+      "prefix": "Right-Calm"
     },
     {
       "name": "singRIGHT-calm-hold",
-      "prefix": "Monster Right note calm",
+      "prefix": "Right-Calm",
       "looped": true,
-      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      "offsets": [-35, -3]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
     },
     {
       "name": "singDOWN",
-      "prefix": "monster down0",
-      "offsets": [-50, -94]
+      "prefix": "Down",
+      "offsets": [0, 0]
     },
     {
       "name": "singDOWN-hold",
-      "prefix": "monster down0",
+      "prefix": "Down",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23, 24, 25, 26, 27, 28, 29
-      ],
-      "offsets": [-50, -94]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13],
+      "offsets": [0, 0]
     },
     {
       "name": "singDOWN-calm",
-      "prefix": "monster down calm",
-      "offsets": [-50, -38]
+      "prefix": "Down-Calm",
+      "offsets": [0, 0]
     },
     {
       "name": "singDOWN-calm-hold",
-      "prefix": "monster down calm",
+      "prefix": "Down-Calm",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23, 24, 25, 26, 27, 28, 29
-      ],
-      "offsets": [-50, -38]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13],
+      "offsets": [0, 0]
     },
     {
       "name": "singUP",
-      "prefix": "monster up note0",
-      "offsets": [-21, 64]
+      "prefix": "Up"
     },
     {
       "name": "singUP-hold",
-      "prefix": "monster up note0",
+      "prefix": "Up",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23
-      ],
-      "offsets": [-21, 64]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
     },
     {
       "name": "singUP-calm",
-      "prefix": "monster up note calm",
-      "offsets": [-21, 71]
+      "prefix": "Up-Calm"
     },
     {
       "name": "singUP-calm-hold",
-      "prefix": "monster up note calm",
+      "prefix": "Up-Calm",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23
-      ],
-      "offsets": [-21, 71]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
     },
     {
       "name": "singLEFT",
-      "prefix": "Monster left note0",
-      "offsets": [-33, -5]
+      "prefix": "Left"
     },
     {
       "name": "singLEFT-hold",
-      "prefix": "Monster left note",
+      "prefix": "Left",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-      ],
-      "offsets": [-33, -5]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singLEFT-calm",
-      "prefix": "Monster left note calm",
-      "offsets": [-33, -6]
+      "prefix": "Left-Calm"
     },
     {
       "name": "singLEFT-calm-hold",
-      "prefix": "Monster left note calm",
+      "prefix": "Left-Calm",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-      ],
-      "offsets": [-33, -6]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
     }
   ]
 }

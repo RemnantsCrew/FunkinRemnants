@@ -1,153 +1,103 @@
 {
   "version": "1.0.0",
   "name": "Remnants Monster",
-  "assetPath": "shared:characters/monster-remnants",
+  "assetPath": "shared:characters/monster-remnants/base",
   "renderType": "animateatlas",
-  "offsets": [-7, 1],
-  "cameraOffsets": [7, 12],
+  "offsets": [0, 1],
+  "cameraOffsets": [0, 37],
   "atlasSettings": {
     "useRenderTexture": true
   },
   "animations": [
     {
       "name": "idle",
-      "prefix": "monster idle",
-      "animType": "symbol"
+      "prefix": "Idle"
     },
     {
       "name": "idle-hold",
-      "prefix": "monster idle",
+      "prefix": "Idle",
       "looped": true,
-      "frameIndices": [11, 12, 13, 14],
-      "animType": "symbol"
+      "frameIndices": [11, 12, 13]
     },
     {
       "name": "singRIGHT",
-      "prefix": "Monster Right note",
-      "animType": "symbol",
-      "offsets": [-36, 19]
+      "prefix": "Right"
     },
     {
       "name": "singRIGHT-hold",
-      "prefix": "Monster Right note",
+      "prefix": "Right",
       "looped": true,
-      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      "animType": "symbol",
-      "offsets": [-36, 20]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singRIGHT-calm",
-      "prefix": "Monster Right note calm",
-      "animType": "symbol",
-      "offsets": [-36, -17]
+      "prefix": "Right-Calm"
     },
     {
       "name": "singRIGHT-calm-hold",
-      "prefix": "Monster Right note calm",
+      "prefix": "Right-Calm",
       "looped": true,
-      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      "animType": "symbol",
-      "offsets": [-36, -17]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singDOWN",
-      "prefix": "monster down",
-      "animType": "symbol",
-      "offsets": [-50, -116]
+      "prefix": "Down"
     },
     {
       "name": "singDOWN-hold",
-      "prefix": "monster down",
+      "prefix": "Down",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23, 24, 25, 26, 27, 28, 29
-      ],
-      "animType": "symbol",
-      "offsets": [-50, -116]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singDOWN-calm",
-      "prefix": "monster down calm",
-      "animType": "symbol",
-      "offsets": [-50, -61.5]
+      "prefix": "Down-Calm"
     },
     {
       "name": "singDOWN-calm-hold",
-      "prefix": "monster down calm",
+      "prefix": "Down-Calm",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23, 24, 25, 26, 27, 28, 29
-      ],
-      "animType": "symbol",
-      "offsets": [-50, -61.5]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singUP",
-      "prefix": "monster up note",
-      "animType": "symbol",
-      "offsets": [-21, 32]
+      "prefix": "Up"
     },
     {
       "name": "singUP-hold",
-      "prefix": "monster up note",
+      "prefix": "Up",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23
-      ],
-      "animType": "symbol",
-      "offsets": [-21, 32]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singUP-calm",
-      "prefix": "monster up note calm",
-      "animType": "symbol",
-      "offsets": [-21, 48]
+      "prefix": "Up-Calm"
     },
     {
       "name": "singUP-calm-hold",
-      "prefix": "monster up note calm",
+      "prefix": "Up-Calm",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-        22, 23
-      ],
-      "animType": "symbol",
-      "offsets": [-21, 48]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
       "name": "singLEFT",
-      "prefix": "Monster left note",
-      "animType": "symbol",
-      "offsets": [-32, -28]
+      "prefix": "Left"
     },
     {
       "name": "singLEFT-hold",
-      "prefix": "Monster left note",
+      "prefix": "Left",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-      ],
-      "animType": "symbol",
-      "offsets": [-32, -28]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
     {
       "name": "singLEFT-calm",
-      "prefix": "Monster left note calm",
-      "animType": "symbol",
-      "offsets": [-32, -20.5]
+      "prefix": "Left-Calm"
     },
     {
       "name": "singLEFT-calm-hold",
-      "prefix": "Monster left note calm",
+      "prefix": "Left-Calm",
       "looped": true,
-      "frameIndices": [
-        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-      ],
-      "animType": "symbol",
-      "offsets": [-32, -20.5]
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     }
   ]
 }
