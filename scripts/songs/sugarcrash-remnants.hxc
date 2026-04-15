@@ -1,8 +1,6 @@
 package funkin.remnants.songs;
 
-#if mobile
 import funkin.mobile.input.ControlsHandler;
-#end
 
 /**
  * Even though this looks like just the sugarcrash song script.
@@ -31,22 +29,26 @@ class SugarCrashRemnantsSong extends Song
 
   public function moveComboPopUps():Void
   {
-    #if !mobile
-    if (!Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [0, -145]; // Upscroll PC Offset
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (RemnantsContentUtil.hasMobileUI())
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [0, 355];
+        }
+        else
+        {
+          // Upscroll Offset
+          [0, -145];
+        }
+      };
 
-    if (Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [0, 355]; // Downscroll PC Offset
-    #else
-    if (Preferences.controlsScheme == "Arrows"
-      && !ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [30, 350]; // Middle Mobile Offset
-
-    if (!Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [0, -145]; // Upscroll Controller Mobile Offset
-
-    if (Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [0, 355]; // Downscroll Controller Mobile Offset
-    #end
+    PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
   override public function getBaseInstrumentalId(difficultyId:String, variationId:String):String

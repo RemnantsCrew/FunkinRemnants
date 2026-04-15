@@ -1,8 +1,6 @@
 package funkin.remnants.songs;
 
-#if mobile
 import funkin.mobile.input.ControlsHandler;
-#end
 
 class GrievingRemnantsSong extends Song
 {
@@ -95,22 +93,26 @@ class GrievingRemnantsSong extends Song
 
     playedDialogue = false;
 
-    #if !mobile
-    if (!Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [550, 350]; // Upscroll PC Offset
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (RemnantsContentUtil.hasMobileUI())
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [550, -190];
+        }
+        else
+        {
+          // Upscroll Offset
+          [550, 350];
+        }
+      };
 
-    if (Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [550, -190]; // Downscroll PC Offset
-    #else
-    if (Preferences.controlsScheme == "Arrows"
-      && !ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [30, 350]; // Middle Mobile Offset
-
-    if (!Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [725, -350]; // Upscroll Side Mobile Offset
-
-    if (Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [725, -190]; // Downscroll Side Mobile Offset
-    #end
+    PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
   function onSongRetry(event:ScriptEvent)
