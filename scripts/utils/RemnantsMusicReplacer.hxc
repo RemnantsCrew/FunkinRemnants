@@ -2,7 +2,6 @@ package funkin.remnants.utils;
 
 import funkin.ui.freeplay.FreeplayState;
 import funkin.data.song.SongRegistry;
-import StringTools;
 
 /**
  * A Module that replaces music with different audio.
@@ -24,7 +23,7 @@ class RemnantsMusicReplacer extends Module
     // The third argument is completely optional.
     addReplacement('freeplayRandom', 'freeplayRandom-remnants', () -> {
       // If the current freeplay character is Funkin' their Remnants, replace the music.
-      return StringTools.contains(FreeplayState.rememberedCharacterId, 'remnants');
+      return FreeplayState.rememberedCharacterId.contains('remnants');
     });
 
     addReplacement('freakyMenu', 'freakyMenu-remnants', RemnantsContentUtil.remnantsContentEnabled);

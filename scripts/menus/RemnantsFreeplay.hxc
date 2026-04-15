@@ -6,8 +6,6 @@ import funkin.ui.freeplay.AlbumRoll;
 import funkin.util.ReflectUtil;
 import haxe.Json;
 
-using StringTools;
-
 class RemnantsFreeplay extends Module
 {
   public static var instance:RemnantsFreeplay = null;

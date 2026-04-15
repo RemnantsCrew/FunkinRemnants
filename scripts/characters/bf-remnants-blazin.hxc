@@ -2,7 +2,6 @@ package funkin.remnants.characters;
 
 import funkin.play.GameOverSubState;
 import funkin.play.PauseSubState;
-import StringTools;
 
 class BFRemnantsBlazinCharacter extends AnimateAtlasCharacter
 {
@@ -41,7 +40,7 @@ class BFRemnantsBlazinCharacter extends AnimateAtlasCharacter
   {
     holdTimer = 0;
 
-    if (!StringTools.startsWith(event?.note?.kind ?? '', 'weekend-1-')) return;
+    if (!event?.note?.kind?.startsWith('weekend-1-') ?? true) return;
 
     while (flickerTimers.length > 0)
     {

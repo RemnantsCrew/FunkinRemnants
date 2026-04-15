@@ -5,8 +5,6 @@ import funkin.ui.freeplay.dj.AnimateAtlasFreeplayDJ;
 import funkin.ui.freeplay.dj.FreeplayDJState;
 import funkin.data.freeplay.player.PlayerRegistry;
 
-using StringTools;
-
 class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
 {
   var alternateCartoon:Bool = FlxG.random.bool(50); // 50% chance of the cartoon anim change

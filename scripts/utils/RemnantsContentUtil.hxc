@@ -3,7 +3,6 @@ package funkin.remnants.utils;
 import funkin.ui.freeplay.FreeplayState;
 import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.data.song.SongRegistry;
-import StringTools;
 
 class RemnantsContentUtil
 {
@@ -16,7 +15,7 @@ class RemnantsContentUtil
 
     for (charId in characters)
     {
-      if (charId != null && StringTools.contains(charId, 'remnants')) return true;
+      if (charId != null && charId.contains('remnants')) return true;
     }
 
     return false;
@@ -30,7 +29,7 @@ class RemnantsContentUtil
 
       for (variation in song.variations)
       {
-        if (!StringTools.contains(songID, 'remnants') && !StringTools.contains(variation, 'remnants')) continue;
+        if (!songID.contains('remnants') && !variation.contains('remnants')) continue;
 
         var difficultyList:String = song.listDifficulties(variation, null, true, false);
 
@@ -63,7 +62,7 @@ class RemnantsContentUtil
 
   public static function saveLastRemnantsChar():Void
   {
-    if (!StringTools.contains(FreeplayState.rememberedCharacterId, 'remnants')) return;
+    if (!FreeplayState.rememberedCharacterId.contains('remnants')) return;
 
     Save.instance.modOptions.set('lastRemnantsChar', FreeplayState.rememberedCharacterId);
     Save.instance.flush();
@@ -72,6 +71,6 @@ class RemnantsContentUtil
   public static function isRemnantsSong():Bool
   {
     var longAssName:String = [for (i in PlayState.instance?.currentStage?.characters ?? []) i.characterId].join('-');
-    return StringTools.contains(longAssName, 'remnants');
+    return longAssName.contains('remnants');
   }
 }

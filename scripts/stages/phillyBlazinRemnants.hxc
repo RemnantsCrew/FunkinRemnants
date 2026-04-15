@@ -5,8 +5,6 @@ import openfl.filters.ShaderFilter;
 import flixel.addons.display.FlxTiledSprite;
 import funkin.util.MathUtil;
 
-using StringTools;
-
 /**
  * This stage includes a partial version of the Philly Streets stage with shaders applied.
  * BUT now it got Remnants'd

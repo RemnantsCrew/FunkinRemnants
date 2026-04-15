@@ -2,8 +2,6 @@ package funkin.remnants.gameplay;
 
 import funkin.play.GameOverSubState;
 
-using StringTools;
-
 class RemnantsGameOver extends Module
 {
   final CHAR_BLACKLIST:Array<String> = ["bf-remnants-blazin", "pico-remnants-blazin"];

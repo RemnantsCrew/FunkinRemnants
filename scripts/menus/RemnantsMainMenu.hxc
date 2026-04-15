@@ -7,8 +7,6 @@ import funkin.util.WindowUtil;
 import funkin.ui.UIState;
 import flixel.FlxSprite;
 
-using StringTools;
-
 class RemnantsMainMenu extends Module
 {
   public function new()

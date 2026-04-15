@@ -4,8 +4,6 @@ import funkin.ui.credits.CreditsState;
 import funkin.util.TouchUtil;
 import funkin.graphics.video.FunkinVideoSprite;
 
-using StringTools;
-
 class RemnantsCredits extends Module
 {
   final VIDEO_PATH:String = 'remnants-credits';

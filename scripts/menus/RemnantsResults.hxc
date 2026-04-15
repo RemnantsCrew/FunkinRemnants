@@ -9,7 +9,6 @@ import funkin.graphics.FunkinCamera;
 import flixel.effects.FlxFlicker;
 import flixel.math.FlxBasePoint;
 import funkin.play.ResultState;
-import StringTools;
 
 class RemnantsResults extends Module
 {
@@ -44,10 +43,10 @@ class RemnantsResults extends Module
     super.onUpdate(event);
 
     // This doesn't works on the results debug if the mode is Freeplay or Story... (Debug works btw)
-    if (Std.isOfType(FlxG.state?.subState, ResultState) && StringTools.contains(FlxG.state?.subState?.playerCharacterId, 'remnants'))
+    if (Std.isOfType(FlxG.state?.subState, ResultState) && FlxG.state?.subState?.playerCharacterId?.contains('remnants'))
     {
       var curState = FlxG.state?.subState;
-      var isPico:Bool = StringTools.contains(curState?.playerCharacterId, 'pico');
+      var isPico:Bool = curState?.playerCharacterId?.contains('pico');
 
       var flashColor:Int = isPico ? 0xFF00591D : 0xFF000D59;
       var gradientColor:Int = isPico ? 0xFF003300 : 0xFF000C33;
@@ -246,8 +245,8 @@ class RemnantsResults extends Module
 
   function formatPath(rawPath:String)
   {
-    var format = StringTools.replace(rawPath, 'shared:assets/shared/images/', ''); // Remove the first part.
-    var format2 = StringTools.replace(format, '.png', ''); // Remove the .png and throw the results.
+    var format = rawPath.replace('shared:assets/shared/images/', ''); // Remove the first part.
+    var format2 = format.replace('.png', ''); // Remove the .png and throw the results.
     return format2;
   }
 }
