@@ -14,7 +14,7 @@ class RemnantsContentUtil
     if (PlayState.instance != null)
     {
       var playerCharacterId:String = PlayerRegistry.instance.getCharacterOwnerId(PlayState.instance?.currentChart?.characters.player);
-      return playerCharacterId.contains('remnants');
+      return playerCharacterId?.contains('remnants') ?? false;
     }
 
     // Look through all new characters + the current selected character.
