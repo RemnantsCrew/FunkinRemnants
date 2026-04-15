@@ -1,6 +1,7 @@
 package funkin.remnants.notestyles;
 
 import funkin.play.notes.notestyle.NoteStyle;
+import funkin.mobile.input.ControlsHandler;
 import funkin.play.notes.NoteSprite;
 import funkin.play.notes.Strumline;
 import flixel.util.FlxColor;
@@ -54,14 +55,15 @@ class InitCommitNoteStyle extends NoteStyle
     for (name in ['static', 'press', 'confirm', 'confirm-hold'])
       target.animation.add(name, [for (i in 0...4) animIndex], 12, false);
 
-    #if mobile
-    var target_persist:StrumlineNote = target;
-    var dir_persist:Int = dir;
-    target_persist.animation.onFrameChange.add((animName:String, _, __) -> {
-      var color:FlxColor = (animName == 'confirm' || animName == 'confirm-hold') ? COLORS[dir_persist] : FlxColor.WHITE;
-      target_persist.color = color;
-    });
-    #end
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
+    {
+      var target_persist:StrumlineNote = target;
+      var dir_persist:Int = dir;
+      target_persist.animation.onFrameChange.add((animName:String, _, __) -> {
+        var color:FlxColor = (animName == 'confirm' || animName == 'confirm-hold') ? COLORS[dir_persist] : FlxColor.WHITE;
+        target_persist.color = color;
+      });
+    }
   }
 
   override public function applyStrumlineOffsets(target:StrumlineNote):Void
