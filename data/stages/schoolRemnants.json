@@ -237,6 +237,6 @@
     "dad": { "zIndex": 200, "cameraOffsets": [160, 0], "position": [306, 960] },
     "gf": { "zIndex": 100, "cameraOffsets": [40, 40], "position": [724, 823] }
   },
-  "name": "School (Date) [Remnants]",
+  "name": "School (Remnants)",
   "directory": "week6"
 }
