@@ -31,7 +31,7 @@ class SugarCrashRemnantsSong extends Song
   {
     PlayState.instance.comboPopUps.offsets =
       {
-        if (RemnantsContentUtil.hasMobileUI())
+        if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
         {
           // Mobile Offset
           [30, 350];
