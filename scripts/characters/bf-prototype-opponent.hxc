@@ -8,7 +8,7 @@ import funkin.Conductor;
 
 class BFPrototypeOpponentCharacter extends AnimateAtlasCharacter
 {
-  public var currentSustainSteps:Array<Float> = [for (i in 0...4) 0];
+  public var currentSustains:Array<Dynamic> = [];
 
   public function new()
   {
@@ -25,7 +25,7 @@ class BFPrototypeOpponentCharacter extends AnimateAtlasCharacter
 
   override public function resetCharacter(resetCamera:Bool = true):Void
   {
-    currentSustainSteps = [for (i in 0...4) 0];
+    currentSustains = [];
     super.resetCharacter(resetCamera);
   }
 
@@ -84,29 +84,36 @@ class BFPrototypeOpponentCharacter extends AnimateAtlasCharacter
 
     super.onNoteHit(event);
 
-    if (isTarget)
+    if (isTarget && event.note.length > 0)
     {
-      var noteData:Int = event.note.noteData.getDirection();
-      currentSustainSteps[noteData] = event.note.length;
+      currentSustains.push({noteData: event.note.noteData, elapsed: 0});
     }
   }
 
   override public function onUpdate(event:UpdateScriptEvent):Void
   {
-    for (i in 0...currentSustainSteps.length)
+    var i:Int = 0;
+    while (i < currentSustains.length)
     {
-      if (currentSustainSteps[i] <= 0) continue;
+      var data:Dynamic = currentSustains[i];
 
-      var stepBefore:Float = Math.floor(currentSustainSteps[i] / Conductor.instance.stepLengthMs);
-      currentSustainSteps[i] -= event.elapsed * 1000;
-      var stepNow:Float = Math.floor(currentSustainSteps[i] / Conductor.instance.stepLengthMs);
+      var stepBefore:Float = Math.floor(data.elapsed / Conductor.instance.stepLengthMs);
+      data.elapsed += event.elapsed * 1000;
+      var stepNow:Float = Math.floor(data.elapsed / Conductor.instance.stepLengthMs);
 
-      if (stepBefore - stepNow >= 1)
+      if (stepNow - stepBefore >= 1)
       {
         // No suffix support... we should be fine... right?
-        this.playSingAnimation(i, false, '');
+        this.playSingAnimation(data.noteData.getDirection(), false, '');
         this.holdTimer = 0;
       }
+
+      if (data.elapsed >= data.noteData.length)
+      {
+        currentSustains.remove(data);
+      }
+
+      i++;
     }
 
     super.onUpdate(event);
