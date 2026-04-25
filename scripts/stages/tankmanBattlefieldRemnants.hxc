@@ -163,11 +163,11 @@ class TankmanBattlefieldRemnantsStage extends Stage
     else // Hide the tanks when on performance mode.
     {
       var tankRolling = getNamedProp('tankRolling');
-      tankRolling?.animation.pause();
+      tankRolling?.animation?.pause();
       tankRolling?.visible = false;
 
       var tankRollingExtra = getNamedProp('tankRollingExtra');
-      tankRollingExtra?.animation.pause();
+      tankRollingExtra?.animation?.pause();
       tankRollingExtra?.visible = false;
     }
   }
