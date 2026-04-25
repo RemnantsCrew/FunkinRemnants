@@ -1,13 +1,15 @@
 {
   "version": "1.0.0",
   "name": "Boyfriend (Normal Glitcher)",
-  "renderType": "sparrow",
+  "renderType": "multisparrow",
   "assetPath": "characters/glitcherbf",
   "flipX": true,
   "singTime": 8.0,
   "healthIcon": {
-    "id": "bf",
-    "isPixel": false
+    "id": "bf"
+  },
+  "death": {
+    "cameraOffsets": [25, -125]
   },
   "animations": [
     {
@@ -54,6 +56,44 @@
       "name": "singRIGHTmiss",
       "prefix": "BF NOTE RIGHT MISS",
       "offsets": [-47, 21]
+    },
+    {
+      "name": "firstDeath",
+      "prefix": "BF dies",
+      "offsets": [20, 5]
+    },
+    {
+      "name": "deathLoop",
+      "prefix": "BF Dead Loop",
+      "looped": true,
+      "offsets": [20, -1]
+    },
+    {
+      "name": "deathConfirm",
+      "prefix": "BF Dead confirm",
+      "offsets": [20, 63]
+    },
+    {
+      "renderType": "animateatlas",
+      "assetPath": "shared:characters/bf-remnants/death",
+      "name": "firstDeath-remnants",
+      "prefix": "Death Intro",
+      "offsets": [32, 162]
+    },
+    {
+      "renderType": "animateatlas",
+      "assetPath": "shared:characters/bf-remnants/death",
+      "name": "deathLoop-remnants",
+      "prefix": "Death Loop",
+      "looped": true,
+      "offsets": [32, 162]
+    },
+    {
+      "renderType": "animateatlas",
+      "assetPath": "shared:characters/bf-remnants/death",
+      "name": "deathConfirm-remnants",
+      "prefix": "Death Confirm",
+      "offsets": [32, 162]
     }
   ]
 }
