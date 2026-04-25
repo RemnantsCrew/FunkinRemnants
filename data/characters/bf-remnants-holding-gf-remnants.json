@@ -11,7 +11,7 @@
   },
   "death": {
     "cameraZoom": 0.85,
-    "cameraOffsets": [275, 50]
+    "cameraOffsets": [-25, -75]
   },
   "atlasSettings": {
     "swfMode": false,
@@ -73,20 +73,20 @@
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
       "name": "firstDeath",
       "prefix": "Death Intro",
-      "offsets": [-278, -126]
+      "offsets": [22, -23]
     },
     {
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
       "name": "deathLoop",
       "prefix": "Death Loop",
       "looped": true,
-      "offsets": [-278, -126]
+      "offsets": [22, -23]
     },
     {
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
       "name": "deathConfirm",
       "prefix": "Death Confirm",
-      "offsets": [-278, -126]
+      "offsets": [22, -23]
     }
   ]
 }
