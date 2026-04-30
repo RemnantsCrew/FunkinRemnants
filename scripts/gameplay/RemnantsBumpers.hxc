@@ -1,5 +1,7 @@
 package funkin.remnants.gameplay;
 
+import funkin.ui.story.Level;
+import funkin.data.story.level.LevelRegistry;
 import funkin.play.cutscene.VideoCutscene;
 
 class RemnantsBumpers extends Module
@@ -47,39 +49,14 @@ class RemnantsBumpers extends Module
   /**
    * Is the current song the first one being played on the week?
    */
-  public var isFirstOfWeek:Bool = null;
+  public var isFirstOfWeek(get, default):Bool = false;
 
-  // Song / Weeks lists.
-  public var tutorialList:Array<String> = ["tutorial"];
-  public var week1List:Array<String> = ["bopeebo", "fresh", "dadbattle"];
-  public var week2List:Array<String> = ["spookeez", "south"];
-  public var week2ListScary:Array<String> = ["monster"];
-  public var week3List:Array<String> = ["pico", "philly-nice", "blammed"];
-  public var week4List:Array<String> = ["satin-panties", "high", "milf"];
-  public var week5List:Array<String> = ["cocoa", "eggnog"];
-  public var week5ListScary:Array<String> = ["winter-horrorland"];
-  public var week6List:Array<String> = ["senpai", "roses"];
-  public var week6ListScary:Array<String> = ["thorns"];
-  public var week7List:Array<String> = ["ugh", "guns", "stress"];
-  public var weekend1List:Array<String> = ["darnell", "lit-up", "2hot", "blazin"];
-
-  // I could put all of the songs in a single array but that would cause the bumpers to play twice when re-entering the same song.
-  public var grievingList:Array<String> = ["grieving-remnants"];
-
-  public var weeks:Map<String, Array<String>> = [
-    "tutorial" => tutorialList,
-    "week1" => week1List,
-    "week2" => week2List,
-    "week3" => week3List,
-    "week4" => week4List,
-    "week5" => week5List,
-    "week6" => week6List,
-    "week7" => week7List,
-    "weekend1" => weekend1List,
-    "week2-scary" => week2ListScary,
-    "week5-scary" => week5ListScary,
-    "week6-scary" => week6ListScary,
-    "grieving" => grievingList
+  // For some songs, we change the level's name just so they have independent bumpers!
+  public var specialCases:Map<String, Array<String>> = [
+    "monster" => "week2-scary",
+    "winter-horrorland" => "week5-scary",
+    "thorns" => "week6-scary",
+    "grieving-remnants" => "grieving",
   ];
 
   // Make fade from black and countdown start at the same time for these weeks.
@@ -101,7 +78,6 @@ class RemnantsBumpers extends Module
       return;
     }
 
-    trace("Attempting to play the bumper...");
     if (setupBumper())
     {
       trace("setupBumper() returned 'true', stopping the countdown...");
@@ -111,58 +87,59 @@ class RemnantsBumpers extends Module
   }
 
   /**
-   * Sets up the bumper and plays it ONLY if the conditions allows it.
-   * Condition 1: The song must be the first one the user plays of the current week.
-   * Condition 2: The current week has changed.
-   * Condition 3: There's a bumper to play.
-   * If any of those checks fail, the bumper will not play.
+   * Prepares the bumper and plays it ONLY if the next conditions allows it.
+   * 
+   * ``Condition 1:`` The song must be the first one the user plays of the current week.
+   * ``Condition 2:`` The current week has changed.
+   * ``Condition 3:`` The bumper video file exist in ``videos/videos/``.
+   * 
+   * If any of those checks fail, the function will get skipped.
    * Really proud of this - Honton129
    */
   public function setupBumper():Bool
   {
-    var variation = PlayState.instance.currentVariation;
+    trace("Attempting to play the bumper...");
+
+    var curVariation = PlayState.instance.currentVariation;
     var songLowercase = PlayState.instance.currentSong.id.toLowerCase();
 
-    currentWeek = getWeek(songLowercase, variation);
-    lastWeek = getWeek(lastSong, lastVariation);
+    currentWeek = getLevel(songLowercase, curVariation);
+    lastWeek = getLevel(lastSong, lastVariation);
+    shouldReset();
 
-    trace("The current week is " + currentWeek);
-    hasChangedVariant();
-    hasChangedWeek();
-
-    setIsFirstOfWeek();
     isPlaying = false;
 
-    // Prevent the bumper from playing if there's no video.
-    if (getWeek(songLowercase) == null) return false;
+    if (!RemnantsOptions.getBumperOption() || currentWeek == null || !Assets.exists(Paths.videos(currentWeek)))
+    {
+      trace('One or more conditions are present, skipping video!');
+      playedBumper = true;
+    }
 
-    // Prevent the bumper from playing if the option is set to off.
-    if (!RemnantsOptions.getBumperOption()) return false;
+    lastVariation = curVariation;
+    lastSong = songLowercase;
 
+    if (playedBumper) trace('The bumper was already played!');
     if (isFirstOfWeek && !playedBumper)
     {
       isPlaying = true;
       disableUpdateNext = false;
       playedBumper = true;
-      trace("Playing the bumper '" + currentWeek + "'");
+
+      trace('Playing the bumper "$currentWeek"');
 
       VideoCutscene.play(Paths.videos(currentWeek));
       if (skipTransitionWeeks.contains(currentWeek))
       {
-        VideoCutscene.vid.bitmap.onEncounteredError.add(cutsceneFinishVideo);    
-        VideoCutscene.vid.bitmap.onEndReached.add(cutsceneFinishVideo);  
+        VideoCutscene.vid.bitmap.onEncounteredError.add(cutsceneFinishVideo);
+        VideoCutscene.vid.bitmap.onEndReached.add(cutsceneFinishVideo);
       }
       VideoCutscene.onVideoEnded.add(() -> {
         isPlaying = false;
       });
 
-      lastVariation = variation;
-      lastSong = songLowercase;
       return true;
     }
 
-    lastVariation = variation;
-    lastSong = songLowercase;
     return false;
   }
 
@@ -173,14 +150,14 @@ class RemnantsBumpers extends Module
 
     var cutsceneType:CutsceneType = VideoCutscene.cutsceneType;
 
-    FlxTween.tween(VideoCutscene.blackScreen, {alpha: 0}, 0.5, {
-      ease: FlxEase.quadInOut,
-      onComplete: function(twn:FlxTween)
+    FlxTween.tween(VideoCutscene.blackScreen, {alpha: 0}, 0.5,
       {
-        PlayState.instance.remove(VideoCutscene.blackScreen);
-        VideoCutscene.blackScreen = null;
-      }
-    });
+        ease: FlxEase.quadInOut,
+        onComplete: function(twn:FlxTween) {
+          PlayState.instance.remove(VideoCutscene.blackScreen);
+          VideoCutscene.blackScreen = null;
+        }
+      });
     VideoCutscene.onVideoEnded.dispatch();
     VideoCutscene.onCutsceneFinish(cutsceneType);
   }
@@ -190,72 +167,85 @@ class RemnantsBumpers extends Module
     if (!isPlaying || !skipTransitionWeeks.contains(currentWeek) || VideoCutscene.vid != null) return;
     cutsceneFinishVideo();
   }
+
   /**
    * Checks and sets if ??isFirstOfWeek?? is the first song being played of the week.
    */
-  public function setIsFirstOfWeek()
+  function get_isFirstOfWeek():Bool
   {
     if (currentWeek != null)
     {
       isFirstOfWeek = (currentWeek != lastWeek);
     }
+
+    return isFirstOfWeek;
   }
 
   /**
-   * Checks if ??currentWeek?? has changed.
-   * If it's false, it resets the bumper state.
+   * Checks if ??currentWeek?? or ??currentVariant?? has changed.
+   * If any of the mentioned variables has changed since the last bumper, we reset the bumper state.
    */
-  public function hasChangedWeek()
+  public function shouldReset():Void
   {
     if (currentWeek != null)
     {
       if (currentWeek != lastWeek)
       {
-        trace("Week has changed, reseting bumper state...");
+        trace("The level has changed, resetting bumper state...");
         playedBumper = false;
+        return;
       }
     }
-  }
 
-  /**
-   * Checks if ??currentVariant?? has changed.
-   * If it's false, it resets the bumper state.
-   */
-  public function hasChangedVariant()
-  {
     if (PlayState.instance.currentVariation != null)
     {
       if (PlayState.instance.currentVariation != lastVariation)
       {
-        trace("Variation has changed, reseting bumper state...");
+        trace("The variation has changed, resetting bumper state...");
         playedBumper = false;
+        return;
       }
     }
   }
 
   /**
-   * Get's the current week's name looking for ??song?? on the weeks map.
-   * If it fails, it returns null.
+   * Function to get the current level ID by looking for ??song?? in all the loaded levels in the registry.
+   * If it fails to find a valid match, it returns null.
    * This is also used for get the bumper video path.
    */
-  function getWeek(song:String, ?variation:Null<String>):String
+  function getLevel(song:String, ?variation:Null<String>):String
   {
     if (song == null || song == '') return null;
-    for (weekName in weeks.keys())
+
+    for (levelId in LevelRegistry.instance.listEntryIds())
     {
-      var songs = weeks[weekName];
+      var level:Null<Level> = LevelRegistry.instance.fetchEntry(levelId);
+
+      if (level == null)
+      {
+        trace('Could not find level with id (${levelId})');
+        continue;
+      }
 
       var parsedVariation:String = '';
-      if (variation != null && variation != 'remnants' && variation != 'default')
+      var songsList:Array<String> = level.getSongs();
+
+      if (variation != null && variation != 'remnants' && variation != 'default') parsedVariation = '-$variation';
+
+      if (specialCases.contains(song))
       {
-        parsedVariation = '-' + variation;
+        trace('The song "$song" is a special case, using special name instead...');
+        return '${specialCases[song]}$parsedVariation';
       }
 
-      if (songs.contains(song))
+      if (songsList.contains(song))
       {
-        return weekName + parsedVariation;
+        trace('Level $levelId has a match with $song!');
+        return '$levelId$parsedVariation';
       }
     }
+
+    trace(FlxG.random.bool(5) ? 'Hell na yo ass is tweakin jigsaw' : 'No match found!');
     return null;
   }
 
