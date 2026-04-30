@@ -82,6 +82,9 @@ class RemnantsBumpers extends Module
     "grieving" => grievingList
   ];
 
+  // Make fade from black and countdown start at the same time for these weeks.
+  public var skipTransitionWeeks:Array<String> = ['week5-scary', 'week7'];
+
   public function new()
   {
     super('remnantsBumpers', -1000, {state: PlayState});
@@ -144,6 +147,11 @@ class RemnantsBumpers extends Module
       trace("Playing the bumper '" + currentWeek + "'");
 
       VideoCutscene.play(Paths.videos(currentWeek));
+      if (skipTransitionWeeks.contains(currentWeek))
+      {
+        VideoCutscene.vid.bitmap.onEncounteredError.add(cutsceneFinishVideo);    
+        VideoCutscene.vid.bitmap.onEndReached.add(cutsceneFinishVideo);  
+      }
       VideoCutscene.onVideoEnded.add(() -> {
         isPlaying = false;
       });
@@ -158,6 +166,30 @@ class RemnantsBumpers extends Module
     return false;
   }
 
+  public function cutsceneFinishVideo():Void
+  {
+    FlxTween.cancelTweensOf(FlxG.camera, ["zoom"]);
+    FlxTween.cancelTweensOf(VideoCutscene.blackScreen, ["alpha"]);
+
+    var cutsceneType:CutsceneType = VideoCutscene.cutsceneType;
+
+    FlxTween.tween(VideoCutscene.blackScreen, {alpha: 0}, 0.5, {
+      ease: FlxEase.quadInOut,
+      onComplete: function(twn:FlxTween)
+      {
+        PlayState.instance.remove(VideoCutscene.blackScreen);
+        VideoCutscene.blackScreen = null;
+      }
+    });
+    VideoCutscene.onVideoEnded.dispatch();
+    VideoCutscene.onCutsceneFinish(cutsceneType);
+  }
+
+  public function onResume(event:ScriptEvent):Void
+  {
+    if (!isPlaying || !skipTransitionWeeks.contains(currentWeek) || VideoCutscene.vid != null) return;
+    cutsceneFinishVideo();
+  }
   /**
    * Checks and sets if ??isFirstOfWeek?? is the first song being played of the week.
    */
