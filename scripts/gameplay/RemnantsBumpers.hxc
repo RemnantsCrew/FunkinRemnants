@@ -72,12 +72,6 @@ class RemnantsBumpers extends Module
     super.onCountdownStart(event);
     if (disableAutoPlay) return;
 
-    if (!RemnantsContentUtil.isRemnantsSong())
-    {
-      trace("The current song is not a 'Remnants Mix', skipping the bumper...");
-      return;
-    }
-
     if (setupBumper())
     {
       trace("setupBumper() returned 'true', stopping the countdown...");
@@ -91,7 +85,7 @@ class RemnantsBumpers extends Module
    * 
    * ``Condition 1:`` The song must be the first one the user plays of the current week.
    * ``Condition 2:`` The current week has changed.
-   * ``Condition 3:`` The bumper video file exist in ``videos/videos/``.
+   * ``Condition 3:`` The bumper video file exist in ``videos/videos/bumpers/``.
    * 
    * If any of those checks fail, the function will get skipped.
    * Really proud of this - Honton129
@@ -107,10 +101,15 @@ class RemnantsBumpers extends Module
     lastWeek = getLevel(lastSong, lastVariation);
     shouldReset();
 
+    trace('The current week is: $currentWeek');
     isPlaying = false;
 
-    if (!RemnantsOptions.getBumperOption() || currentWeek == null || !Assets.exists(Paths.videos(currentWeek)))
+    if (!RemnantsOptions.getBumperOption() || currentWeek == null || !Assets.exists(Paths.videos('bumpers/$currentWeek')))
     {
+      trace('Bumpers disabled: ${!RemnantsOptions.getBumperOption()}');
+      trace('Video exists: ${Assets.exists(Paths.videos('bumpers/$currentWeek'))}');
+      trace('Current week is null: ${currentWeek == null}');
+
       trace('One or more conditions are present, skipping video!');
       playedBumper = true;
     }
@@ -127,12 +126,13 @@ class RemnantsBumpers extends Module
 
       trace('Playing the bumper "$currentWeek"');
 
-      VideoCutscene.play(Paths.videos(currentWeek));
+      VideoCutscene.play(Paths.videos('bumpers/$currentWeek'));
       if (skipTransitionWeeks.contains(currentWeek))
       {
         VideoCutscene.vid.bitmap.onEncounteredError.add(cutsceneFinishVideo);
         VideoCutscene.vid.bitmap.onEndReached.add(cutsceneFinishVideo);
       }
+
       VideoCutscene.onVideoEnded.add(() -> {
         isPlaying = false;
       });
