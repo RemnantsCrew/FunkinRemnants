@@ -1,19 +1,27 @@
 MOD_ROOT="../.."
 
-rm -fr discord-icons
-mkdir discord-icons
+rm -fr discord
+mkdir -p discord/icons discord/albums
 
-if command -v ffmpeg > /dev/null 2>&1
-then
-	find "$MOD_ROOT/images/icons" -name "*.png" -type f | while read -r file; do
-    echo "$file"
-    ffmpeg -hide_banner -loglevel error -y -i "$file" -pix_fmt rgba -vf "crop=in_h:in_h:0:0, scale=512:512:flags=neighbor" "discord-icons/$(basename -- "$file")"
-	done
+find "$MOD_ROOT/images/icons" -name "*.png" -type f | while read -r file; do
+	filename=$(basename "$file")
+  echo "$filename"
 
-	if command -v ffmpeg > /dev/null 2>&1
-	then
-		oxipng -o 6 --strip safe --alpha -r discord-icons
+	prefix="icon-"
+	better_filename="${filename#$prefix}"
+
+  ffmpeg -hide_banner -loglevel error -y -i "$file" -pix_fmt rgba -vf "crop=in_h:in_h:0:0, scale=512:512:flags=neighbor" "discord/icons/$better_filename"
+done
+
+find "$MOD_ROOT/images/freeplay/albumRoll" -name "*.png" -type f | while read -r file; do
+	if [ -f "${file%.png}.xml" ]; then
+		continue
 	fi
-else
-	echo "FFMPEG is not installed! Cannot create discord icons."
-fi
+
+	filename=$(basename "$file")
+  echo "$filename"
+
+  ffmpeg -hide_banner -loglevel error -y -i "$file" -pix_fmt rgba -vf "scale=512:512:flags=neighbor" "discord/albums/$filename"
+done
+
+oxipng -o 6 --strip safe --alpha -r discord
