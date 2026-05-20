@@ -13,7 +13,7 @@ class GirlfriendRemnantsCharacter extends GirlfriendCharacter
 
     if (!this.debug)
     { // Gotta do it like this because the editor freaks out.
-      if (PlayState.instance.currentSong.id == null) return;
+      if (PlayState.instance?.currentSong?.id == null) return;
       if (['south'].contains(PlayState.instance.currentSong.id)) this.idleSuffix = '-spooky';
       else
         this.idleSuffix = '';
