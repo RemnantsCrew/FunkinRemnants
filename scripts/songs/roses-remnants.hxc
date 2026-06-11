@@ -11,6 +11,7 @@ class RosesRemnantsMixSong extends Song
   var sequence:SongSequence;
 
   var colorTweens:Array<FlxTween> = [];
+  var colorTweenReal:Bool = false;
 
   public function new()
   {
@@ -87,9 +88,12 @@ class RosesRemnantsMixSong extends Song
     PlayState.instance.startConversation(targetDialogue);
   }
 
-  /**
-   * Replay the cutscene after leaving the song.
-   */
+  public override function onDialogueEnd()
+  {
+    // We may need to wait for the outro to play.
+    Countdown.performCountdown();
+  }
+
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
@@ -147,7 +151,7 @@ class RosesRemnantsMixSong extends Song
 
         colorTweens.push(FlxTween.num(0, 1, 0.5,
           {
-            ease: FlxEase.linear,
+            ease: FlxEase.expoIn,
             onComplete: (t:FlxTween) -> {
               colorTweens.remove(t);
             }
@@ -185,12 +189,6 @@ class RosesRemnantsMixSong extends Song
       PlayState.instance.iconP1.colorTransform.__identity();
       PlayState.instance.iconP2.colorTransform.__identity();
     }
-  }
-
-  public override function onDialogueEnd()
-  {
-    // We may need to wait for the outro to play.
-    Countdown.performCountdown();
   }
 
   function onPause(event:ScriptEvent):Void
@@ -317,10 +315,12 @@ class RosesRemnantsMixSong extends Song
               char.colorTransform.blueOffset
             ];
 
+            colorTweenReal = true;
             colorTweens.push(FlxTween.num(0, 1, 7.05,
               {
                 onComplete: (t:FlxTween) -> {
                   colorTweens.remove(t);
+                  colorTweenReal = false;
                 }
               }, (value:Float) -> {
                 char.colorTransform.redOffset = originalValues[0] * (1 - value);
