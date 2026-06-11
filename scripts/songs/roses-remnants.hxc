@@ -7,7 +7,6 @@ class RosesRemnantsMixSong extends Song
   var bgSprite:FunkinSprite;
   var hasPlayedCutscene:Bool;
 
-  var outro:Bool = false;
   var color:Bool = false;
   var sequence:SongSequence;
 
@@ -96,7 +95,6 @@ class RosesRemnantsMixSong extends Song
     super.onCreate(event);
 
     hasPlayedCutscene = false;
-    outro = false;
     color = false;
 
     PlayState.instance.camHUD.alpha = 0;
@@ -165,19 +163,34 @@ class RosesRemnantsMixSong extends Song
       }
     }
 
-    if (PlayState.instance.disableKeys) PlayState.instance.disableKeys = false;
-  }
-
-  public override function onDialogueEnd()
-  {
-    // We may need to wait for the outro to play.
-    Countdown.performCountdown();
+    if (PlayState.instance.disableKeys)
+    {
+      PlayState.instance.camGame.fade(0xFF000000, 0, true, null, false);
+      PlayState.instance.disableKeys = false;
+    }
   }
 
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
     sequence?.destroy();
+
+    while (colorTweens.length > 0)
+    {
+      colorTweens.shift()?.cancel();
+
+      PlayState.instance.currentStage.getBoyfriend().colorTransform.__identity();
+      PlayState.instance.currentStage.getGirlfriend().colorTransform.__identity();
+      PlayState.instance.currentStage.getDad().colorTransform.__identity();
+      PlayState.instance.iconP1.colorTransform.__identity();
+      PlayState.instance.iconP2.colorTransform.__identity();
+    }
+  }
+
+  public override function onDialogueEnd()
+  {
+    // We may need to wait for the outro to play.
+    Countdown.performCountdown();
   }
 
   function onPause(event:ScriptEvent):Void
@@ -279,8 +292,8 @@ class RosesRemnantsMixSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(162) / 1000,
         callback: () -> {
-          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('skyEvil'), {alpha: 1}, 7.05, {ease: FlxEase.backIn});
-          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('sky'), {alpha: 0}, 7.05, {ease: FlxEase.backIn});
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('skyEvil'), {alpha: 1}, 7.05);
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('sky'), {alpha: 0}, 7.05);
 
           FlxTween.tween(PlayState.instance.currentStage.getNamedProp('black'), {alpha: 0}, 7.05);
           FlxTween.tween(PlayState.instance.currentStage.getNamedProp('freaks'), {alpha: 1}, 7.05,
@@ -352,14 +365,7 @@ class RosesRemnantsMixSong extends Song
           }
         }
       },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(278) / 1000,
-        callback: () -> {
-          outro = true;
-        }
-      },
-
+  
       {
         time: Conductor.instance.getBeatTimeInMs(282) / 1000,
         callback: () -> {
