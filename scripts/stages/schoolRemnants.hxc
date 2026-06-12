@@ -11,13 +11,13 @@ class SchoolRemnantsStage extends Stage
   {
     super.buildStage();
 
-    if (PlayState.instance.currentSong.id.toLowerCase() == "roses")
+    if (PlayState.instance?.currentSong?.id?.toLowerCase() == "roses")
     {
-      getNamedProp('freaks').idleSuffix = '-scared';
+      getNamedProp('freaks')?.idleSuffix = '-scared';
     }
     else
     {
-      getNamedProp('freaks').idleSuffix = '';
+      getNamedProp('freaks')?.idleSuffix = '';
     }
   }
 }

@@ -22,8 +22,8 @@ class SpookyMansionRemnantsStage extends Stage
 
     halloweenWhite = new FunkinSprite(-20, -20);
     halloweenWhite.makeSolidColor(Std.int(FlxG.width * 1.5), Std.int(FlxG.height * 1.5), 0xFFFFFFFF);
-    halloweenWhite.cameras = [PlayState.instance.camCutscene];
-    PlayState.instance.add(halloweenWhite);
+    halloweenWhite.cameras = [PlayState.instance?.camCutscene];
+    PlayState.instance?.add(halloweenWhite);
     halloweenWhite.alpha = 0.0001;
     halloweenWhite.blend = 0;
   }

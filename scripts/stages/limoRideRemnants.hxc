@@ -155,15 +155,15 @@ class LimoRideRemnantsStage extends Stage
     for (i in 1...(POLE_QUANTITY + 1))
     {
       var lamp = getNamedProp('bgLight' + i);
-      lamp.active = true;
-      lamp.velocity.x = 3000;
-      if (lamp.x > 2000)
+      lamp?.active = true;
+      lamp?.velocity?.x = 3000;
+      if (lamp?.x > 2000)
       {
         lamp.x = -1000;
       }
 
       var pole = getNamedProp('bgPole' + i);
-      pole.x = lamp.x + 190;
+      pole?.x = lamp.x + 190;
     }
 
     if (!RemnantsOptions.getPerformanceOption())

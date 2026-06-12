@@ -191,9 +191,9 @@ class RemnantsOverlayHandler extends Module
         }
       }, setOverlayAlpha);
 
-    overlay.color = white ? 0xFFFFFFFF : 0xFF000000;
+    overlay?.color = white ? 0xFFFFFFFF : 0xFF000000;
     trace(hud);
-    overlay.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
+    overlay?.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
   }
 
   var colorMatrixFilter:ColorMatrixFilter;

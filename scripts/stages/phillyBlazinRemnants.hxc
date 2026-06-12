@@ -64,16 +64,16 @@ class PhillyBlazinRemnantsStage extends Stage
     super.buildStage();
 
     var skyAdditive = getNamedProp('skyAdditive');
-    skyAdditive.visible = false;
+    skyAdditive?.visible = false;
 
     var foregroundMultiply = getNamedProp('foregroundMultiply');
-    foregroundMultiply.visible = false;
+    foregroundMultiply?.visible = false;
 
     var lightning = getNamedProp('lightning');
-    lightning.visible = false;
+    lightning?.visible = false;
 
     var additionalLighten = getNamedProp('additionalLighten');
-    additionalLighten.visible = false;
+    additionalLighten?.visible = false;
 
     if (!RemnantsOptions.getPerformanceOption())
     {
@@ -283,11 +283,11 @@ class PhillyBlazinRemnantsStage extends Stage
     // yTarget += 200;
     xTarget += 50;
     yTarget -= 90;
-    PlayState.instance.cameraFollowPoint.setPosition(xTarget, yTarget);
-    PlayState.instance.resetCamera();
+    PlayState.instance?.cameraFollowPoint?.setPosition(xTarget, yTarget);
+    PlayState.instance?.resetCamera();
 
-    PlayState.instance.comboPopUps.offsets = [480, -50];
+    PlayState.instance?.comboPopUps?.offsets = [480, -50];
 
-    PlayState.instance.camGame.fade(0xFF000000, 1.5, true, null, true);
+    PlayState.instance?.camGame?.fade(0xFF000000, 1.5, true, null, true);
   }
 }

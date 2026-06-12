@@ -26,6 +26,6 @@ class SpiritRemnantsCharacter extends PackerCharacter
   {
     if (this.debug) return;
 
-    currentStage.add(sprite);
+    currentStage?.add(sprite);
   }
 }
