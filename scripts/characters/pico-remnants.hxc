@@ -1,0 +1,66 @@
+package funkin.remnants.characters;
+
+class PicoRemnantsCharacter extends MultiAnimateAtlasCharacter
+{
+  function new()
+  {
+    super('pico-remnants');
+  }
+
+  var flippedParts:FlxAnimateFrames;
+
+  override public function onCreate():Void
+  {
+    super.onCreate();
+
+    flippedParts = Paths.getAnimateAtlas("characters/pico-remnants/playable", "shared", _data.atlasSettings);
+    flippedParts.parent.destroyOnNoUse = false;
+    this.library.addAtlas(flippedParts);
+
+    flipCensor();
+  }
+
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    if (event.eventCanceled) return;
+    if (!event.note.noteData.getMustHitNote() && characterType == CharacterType.DAD)
+    {
+      switch (event.note.kind)
+      {
+        case "censor":
+          holdTimer = 0;
+          this.playSingAnimation(event.note.noteData.getDirection(), false, 'censor');
+
+        default:
+          super.onNoteHit(event);
+      }
+    }
+  }
+
+  function flipCensor():Void
+  {
+    var symbolInstance:SymbolItem = this.library.getSymbol("Parts/mouth censor");
+    if (symbolInstance == null) return;
+
+    var timeline:Timeline = symbolInstance.timeline;
+
+    var bounds:FlxRect = null;
+
+    for (layer in timeline.layers)
+    {
+      if (!layer.visible || layer.frames == null) continue;
+
+      for (frame in layer.frames)
+      {
+        for (element in frame.elements)
+        {
+          bounds = element.getBounds(0, bounds);
+          element.matrix.scale(-1, 1);
+          element.matrix.translate(bounds.width, 0);
+        }
+      }
+    }
+
+    if (bounds != null) bounds.put();
+  }
+}

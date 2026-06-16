@@ -64,13 +64,13 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
   override function createDeathSprites()
   {
     deathSpriteNene = FunkinSprite.createSparrow(0, 0, "characters/neneKnife-remnants");
-    var gf = PlayState.instance?.currentStage.getGirlfriend();
-    deathSpriteNene.x = gf.originalPosition.x + 120;
-    deathSpriteNene.y = gf.originalPosition.y;
+    var gf = PlayState.instance?.currentStage?.getGirlfriend();
+    deathSpriteNene.x = gf?.originalPosition?.x + 120;
+    deathSpriteNene.y = gf?.originalPosition?.y;
     deathSpriteNene.zIndex = this.zIndex - 5;
     deathSpriteNene.animation.addByPrefix('throw', "knife toss0", 24, false);
     deathSpriteNene.visible = true;
-    deathSpriteNene.animation.onFinish.add(function(name:String) {
+    deathSpriteNene.animation.onFinish?.add(function(name:String) {
       deathSpriteNene.visible = false;
     });
   }
@@ -91,7 +91,7 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
       // Standard death animation.
       createDeathSprites();
 
-      GameOverSubState.instance.add(deathSpriteNene);
+      GameOverSubState.instance?.add(deathSpriteNene);
       deathSpriteNene.animation.play("throw");
     }
 
@@ -152,7 +152,7 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
     }
 
     // Suffixed death sound will already play.
-    GameOverSubState.instance.targetCameraZoom = 0.8;
+    GameOverSubState.instance?.targetCameraZoom = 0.8;
 
     HapticUtil.vibrate(0, 0.5);
 
@@ -181,7 +181,7 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
   {
     if (name == "firstDeath" && frameNumber == 36 - 1)
     {
-      GameOverSubState.instance.startDeathMusic(1.0, false);
+      GameOverSubState.instance?.startDeathMusic(1.0, false);
       // force the deathloop to play in here, since we are starting the music early it
       // doesn't check this in gameover substate !
       // also no animation suffix 🤔
@@ -262,14 +262,8 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
    */
   override function playFireGunAnim():Void
   {
-    if (FlxG.random.bool(50))
-    {
-      this.playAnimation('shoot', true, true);
-    }
-    else
-    {
-      this.playAnimation('fire', true, true);
-    }
+    if (FlxG.random.bool(50)) this.playAnimation('shoot1', true, true);
+    else this.playAnimation('shoot2', true, true);
 
     FunkinSound.playOnce(Paths.soundRandom('shot', 1, 4));
   }
