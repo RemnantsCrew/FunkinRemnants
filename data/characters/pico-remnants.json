@@ -35,77 +35,77 @@
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Right Censor",
       "name": "singLEFT-censor",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Right Censor Hold",
       "name": "singLEFT-censor-hold",
       "looped": true,
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Down Censor",
       "name": "singDOWN-censor",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Down Censor Hold",
       "name": "singDOWN-censor-hold",
       "looped": true,
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Up Censor",
       "name": "singUP-censor",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Up Censor Hold",
       "name": "singUP-censor-hold",
       "looped": true,
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Left Censor",
       "name": "singRIGHT-censor",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Right Perfect",
       "name": "singLEFT-perfect",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Left Censor Hold",
       "name": "singRIGHT-censor-hold",
       "looped": true,
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Down Perfect",
       "name": "singDOWN-perfect",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Up Perfect",
       "name": "singUP-perfect",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     },
     {
       "assetPath": "shared:characters/pico-remnants/playable",
       "prefix": "Left Perfect",
       "name": "singRIGHT-perfect",
-      "offsets": [68, 201]
+      "offsets": [180, 200]
     }
   ]
 }
