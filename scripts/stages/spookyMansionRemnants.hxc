@@ -10,6 +10,7 @@ class SpookyMansionRemnantsStage extends Stage
   var lightningStrikeBeat:Int = 0;
   var lightningStrikeOffset:Int = 8;
   var halloweenWhite:FunkinSprite;
+  var vignette:FunkinSprite;
 
   // These are similar but are used for different things.
   var wentDark:Bool = false;
@@ -20,12 +21,20 @@ class SpookyMansionRemnantsStage extends Stage
     super.onCreate(event);
     stopThunders = false;
 
+    vignette = FunkinSprite.create(0, 0, 'remnants/vignette', 'week2');
+    vignette.cameras = [PlayState.instance?.camCutscene];
+    PlayState.instance?.add(vignette);
+    vignette.alpha = 0.0001;
+    vignette.screenCenter();
+
     halloweenWhite = new FunkinSprite(-20, -20);
     halloweenWhite.makeSolidColor(Std.int(FlxG.width * 1.5), Std.int(FlxG.height * 1.5), 0xFFFFFFFF);
     halloweenWhite.cameras = [PlayState.instance?.camCutscene];
     PlayState.instance?.add(halloweenWhite);
     halloweenWhite.alpha = 0.0001;
     halloweenWhite.blend = 0;
+
+    PlayState.instance?.refresh();
   }
 
   override function buildStage()
@@ -165,6 +174,7 @@ class SpookyMansionRemnantsStage extends Stage
     for (i in ['sky', 'mansionThunder', 'paintingThunder', 'coatThunder', 'cabinetThunder'])
       FlxTweenUtil.pauseTweensOf(getNamedProp(i));
     FlxTweenUtil.pauseTweensOf(halloweenWhite);
+    FlxTweenUtil.pauseTweensOf(vignette);
   }
 
   function onResume()
@@ -174,6 +184,7 @@ class SpookyMansionRemnantsStage extends Stage
     for (i in ['sky', 'mansionThunder', 'paintingThunder', 'coatThunder', 'cabinetThunder'])
       FlxTweenUtil.resumeTweensOf(getNamedProp(i));
     FlxTweenUtil.resumeTweensOf(halloweenWhite);
+    FlxTweenUtil.resumeTweensOf(vignette);
   }
 
   function onBeatHit(event:SongTimeScriptEvent)
@@ -248,6 +259,8 @@ class SpookyMansionRemnantsStage extends Stage
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
+
+    FlxTween.cancelTweensOf(vignette);
 
     // Properly reset lightning when restarting the song.
     lightningStrikeBeat = 0;
