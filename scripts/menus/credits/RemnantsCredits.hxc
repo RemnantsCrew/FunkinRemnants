@@ -89,9 +89,16 @@ class RemnantsCredits extends Module
 
       FlxG.state.add(vid);
 
+      remnantsCredits = new RemnantsCreditsGroup();
+      remnantsCredits.generateCredits();
+      FlxG.state.add(remnantsCredits);
+
+      specialThanks = new RemnantsCreditsGroup();
+      specialThanks.generateSpecialThanks();
+      FlxG.state.add(specialThanks);
+
       isPico = FlxG.random.bool(50);
-      final character:String = isPico ? 'pico' : 'bf';
-      playerData = PlayerRegistry.instance.fetchEntry(('$character-remnants')).getFreeplayDJData();
+      playerData = PlayerRegistry.instance.fetchEntry(('${isPico ? 'pico' : 'bf'}-remnants')).getFreeplayDJData();
       playerDJ = new FunkinSprite(0, 0, playerData.getAssetPath(), playerData.getAtlasSettings());
       FlxG.state.add(playerDJ);
 
@@ -104,14 +111,6 @@ class RemnantsCredits extends Module
       playerDJ.screenCenter();
       playerDJ.x += isPico ? 0 : 18;
       playerDJ.y += isPico ? 90 : 29;
-
-      remnantsCredits = new RemnantsCreditsGroup();
-      remnantsCredits.generateCredits();
-      FlxG.state.add(remnantsCredits);
-
-      specialThanks = new RemnantsCreditsGroup();
-      specialThanks.generateSpecialThanks();
-      FlxG.state.add(specialThanks);
 
       var filePath:String = Paths.videos(VIDEO_PATH);
       if (vid.load(filePath))
