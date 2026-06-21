@@ -28,6 +28,9 @@
       "transitionDelay": 0.45
     },
     "useAnimatePosition": true,
+    "atlasSettings": {
+      "useRenderTexture": true
+    },
     "animations": [
       {
         "name": "intro",

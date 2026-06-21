@@ -1,16 +1,33 @@
 package funkin.remnants.menus;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import funkin.util.tools.Int64Tools;
+import funkin.remnants.shaders.BloomShader;
+import funkin.data.freeplay.player.PlayerRegistry;
+import funkin.remnants.menus.props.RemnantsCreditsGroup;
 import funkin.ui.credits.CreditsState;
-import funkin.util.TouchUtil;
 import funkin.graphics.video.FunkinVideoSprite;
+import funkin.util.assets.FlxAnimationUtil;
+import funkin.util.TouchUtil;
+import funkin.util.Sequence;
 
 class RemnantsCredits extends Module
 {
   final VIDEO_PATH:String = 'remnants-credits';
 
+  var isPico:Bool;
+  var playerDJ:FunkinSprite;
+  var playerData:PlayerRegistry;
+  var sequence:Sequence;
+
+  var remnantsCredits:RemnantsCreditsGroup;
+  var specialThanks:RemnantsCreditsGroup;
+
   public var vid:FunkinVideoSprite;
   public var vidBG:FunkinSprite;
 
+  var specialHour:Bool = false;
   var playingVideo:Bool = false;
 
   public function new()
@@ -72,8 +89,71 @@ class RemnantsCredits extends Module
 
       FlxG.state.add(vid);
 
+      isPico = FlxG.random.bool(50);
+      final character:String = isPico ? 'pico' : 'bf';
+      playerData = PlayerRegistry.instance.fetchEntry(('$character-remnants')).getFreeplayDJData();
+      playerDJ = new FunkinSprite(0, 0, playerData.getAssetPath(), playerData.getAtlasSettings());
+      FlxG.state.add(playerDJ);
+
+      FlxAnimationUtil.addTextureAtlasAnimations(playerDJ, playerData.getAnimationsList());
+      playerDJ.shader = new BloomShader();
+      playerDJ.scale.set(0.7, 0.7);
+      playerDJ.visible = false;
+      playerDJ.updateHitbox();
+
+      playerDJ.screenCenter();
+      playerDJ.x += isPico ? 0 : 18;
+      playerDJ.y += isPico ? 90 : 29;
+
+      remnantsCredits = new RemnantsCreditsGroup();
+      remnantsCredits.generateCredits();
+      FlxG.state.add(remnantsCredits);
+
+      specialThanks = new RemnantsCreditsGroup();
+      specialThanks.generateSpecialThanks();
+      FlxG.state.add(specialThanks);
+
       var filePath:String = Paths.videos(VIDEO_PATH);
-      if (vid.load(filePath)) vid.play();
+      if (vid.load(filePath))
+      {
+        var sequenceData = [
+          {
+            time: 3650 / 1000,
+            callback: () -> {
+              playerDJ.visible = true;
+              playDJAnim('intro', false);
+              playerDJ.animation.onFinish.addOnce(() -> playDJAnim('idle', true));
+            }
+          },
+          {
+            time: 4950 / 1000,
+            callback: () -> {
+              remnantsCredits.scrolling = true;
+            }
+          },
+          {
+            time: 37500 / 1000,
+            callback: () -> {
+              specialHour = true;
+              remnantsCredits.scrolling = false;
+              specialThanks.scrolling = true;
+            }
+          },
+          {
+            time: 150500 / 1000,
+            callback: () -> {
+              playDJAnim('charSelect', false);
+              specialThanks.scrolling = false;
+              playerDJ.animation.onFinish.addOnce(() -> {
+                FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut});
+              });
+            }
+          }
+        ];
+
+        sequence = new Sequence(sequenceData);
+        vid.play();
+      }
     }
     else
     {
@@ -82,11 +162,30 @@ class RemnantsCredits extends Module
     }
   }
 
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    sequence?.destroy();
+  }
+
+  function playDJAnim(name:String, loop:Bool)
+  {
+    if (playerDJ == null) return;
+    final animPrefix = playerData?.getAnimationPrefix(name);
+    playerDJ.animation.play(animPrefix, true);
+    playerDJ.animation.curAnim.looped = loop;
+  }
+
   public function stopVideo():Void
   {
     vid.stop();
     playingVideo = false;
 
+    playerDJ?.destroy();
+    sequence?.destroy();
+    specialThanks?.destroy();
+    remnantsCredits?.destroy();
     FlxG.state.scrollPaused = false;
 
     FunkinSound.playMusic('freeplayRandom-remnants',
@@ -103,6 +202,35 @@ class RemnantsCredits extends Module
   {
     super.onUpdate(event);
 
+    if (specialThanks != null) // I only check for this one because that means the first one exists.
+    {
+      var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
+      #if mobile
+      if (TouchUtil.pressed && !TouchUtil.overlaps(state.backButton)) pressingEnter = true;
+      #end
+
+      if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) remnantsCredits.scrolling = specialThanks.scrolling = false;
+      else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT)
+      {
+        specialThanks.scrolling = specialHour ? true : false;
+        remnantsCredits.scrolling = !specialHour ? true : false;
+      }
+
+      if (remnantsCredits.scrolling)
+      {
+        if (pressingEnter) remnantsCredits.y -= remnantsCredits.fastSpeed * event.elapsed;
+        else
+          remnantsCredits.y -= remnantsCredits.baseSpeed * event.elapsed;
+      }
+
+      if (specialThanks.scrolling)
+      {
+        if (pressingEnter) specialThanks.y -= specialThanks.fastSpecialSpeed * event.elapsed;
+        else
+          specialThanks.y -= specialThanks.specialSpeed * event.elapsed;
+      }
+    }
+
     if (vid?.bitmap != null)
     {
       var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
@@ -113,9 +241,18 @@ class RemnantsCredits extends Module
       if (playingVideo)
       {
         vid.bitmap.rate = pressingEnter ? 2 : 1;
+        playerDJ?.animation?.curAnim?.timeScale = pressingEnter ? 2 : 1;
 
-        if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) vid.pause();
-        else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT) vid.resume();
+        if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT)
+        {
+          vid.pause();
+          playerDJ?.animation?.curAnim?.pause();
+        }
+        else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT)
+        {
+          vid.resume();
+          playerDJ?.animation?.curAnim?.resume();
+        }
       }
       else if (pressingEnter)
       {

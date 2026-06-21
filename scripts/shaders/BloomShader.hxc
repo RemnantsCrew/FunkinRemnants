@@ -1,0 +1,19 @@
+package funkin.remnants.shaders;
+
+import flixel.addons.display.FlxRuntimeShader;
+
+class BloomShader extends FlxRuntimeShader
+{
+  public function new(?intensity:Float = 0.5)
+  {
+    var fragText:String = Assets.getText(Paths.frag('bloom'));
+    super(fragText);
+
+    setIntensity(0.5);
+  }
+
+  public function setIntensity(value:Float):Float
+  {
+    this.setFloat('intensity', value);
+  }
+}
