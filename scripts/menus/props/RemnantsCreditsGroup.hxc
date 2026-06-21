@@ -43,6 +43,31 @@ class RemnantsCreditsGroup extends FunkinGroup
   final SHADER_INTENSITY:Float = 4.0;
 
   /**
+   * The size a header should have.
+   */
+  final HEADER_SIZE:Int = 25;
+
+  /**
+   * The size a credit name should have.
+   */
+  final NAME_SIZE:Int = 22;
+
+  /**
+   * The size a credit role should have.
+   */
+  final ROLE_SIZE:Int = 18;
+
+  /**
+   * The size a person's header should have.
+   */
+  final NAME_THANKS_SIZE:Int = 20;
+
+  /**
+   * The size a special thank should have.
+   */
+  final THANKS_SIZE:Int = 16;
+
+  /**
    * This group's credits raw json data.
    */
   var creditsJson:Dynamic = {};
@@ -109,7 +134,7 @@ class RemnantsCreditsGroup extends FunkinGroup
     }
 
     var header = new FlxText(0, 0, 0, title);
-    header.setFormat(Paths.font('creditsFont.ttf'), 25, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    header.setFormat(Paths.font('creditsFont.ttf'), HEADER_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
     header.shader = new BloomShader(SHADER_INTENSITY);
     headersGroup.add(header);
     header.borderSize = 4;
@@ -135,13 +160,13 @@ class RemnantsCreditsGroup extends FunkinGroup
     creditGroup.localY = targetY;
 
     var name = new FlxText(0, 0, 0, name);
-    name.setFormat(Paths.font('creditsFont.ttf'), 25, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    name.setFormat(Paths.font('creditsFont.ttf'), NAME_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
     name.shader = new BloomShader(SHADER_INTENSITY);
     creditGroup.add(name);
     name.borderSize = 4;
 
     var role = new FlxText(0, 0, 0, ' - $role');
-    role.setFormat(Paths.font('creditsFont.ttf'), 20, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    role.setFormat(Paths.font('creditsFont.ttf'), ROLE_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
     role.shader = new BloomShader(SHADER_INTENSITY);
     creditGroup.add(role);
     role.borderSize = 3;
@@ -165,8 +190,8 @@ class RemnantsCreditsGroup extends FunkinGroup
 
     if (id % 2 == 0)
     {
-      final prevChild = this.children[trueID - 1];
-      creditGroup.localX = this.children[trueID].localX + getMaxWidth();
+      final prevChild = this.children[trueID - 1]; // Actually, this is 2 childs before.
+      creditGroup.localX = this.children[trueID].localX + getMaxWidth() + 5;
 
       if (prevChild != null && id != 2) creditGroup.localY = prevChild.localY + prevChild.height + 35;
       else
@@ -174,14 +199,14 @@ class RemnantsCreditsGroup extends FunkinGroup
     }
     else
     {
-      final prevChild = this.children[trueID - 1];
+      final prevChild = this.children[trueID - 1]; // Actually, this is 2 childs before.
       if (prevChild != null) creditGroup.localY = prevChild.localY + prevChild.height + 35;
       else
         creditGroup.localY = targetY;
     }
 
     var name = new FlxText(0, 0, 0, '$name would like to Thank:');
-    name.setFormat(Paths.font('creditsFont.ttf'), 20, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    name.setFormat(Paths.font('creditsFont.ttf'), NAME_THANKS_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
     name.shader = new BloomShader(SHADER_INTENSITY);
     creditGroup.add(name);
     name.borderSize = 4;
@@ -199,7 +224,7 @@ class RemnantsCreditsGroup extends FunkinGroup
     }
 
     var specialThanks = new FlxText(0, 0, 0, daList);
-    specialThanks.setFormat(Paths.font('creditsFont.ttf'), 18, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    specialThanks.setFormat(Paths.font('creditsFont.ttf'), THANKS_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
     specialThanks.shader = new BloomShader(SHADER_INTENSITY);
     creditGroup.add(specialThanks);
     specialThanks.borderSize = 4;
@@ -210,7 +235,7 @@ class RemnantsCreditsGroup extends FunkinGroup
   }
 
   /**
-   * Returns the widest special thanks header with a little plus of 195 pixels.
+   * Returns the widest special thanks header with a little plus of 200 pixels.
    */
   function getMaxWidth():Void
   {
@@ -228,6 +253,6 @@ class RemnantsCreditsGroup extends FunkinGroup
       if (num > maxWidth) maxWidth = num;
     }
 
-    return maxWidth + 215;
+    return maxWidth + 200;
   }
 }
