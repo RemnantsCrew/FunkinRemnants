@@ -1,14 +1,16 @@
 package funkin.remnants.menus;
 
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import funkin.util.tools.Int64Tools;
 import funkin.remnants.shaders.BloomShader;
 import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.remnants.menus.props.RemnantsCreditsGroup;
-import funkin.ui.credits.CreditsState;
 import funkin.graphics.video.FunkinVideoSprite;
 import funkin.util.assets.FlxAnimationUtil;
+import funkin.ui.credits.CreditsState;
+import flixel.text.FlxTextBorderStyle;
 import funkin.util.TouchUtil;
 import funkin.util.Sequence;
 
@@ -23,12 +25,14 @@ class RemnantsCredits extends Module
 
   var remnantsCredits:RemnantsCreditsGroup;
   var specialThanks:RemnantsCreditsGroup;
+  var andYou:FlxText;
 
   public var vid:FunkinVideoSprite;
   public var vidBG:FunkinSprite;
 
   var specialHour:Bool = false;
   var playingVideo:Bool = false;
+  var stopScrolling:Bool = false;
 
   public function new()
   {
@@ -97,6 +101,16 @@ class RemnantsCredits extends Module
       specialThanks.generateSpecialThanks();
       FlxG.state.add(specialThanks);
 
+      // Adding it here just to make it stop scrolling.
+      andYou = new FlxText(0, 0, 0, "and you <3");
+      andYou.setFormat(Paths.font('creditsFont.ttf'), 50, 0xFFFFFFFF, 'center', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+      andYou.shader = new BloomShader(4.0);
+      FlxG.state.add(andYou);
+
+      andYou.x = (specialThanks.x + (specialThanks.width - andYou.width) / 2) - 95;
+      andYou.y = (specialThanks.y + specialThanks.height) + 400;
+      andYou.borderSize = 4;
+
       isPico = FlxG.random.bool(50);
       playerData = PlayerRegistry.instance.fetchEntry(('${isPico ? 'pico' : 'bf'}-remnants')).getFreeplayDJData();
       playerDJ = new FunkinSprite(0, 0, playerData.getAssetPath(), playerData.getAtlasSettings());
@@ -139,13 +153,18 @@ class RemnantsCredits extends Module
             }
           },
           {
+            time: 149100 / 1000,
+            callback: () -> {
+              stopScrolling = true;
+            }
+          },
+          {
             time: 150500 / 1000,
             callback: () -> {
               playDJAnim('charSelect', false);
               specialThanks.scrolling = false;
-              playerDJ.animation.onFinish.addOnce(() -> {
-                FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut});
-              });
+              FlxTween.tween(andYou, {x: andYou.x - FlxG.width / 2}, 2, {ease: FlxEase.quadInOut, startDelay: 0.5});
+              playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut}));
             }
           }
         ];
@@ -180,12 +199,14 @@ class RemnantsCredits extends Module
   {
     vid.stop();
     playingVideo = false;
+    FlxG.state.scrollPaused = false;
 
     playerDJ?.destroy();
     sequence?.destroy();
+
+    andYou?.destroy();
     specialThanks?.destroy();
     remnantsCredits?.destroy();
-    FlxG.state.scrollPaused = false;
 
     FunkinSound.playMusic('freeplayRandom-remnants',
       {
@@ -224,9 +245,16 @@ class RemnantsCredits extends Module
 
       if (specialThanks.scrolling)
       {
-        if (pressingEnter) specialThanks.y -= specialThanks.fastSpecialSpeed * event.elapsed;
+        if (!stopScrolling)
+        {
+          if (pressingEnter) andYou.y -= (specialThanks.fastSpeed - 10.0) * event.elapsed;
+          else
+            andYou.y -= (specialThanks.baseSpeed - 5.0) * event.elapsed;
+        }
+
+        if (pressingEnter) specialThanks.y -= (specialThanks.fastSpeed - 10.0) * event.elapsed;
         else
-          specialThanks.y -= specialThanks.specialSpeed * event.elapsed;
+          specialThanks.y -= (specialThanks.baseSpeed - 5.0) * event.elapsed;
       }
     }
 
@@ -242,6 +270,7 @@ class RemnantsCredits extends Module
         vid.bitmap.rate = pressingEnter ? 2 : 1;
         playerDJ?.animation?.curAnim?.timeScale = pressingEnter ? 2 : 1;
 
+        // if (FlxG.keys.justPressed.I) trace(Int64Tools.toFloat(vid.bitmap.time));
         if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT)
         {
           vid.pause();
