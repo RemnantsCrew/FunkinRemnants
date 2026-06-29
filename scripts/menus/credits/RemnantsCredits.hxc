@@ -30,9 +30,9 @@ class RemnantsCredits extends Module
   public var vid:FunkinVideoSprite;
   public var vidBG:FunkinSprite;
 
-  var specialHour:Bool = false;
+  var rollThanks:Bool = false;
   var playingVideo:Bool = false;
-  var stopScrolling:Bool = false;
+  var andYouEvent:Bool = false;
 
   public function new()
   {
@@ -99,6 +99,7 @@ class RemnantsCredits extends Module
 
       specialThanks = new RemnantsCreditsGroup();
       specialThanks.generateSpecialThanks();
+      specialThanks.baseSpeed -= 5.0;
       FlxG.state.add(specialThanks);
 
       // Adding it here just to make it stop scrolling.
@@ -222,55 +223,34 @@ class RemnantsCredits extends Module
   {
     super.onUpdate(event);
 
-    if (specialThanks != null) // I only check for this one because that means the first one exists.
+    if (!rollThanks) remnantsCredits?.updateGroup(event.elapsed, (vid.bitmap != null ? vid.bitmap.rate : 2.0));
+    else
+      specialThanks?.updateGroup(event.elapsed, (vid.bitmap != null ? vid.bitmap.rate : 2.0));
+
+    if (andYou != null)
     {
       var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
       #if mobile
-      if (TouchUtil.pressed && !TouchUtil.overlaps(state.backButton)) pressingEnter = true;
+      if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
       #end
 
-      if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) remnantsCredits.scrolling = specialThanks.scrolling = false;
-      else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT)
+      if (!andYouEvent && specialThanks.scrolling)
       {
-        specialThanks.scrolling = specialHour ? true : false;
-        remnantsCredits.scrolling = !specialHour ? true : false;
-      }
-
-      if (remnantsCredits.scrolling)
-      {
-        if (pressingEnter) remnantsCredits.y -= remnantsCredits.fastSpeed * event.elapsed;
+        if (pressingEnter) andYou.y -= (specialThanks.baseSpeed * (vid.bitmap != null ? vid.bitmap.rate : 2.0)) * event.elapsed;
         else
-          remnantsCredits.y -= remnantsCredits.baseSpeed * event.elapsed;
-      }
-
-      if (specialThanks.scrolling)
-      {
-        if (!stopScrolling)
-        {
-          if (pressingEnter) andYou.y -= (specialThanks.fastSpeed - 10.0) * event.elapsed;
-          else
-            andYou.y -= (specialThanks.baseSpeed - 5.0) * event.elapsed;
-        }
-
-        if (pressingEnter) specialThanks.y -= (specialThanks.fastSpeed - 10.0) * event.elapsed;
-        else
-          specialThanks.y -= (specialThanks.baseSpeed - 5.0) * event.elapsed;
+          andYou.y -= specialThanks.baseSpeed * event.elapsed;
       }
     }
 
     if (vid?.bitmap != null)
     {
-      var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
+      var pressingEnter:Bool = FlxG.keys.pressed.SPACE;
       #if mobile
       if (TouchUtil.pressed && !TouchUtil.overlaps(state.backButton)) pressingEnter = true;
       #end
 
       if (playingVideo)
       {
-        vid.bitmap.rate = pressingEnter ? 2 : 1;
-        playerDJ?.animation?.curAnim?.timeScale = pressingEnter ? 2 : 1;
-
-        // if (FlxG.keys.justPressed.I) trace(Int64Tools.toFloat(vid.bitmap.time));
         if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT)
         {
           vid.pause();
@@ -281,6 +261,9 @@ class RemnantsCredits extends Module
           vid.resume();
           playerDJ?.animation?.curAnim?.resume();
         }
+
+        vid.bitmap.rate = pressingEnter ? 2 : 1;
+        playerDJ?.animation?.curAnim?.timeScale = pressingEnter ? 2 : 1;
       }
       else if (pressingEnter)
       {

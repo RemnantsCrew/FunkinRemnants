@@ -4,6 +4,7 @@ import funkin.remnants.shaders.BloomShader;
 import flixel.text.FlxTextBorderStyle;
 import funkin.group.FunkinGroup;
 import funkin.util.ReflectUtil;
+import funkin.util.TouchUtil;
 import flixel.text.FlxText;
 import haxe.Json;
 
@@ -15,12 +16,7 @@ class RemnantsCreditsGroup extends FunkinGroup
   /**
    * The speed the remnants credits scroll at, in pixels per second.
    */
-  public final baseSpeed = 75.0;
-
-  /**
-   * The speed the remnants credits scroll at while accept keybind or spacebar is held, in pixels per second.
-   */
-  public final fastSpeed = baseSpeed * 2.0;
+  public var baseSpeed = 75.0;
 
   /**
    * Is the group scrolling?
@@ -278,6 +274,24 @@ class RemnantsCreditsGroup extends FunkinGroup
       creditGroup.localX = rightColumnX;
       creditGroup.localY = rightColumnY;
       if (!contributors) rightColumnY += entryHeight + 35;
+    }
+  }
+
+  public function updateGroup(elapsed:Float, mult:Float)
+  {
+    var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
+    #if mobile
+    if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
+    #end
+
+    if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) this.scrolling = false;
+    else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT) this.scrolling = true;
+
+    if (this.scrolling)
+    {
+      if (pressingEnter) this.y -= (this.baseSpeed * mult) * elapsed;
+      else
+        this.y -= this.baseSpeed * elapsed;
     }
   }
 
