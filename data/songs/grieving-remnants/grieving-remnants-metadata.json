@@ -1,23 +1,44 @@
 {
-  "version": "2.2.4",
-  "songName": "Grieving (Remnants Mix)",
-  "artist": "DagaiTai (ft. LunarzNova)",
-  "charter": "TRWario",
-  "offsets": {},
-  "playData": {
-    "difficulties": ["easy", "normal", "hard"],
-    "characters": {
-      "player": "luis-remnants",
-      "girlfriend": "bf-gf-remnants-grieving",
-      "opponent": "roxanne-remnants",
-      "opponentVocals": ["roxanne-remnants"],
-      "playerVocals": ["luis-remnants"]
-    },
-    "stage": "grievingRemnants",
-    "noteStyle": "funkin",
-    "ratings": { "easy": 3, "normal": 4, "hard": 5 },
-    "album": "remnants"
+ "version": "2.2.4",
+ "songName": "Grieving (Remnants Mix)",
+ "artist": "DagaiTai (ft. LunarzNova)",
+ "charter": "TRWario",
+ "offsets": { },
+ "playData": {
+  "difficulties": [
+   "easy",
+   "normal",
+   "hard"
+  ],
+  "characters": {
+   "player": "luis-remnants",
+   "girlfriend": "bf-gf-remnants-grieving",
+   "opponent": "roxanne-remnants",
+   "opponentVocals": [
+    "roxanne-remnants"
+   ],
+   "playerVocals": [
+    "luis-remnants"
+   ]
   },
-  "generatedBy": "Friday Night Funkin' - v0.8.3 (develop : ec868f8) PROTOTYPE",
-  "timeChanges": [{ "t": 0, "b": 0, "bpm": 140, "bt": [4, 4, 4, 4] }]
+  "stage": "grievingRemnants",
+  "noteStyle": "funkin",
+  "ratings": {
+   "easy": 3,
+   "normal": 4,
+   "hard": 5
+  },
+  "album": "remnants",
+  "previewStart": 0.235205246622144,
+  "previewEnd": 0.313606995496192
+ },
+ "generatedBy": "Friday Night Funkin' - v0.8.5",
+ "timeChanges": [
+  {
+   "t": 0,
+   "b": 0,
+   "bpm": 140,
+   "bt": [4, 4, 4, 4]
+  }
+ ]
 }
