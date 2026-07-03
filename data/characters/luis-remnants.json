@@ -1,89 +1,74 @@
 {
   "version": "1.0.0",
-  "name": "Remnants Luis (Dad Grieving)",
+  "name": "Remnants Luis (Remnants Dad Grieving)",
   "renderType": "multianimateatlas",
-  "assetPath": "shared:characters/luis-remnants",
+  "assetPath": "shared:characters/dad-remnants",
   "singTime": 8.0,
-  "healthIcon": {
-    "id": "luis-remnants"
-  },
   "death": {
-    "cameraOffsets": [-55, -175],
+    "cameraOffsets": [50, -100],
     "cameraZoom": 1.6
   },
-  "cameraOffsets": [0, 0],
-  "offsets": [0, 0],
-  "flipX": false,
   "atlasSettings": {
     "useRenderTexture": true
   },
   "animations": [
     {
       "name": "idle",
-      "prefix": "Idle",
-      "offsets": [0, 0]
+      "prefix": "Idle Divorced"
     },
     {
       "name": "singLEFT",
-      "prefix": "Left",
-      "offsets": [0, 0]
+      "prefix": "Left Divorced"
     },
     {
       "name": "singDOWN",
-      "prefix": "Down",
-      "offsets": [0, 0]
+      "prefix": "Down Divorced"
     },
     {
       "name": "singUP",
-      "prefix": "Up",
-      "offsets": [0, 0]
+      "prefix": "Up Divorced"
     },
     {
       "name": "singRIGHT",
-      "prefix": "Right",
-      "offsets": [0, 0]
+      "prefix": "Right Divorced"
     },
     {
       "name": "singLEFTmiss",
-      "prefix": "Left Miss",
-      "offsets": [0, 0]
+      "prefix": "Left Divorced Miss"
     },
     {
       "name": "singDOWNmiss",
-      "prefix": "Down Miss",
-      "offsets": [0, 0]
+      "prefix": "Down Divorced Miss"
     },
     {
       "name": "singUPmiss",
-      "prefix": "Up Miss",
-      "offsets": [0, 0]
+      "prefix": "Up Divorced Miss"
     },
     {
       "name": "singRIGHTmiss",
-      "prefix": "Right Miss",
-      "offsets": [0, 0]
+      "prefix": "Right Divorced Miss"
     },
     {
       "name": "firstDeath",
       "assetPath": "shared:characters/luis-remnants-death",
       "prefix": "Start",
-      "offsets": [0, 0],
-      "flipX": true
+      "flipX": true,
+      "offsets": [-180, 0]
     },
     {
       "name": "deathLoop",
       "assetPath": "shared:characters/luis-remnants-death",
       "prefix": "Loop",
-      "offsets": [0, 0],
       "looped": true,
-      "flipX": true
+      "flipX": true,
+      "offsets": [-180, 0]
     },
     {
       "name": "deathConfirm",
       "assetPath": "shared:characters/luis-remnants-death",
       "prefix": "End",
-      "offsets": [0, 0],
-      "flipX": true
+      "flipX": true,
+      "offsets": [-180, 0]
     }
   ]
 }
