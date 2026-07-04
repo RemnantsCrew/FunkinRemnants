@@ -4,8 +4,10 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import funkin.util.tools.Int64Tools;
+import funkin.ui.FullScreenScaleMode;
 import funkin.remnants.shaders.BloomShader;
 import funkin.data.freeplay.player.PlayerRegistry;
+import funkin.remnants.menus.props.RemnantsDevSprites;
 import funkin.remnants.menus.props.RemnantsCreditsGroup;
 import funkin.graphics.video.FunkinVideoSprite;
 import funkin.util.assets.FlxAnimationUtil;
@@ -21,6 +23,7 @@ class RemnantsCredits extends Module
   var playerDJ:FunkinSprite;
   var playerData:PlayerRegistry;
 
+  var devGroup:RemnantsDevSprites;
   var remnantsCredits:RemnantsCreditsGroup;
   var specialThanks:RemnantsCreditsGroup;
   var andYou:FlxText;
@@ -110,6 +113,12 @@ class RemnantsCredits extends Module
       andYou.y = (specialThanks.y + specialThanks.height) + 400;
       andYou.borderSize = 4;
 
+      // Devs sprites!
+      devSprites = new RemnantsDevSprites();
+      devSprites.shader = new BloomShader();
+      devSprites.alpha = 0.000001;
+      FlxG.state.add(devSprites);
+
       isPico = FlxG.random.bool(50);
       playerData = PlayerRegistry.instance.fetchEntry(('${isPico ? 'pico' : 'bf'}-remnants')).getFreeplayDJData();
       playerDJ = new FunkinSprite(0, 0, playerData.getAssetPath(), playerData.getAtlasSettings());
@@ -151,6 +160,7 @@ class RemnantsCredits extends Module
     andYou?.destroy();
     specialThanks?.destroy();
     remnantsCredits?.destroy();
+    devSprites?.destroy();
     playerDJ?.destroy();
 
     FunkinSound.playMusic('freeplayRandom-remnants',
@@ -176,6 +186,7 @@ class RemnantsCredits extends Module
 
       if (playingVideo)
       {
+        if (FlxG.keys.justPressed.I) trace(Int64Tools.toFloat(vid.bitmap.time));
         if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT)
         {
           vid.pause();
@@ -248,6 +259,8 @@ class RemnantsCredits extends Module
   var event3:Bool = false;
   var event4:Bool = false;
   var event5:Bool = false;
+  var event6:Bool = false;
+  var event7:Bool = false;
 
   /**
    * Handles the events in the credits based on the video's current position.
@@ -270,18 +283,31 @@ class RemnantsCredits extends Module
       remnantsCredits.scrolling = false;
     }
 
-    if (position >= 149100 && !event4) // And you stops scrolling.
+    if (position >= 149100 && !event4) // "and you <3" stops scrolling.
     {
       andYouEvent = event4 = true;
-      specialThanks.scrolling = false;
     }
 
-    if (position >= 150500 && !event5) // DJ and And You dissapear.
+    if (position >= 150500 && !event5) // DJ and "and you <3" dissapear.
     {
       event5 = true;
       playDJAnim('charSelect', false);
+      specialThanks.scrolling = false;
       FlxTween.tween(andYou, {x: andYou.x - FlxG.width / 2}, 2, {ease: FlxEase.quadInOut, startDelay: 0.5});
       playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut}));
+    }
+
+    if (position >= 153400 && !event6) // Dev Sprites Appear
+    {
+      event6 = true;
+      FlxTween.tween(devSprites, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
+    }
+
+    if (position >= 157500 && !event7) // Dev Sprites Gone
+    {
+      event7 = true;
+      FlxTween.cancelTweensOf(devSprites);
+      FlxTween.tween(devSprites, {alpha: 0}, 2, {ease: FlxEase.quadOut});
     }
   }
 }

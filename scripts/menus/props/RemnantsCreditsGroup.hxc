@@ -2,6 +2,7 @@ package funkin.remnants.menus.props;
 
 import funkin.remnants.shaders.BloomShader;
 import flixel.text.FlxTextBorderStyle;
+import funkin.ui.FullScreenScaleMode;
 import funkin.group.FunkinGroup;
 import funkin.util.ReflectUtil;
 import funkin.util.TouchUtil;
@@ -60,7 +61,7 @@ class RemnantsCreditsGroup extends FunkinGroup
 
   override public function new()
   {
-    super(10, FlxG.height);
+    super((FullScreenScaleMode.gameCutoutSize.x / 2) + 10, FlxG.height);
 
     var jsonPath:String = Paths.json('remnantsCredits');
     creditsJson = Json.parse(Assets.getText(jsonPath)) ?? {};
