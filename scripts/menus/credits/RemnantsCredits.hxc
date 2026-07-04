@@ -12,7 +12,6 @@ import funkin.util.assets.FlxAnimationUtil;
 import funkin.ui.credits.CreditsState;
 import flixel.text.FlxTextBorderStyle;
 import funkin.util.TouchUtil;
-import funkin.util.Sequence;
 
 class RemnantsCredits extends Module
 {
@@ -21,7 +20,6 @@ class RemnantsCredits extends Module
   var isPico:Bool;
   var playerDJ:FunkinSprite;
   var playerData:PlayerRegistry;
-  var sequence:Sequence;
 
   var remnantsCredits:RemnantsCreditsGroup;
   var specialThanks:RemnantsCreditsGroup;
@@ -128,64 +126,13 @@ class RemnantsCredits extends Module
       playerDJ.y += isPico ? 90 : 29;
 
       var filePath:String = Paths.videos(VIDEO_PATH);
-      if (vid.load(filePath))
-      {
-        var sequenceData = [
-          {
-            time: 3650 / 1000,
-            callback: () -> {
-              playerDJ.visible = true;
-              playDJAnim('intro', false);
-              playerDJ.animation.onFinish.addOnce(() -> playDJAnim('idle', true));
-            }
-          },
-          {
-            time: 4950 / 1000,
-            callback: () -> {
-              remnantsCredits.scrolling = true;
-            }
-          },
-          {
-            time: 37500 / 1000,
-            callback: () -> {
-              rollThanks = true;
-              remnantsCredits.scrolling = false;
-              specialThanks.scrolling = true;
-            }
-          },
-          {
-            time: 149100 / 1000,
-            callback: () -> {
-              andYouEvent = true;
-            }
-          },
-          {
-            time: 150500 / 1000,
-            callback: () -> {
-              playDJAnim('charSelect', false);
-              specialThanks.scrolling = false;
-              FlxTween.tween(andYou, {x: andYou.x - FlxG.width / 2}, 2, {ease: FlxEase.quadInOut, startDelay: 0.5});
-              playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut}));
-            }
-          }
-        ];
-
-        sequence = new Sequence(sequenceData);
-        vid.play();
-      }
+      if (vid.load(filePath)) vid.play();
     }
     else
     {
       trace('ALERT: Video is null! Could not play remnants credits!');
       stopVideo();
     }
-  }
-
-  function onDestroy(event:ScriptEvent):Void
-  {
-    super.onDestroy(event);
-
-    sequence?.destroy();
   }
 
   function playDJAnim(name:String, loop:Bool)
@@ -202,12 +149,10 @@ class RemnantsCredits extends Module
     playingVideo = false;
     FlxG.state.scrollPaused = false;
 
-    playerDJ?.destroy();
-    sequence?.destroy();
-
     andYou?.destroy();
     specialThanks?.destroy();
     remnantsCredits?.destroy();
+    playerDJ?.destroy();
 
     FunkinSound.playMusic('freeplayRandom-remnants',
       {
@@ -222,25 +167,6 @@ class RemnantsCredits extends Module
   override public function onUpdate(event:UpdateScriptEvent):Void
   {
     super.onUpdate(event);
-
-    if (!rollThanks) remnantsCredits?.updateGroup(event.elapsed, (vid.bitmap != null ? vid.bitmap.rate : 2.0));
-    else
-      specialThanks?.updateGroup(event.elapsed, (vid.bitmap != null ? vid.bitmap.rate : 2.0));
-
-    if (andYou != null)
-    {
-      var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
-      #if mobile
-      if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
-      #end
-
-      if (!andYouEvent && specialThanks.scrolling)
-      {
-        if (pressingEnter) andYou.y -= (specialThanks.baseSpeed * (vid.bitmap != null ? vid.bitmap.rate : 2.0)) * event.elapsed;
-        else
-          andYou.y -= specialThanks.baseSpeed * event.elapsed;
-      }
-    }
 
     if (vid?.bitmap != null)
     {
@@ -262,7 +188,28 @@ class RemnantsCredits extends Module
           playerDJ?.animation?.curAnim?.resume();
         }
 
+        // Handle the scrolling texts.
+        if (!rollThanks) remnantsCredits?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0));
+        else
+          specialThanks?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0));
+
+        if (andYou != null)
+        {
+          var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
+          #if mobile
+          if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
+          #end
+
+          if (!andYouEvent && specialThanks.scrolling)
+          {
+            if (pressingEnter) andYou.y -= (specialThanks.baseSpeed * (vid.bitmap != null ? vid.bitmap.rate : 2.0)) * event.elapsed;
+            else
+              andYou.y -= specialThanks.baseSpeed * event.elapsed;
+          }
+        }
+
         vid.bitmap.rate = pressingEnter ? 2 : 1;
+        handleEvents(Int64Tools.toFloat(vid.bitmap.time));
         playerDJ?.animation?.curAnim?.timeScale = pressingEnter ? 2 : 1;
       }
       else if (pressingEnter)
@@ -293,6 +240,55 @@ class RemnantsCredits extends Module
 
         trace('killed video');
       }
+    }
+  }
+
+  // Til forgive me...
+  var event1:Bool = false;
+  var event2:Bool = false;
+  var event3:Bool = false;
+  var event4:Bool = false;
+  var event5:Bool = false;
+
+  /**
+   * Handles the events in the credits based on the video's current position.
+   */
+  function handleEvents(position:Float):Void
+  {
+    if (position >= 3650 && !event1) // DJ appears.
+    {
+      event1 = true;
+      playerDJ.visible = true;
+      playDJAnim('intro', false);
+      playerDJ.animation.onFinish.addOnce(() -> playDJAnim('idle', true));
+    }
+
+    if (position >= 4950 && !event2) // Main Credits start rolling.
+    {
+      event2 = true;
+      remnantsCredits.scrolling = true;
+    }
+
+    if (position >= 37500 && !event3) // Special Thanks start rolling.
+    {
+      event3 = true;
+      specialThanks.scrolling = rollThanks = true;
+      remnantsCredits.scrolling = false;
+    }
+
+    if (position >= 149100 && !event4) // And you stops scrolling.
+    {
+      event4 = true;
+      andYouEvent = true;
+      specialThanks.scrolling = false;
+    }
+
+    if (position >= 150500 && !event5) // DJ and And You dissapear.
+    {
+      event5 = true;
+      playDJAnim('charSelect', false);
+      FlxTween.tween(andYou, {x: andYou.x - FlxG.width / 2}, 2, {ease: FlxEase.quadInOut, startDelay: 0.5});
+      playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut}));
     }
   }
 }
