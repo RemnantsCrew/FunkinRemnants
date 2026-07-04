@@ -77,9 +77,10 @@ class RemnantsGameOver extends Module
     GameOverSubState.instance.add(loseSprite);
 
     // For Roses Color Event
-    if (PlayState.instance?.currentSong?.scriptHas('color') && PlayState.instance.currentSong.color &&
-      PlayState.instance?.currentSong?.scriptHas('colorTweenReal') && !PlayState.instance.currentSong.colorTweenReal)
-      loseSprite.colorTransform.color = 0xFF3C43A4;
+    if (PlayState.instance?.currentSong?.scriptHas('color')
+      && PlayState.instance.currentSong.color
+      && PlayState.instance?.currentSong?.scriptHas('colorTweenReal')
+      && !PlayState.instance.currentSong.colorTweenReal) loseSprite.colorTransform.color = 0xFF3C43A4;
   }
 
   public function playFall():Void

@@ -263,7 +263,8 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
   override function playFireGunAnim():Void
   {
     if (FlxG.random.bool(50)) this.playAnimation('shoot1', true, true);
-    else this.playAnimation('shoot2', true, true);
+    else
+      this.playAnimation('shoot2', true, true);
 
     FunkinSound.playOnce(Paths.soundRandom('shot', 1, 4));
   }

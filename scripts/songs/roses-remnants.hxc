@@ -365,7 +365,7 @@ class RosesRemnantsMixSong extends Song
           }
         }
       },
-  
+
       {
         time: Conductor.instance.getBeatTimeInMs(282) / 1000,
         callback: () -> {

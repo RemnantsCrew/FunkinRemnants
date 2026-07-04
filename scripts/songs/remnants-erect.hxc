@@ -85,7 +85,8 @@ class RemnantsErectSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(279) / 1000,
         callback: () -> {
-          for (i in 0...4) PlayState.instance.playerStrumline.releaseKey(i);
+          for (i in 0...4)
+            PlayState.instance.playerStrumline.releaseKey(i);
           PlayState.instance.disableKeys = true;
         }
       },

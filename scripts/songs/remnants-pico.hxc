@@ -185,7 +185,8 @@ class RemnantsPicoSong extends Song
         time: Conductor.instance.getBeatTimeInMs(223) / 1000,
         callback: () -> {
           PlayState.instance.disableKeys = false;
-          for (i in 0...4) PlayState.instance.playerStrumline.releaseKey(i);
+          for (i in 0...4)
+            PlayState.instance.playerStrumline.releaseKey(i);
         }
       },
 
