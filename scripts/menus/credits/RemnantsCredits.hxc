@@ -148,7 +148,7 @@ class RemnantsCredits extends Module
           {
             time: 37500 / 1000,
             callback: () -> {
-              specialHour = true;
+              rollThanks = true;
               remnantsCredits.scrolling = false;
               specialThanks.scrolling = true;
             }
@@ -156,7 +156,7 @@ class RemnantsCredits extends Module
           {
             time: 149100 / 1000,
             callback: () -> {
-              stopScrolling = true;
+              andYouEvent = true;
             }
           },
           {
