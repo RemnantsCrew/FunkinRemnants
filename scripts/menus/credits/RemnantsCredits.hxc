@@ -145,9 +145,8 @@ class RemnantsCredits extends Module
 
   public function stopVideo():Void
   {
-    vid.stop();
-    playingVideo = false;
-    FlxG.state.scrollPaused = false;
+    vid?.stop();
+    FlxG.state.scrollPaused = playingVideo = false;
 
     andYou?.destroy();
     specialThanks?.destroy();
@@ -257,29 +256,23 @@ class RemnantsCredits extends Module
   {
     if (position >= 3650 && !event1) // DJ appears.
     {
-      event1 = true;
-      playerDJ.visible = true;
       playDJAnim('intro', false);
+      playerDJ.visible = event1 = true;
       playerDJ.animation.onFinish.addOnce(() -> playDJAnim('idle', true));
     }
 
     if (position >= 4950 && !event2) // Main Credits start rolling.
-    {
-      event2 = true;
-      remnantsCredits.scrolling = true;
-    }
+      remnantsCredits.scrolling = event2 = true;
 
     if (position >= 37500 && !event3) // Special Thanks start rolling.
     {
-      event3 = true;
-      specialThanks.scrolling = rollThanks = true;
+      specialThanks.scrolling = rollThanks = event3 = true;
       remnantsCredits.scrolling = false;
     }
 
     if (position >= 149100 && !event4) // And you stops scrolling.
     {
-      event4 = true;
-      andYouEvent = true;
+      andYouEvent = event4 = true;
       specialThanks.scrolling = false;
     }
 
