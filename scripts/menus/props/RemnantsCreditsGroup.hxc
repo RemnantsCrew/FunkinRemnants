@@ -89,6 +89,11 @@ class RemnantsCreditsGroup extends FunkinGroup
   var leftColumnY:Float = 0;
 
   /**
+   * Handles the position in the x-axis of the right column.
+   */
+  var rightColumnX:Float = 0;
+
+  /**
    * Handles the distance in the y-axis of the right column.
    */
   var rightColumnY:Float = 0;
@@ -103,8 +108,8 @@ class RemnantsCreditsGroup extends FunkinGroup
 
     // Before adding the contributors, we save the starting y-axis.
     var startY:Float = headersGroup.children[0].localY + headersGroup.children[0].height + 5;
-    leftColumnY = startY;
-    rightColumnY = startY;
+    leftColumnY = rightColumnY = startY;
+    rightColumnX = getMaxWidth() + 15;
 
     // Before adding the team's thanks, we are giving our contributors a special space <3
     var contributors:Dynamic = ReflectUtil.getProperty(creditsJson, "contributors");
@@ -117,7 +122,7 @@ class RemnantsCreditsGroup extends FunkinGroup
     itMeansALot.borderSize = 4;
     this.add(itMeansALot);
 
-    // Position fix!
+    // Evil manual position fix
     itMeansALot.localY = this.children[1].y + this.children[1].height + 90;
 
     // Before adding anything, we reset the starting y-axis for both columns.
@@ -259,8 +264,8 @@ class RemnantsCreditsGroup extends FunkinGroup
     creditGroup.children[1].localY = (nameTxt.localY + nameTxt.height);
 
     // And after that we position the entry.
+    // But we first get the maximum width of the left column.
     var entryHeight:Float = specialThanks.localY + specialThanks.height;
-    var rightColumnX:Float = getMaxWidth() + 20;
 
     // This shit almost killed me....
     if (leftColumnY <= rightColumnY)
@@ -296,24 +301,38 @@ class RemnantsCreditsGroup extends FunkinGroup
   }
 
   /**
-   * Returns the widest special thanks header with a little plus of 200 pixels.
+   * Helper function to get the right column not overlapping with the left one.
    */
-  function getMaxWidth():Void
+  function getMaxWidth():Float
   {
-    var widthList:Array<Float> = [];
+    var maxWidth:Float = 0;
     var entries:Dynamic = ReflectUtil.getProperty(creditsJson, "entries");
-    for (id => entry in entries)
+
+    for (entry in entries)
     {
-      var name = new FlxText(0, 0, 0, '${entry.name} would like to Thank:');
-      widthList.push(name.width);
+      if (entry.specialThanks == null) continue;
+
+      var list:String = '';
+      var header = new FlxText(0, 0, 0, '${entry.names[1] ?? entry.names[0]} would like to Thank:');
+      header.setFormat(Paths.font('creditsFont.ttf'), NAME_THANKS_SIZE);
+
+      for (i => thanks in entry.specialThanks)
+      {
+        if (i > 0) list += "\n";
+        list += thanks;
+      }
+
+      var thanksText = new FlxText(0, 0, 0, list);
+      thanksText.setFormat(Paths.font('creditsFont.ttf'), THANKS_SIZE);
+
+      var groupWidth:Float = Math.max(header.width, thanksText.width);
+      if (groupWidth > maxWidth) maxWidth = groupWidth;
+
+      // Clean up the RAM please!
+      header?.destroy();
+      thanksText?.destroy();
     }
 
-    var maxWidth:Int = widthList[0] ?? 0;
-    for (num in widthList)
-    {
-      if (num > maxWidth) maxWidth = num;
-    }
-
-    return maxWidth + 200;
+    return maxWidth;
   }
 }
