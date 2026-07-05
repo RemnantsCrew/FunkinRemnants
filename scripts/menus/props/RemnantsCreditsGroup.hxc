@@ -63,7 +63,7 @@ class RemnantsCreditsGroup extends FunkinGroup
   {
     super((FullScreenScaleMode.gameCutoutSize.x / 2) + 10, FlxG.height);
 
-    var jsonPath:String = Paths.json('remnantsCredits');
+    var jsonPath:String = Paths.json('ui/credits/remnants-credits');
     creditsJson = Json.parse(Assets.getText(jsonPath)) ?? {};
   }
 
@@ -114,7 +114,7 @@ class RemnantsCreditsGroup extends FunkinGroup
 
     // Before adding the team's thanks, we are giving our contributors a special space <3
     var contributors:Dynamic = ReflectUtil.getProperty(creditsJson, "contributors");
-    addSpecialThank(1, "We", contributors, true);
+    addSpecialThank(1, "The Remnants Crew", contributors, true);
 
     // Cute ending text for the contributors section.
     var itMeansALot = new FlxText(0, 0, 0, "Your contributions mean a lot! <3");
