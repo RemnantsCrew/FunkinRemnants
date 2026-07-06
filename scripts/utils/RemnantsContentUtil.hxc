@@ -5,6 +5,7 @@ import funkin.ui.freeplay.FreeplayState;
 import funkin.data.song.SongRegistry;
 import funkin.util.ReflectUtil;
 import haxe.ds.StringMap;
+import haxe.Json;
 
 class RemnantsContentUtil
 {
@@ -120,7 +121,7 @@ class RemnantsContentUtil
     if (_chances == null)
     {
       var content:String = Assets.getText(Paths.json('remnants-chances'));
-      var json:String = Json.parse(fullText);
+      var json:String = Json.parse(content);
 
       _chances = new StringMap();
       for (field in ReflectUtil.getAnonymousFieldsOf(json))
