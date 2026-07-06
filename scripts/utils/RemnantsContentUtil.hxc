@@ -62,7 +62,7 @@ class RemnantsContentUtil
   public static function getChance(id:String):Bool
   {
     final percentage:Float = fetchChances().get(id);
-    return FlxG.random.bool(id);
+    return FlxG.random.bool(percentage);
   }
 
   /**
