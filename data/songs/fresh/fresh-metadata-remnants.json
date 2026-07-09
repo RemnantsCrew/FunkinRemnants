@@ -1,5 +1,5 @@
 {
-  "version": "2.2.4",
+  "version": "2.2.8",
   "songName": "Fresh (Remnants Mix)",
   "artist": "fishgarden",
   "charter": "fishgarden",
@@ -17,9 +17,21 @@
     },
     "stage": "mainStageRemnants",
     "noteStyle": "funkin",
-    "ratings": { "easy": 5, "normal": 6, "hard": 7 },
-    "album": "remnants"
+    "ratings": {
+      "easy": 3,
+      "normal": 5,
+      "hard": 6
+    },
+    "album": "remnants",
+    "stickerPack": "remnants-default"
   },
-  "generatedBy": "Friday Night Funkin' - v0.8.3 (develop : ec868f8) PROTOTYPE",
-  "timeChanges": [{ "t": 0, "b": 0, "bpm": 120, "bt": [4, 4, 4, 4] }]
+  "generatedBy": "Friday Night Funkin' - v0.8.5",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 120,
+      "bt": [4, 4, 4, 4]
+    }
+  ]
 }
