@@ -10,8 +10,10 @@ import funkin.remnants.utils.RemnantsSequence;
 import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.remnants.menus.props.RemnantsDevSprites;
 import funkin.remnants.menus.props.RemnantsCreditsGroup;
+import funkin.remnants.menus.props.RemnantsCreditsCircles;
 import funkin.graphics.video.FunkinVideoSprite;
 import funkin.util.assets.FlxAnimationUtil;
+import funkin.ui.freeplay.FreeplayState;
 import funkin.ui.credits.CreditsState;
 import flixel.text.FlxTextBorderStyle;
 import funkin.util.TouchUtil;
@@ -20,11 +22,13 @@ class RemnantsCredits extends Module
 {
   final VIDEO_PATH:String = 'remnants-credits';
 
-  var isPico:Bool;
+  final REMNANTS_CHAR_COLOR:Array<Int> = [0xFF52C7F2, 0xFF06ED76]; // BF - Pico
+
   var playerDJ:FunkinSprite;
   var playerData:PlayerRegistry;
 
   var devGroup:RemnantsDevSprites;
+  var circleGroup:RemnantsCreditsCircles;
   var remnantsCredits:RemnantsCreditsGroup;
   var specialThanks:RemnantsCreditsGroup;
   var andYou:FlxText;
@@ -34,8 +38,9 @@ class RemnantsCredits extends Module
 
   var sequence:RemnantsSequence;
 
-  var rollThanks:Bool = false;
+  var allowThanks:Bool = false;
   var playingVideo:Bool = false;
+  var allowCredits:Bool = false;
   var andYouEvent:Bool = false;
 
   public function new()
@@ -116,24 +121,29 @@ class RemnantsCredits extends Module
       andYou.y = (specialThanks.y + specialThanks.height) + 350; // TODO: Make this get calculated based on the thanks total height?
       andYou.borderSize = 4;
 
+      // The circles!
+      var targetColor:Int = FreeplayState.rememberedCharacterId == 'bf-remnants' ? REMNANTS_CHAR_COLOR[0] : REMNANTS_CHAR_COLOR[1];
+      circleGroup = new RemnantsCreditsCircles(targetColor);
+      FlxG.state.add(circleGroup);
+
       // Devs sprites!
       devSprites = new RemnantsDevSprites();
       FlxG.state.add(devSprites);
 
-      isPico = FlxG.random.bool(50);
-      playerData = PlayerRegistry.instance.fetchEntry(('${isPico ? 'pico' : 'bf'}-remnants')).getFreeplayDJData();
-      playerDJ = new FunkinSprite(0, 0, playerData.getAssetPath(), playerData.getAtlasSettings());
+      playerData = PlayerRegistry.instance.fetchEntry(FreeplayState.rememberedCharacterId).getFreeplayDJData();
+      playerDJ = FunkinSprite.createTextureAtlas(0, 0, playerData.getAssetPath(), null, {useRenderTexture: true});
       FlxG.state.add(playerDJ);
 
       FlxAnimationUtil.addTextureAtlasAnimations(playerDJ, playerData.getAnimationsList());
+      playDJAnim('idle', false); // Play the idle so the position is based on it.
+
       playerDJ.shader = new BloomShader();
       playerDJ.scale.set(0.7, 0.7);
       playerDJ.visible = false;
       playerDJ.updateHitbox();
-
       playerDJ.screenCenter();
-      playerDJ.x += isPico ? 0 : 18;
-      playerDJ.y += isPico ? 90 : 29;
+
+      playerDJ.y = FlxG.height - playerDJ.height + 100;
 
       var filePath:String = Paths.videos(VIDEO_PATH);
       if (vid.load(filePath))
@@ -150,15 +160,15 @@ class RemnantsCredits extends Module
           {
             time: 4950,
             callback: () -> {
-              remnantsCredits.scrolling = true;
+              FlxTween.tween(circleGroup, {y: 0}, 4, {ease: FlxEase.quadOut});
+              remnantsCredits.scrolling = allowCredits = true;
             }
           },
           {
             time: 37500,
             callback: () -> {
-              rollThanks = true;
-              remnantsCredits.scrolling = false;
-              specialThanks.scrolling = true;
+              remnantsCredits.scrolling = allowCredits = false;
+              specialThanks.scrolling = allowThanks = true;
             }
           },
           {
@@ -171,7 +181,8 @@ class RemnantsCredits extends Module
             time: 150500,
             callback: () -> {
               playDJAnim('charSelect', false);
-              specialThanks.scrolling = false;
+              specialThanks.scrolling = allowThanks = false;
+              FlxTween.tween(circleGroup, {y: FlxG.width / 2}, 3, {ease: FlxEase.quadInOut, startDelay: 0.5});
               FlxTween.tween(andYou, {x: andYou.x - FlxG.width / 2}, 2, {ease: FlxEase.quadInOut, startDelay: 0.5});
               playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut}));
             }
@@ -216,6 +227,7 @@ class RemnantsCredits extends Module
     FlxG.state.scrollPaused = playingVideo = false;
 
     andYou?.destroy();
+    circleGroup?.destroy();
     specialThanks?.destroy();
     remnantsCredits?.destroy();
     devSprites?.destroy();
@@ -259,9 +271,11 @@ class RemnantsCredits extends Module
         }
 
         // Handle the scrolling texts.
-        if (!rollThanks) remnantsCredits?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0));
-        else
-          specialThanks?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0));
+        remnantsCredits?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0), allowCredits);
+        specialThanks?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0), allowThanks);
+
+        // Make the circle spin.
+        if (sequence?.running) circleGroup.spinCircles(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0));
 
         if (andYou != null)
         {

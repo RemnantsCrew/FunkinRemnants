@@ -1,0 +1,65 @@
+package funkin.remnants.menus.props;
+
+import funkin.ui.FullScreenScaleMode;
+import funkin.remnants.shaders.BloomShader;
+import funkin.group.FunkinGroup;
+
+/**
+ * The class responsable of creating the spinning circles for the credits.
+ */
+class RemnantsCreditsCircles extends FunkinGroup
+{
+  /**
+   * The color the circles will have.
+   * By default it's white.
+   */
+  var circleColor:Int = 0xFFFFFFFF;
+
+  /**
+   * The rotation speeds of each circle.
+   */
+  final CIRCLE_SPEEDS:Array<Float> = [0.02, 0.06, 0.02, 0.05];
+
+  /**
+   * The positions of each circle.
+   */
+  final CIRCLE_POSITION:Array<Array<Int>> = [[600, 538], [805, 456], [1195, 470], [950, 535]];
+
+  override public function new(color:Int, ?amount:Float = 4)
+  {
+    super(0, FlxG.height / 2);
+
+    circleColor = color;
+
+    for (id in 1...amount + 1)
+      createCircle(id, id % 2 == 0);
+  }
+
+  function createCircle(id:Int, small:Bool):Void
+  {
+    var circle:FunkinSprite = FunkinSprite.createTextureAtlas(0, 0, "creditsMenu/circles", null, {useRenderTexture: true});
+    circle.animation.addByFrameLabel('circle', small ? "Small" : "Big", 0, false);
+    circle.shader = new BloomShader();
+    circle.anim.play("circle");
+    this.add(circle);
+
+    // Apply color and position.
+    circle.color = circleColor;
+    circle.localX = CIRCLE_POSITION[id - 1][0]#if mobile + FullScreenScaleMode.gameCutoutSize.x / 2 #end;
+    circle.localY = CIRCLE_POSITION[id - 1][1];
+    if (id == 4) circle.localScale.set(1.15, 1.15); // The second small circle is sligly bigger.
+  }
+
+  /**
+   * Helper function to make the circles spin.
+   * @param mult Speed multiplier.
+   */
+  public function spinCircles(elapsed:Float, mult:Float):Void
+  {
+    for (id => circle in this.children)
+    {
+      if (circle == null) continue;
+      circle.localAngle += (elapsed + CIRCLE_SPEEDS[id]) * mult;
+    }
+  }
+}

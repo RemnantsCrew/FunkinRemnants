@@ -205,6 +205,8 @@ class RemnantsCreditsGroup extends FunkinGroup
    */
   function addEntry(id:Int, name:String, role:String):Void
   {
+    if (this.children[id] == null) return;
+
     var targetY:Float = (headersGroup.children[0].localY + headersGroup.children[0].height) + 5;
     if (id != 0) targetY = (this.children[id].y + this.children[id].height) + 8;
 
@@ -283,7 +285,7 @@ class RemnantsCreditsGroup extends FunkinGroup
     }
   }
 
-  public function updateGroup(elapsed:Float, mult:Float)
+  public function updateGroup(elapsed:Float, mult:Float, pause:Bool)
   {
     var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
     #if mobile
@@ -291,7 +293,7 @@ class RemnantsCreditsGroup extends FunkinGroup
     #end
 
     if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) this.scrolling = false;
-    else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT) this.scrolling = true;
+    else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT) this.scrolling = pause;
 
     if (this.scrolling)
     {
