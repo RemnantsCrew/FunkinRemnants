@@ -22,6 +22,8 @@ class RemnantsCredits extends Module
 {
   final VIDEO_PATH:String = 'remnants-credits';
 
+  final RATE_MULT:Float = 2.0; // Made this a variable for testing.
+
   final REMNANTS_CHAR_COLOR:Array<Int> = [0xFF52C7F2, 0xFF06ED76]; // BF - Pico
 
   var playerDJ:FunkinSprite;
@@ -41,7 +43,6 @@ class RemnantsCredits extends Module
   var allowThanks:Bool = false;
   var playingVideo:Bool = false;
   var allowCredits:Bool = false;
-  var andYouEvent:Bool = false;
 
   public function new()
   {
@@ -108,17 +109,16 @@ class RemnantsCredits extends Module
 
       specialThanks = new RemnantsCreditsGroup();
       specialThanks.generateSpecialThanks();
-      specialThanks.baseSpeed -= 5.0;
       FlxG.state.add(specialThanks);
 
       // Adding it here just to make it stop scrolling.
       andYou = new FlxText(0, 0, 0, "and you <3");
-      andYou.setFormat(Paths.font('creditsFont.ttf'), 50, 0xFFFFFFFF, 'center', FlxTextBorderStyle.OUTLINE, 0xFF000000);
-      andYou.shader = new BloomShader(4.0);
+      andYou.setFormat(Paths.font('creditsFont.ttf'), 65, 0xFFFFFFFF, 'center', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+      andYou.shader = new BloomShader(RemnantsCreditsGroup.SHADER_INTENSITY);
       FlxG.state.add(andYou);
 
-      andYou.x = (specialThanks.x + (specialThanks.width - andYou.width) / 2) - 95;
-      andYou.y = (specialThanks.y + specialThanks.height) + 350; // TODO: Make this get calculated based on the thanks total height?
+      andYou.x = (specialThanks.x + (specialThanks.width - andYou.width) / 2) - 75;
+      andYou.y = (specialThanks.y + specialThanks.height) + (andYou.height * 7);
       andYou.borderSize = 4;
 
       // The circles!
@@ -160,8 +160,9 @@ class RemnantsCredits extends Module
           {
             time: 4950,
             callback: () -> {
-              FlxTween.tween(circleGroup, {y: 0}, 4, {ease: FlxEase.quadOut});
+              FlxTween.tween(circleGroup, {y: 0}, 4.0 / vid.bitmap.rate, {ease: FlxEase.quadOut});
               remnantsCredits.scrolling = allowCredits = true;
+              remnantsCredits.calculateSpeed(4950, 37500);
             }
           },
           {
@@ -169,12 +170,7 @@ class RemnantsCredits extends Module
             callback: () -> {
               remnantsCredits.scrolling = allowCredits = false;
               specialThanks.scrolling = allowThanks = true;
-            }
-          },
-          {
-            time: 149100,
-            callback: () -> {
-              andYouEvent = true;
+              specialThanks.calculateSpeed(37500, 150500);
             }
           },
           {
@@ -182,22 +178,22 @@ class RemnantsCredits extends Module
             callback: () -> {
               playDJAnim('charSelect', false);
               specialThanks.scrolling = allowThanks = false;
-              FlxTween.tween(circleGroup, {y: FlxG.width / 2}, 3, {ease: FlxEase.quadInOut, startDelay: 0.5});
-              FlxTween.tween(andYou, {x: andYou.x - FlxG.width / 2}, 2, {ease: FlxEase.quadInOut, startDelay: 0.5});
-              playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3, {ease: FlxEase.quadInOut}));
+              FlxTween.tween(circleGroup, {y: FlxG.width / 2}, 3.0 / vid.bitmap.rate, {ease: FlxEase.quadInOut, startDelay: 0.5 / vid.bitmap.rate});
+              FlxTween.tween(andYou, {x: andYou.x - FlxG.width}, 1.5 / vid.bitmap.rate, {ease: FlxEase.quadInOut, startDelay: 0.5 / vid.bitmap.rate});
+              playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3.0 / vid.bitmap.rate, {ease: FlxEase.quadInOut}));
             }
           },
           {
             time: 153400,
             callback: () -> {
-              FlxTween.tween(devSprites, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
+              FlxTween.tween(devSprites, {alpha: 1}, 1.5 / vid.bitmap.rate, {ease: FlxEase.quadOut});
             }
           },
           {
             time: 157500,
             callback: () -> {
               FlxTween.cancelTweensOf(devSprites);
-              FlxTween.tween(devSprites, {alpha: 0}, 1.75, {ease: FlxEase.quadOut});
+              FlxTween.tween(devSprites, {alpha: 0}, 1.75 / vid.bitmap.rate, {ease: FlxEase.quadOut});
             }
           }
         ];
@@ -284,7 +280,7 @@ class RemnantsCredits extends Module
           if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
           #end
 
-          if (!andYouEvent && specialThanks.scrolling)
+          if (specialThanks.scrolling && andYou.y > (FlxG.height / 2) - (andYou.height / 2))
           {
             if (pressingEnter) andYou.y -= (specialThanks.baseSpeed * (vid.bitmap != null ? vid.bitmap.rate : 2.0)) * event.elapsed;
             else
@@ -292,9 +288,9 @@ class RemnantsCredits extends Module
           }
         }
 
-        vid.bitmap.rate = pressingEnter ? 2 : 1;
+        vid.bitmap.rate = pressingEnter ? RATE_MULT : 1.0;
         sequence?.update(Int64Tools.toFloat(vid.bitmap.time));
-        playerDJ?.animation?.curAnim?.timeScale = pressingEnter ? 2 : 1;
+        playerDJ?.animation?.curAnim?.timeScale = vid.bitmap.rate;
       }
       else if (pressingEnter)
       {

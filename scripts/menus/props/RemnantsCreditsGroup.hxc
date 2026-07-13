@@ -27,7 +27,7 @@ class RemnantsCreditsGroup extends FunkinGroup
   /**
    * The intensity of the bloom shader glow.
    */
-  final SHADER_INTENSITY:Float = 4.0;
+  public static final SHADER_INTENSITY:Float = 4.0;
 
   /**
    * The size a header should have.
@@ -68,7 +68,7 @@ class RemnantsCreditsGroup extends FunkinGroup
   }
 
   /**
-   * Fetches and then creates the credits entries.
+   * Fetches and creates the main credits.
    */
   public function generateCredits():Void
   {
@@ -76,13 +76,43 @@ class RemnantsCreditsGroup extends FunkinGroup
     addHeader('Remnants Crew Credits:');
 
     // Then fetch the entries from the json and create them.
+    var lastId:Int = 0;
     var entries:Dynamic = ReflectUtil.getProperty(creditsJson, "entries");
     for (id => entry in entries)
     {
       if (entry.onlySP) continue;
       addEntry(id, entry.names[0], entry.role);
+      lastId = id;
+    }
+
+    // If the mods DLC is present, create a section for the original mod directors / owners.
+    #if funkin_remnants_mods
+    addMods(lastId + 1);
+    #end
+  }
+
+  /**
+   * Fetches and adds the mod credits (Only if the mods DLC is present)
+   */
+  #if funkin_remnants_mods
+  public function addMods(id:Int):Void
+  {
+    // First add a separator.
+    var modId:Int = id;
+    var lineOfDashes:String = '';
+    for (dash in 1...24)
+      lineOfDashes += '---';
+    addEntry(modId, lineOfDashes, ''); // If the role is empty, it will not add the " - Role String".
+
+    // Then, load the mods entries.
+    var mods:Dynamic = ReflectUtil.getProperty(creditsJson, "mods");
+    for (entry in mods)
+    {
+      modId++;
+      addEntry(modId, entry.name, entry.credit);
     }
   }
+  #end
 
   /**
    * Handles the distance in the y-axis of the left column.
@@ -221,7 +251,7 @@ class RemnantsCreditsGroup extends FunkinGroup
     creditGroup.add(name);
     name.borderSize = 4;
 
-    var role = new FlxText(0, 0, 0, ' - $role');
+    var role = new FlxText(0, 0, 0, (role == '') ? '' : ' - $role');
     role.setFormat(Paths.font('creditsFont.ttf'), ROLE_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
     role.shader = new BloomShader(SHADER_INTENSITY);
     creditGroup.add(role);
@@ -251,9 +281,8 @@ class RemnantsCreditsGroup extends FunkinGroup
     var list:String = '';
     for (id => thanks in specialThanks)
     {
-      if (id == 0) list += thanks;
-      else
-        list += '\n$thanks';
+      if (id > 0) list += "\n";
+      list += thanks;
     }
 
     var specialThanks = new FlxText(0, 0, 0, list);
@@ -285,6 +314,9 @@ class RemnantsCreditsGroup extends FunkinGroup
     }
   }
 
+  /**
+   * Helper function for updating the group's position.
+   */
   public function updateGroup(elapsed:Float, mult:Float, pause:Bool)
   {
     var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
@@ -301,6 +333,16 @@ class RemnantsCreditsGroup extends FunkinGroup
       else
         this.y -= this.baseSpeed * elapsed;
     }
+  }
+
+  /**
+   * Helper function to calculate the scrolling speed (in pixels per second)
+   */
+  public function calculateSpeed(start:Float, end:Float):Void
+  {
+    var distance:Float = this.y - -this.height;
+    var duration:Float = (end - start) / 1000.0;
+    this.baseSpeed = (distance / duration) + 5;
   }
 
   /**
