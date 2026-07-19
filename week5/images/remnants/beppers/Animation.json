@@ -1,7 +1,7 @@
 {
   "AN": {
     "N": "Week 5 Remnants BG",
-    "SN": "BEPPERS TA EXPORT",
+    "SN": "! - Export Boppers/BEPPERS TA EXPORT",
     "TL": {
       "L": [
         {
@@ -13,7 +13,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "ashley boppin",
+                    "SN": "Parts/ashley boppin",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 457.5, "y": 110.55 },
@@ -23,7 +23,7 @@
                 },
                 {
                   "SI": {
-                    "SN": "Phanto Bop",
+                    "SN": "Parts/Phanto Bop",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 2435.75, "y": 1491.35 },
@@ -33,20 +33,20 @@
                 },
                 {
                   "SI": {
-                    "SN": "zara boppin",
+                    "SN": "Parts/spg boppin",
                     "FF": 0,
                     "ST": "G",
-                    "TRP": { "x": 170.55, "y": 323.85 },
+                    "TRP": { "x": 312.7, "y": 1475.65 },
                     "LP": "LP",
                     "MX": [1, 0, 0, 1, 0, 0]
                   }
                 },
                 {
                   "SI": {
-                    "SN": "spg boppin",
+                    "SN": "Parts/These guys",
                     "FF": 0,
                     "ST": "G",
-                    "TRP": { "x": 312.7, "y": 1475.65 },
+                    "TRP": { "x": -215.25, "y": 1558.75 },
                     "LP": "LP",
                     "MX": [1, 0, 0, 1, 0, 0]
                   }
@@ -59,7 +59,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "Plush Escalator",
+                    "SN": "Parts/Plush Escalator",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": -324, "y": -197.8 },
@@ -69,7 +69,7 @@
                 },
                 {
                   "SI": {
-                    "SN": "Phanto Bop Scared",
+                    "SN": "Parts/Phanto Bop Scared",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 2435.75, "y": 1491.35 },
@@ -79,7 +79,7 @@
                 },
                 {
                   "SI": {
-                    "SN": "spg exe boppin ",
+                    "SN": "Parts/spg exe boppin ",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 312.7, "y": 1475.65 },
@@ -89,7 +89,7 @@
                 },
                 {
                   "SI": {
-                    "SN": "lz boppin",
+                    "SN": "Parts/lz boppin",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 32.35, "y": 72 },
@@ -107,7 +107,7 @@
   "SD": {
     "S": [
       {
-        "SN": "ashley boppin",
+        "SN": "Parts/ashley boppin",
         "TL": {
           "L": [
             {
@@ -119,7 +119,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley head",
+                        "SN": "Parts/ashley head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 116.55, "y": 120.8 },
@@ -135,7 +135,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley head",
+                        "SN": "Parts/ashley head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 116.4, "y": 120.85 },
@@ -151,7 +151,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley head",
+                        "SN": "Parts/ashley head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 116.45, "y": 120.8 },
@@ -167,7 +167,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley head",
+                        "SN": "Parts/ashley head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 116.45, "y": 120.8 },
@@ -183,7 +183,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley head",
+                        "SN": "Parts/ashley head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 116.45, "y": 120.75 },
@@ -204,7 +204,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front hand",
+                        "SN": "Parts/ashley front hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 78.4, "y": 64.1 },
@@ -220,7 +220,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front hand",
+                        "SN": "Parts/ashley front hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 78.55, "y": 64.1 },
@@ -236,7 +236,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front hand",
+                        "SN": "Parts/ashley front hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 78.55, "y": 64.1 },
@@ -252,7 +252,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front hand",
+                        "SN": "Parts/ashley front hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 78.45, "y": 64.05 },
@@ -268,7 +268,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front hand",
+                        "SN": "Parts/ashley front hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 78.45, "y": 64.05 },
@@ -289,7 +289,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front arm",
+                        "SN": "Parts/ashley front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 71.75, "y": 106.1 },
@@ -305,7 +305,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front arm",
+                        "SN": "Parts/ashley front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 71.85, "y": 106.1 },
@@ -321,7 +321,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front arm",
+                        "SN": "Parts/ashley front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 71.9, "y": 106.15 },
@@ -337,7 +337,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front arm",
+                        "SN": "Parts/ashley front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 71.75, "y": 106.05 },
@@ -353,7 +353,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley front arm",
+                        "SN": "Parts/ashley front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 71.8, "y": 106.1 },
@@ -374,7 +374,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back hand",
+                        "SN": "Parts/ashley back hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 86.75, "y": 75.5 },
@@ -390,7 +390,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back hand",
+                        "SN": "Parts/ashley back hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 86.8, "y": 75.55 },
@@ -406,7 +406,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back hand",
+                        "SN": "Parts/ashley back hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 86.8, "y": 75.6 },
@@ -422,7 +422,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back hand",
+                        "SN": "Parts/ashley back hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 86.8, "y": 75.65 },
@@ -438,7 +438,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back hand",
+                        "SN": "Parts/ashley back hand",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 86.8, "y": 75.6 },
@@ -459,7 +459,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley body",
+                        "SN": "Parts/ashley body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 173.05, "y": 723.15 },
@@ -475,7 +475,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley body",
+                        "SN": "Parts/ashley body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 174.2, "y": 723.2 },
@@ -491,7 +491,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley body",
+                        "SN": "Parts/ashley body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 175.15, "y": 722.05 },
@@ -507,7 +507,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley body",
+                        "SN": "Parts/ashley body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 174.1, "y": 362.1 },
@@ -528,7 +528,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back arm",
+                        "SN": "Parts/ashley back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 104.15, "y": 115.75 },
@@ -544,7 +544,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back arm",
+                        "SN": "Parts/ashley back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 104.15, "y": 115.85 },
@@ -560,7 +560,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back arm",
+                        "SN": "Parts/ashley back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 104.15, "y": 115.8 },
@@ -576,7 +576,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back arm",
+                        "SN": "Parts/ashley back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 104.25, "y": 115.75 },
@@ -592,7 +592,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley back arm",
+                        "SN": "Parts/ashley back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 104.25, "y": 115.7 },
@@ -613,7 +613,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley hair",
+                        "SN": "Parts/ashley hair",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 176.9, "y": 4.65 },
@@ -629,7 +629,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley hair",
+                        "SN": "Parts/ashley hair",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 174.1, "y": 15.65 },
@@ -645,7 +645,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley hair",
+                        "SN": "Parts/ashley hair",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 165.8, "y": 27.35 },
@@ -661,7 +661,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley hair",
+                        "SN": "Parts/ashley hair",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 170.55, "y": 19.05 },
@@ -677,7 +677,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley hair",
+                        "SN": "Parts/ashley hair",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 174.9, "y": 201 },
@@ -698,7 +698,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley tail",
+                        "SN": "Parts/ashley tail",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 88.15, "y": 96.4 },
@@ -714,7 +714,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley tail",
+                        "SN": "Parts/ashley tail",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 88.25, "y": 96.4 },
@@ -730,7 +730,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley tail",
+                        "SN": "Parts/ashley tail",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 88.3, "y": 96.35 },
@@ -746,7 +746,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley tail",
+                        "SN": "Parts/ashley tail",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 88.1, "y": 96.4 },
@@ -762,7 +762,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley tail",
+                        "SN": "Parts/ashley tail",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 88.2, "y": 96.4 },
@@ -778,7 +778,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "ashley tail",
+                        "SN": "Parts/ashley tail",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 88.2, "y": 96.4 },
@@ -794,9 +794,94 @@
         }
       },
       {
-        "SN": "Phanto Bop",
+        "SN": "Parts/Phanto Bop",
         "TL": {
           "L": [
+            {
+              "LN": "Layer_2_copia",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 41.6, "y": 35.65 },
+                        "LP": "SF",
+                        "MX": [0.998, -0.061, 0.061, 0.998, 2371.1, 1393.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 2,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 41.55, "y": 35.7 },
+                        "LP": "SF",
+                        "MX": [0.993, -0.119, 0.119, 0.993, 2370.6, 1394.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 4,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 41.6, "y": 35.7 },
+                        "LP": "SF",
+                        "MX": [0.998, -0.061, 0.061, 0.998, 2375.05, 1385.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 6,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 41.6, "y": 35.6 },
+                        "LP": "SF",
+                        "MX": [1, -0.028, 0.028, 1, 2377.2, 1382.95]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 8,
+                  "DU": 6,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 41.55, "y": 35.65 },
+                        "LP": "SF",
+                        "MX": [1, 0, 0, 1, 2377.65, 1379.45]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
             {
               "LN": "Layer_2",
               "FR": [
@@ -806,7 +891,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.55, "y": 121.45 },
@@ -822,7 +907,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.65, "y": 121.5 },
@@ -838,7 +923,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.65, "y": 121.45 },
@@ -854,7 +939,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.6, "y": 121.5 },
@@ -870,7 +955,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.55, "y": 121.5 },
@@ -891,7 +976,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant body-",
+                        "SN": "Parts/phanto remnant body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 182.5, "y": 336.35 },
@@ -907,7 +992,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant body-",
+                        "SN": "Parts/phanto remnant body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 174.5, "y": 337.35 },
@@ -923,7 +1008,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant body-",
+                        "SN": "Parts/phanto remnant body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 177.5, "y": 168.3 },
@@ -939,154 +1024,7 @@
         }
       },
       {
-        "SN": "zara boppin",
-        "TL": {
-          "L": [
-            {
-              "LN": "Layer_8",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 2,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 4,
-                  "DU": 4,
-                  "E": []
-                },
-                {
-                  "I": 8,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 10,
-                  "DU": 4,
-                  "E": []
-                }
-              ]
-            },
-            {
-              "LN": "MergedLayer_1",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 2,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 4,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 6,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 8,
-                  "DU": 6,
-                  "E": []
-                }
-              ]
-            },
-            {
-              "LN": "Layer_10",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 2,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 4,
-                  "DU": 10,
-                  "E": []
-                }
-              ]
-            },
-            {
-              "LN": "Layer_11",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 2,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 4,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 6,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 8,
-                  "DU": 6,
-                  "E": []
-                }
-              ]
-            },
-            {
-              "LN": "Layer_9",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 2,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 4,
-                  "DU": 4,
-                  "E": []
-                },
-                {
-                  "I": 8,
-                  "DU": 2,
-                  "E": []
-                },
-                {
-                  "I": 10,
-                  "DU": 4,
-                  "E": []
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "SN": "spg boppin",
+        "SN": "Parts/spg boppin",
         "TL": {
           "L": [
             {
@@ -1098,7 +1036,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm",
+                        "SN": "Parts/spg front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.1, "y": 59.75 },
@@ -1114,7 +1052,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm",
+                        "SN": "Parts/spg front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.1, "y": 59.65 },
@@ -1130,7 +1068,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm",
+                        "SN": "Parts/spg front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.05, "y": 59.7 },
@@ -1146,7 +1084,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm",
+                        "SN": "Parts/spg front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.05, "y": 59.65 },
@@ -1162,7 +1100,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm",
+                        "SN": "Parts/spg front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.05, "y": 59.65 },
@@ -1183,7 +1121,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head",
+                        "SN": "Parts/spg head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.85, "y": 109.25 },
@@ -1199,7 +1137,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head",
+                        "SN": "Parts/spg head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 133, "y": 109.2 },
@@ -1215,7 +1153,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head",
+                        "SN": "Parts/spg head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.95, "y": 109.2 },
@@ -1231,7 +1169,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head",
+                        "SN": "Parts/spg head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.85, "y": 109.2 },
@@ -1247,7 +1185,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head",
+                        "SN": "Parts/spg head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.9, "y": 109.15 },
@@ -1268,7 +1206,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body",
+                        "SN": "Parts/spg body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 134.65, "y": 403.35 },
@@ -1284,7 +1222,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body",
+                        "SN": "Parts/spg body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 138.75, "y": 397.3 },
@@ -1300,7 +1238,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body",
+                        "SN": "Parts/spg body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 140.7, "y": 204.3 },
@@ -1316,7 +1254,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body",
+                        "SN": "Parts/spg body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 140.7, "y": 204.3 },
@@ -1332,7 +1270,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body",
+                        "SN": "Parts/spg body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 140.7, "y": 204.3 },
@@ -1348,7 +1286,7 @@
         }
       },
       {
-        "SN": "Plush Escalator",
+        "SN": "Parts/These guys",
         "TL": {
           "L": [
             {
@@ -1360,7 +1298,184 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "STUPID PLUSH",
+                        "SN": "Parts/hank head",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 223.6, "y": 134.45 },
+                        "LP": "LP",
+                        "MX": [0.999, 0.048, -0.048, 0.999, -639.5, 1437.35]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 2,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank head",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 223.6, "y": 134.5 },
+                        "LP": "LP",
+                        "MX": [0.998, 0.069, -0.069, 0.998, -639.35, 1429.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 4,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank head",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 223.55, "y": 134.5 },
+                        "LP": "LP",
+                        "MX": [0.999, 0.039, -0.039, 0.999, -648.75, 1436.25]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 6,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank head",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 223.6, "y": 134.6 },
+                        "LP": "LP",
+                        "MX": [1, 0.008, -0.008, 1, -651.1, 1439]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 8,
+                  "DU": 6,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank head",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 223.6, "y": 134.55 },
+                        "LP": "LP",
+                        "MX": [1, 0, 0, 1, -651.15, 1438.75]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "LN": "Layer_2",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank body",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 249.55, "y": 322.8 },
+                        "LP": "LP",
+                        "MX": [1.045, 0, 0, 0.975, -576.3, 1624.45]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 2,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank body",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 249.5, "y": 315.75 },
+                        "LP": "LP",
+                        "MX": [1.012, 0, 0, 0.99, -568.15, 1619.45]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 4,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank body",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 247.55, "y": 160.75 },
+                        "LP": "LP",
+                        "MX": [1, 0, 0, 1, -565.1, 1616.45]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 6,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank body",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 247.55, "y": 160.75 },
+                        "LP": "LP",
+                        "MX": [1, 0, 0, 1, -565.1, 1616.45]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 8,
+                  "DU": 6,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/hank body",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 247.55, "y": 160.75 },
+                        "LP": "LP",
+                        "MX": [1, 0, 0, 1, -565.1, 1616.45]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/Plush Escalator",
+        "TL": {
+          "L": [
+            {
+              "LN": "Layer_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/STUPID PLUSH",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 127.55, "y": 783.4 },
@@ -1376,7 +1491,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "STUPID PLUSH",
+                        "SN": "Parts/STUPID PLUSH",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 127.65, "y": 795.35 },
@@ -1392,7 +1507,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "STUPID PLUSH",
+                        "SN": "Parts/STUPID PLUSH",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 122.5, "y": 800.25 },
@@ -1408,7 +1523,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "STUPID PLUSH",
+                        "SN": "Parts/STUPID PLUSH",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 150.5 },
@@ -1424,9 +1539,94 @@
         }
       },
       {
-        "SN": "Phanto Bop Scared",
+        "SN": "Parts/Phanto Bop Scared",
         "TL": {
           "L": [
+            {
+              "LN": "Layer_2_copia",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 1,
+                        "ST": "G",
+                        "TRP": { "x": 41.6, "y": 35.65 },
+                        "LP": "SF",
+                        "MX": [0.998, -0.061, 0.061, 0.998, 2371.1, 1393.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 2,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 1,
+                        "ST": "G",
+                        "TRP": { "x": 41.55, "y": 35.7 },
+                        "LP": "SF",
+                        "MX": [0.993, -0.119, 0.119, 0.993, 2370.6, 1394.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 4,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 1,
+                        "ST": "G",
+                        "TRP": { "x": 41.6, "y": 35.7 },
+                        "LP": "SF",
+                        "MX": [0.998, -0.061, 0.061, 0.998, 2375.05, 1385.75]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 6,
+                  "DU": 2,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 1,
+                        "ST": "G",
+                        "TRP": { "x": 41.6, "y": 35.6 },
+                        "LP": "SF",
+                        "MX": [1, -0.028, 0.028, 1, 2377.2, 1382.95]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "I": 8,
+                  "DU": 6,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "phanto face",
+                        "FF": 1,
+                        "ST": "G",
+                        "TRP": { "x": 41.55, "y": 35.65 },
+                        "LP": "SF",
+                        "MX": [1, 0, 0, 1, 2377.65, 1379.45]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
             {
               "LN": "Layer_2",
               "FR": [
@@ -1436,7 +1636,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head scared",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.55, "y": 121.45 },
@@ -1452,7 +1652,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head scared",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.65, "y": 121.5 },
@@ -1468,7 +1668,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head scared",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.65, "y": 121.45 },
@@ -1484,7 +1684,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head scared",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.6, "y": 121.5 },
@@ -1500,7 +1700,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant head scared",
+                        "SN": "Parts/phanto remnant head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.55, "y": 121.5 },
@@ -1521,7 +1721,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant body-",
+                        "SN": "Parts/phanto remnant body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 182.5, "y": 336.35 },
@@ -1537,7 +1737,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant body-",
+                        "SN": "Parts/phanto remnant body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 174.5, "y": 337.35 },
@@ -1553,7 +1753,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "phanto remnant body-",
+                        "SN": "Parts/phanto remnant body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 177.5, "y": 168.3 },
@@ -1569,7 +1769,7 @@
         }
       },
       {
-        "SN": "spg exe boppin ",
+        "SN": "Parts/spg exe boppin ",
         "TL": {
           "L": [
             {
@@ -1581,7 +1781,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm exe!!",
+                        "SN": "Parts/spg front arm exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.1, "y": 59.75 },
@@ -1597,7 +1797,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm exe!!",
+                        "SN": "Parts/spg front arm exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.1, "y": 59.65 },
@@ -1613,7 +1813,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm exe!!",
+                        "SN": "Parts/spg front arm exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.05, "y": 59.7 },
@@ -1629,7 +1829,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm exe!!",
+                        "SN": "Parts/spg front arm exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.05, "y": 59.65 },
@@ -1645,7 +1845,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg front arm exe!!",
+                        "SN": "Parts/spg front arm exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.05, "y": 59.65 },
@@ -1666,7 +1866,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head exe!!",
+                        "SN": "Parts/spg head exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.85, "y": 109.25 },
@@ -1682,7 +1882,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head exe!!",
+                        "SN": "Parts/spg head exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 133, "y": 109.2 },
@@ -1698,7 +1898,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head exe!!",
+                        "SN": "Parts/spg head exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.95, "y": 109.2 },
@@ -1714,7 +1914,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head exe!!",
+                        "SN": "Parts/spg head exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.85, "y": 109.2 },
@@ -1730,7 +1930,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg head exe!!",
+                        "SN": "Parts/spg head exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 132.9, "y": 109.15 },
@@ -1751,7 +1951,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body exe!!",
+                        "SN": "Parts/spg body exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 134.65, "y": 403.35 },
@@ -1767,7 +1967,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body exe!!",
+                        "SN": "Parts/spg body exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 138.75, "y": 397.3 },
@@ -1783,7 +1983,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body exe!!",
+                        "SN": "Parts/spg body exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 140.7, "y": 204.3 },
@@ -1799,7 +1999,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body exe!!",
+                        "SN": "Parts/spg body exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 140.7, "y": 204.3 },
@@ -1815,7 +2015,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "spg body exe!!",
+                        "SN": "Parts/spg body exe!!",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 140.7, "y": 204.3 },
@@ -1831,7 +2031,7 @@
         }
       },
       {
-        "SN": "lz boppin",
+        "SN": "Parts/lz boppin",
         "TL": {
           "L": [
             {
@@ -1843,7 +2043,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "aku back arm",
+                        "SN": "Parts/aku back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 118.15, "y": 99.65 },
@@ -1853,7 +2053,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku body",
+                        "SN": "Parts/aku body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 160.35, "y": 276.15 },
@@ -1863,7 +2063,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku front arm",
+                        "SN": "Parts/aku front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 85.05, "y": 135.85 },
@@ -1873,7 +2073,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku head",
+                        "SN": "Parts/aku head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 218.4, "y": 152.55 },
@@ -1889,7 +2089,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "aku back arm",
+                        "SN": "Parts/aku back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 118.2, "y": 99.7 },
@@ -1899,7 +2099,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku body",
+                        "SN": "Parts/aku body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 154.3, "y": 282.05 },
@@ -1909,7 +2109,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku front arm",
+                        "SN": "Parts/aku front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 85.05, "y": 135.85 },
@@ -1919,7 +2119,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku head",
+                        "SN": "Parts/aku head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 218.3, "y": 152.55 },
@@ -1935,7 +2135,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "aku back arm",
+                        "SN": "Parts/aku back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 118.3, "y": 99.7 },
@@ -1945,7 +2145,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku body",
+                        "SN": "Parts/aku body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 220.9, "y": 333.95 },
@@ -1955,7 +2155,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku front arm",
+                        "SN": "Parts/aku front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 85, "y": 135.9 },
@@ -1965,7 +2165,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku head",
+                        "SN": "Parts/aku head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 218.3, "y": 152.65 },
@@ -1981,7 +2181,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "aku back arm",
+                        "SN": "Parts/aku back arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 118.35, "y": 99.7 },
@@ -1991,7 +2191,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku body",
+                        "SN": "Parts/aku body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 220.9, "y": 333.95 },
@@ -2001,7 +2201,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku front arm",
+                        "SN": "Parts/aku front arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 85.05, "y": 135.85 },
@@ -2011,7 +2211,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "aku head",
+                        "SN": "Parts/aku head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 218.3, "y": 152.6 },
@@ -2026,8 +2226,114 @@
                   "DU": 6,
                   "E": [
                     {
+                      "SI": {
+                        "SN": "Parts/aku back arm",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 118.35, "y": 99.7 },
+                        "LP": "LP",
+                        "MX": [0.836, 0, 0, 0.836, 0.65, -30.6]
+                      }
+                    },
+                    {
+                      "SI": {
+                        "SN": "Parts/aku body",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 220.9, "y": 333.95 },
+                        "LP": "LP",
+                        "MX": [0.836, 0, 0, 0.836, -85.85, -63.55]
+                      }
+                    },
+                    {
+                      "SI": {
+                        "SN": "Parts/aku front arm",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 85.05, "y": 135.85 },
+                        "LP": "LP",
+                        "MX": [0.836, 0, 0, 0.836, -132.45, -46.2]
+                      }
+                    },
+                    {
+                      "SI": {
+                        "SN": "Parts/aku head",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 235.5, "y": 182.5 },
+                        "LP": "LP",
+                        "MX": [0.836, 0, 0, 0.836, -156.1, -252.4]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/ashley head",
+        "TL": {
+          "L": [
+            {
+              "LN": "Layer_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
                       "ASI": {
-                        "MX": [1, 0, 0, 1, -156.1, -252.6],
+                        "MX": [1.337, 0, 0, 1.337, 0, 0],
+                        "N": "0"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/ashley front hand",
+        "TL": {
+          "L": [
+            {
+              "LN": "Layer_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [1.337, 0, 0, 1.337, 0, 0],
+                        "N": "1"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/ashley front arm",
+        "TL": {
+          "L": [
+            {
+              "LN": "Layer_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [1.337, 0, 0, 1.337, 0, 0],
                         "N": "2"
                       }
                     }
@@ -2039,7 +2345,7 @@
         }
       },
       {
-        "SN": "ashley head",
+        "SN": "Parts/ashley back hand",
         "TL": {
           "L": [
             {
@@ -2063,7 +2369,7 @@
         }
       },
       {
-        "SN": "ashley front hand",
+        "SN": "Parts/ashley body",
         "TL": {
           "L": [
             {
@@ -2075,7 +2381,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1.337, 0, 0, 1.337, 0, 0],
+                        "MX": [1.307, 0, 0, 1.337, 0, 0],
                         "N": "4"
                       }
                     }
@@ -2087,7 +2393,7 @@
         }
       },
       {
-        "SN": "ashley front arm",
+        "SN": "Parts/ashley back arm",
         "TL": {
           "L": [
             {
@@ -2111,7 +2417,7 @@
         }
       },
       {
-        "SN": "ashley back hand",
+        "SN": "Parts/ashley hair",
         "TL": {
           "L": [
             {
@@ -2135,7 +2441,7 @@
         }
       },
       {
-        "SN": "ashley body",
+        "SN": "Parts/ashley tail",
         "TL": {
           "L": [
             {
@@ -2147,7 +2453,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1.307, 0, 0, 1.337, 0, 0],
+                        "MX": [1.337, 0, 0, 1.337, 0, 0],
                         "N": "7"
                       }
                     }
@@ -2159,11 +2465,11 @@
         }
       },
       {
-        "SN": "ashley back arm",
+        "SN": "phanto face",
         "TL": {
           "L": [
             {
-              "LN": "Layer_1",
+              "LN": "Capa_1",
               "FR": [
                 {
                   "I": 0,
@@ -2171,31 +2477,19 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1.337, 0, 0, 1.337, 0, 0],
+                        "MX": [1, 0, 0, 1, 0, 0],
                         "N": "8"
                       }
                     }
                   ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "SN": "ashley hair",
-        "TL": {
-          "L": [
-            {
-              "LN": "Layer_1",
-              "FR": [
+                },
                 {
-                  "I": 0,
+                  "I": 1,
                   "DU": 1,
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1.337, 0, 0, 1.337, 0, 0],
+                        "MX": [1, 0, 0, 1, -61.3, -20.2],
                         "N": "9"
                       }
                     }
@@ -2207,11 +2501,11 @@
         }
       },
       {
-        "SN": "ashley tail",
+        "SN": "Parts/phanto remnant head",
         "TL": {
           "L": [
             {
-              "LN": "Layer_1",
+              "LN": "Layer_2",
               "FR": [
                 {
                   "I": 0,
@@ -2219,7 +2513,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1.337, 0, 0, 1.337, 0, 0],
+                        "MX": [1, 0, 0, 1, 0, 0],
                         "N": "10"
                       }
                     }
@@ -2231,31 +2525,7 @@
         }
       },
       {
-        "SN": "phanto remnant head",
-        "TL": {
-          "L": [
-            {
-              "LN": "Layer 1",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 1,
-                  "E": [
-                    {
-                      "ASI": {
-                        "MX": [1, 0, 0, 1, 0, 0],
-                        "N": "0"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "SN": "phanto remnant body-",
+        "SN": "Parts/phanto remnant body",
         "TL": {
           "L": [
             {
@@ -2279,7 +2549,7 @@
         }
       },
       {
-        "SN": "spg front arm",
+        "SN": "Parts/spg front arm",
         "TL": {
           "L": [
             {
@@ -2303,7 +2573,7 @@
         }
       },
       {
-        "SN": "spg head",
+        "SN": "Parts/spg head",
         "TL": {
           "L": [
             {
@@ -2327,7 +2597,7 @@
         }
       },
       {
-        "SN": "spg body",
+        "SN": "Parts/spg body",
         "TL": {
           "L": [
             {
@@ -2351,7 +2621,55 @@
         }
       },
       {
-        "SN": "STUPID PLUSH",
+        "SN": "Parts/hank head",
+        "TL": {
+          "L": [
+            {
+              "LN": "Layer_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [1, 0, 0, 1, 0, 0],
+                        "N": "15"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/hank body",
+        "TL": {
+          "L": [
+            {
+              "LN": "Layer_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [0.957, 0, 0, 1, 0, 0],
+                        "N": "16"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/STUPID PLUSH",
         "TL": {
           "L": [
             {
@@ -2364,7 +2682,7 @@
                     {
                       "ASI": {
                         "MX": [0.939, 0, 0, 1, -38.6, 140.9],
-                        "N": "15"
+                        "N": "17"
                       }
                     }
                   ]
@@ -2375,31 +2693,7 @@
         }
       },
       {
-        "SN": "phanto remnant head scared",
-        "TL": {
-          "L": [
-            {
-              "LN": "Layer 1",
-              "FR": [
-                {
-                  "I": 0,
-                  "DU": 1,
-                  "E": [
-                    {
-                      "ASI": {
-                        "MX": [1, 0, 0, 1, 0, 0],
-                        "N": "1"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "SN": "spg front arm exe!!",
+        "SN": "Parts/spg front arm exe!!",
         "TL": {
           "L": [
             {
@@ -2412,7 +2706,7 @@
                     {
                       "ASI": {
                         "MX": [0.905, 0, 0, 0.905, -0.3, 18.85],
-                        "N": "16"
+                        "N": "18"
                       }
                     }
                   ]
@@ -2423,7 +2717,7 @@
         }
       },
       {
-        "SN": "spg head exe!!",
+        "SN": "Parts/spg head exe!!",
         "TL": {
           "L": [
             {
@@ -2436,7 +2730,7 @@
                     {
                       "ASI": {
                         "MX": [0.905, 0, 0, 0.905, 0, 0],
-                        "N": "17"
+                        "N": "19"
                       }
                     }
                   ]
@@ -2447,7 +2741,7 @@
         }
       },
       {
-        "SN": "spg body exe!!",
+        "SN": "Parts/spg body exe!!",
         "TL": {
           "L": [
             {
@@ -2460,7 +2754,7 @@
                     {
                       "ASI": {
                         "MX": [0.853, 0, 0, 0.905, 0, 0],
-                        "N": "18"
+                        "N": "20"
                       }
                     }
                   ]
@@ -2471,7 +2765,7 @@
         }
       },
       {
-        "SN": "aku back arm",
+        "SN": "Parts/aku back arm",
         "TL": {
           "L": [
             {
@@ -2484,7 +2778,7 @@
                     {
                       "ASI": {
                         "MX": [1.176, 0, 0, 1.196, 0, 0],
-                        "N": "19"
+                        "N": "21"
                       }
                     }
                   ]
@@ -2495,7 +2789,7 @@
         }
       },
       {
-        "SN": "aku body",
+        "SN": "Parts/aku body",
         "TL": {
           "L": [
             {
@@ -2508,7 +2802,7 @@
                     {
                       "ASI": {
                         "MX": [1.17, 0, 0, 1.196, -61.65, 7.5],
-                        "N": "20"
+                        "N": "22"
                       }
                     }
                   ]
@@ -2519,7 +2813,7 @@
         }
       },
       {
-        "SN": "aku front arm",
+        "SN": "Parts/aku front arm",
         "TL": {
           "L": [
             {
@@ -2532,7 +2826,7 @@
                     {
                       "ASI": {
                         "MX": [1.168, 0, 0, 1.196, 0, 0],
-                        "N": "21"
+                        "N": "23"
                       }
                     }
                   ]
@@ -2543,7 +2837,7 @@
         }
       },
       {
-        "SN": "aku head",
+        "SN": "Parts/aku head",
         "TL": {
           "L": [
             {
@@ -2556,7 +2850,7 @@
                     {
                       "ASI": {
                         "MX": [1.179, 0, 0, 1.195, 0, 0],
-                        "N": "22"
+                        "N": "24"
                       }
                     }
                   ]
