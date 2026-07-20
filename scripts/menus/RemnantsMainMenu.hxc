@@ -35,7 +35,7 @@ class RemnantsMainMenu extends Module
     backSpr.animation.play('press', true);
 
     // If the plush button is absent, we apply the offset normally.
-    var qtPlush = ModuleHandler.getModule("QtPlushMenuButton")?.plushButton;
+    var qtPlush = ModuleHandler.getModule('QtPlushMenuButton')?.plushButton ?? null;
     backSpr.setPosition(FlxG.width - backSpr.width, qtPlush == null ? FlxG.height - backSpr.height : 0);
 
     FlxTimer.wait(0.5, () -> {
@@ -50,7 +50,6 @@ class RemnantsMainMenu extends Module
   override public function onStateChangeEnd(event:StateChangeScriptEvent):Void
   {
     super.onStateChangeEnd(event);
-
     addRemnantsMainMenuItems(event.targetState);
   }
 
@@ -64,7 +63,9 @@ class RemnantsMainMenu extends Module
     backSpr.animation.addByPrefix('idle', 'backspace to exit', 24, true);
     backSpr.animation.play('idle', true);
 
-    backSpr.setPosition(FlxG.width - backSpr.width + 15, FlxG.height - backSpr.height + 50);
+    // If the plush button is absent, we apply the offset normally.
+    var qtPlush = ModuleHandler.getModule('QtPlushMenuButton')?.plushButton ?? null;
+    backSpr.setPosition(FlxG.width - backSpr.width + 15, qtPlush == null ? FlxG.height - backSpr.height + 50 : 50);
 
     backSpr.scrollFactor.set();
     state.add(backSpr);
@@ -76,13 +77,12 @@ class RemnantsMainMenu extends Module
     if (state.hasUpgraded)
     {
       var merchItem:FlxSprite = state.menuItems.getItem('merch');
-
       var prevAnim:String = merchItem?.animation?.curAnim?.name;
       var item = FlxG.random.bool(50) ? 'kickstarter' : FlxG.random.bool(50) ? 'goodies' : 'donate';
 
-      merchItem.frames = Paths.getSparrowAtlas('mainMenu/' + item);
-      merchItem.animation.addByPrefix('idle', item + ' idle', 24);
-      merchItem.animation.addByPrefix('selected', item + ' selected', 24);
+      merchItem.frames = Paths.getSparrowAtlas('mainMenu/$item');
+      merchItem.animation.addByPrefix('idle', '$item idle', 24);
+      merchItem.animation.addByPrefix('selected', '$item selected', 24);
       merchItem.changeAnim(prevAnim);
 
       // Replace the callback so it opens or the kickstarter, or itch.io instead of the merch page.
