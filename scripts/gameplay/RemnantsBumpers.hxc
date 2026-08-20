@@ -70,6 +70,8 @@ class RemnantsBumpers extends Module
   override public function onCountdownStart(event:CountdownScriptEvent):Void
   {
     super.onCountdownStart(event);
+
+    if (!RemnantsContentUtil.remnantsContentEnabled()) return;
     if (disableAutoPlay) return;
 
     if (setupBumper())
