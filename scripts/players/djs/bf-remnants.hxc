@@ -1,15 +1,24 @@
 package funkin.remnants.players.djs;
 
-import openfl.utils.Assets;
+import funkin.audio.FunkinSound;
 import funkin.ui.freeplay.dj.AnimateAtlasFreeplayDJ;
 import funkin.ui.freeplay.dj.FreeplayDJState;
 import funkin.data.freeplay.player.PlayerRegistry;
 
+using StringTools;
+
 class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
 {
-  var alternateCartoon:Bool = FlxG.random.bool(50); // 50% chance of the cartoon anim change
   final CARTOON_LIST:Array<String> = Assets.list().filter((path) -> return path.startsWith("assets/sounds/cartoons/"));
-  final CARTOON_SYMBOL:String = 'Animations/Boyfriend DJ watchin tv';
+
+  /**
+   * 50% chance for the cartoon animation to change between versions.
+   * The possible outcomes are "Bored" (1) and "Original" (2).
+   */
+  var SUFFIX:Int = FlxG.random.int(1, 2);
+
+  final CARTOON_SYMBOL:String = 'Animations/Boyfriend DJ watchin tv $SUFFIX';
+  final CARTOON_ANIMATION_NAME:String = 'cartoon$SUFFIX';
 
   var currentCartoonFrame:Int = 60;
   var cartoonSnd:Null<FunkinSound> = null;
@@ -21,8 +30,11 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
     super(x, y, characterId);
     this.cartoonSnd?.destroy();
 
+    // Re-roll the chance.
+    SUFFIX = FlxG.random.int(1, 2);
+
     animation.onFrameChange.add((name, number) -> {
-      if (name == playableCharData.getAnimationPrefix('cartoon${alternateCartoon ? 2 : 1}'))
+      if (name == playableCharData.getAnimationPrefix(CARTOON_ANIMATION_NAME))
       {
         if (number == getCartoonFrame('REMOTE_CLICK')) FunkinSound.playOnce(Paths.sound('remote_click'));
         if (number == getCartoonFrame('TV_SOUND')) _runTVLogic();
@@ -61,7 +73,7 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
       // trace('Finished loss reaction');
       currentState = FreeplayDJState.Idle;
     }
-    else if (name == playableCharData?.getAnimationPrefix('cartoon${alternateCartoon ? 2 : 1}'))
+    else if (name == playableCharData?.getAnimationPrefix(CARTOON_ANIMATION_NAME))
     {
       // trace('Finished cartoon');
 
@@ -73,7 +85,7 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
         this.currentCartoonFrame = getCartoonFrame('CHANGE_CHANNEL');
       }
 
-      var animationPrefix:String = playableCharData.getAnimationPrefix('cartoon${alternateCartoon ? 2 : 1}');
+      var animationPrefix:String = playableCharData.getAnimationPrefix(CARTOON_ANIMATION_NAME);
       playFlashAnimation(animationPrefix, true, false, false, this.currentCartoonFrame);
     }
     else if (name == playableCharData?.getAnimationPrefix('newUnlock'))
@@ -110,7 +122,7 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
 
   public function getCartoonFrame(frameLabel:String):Int
   {
-    var cartoonSymbol:Null<SymbolItem> = this.library.getSymbol(CARTOON_SYMBOL + ' ${alternateCartoon ? 2 : 1}');
+    var cartoonSymbol:Null<SymbolItem> = this.library.getSymbol(CARTOON_SYMBOL);
     var cartoonFrame:Null<Frame> = this.getFrameLabel(frameLabel, cartoonSymbol.timeline);
 
     return cartoonFrame.index;
@@ -126,8 +138,8 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
       cartoonSnd = null;
     }
 
-    cartoonSnd = FunkinSound.load(Paths.sound(getRandomFlashToon()), 1.0, false, true, true, () -> {
-      var animationPrefix:String = playableCharData.getAnimationPrefix('cartoon${alternateCartoon ? 2 : 1}');
+    cartoonSnd = FunkinSound.load(Paths.sound(getRandomFlashToon()), 1.0, false, true, true, false, () -> {
+      var animationPrefix:String = playableCharData.getAnimationPrefix(CARTOON_ANIMATION_NAME);
       if (animationPrefix != null) playFlashAnimation(animationPrefix, true, false, false, getCartoonFrame('CHANGE_CHANNEL'));
     });
 
@@ -187,7 +199,7 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
       if (playingCartoonAnim) return;
       playingCartoonAnim = true;
 
-      super.playFlashAnimation('Watching TV ${alternateCartoon ? 2 : 1}', Force, Reverse, Loop, Frame);
+      super.playFlashAnimation('Watching TV $SUFFIX', Force, Reverse, Loop, Frame);
     }
     else
     {
