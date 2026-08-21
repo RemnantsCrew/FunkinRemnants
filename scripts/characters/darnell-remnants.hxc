@@ -50,53 +50,13 @@ class DarnellRemnantsCharacter extends AnimateAtlasCharacter
     }
   }
 
-  function onNoteIncoming(event:NoteScriptEvent)
-  {
-    if (!event.note.noteData.getMustHitNote()
-      && characterType == CharacterType.DAD
-      || event.note.noteData.getMustHitNote()
-      && characterType == CharacterType.BF)
-    {
-      // Get how long until it's time to strum the note.
-      var msTilStrum = event.note.strumTime - Conductor.instance.songPosition;
-
-      switch (event.note.kind)
-      {
-        case "weekend-1-lightcan":
-          scheduleLightCanSound(msTilStrum - 65);
-        case "weekend-1-kickcan":
-          scheduleKickCanSound(msTilStrum - 50);
-        case "weekend-1-kneecan":
-          scheduleKneeCanSound(msTilStrum - 22);
-        default:
-          super.onNoteIncoming(event);
-      }
-    }
-  }
-
   /**
    * Play the animation where Darnell kneels down to light the can.
    */
   function playLightCanAnim()
   {
     this.playAnimation('lightCan', true, true);
-  }
-
-  var lightCanSound:FunkinSound;
-  var loadedLightCanSound:Bool = false;
-
-  /**
-   * Schedule the can-lighting sound to play in X ms
-   */
-  function scheduleLightCanSound(timeToPlay:Float)
-  {
-    if (!loadedLightCanSound)
-    {
-      lightCanSound = FunkinSound.load(Paths.sound('Darnell_Lighter', 'weekend1'), 1.0);
-      loadedLightCanSound = true;
-    }
-
-    lightCanSound.play(true, -timeToPlay);
+    FunkinSound.playOnce(Paths.sound('Darnell_Lighter'));
   }
 
   /**
@@ -105,23 +65,7 @@ class DarnellRemnantsCharacter extends AnimateAtlasCharacter
   function playKickCanAnim()
   {
     this.playAnimation('kickCan', true, false);
-  }
-
-  var kickCanSound:FunkinSound;
-  var loadedKickCanSound:Bool = false;
-
-  /**
-   * Schedule the can-kicking sound to play in X ms
-   */
-  function scheduleKickCanSound(timeToPlay:Float)
-  {
-    if (!loadedKickCanSound)
-    {
-      kickCanSound = FunkinSound.load(Paths.sound('Kick_Can_UP', 'weekend1'), 1.0);
-      loadedKickCanSound = true;
-    }
-
-    kickCanSound.play(true, -timeToPlay);
+    FunkinSound.playOnce(Paths.sound('Kick_Can_UP'));
   }
 
   /**
@@ -130,22 +74,6 @@ class DarnellRemnantsCharacter extends AnimateAtlasCharacter
   function playKneeCanAnim()
   {
     this.playAnimation('kneeCan', true, true);
-  }
-
-  var kneeCanSound:FunkinSound;
-  var loadedKneeCanSound:Bool = false;
-
-  /**
-   * Schedule the can-kneeing sound to play in X ms
-   */
-  function scheduleKneeCanSound(timeToPlay:Float)
-  {
-    if (!loadedKneeCanSound)
-    {
-      kneeCanSound = FunkinSound.load(Paths.sound('Kick_Can_FORWARD', 'weekend1'), 1.0);
-      loadedKneeCanSound = true;
-    }
-
-    kneeCanSound.play(true, -timeToPlay);
+    FunkinSound.playOnce(Paths.sound('Kick_Can_FORWARD'));
   }
 }

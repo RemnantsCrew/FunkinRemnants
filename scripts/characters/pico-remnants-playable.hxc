@@ -32,33 +32,10 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
     GameOverSubState.animationSuffix = "";
 
     PauseSubState.musicSuffix = '-remnants-pico';
-
-    for (img in CACHE_IMAGE_PATHS)
-    {
-      var lib:String = Paths.getLibrary(img);
-      var file:String = Paths.stripLibrary(img);
-
-      // We don't need these graphics outside of Weekend 1.
-      if (lib == "weekend1" && Paths.currentLevel != "weekend1")
-      {
-        continue;
-      }
-
-      FunkinMemory.cacheTexture(Paths.image(file, lib == 'preload' ? null : lib));
-    }
-
-    // We don't need these sounds outside of Weekend 1.
-    if (Paths.currentLevel == "weekend1")
-    {
-      for (snd in CACHE_SOUND_PATHS)
-      {
-        FunkinMemory.cacheSound(Paths.sound(snd, "weekend1"));
-      }
-    }
   }
 
   /**
-     * Initialize and cache sprites used for the death animation,
+   * Initialize and cache sprites used for the death animation,
    * for use later.
    */
   override function createDeathSprites()
