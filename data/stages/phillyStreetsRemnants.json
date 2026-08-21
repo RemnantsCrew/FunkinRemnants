@@ -121,7 +121,7 @@
       "animType": "sparrow",
       "name": "spraycanPile",
       "isPixel": false,
-      "assetPath": "remnants/spraycans/SpraycanPile",
+      "assetPath": "remnants/spraycans/spraycans",
       "scroll": [1, 1],
       "alpha": 1,
       "animations": []

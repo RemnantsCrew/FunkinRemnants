@@ -6,22 +6,8 @@ class SpraycanAtlasSpriteRemnants extends SpraycanAtlasSprite
   {
     super(x, y);
 
-    loadTextureAtlas("remnants/spraycans/spraycanAtlas", "weekend1",
-      {
-        swfMode: true
-      });
-
+    loadTextureAtlas("remnants/spraycans/spraycan-remnants", "weekend1", {swfMode: true});
     animation.onFinish.add(finishCanAnimation);
     animation.onFrameChange.add(onCanFrame);
-  }
-
-  override public function finishCanAnimation(name:String):Void
-  {
-    if (name == 'Can Shot')
-    {
-      onCanFrame('Can Shot', 3, 3);
-    }
-
-    super.finishCanAnimation(name);
   }
 }

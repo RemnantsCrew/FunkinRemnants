@@ -162,7 +162,11 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
       HapticUtil.vibrate(0, 0.1, 0.1, 1);
     });
 
-    new FlxTimer().start(3.0, afterPicoDeathExplosionIntro);
+    FlxTimer.wait(3.0, () -> {
+      if (GameOverSubState.instance == null) return;
+
+      afterPicoDeathExplosionIntro();
+    });
   }
 
   override function onSongRetry(event:ScriptEvent):Void

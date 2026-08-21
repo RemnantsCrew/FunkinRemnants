@@ -51,7 +51,7 @@ class TwoHOTRemnantsBFMixSong extends Song
     // Precache the assets for the song.
     FunkinMemory.cacheTexture(Paths.image("CanImpactParticle"));
     FunkinMemory.cacheTexture(Paths.image("spraypaintExplosionEZ"));
-    FunkinMemory.cacheTexture(Paths.image("remnants/spraycans/spraycanAtlas/spritemap1"));
+    FunkinMemory.cacheTexture(Paths.image("remnants/spraycans/spraycan-remnants/spritemap1"));
   }
 
   function onSongRetry(event:ScriptEvent)

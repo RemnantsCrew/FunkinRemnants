@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Tex-Packer-EX v0.7.1 https://kitzsh.github.io/tex-packer-ex
+-->
+<TextureAtlas imagePath="cutscene-can.png" width="491" height="595">
+  <SubTexture name="can kick quick0000.png" x="2" y="70"  width="193" height="114" frameX="-1" frameY="-115" frameWidth="891" frameHeight="229"/>
+  <SubTexture name="can kick quick0001.png" x="2" y="444" width="154" height="149" rotated="true"  frameX="-313" frameY="-31" frameWidth="891" frameHeight="229"/>
+  <SubTexture name="can kick quick0002.png" x="2" y="188" width="170" height="94" rotated="true"  frameX="-575" frameY="-2" frameWidth="891" frameHeight="229"/>
+  <SubTexture name="can kick quick0003.png" x="354" y="2"  width="135" height="162" frameX="-752" frameY="-47" frameWidth="891" frameHeight="229"/>
+  <SubTexture name="can kicked up0000.png" x="344" y="338"  width="88" height="151" frameX="-0" frameY="-87" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0001.png" x="347" y="174"  width="79" height="160" frameX="-5" frameY="-22" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0002.png" x="2" y="361" width="158" height="79" rotated="true"  frameX="-5" frameY="-3" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0003.png" x="176" y="188" width="167" height="71" rotated="true"  frameX="-9" frameY="-2" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0004.png" x="204" y="2"  width="71" height="168" frameX="-9" frameY="-1" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0005.png" x="279" y="2"  width="71" height="168" frameX="-9" frameY="-36" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0006.png" x="2" y="286" width="167" height="71" rotated="true"  frameX="-9" frameY="-37" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0007.png" x="173" y="286" width="167" height="71" rotated="true"  frameX="-9" frameY="-125" frameWidth="89" frameHeight="403"/>
+  <SubTexture name="can kicked up0008.png" x="2" y="2" width="198" height="64" rotated="true"  frameX="-12" frameY="-205" frameWidth="89" frameHeight="403"/>
+</TextureAtlas>
