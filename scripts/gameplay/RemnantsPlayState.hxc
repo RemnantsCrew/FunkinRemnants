@@ -72,9 +72,12 @@ class RemnantsPlayState extends Module
       PlayState.instance.opponentStrumline.noteHoldCovers.visible = false;
       for (strum in PlayState.instance.opponentStrumline.strumlineNotes.members)
       {
-        var staticAnim = strum.animation.getByName('static')?.frames;
-        strum.animation.add('confirm-hold', staticAnim, 0, false);
-        strum.animation.add('confirm', staticAnim, 0, false);
+        final staticAnim = strum.animation.getByName('static')?.frames;
+        if (staticAnim != null)
+        {
+          strum.animation.add('confirm-hold', staticAnim, 0, false);
+          strum.animation.add('confirm', staticAnim, 0, false);
+        }
       }
     }
   }
