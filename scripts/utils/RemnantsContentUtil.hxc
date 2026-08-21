@@ -8,9 +8,12 @@ class RemnantsContentUtil
 {
   public static var songList(get, never):Array<String>;
 
+  /**
+   * Checks if the current playable character is Funkin' their Remnants.
+   * @return Bool
+   */
   public static function remnantsContentEnabled():Bool
   {
-    // If PlayState is active, check if the current "player" is Funkin' their Remnants.
     if (PlayState.instance != null)
     {
       var playerCharacterId:String = PlayerRegistry.instance.getCharacterOwnerId(PlayState.instance?.currentChart?.characters.player);
@@ -53,6 +56,10 @@ class RemnantsContentUtil
     return true;
   }
 
+  /**
+   * Loads the last remnants character.
+   * If everything goes fine, your game will be Funkin' their Remnants!
+   */
   public static function loadLastRemnantsChar():Void
   {
     if (!Save.instance.modOptions.exists('lastRemnantsChar')) return;
@@ -62,6 +69,10 @@ class RemnantsContentUtil
     Save.instance.flush();
   }
 
+  /**
+   * Saves the last remnants character.
+   * This will make the game remember it when you open it again!
+   */
   public static function saveLastRemnantsChar():Void
   {
     if (!FreeplayState.rememberedCharacterId.contains('remnants')) return;
@@ -70,13 +81,16 @@ class RemnantsContentUtil
     Save.instance.flush();
   }
 
+  /**
+   * Checks if the current song is Funkin' their Remnants.
+   * @return Bool
+   */
   public static function isRemnantsSong():Bool
   {
-    var songID:String = PlayState.instance?.currentSong?.id;
-    var variation:String = PlayState.instance?.currentChart?.variation;
-
-    var saveID:String = '${songID}${variation != Constants.DEFAULT_VARIATION ? '-$variation' : ''}';
-    return songList.contains(saveID);
+    final id:String = PlayState.instance?.currentSong?.id;
+    final variation:String = PlayState.instance?.currentChart?.variation;
+    final songCheck:String = variation != Constants.DEFAULT_VARIATION ? '$id-$variation' : id;
+    return songList.contains(songCheck);
   }
 
   static var _songList:Array<String> = null;
