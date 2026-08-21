@@ -1,4 +1,4 @@
-package funkin.remnants.menus;
+package funkin.remnants.menus.freeplay;
 
 import funkin.ui.freeplay.FreeplayState;
 import funkin.ui.freeplay.SongMenuItem;
@@ -17,7 +17,7 @@ class RemnantsFreeplay extends Module
 
   public function new()
   {
-    super('remnantsFreeplay', 1000, {state: FreeplayState});
+    super('RemnantsFreeplay', 1000, {state: FreeplayState});
 
     var freeplayPath:String = Paths.json('ui/freeplay/remnants-freeplay');
     freeplayJson = Json.parse(Assets.getText(freeplayPath)) ?? {};
