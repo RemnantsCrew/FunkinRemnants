@@ -6,8 +6,9 @@ class OneColorShader extends FlxRuntimeShader
 {
   public function new()
   {
-    var fragText:String = Assets.getText(Paths.frag('oneColor'));
+    var fragText:String = Assets.getText(Paths.frag('one-color'));
     super(fragText);
+
     setColor(0xFFFFFFFF);
   }
 
