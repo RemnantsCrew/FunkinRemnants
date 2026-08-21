@@ -30,31 +30,23 @@ class RemnantsContentUtil
     return false;
   }
 
+  /**
+   * Checks if the player has beaten all the songs in the mod.
+   * @return Bool
+   */
   public static function hasBeatenAllSongs():Bool
   {
-    for (songID in SongRegistry.instance.listEntryIds())
+    for (id in SongRegistry.instance.listEntryIds())
     {
-      var song:Song = SongRegistry.instance.fetchEntry(songID);
+      var song:Song = SongRegistry.instance.fetchEntry(id);
 
       for (variation in song.variations)
       {
-        var saveID:String = '$songID${variation != Constants.DEFAULT_VARIATION ? '-$variation' : ''}';
-        if (!songList.contains(saveID)) continue;
+        final parsedSong = (variation != Constants.DEFAULT_VARIATION) ? '$id-$variation' : id;
 
-        var difficultyList:String = song.listDifficulties(variation, null, true, false);
+        if (!songList.contains(parsedSong)) continue;
 
-        var hasBeatenSong:Bool = false;
-        for (difficultyID in difficultyList)
-        {
-          hasBeatenSong = Save.instance.getSongScore(songID, difficultyID, variation) != null;
-          if (hasBeatenSong) break;
-        }
-
-        if (!hasBeatenSong)
-        {
-          trace('Has not beaten "' + song.songName + '" on "' + variation + '"!');
-          return false;
-        }
+        if (!Save.instance.hasBeatenSong(id, null, variation)) return false;
       }
     }
 
