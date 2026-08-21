@@ -1,4 +1,4 @@
-package funkin.remnants.menus;
+package funkin.remnants.menus.freeplay;
 
 import funkin.ui.freeplay.FreeplayState;
 import funkin.ui.freeplay.SongMenuItem;
@@ -17,7 +17,7 @@ class RemnantsFreeplay extends Module
 
   public function new()
   {
-    super('remnantsFreeplay', 1000, {state: FreeplayState});
+    super('RemnantsFreeplay', 1000, {state: FreeplayState});
 
     var freeplayPath:String = Paths.json('ui/freeplay/remnants-freeplay');
     freeplayJson = Json.parse(Assets.getText(freeplayPath)) ?? {};
@@ -156,13 +156,6 @@ class RemnantsFreeplay extends Module
 
   public function isSongSecret(songId:String, variationId:String):Bool
   {
-    if (selectedSong)
-    {
-      // This sucks. Maybe we should cancel the preview here instead?
-      trace('Forcefully disabling `isSongSecret` check!');
-      return false;
-    }
-
     var json:Dynamic = this.getReplaceSongData(songId, variationId);
 
     var variationSuffix:String = variationId != Constants.DEFAULT_VARIATION ? variationId : '';

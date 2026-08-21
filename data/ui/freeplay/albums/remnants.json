@@ -5,5 +5,6 @@
   "albumArtAsset": "freeplay/albumRoll/remnants-placeholder",
   "albumTitleAsset": "freeplay/albumRoll/remnants-text",
   "albumTitleOffsets": [-15, 0],
-  "albumOSTName": "REMNANTS OST"
+  "albumOSTName": "REMNANTS OST",
+  "discordRPCImage": "https://files.tilnotdrip.org/discord-rpc/remnants//albums/remnants-placeholder.png"
 }
