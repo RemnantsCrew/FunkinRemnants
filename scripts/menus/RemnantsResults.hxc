@@ -151,8 +151,9 @@ class RemnantsResults extends Module
       clearPercent.drawNumbers();
 
       // Percent Text
+      final postfix = clearPercent.small ? 'Small' : '';
       final clearPercentText:FunkinSprite = clearPercent.members[0];
-      clearPercentText.loadTexture('resultScreen/clearPercent/clearPercentText${clearPercent.small ? 'Small' : ''}-remnants');
+      clearPercentText.loadTexture('resultScreen/clearPercent/clearPercentText$postfix-remnants');
 
       // Percent Numbers
       for (number in clearPercent.members)
@@ -163,7 +164,8 @@ class RemnantsResults extends Module
         final digitIndex:Int = clearPercent.members.indexOf(number);
         final variant:Bool = digitIndex >= 2;
 
-        number.frames = Paths.getSparrowAtlas('resultScreen/clearPercent/clearPercentNumber${clearPercent.small ? 'Small' : variant ? 'Right' : 'Left'}-remnants');
+        final postfix = clearPercent.small ? 'Small' : variant ? 'Right' : 'Left';
+        number.frames = Paths.getSparrowAtlas('resultScreen/clearPercent/clearPercentNumber$postfix-remnants');
 
         for (i in 0...10)
         {
@@ -203,12 +205,12 @@ class RemnantsResults extends Module
 
     waitWithPreDraw(ScoringRank.getFlashDelay(resultState.rank), () -> {
       final rankTextVert:FlxBackdrop = findByZ(990);
-      rankTextVert?.loadGraphic(Paths.image('${verTextAsset}-remnants'));
+      rankTextVert?.loadGraphic(Paths.image('$verTextAsset-remnants'));
 
       final rankTextBacks:Array<FlxBackdrop> = findAllByZ(100);
       for (backdrop in rankTextBacks)
       {
-        backdrop?.loadGraphic(Paths.image('${horTextAsset}-remnants'));
+        backdrop?.loadGraphic(Paths.image('$horTextAsset-remnants'));
         backdrop?.alpha = 0.5;
       }
     });
