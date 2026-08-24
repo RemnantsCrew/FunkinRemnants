@@ -1,8 +1,8 @@
 package funkin.remnants.menus.freeplay.album;
 
+import funkin.data.character.CharacterDataParser;
 import funkin.ui.freeplay.FreeplaySongData;
 import funkin.ui.freeplay.Album;
-import funkin.util.ReflectUtil;
 import haxe.Json;
 
 class RemnantsAlbum extends Album
@@ -24,10 +24,22 @@ class RemnantsAlbum extends Album
     return super.getAlbumArtAssetKey();
   }
 
+  final PATH_ICON:String = 'https://files.tilnotdrip.org/discord-rpc/remnants/icons';
   final PATH_ALBUM:String = 'https://files.tilnotdrip.org/discord-rpc/remnants/albums';
 
   override public function getDiscordRPCImage():Null<String>
   {
+    // Override RPC Small icon.
+    if (PlayState.instance != null)
+    {
+      final dad = CharacterDataParser.fetchCharacter(PlayState.instance?.currentChart?.characters?.opponent ?? 'face-remnants');
+      final icon = '$PATH_ICON/${dad?.getHealthIconId()}.png';
+
+      // Apply the new icon key.
+      PlayState.instance.currentChart?.discordRPCImage = icon;
+      PlayState.instance?.discordRPCIcon = icon;
+    }
+
     // TODO: Actually check this on a proper way?
     final album = getAssetKey(PlayState.instance?.currentSong.id, PlayState.instance?.currentVariation);
     if (Assets.exists(Paths.image('freeplay/albumRoll/$album'))) return '$PATH_ALBUM/$album.png';
