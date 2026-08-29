@@ -70,6 +70,7 @@ class RemnantsRemnantsSong extends SugarCrashRemnantsSong
         }
       };
 
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows') return;
     PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 }

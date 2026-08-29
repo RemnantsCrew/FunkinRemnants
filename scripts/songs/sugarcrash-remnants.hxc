@@ -55,6 +55,7 @@ class SugarCrashRemnantsSong extends Song
         }
       };
 
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows') return;
     PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
