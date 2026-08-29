@@ -55,7 +55,7 @@ class RemnantsOptions extends Module
 
     if (!RemnantsContentUtil.remnantsContentEnabled()) return;
 
-    // Make 'Lag Adjustment' display as 'Input Offsets' like in Funkin' 0.6.x
+    // Make 'Lag Adjustment' display as 'Input Offsets' like before Funkin 0.7.4.
     var lagItem = event.targetState.optionsCodex.pages.get('options').items?.getItem("LAG ADJUSTMENT");
     lagItem?.atlasText?.text = 'INPUT OFFSETS';
     lagItem?.x += 45;
