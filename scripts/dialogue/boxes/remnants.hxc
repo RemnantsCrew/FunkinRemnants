@@ -18,22 +18,22 @@ class RemnantsDialogueBox extends DialogueBox
     },
     'bf-remnants' =>
     {
-      noises: [for (i in 0...5) 'dialogueNoises/bfNoise/BF_$i'],
+      noises: [for (i in 1...5) 'dialogueNoises/bfNoise/BF_$i'],
       volume: 0.8
     },
     'gf-remnants' =>
     {
-      noises: [for (i in 0...5) 'dialogueNoises/gfNoise/GF_$i'],
+      noises: [for (i in 1...5) 'dialogueNoises/gfNoise/GF_$i'],
       volume: 0.9
     },
     'proto-bf' =>
     {
-      noises: [for (i in 0...5) 'dialogueNoises/protoBf/badnoise$i'],
+      noises: [for (i in 1...4) 'dialogueNoises/protoBf/badnoise$i'],
       volume: 0.45
     },
     'proto-gf' =>
     {
-      noises: [for (i in 0...5) 'dialogueNoises/protoGf/GF_$i'],
+      noises: [for (i in 1...5) 'dialogueNoises/protoGf/GF_$i'],
       volume: 0.65
     },
     'default' =>
