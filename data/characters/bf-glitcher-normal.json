@@ -74,6 +74,11 @@
       "offsets": [20, 63]
     },
     {
+      "atlasSettings": {
+        "swfMode": false,
+        "useRenderTexture": true,
+        "uniqueInCache": true
+      },
       "renderType": "animateatlas",
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "firstDeath-remnants",
@@ -81,6 +86,11 @@
       "offsets": [32, 162]
     },
     {
+      "atlasSettings": {
+        "swfMode": false,
+        "useRenderTexture": true,
+        "uniqueInCache": true
+      },
       "renderType": "animateatlas",
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "deathLoop-remnants",
@@ -89,6 +99,11 @@
       "offsets": [32, 162]
     },
     {
+      "atlasSettings": {
+        "swfMode": false,
+        "useRenderTexture": true,
+        "uniqueInCache": true
+      },
       "renderType": "animateatlas",
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "deathConfirm-remnants",
