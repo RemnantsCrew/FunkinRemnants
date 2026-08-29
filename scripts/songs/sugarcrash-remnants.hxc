@@ -1,6 +1,8 @@
 package funkin.remnants.songs;
 
+import funkin.ui.freeplay.Album;
 import funkin.mobile.input.ControlsHandler;
+import funkin.data.freeplay.album.AlbumRegistry;
 
 /**
  * Even though this looks like just the sugarcrash song script.
@@ -24,6 +26,11 @@ class SugarCrashRemnantsSong extends Song
   override public function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
+
+    // Fetch the album and get the RPC (Little workaround because the opponent is null)
+    var albumEntry:Null<Album> = AlbumRegistry.instance.fetchEntry(PlayState.instance.currentChart?.album ?? '');
+    var album:Null<String> = albumEntry?.getDiscordRPCImage() ?? (PlayState.instance.currentChart?.album ?? '');
+
     moveComboPopUps();
   }
 

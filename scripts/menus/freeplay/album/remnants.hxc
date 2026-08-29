@@ -27,23 +27,36 @@ class RemnantsAlbum extends Album
   final PATH_ICON:String = 'https://files.tilnotdrip.org/discord-rpc/remnants/icons';
   final PATH_ALBUM:String = 'https://files.tilnotdrip.org/discord-rpc/remnants/albums';
 
+  // TODO: Instead of checking if the icon or album asset exists IN THE GAME FILES, check if it exists IN THE SERVER.
+  // Impossible or really hard to accomplish because "haxe.Http" and "Sys.Http" are blacklisted and there's no other way to check a request status.
   override public function getDiscordRPCImage():Null<String>
   {
-    // Override RPC Small icon.
+    // Overrides the RPC small icon.
     if (PlayState.instance != null)
     {
-      final dad = CharacterDataParser.fetchCharacter(PlayState.instance?.currentChart?.characters?.opponent ?? 'face-remnants');
-      final icon = '$PATH_ICON/${dad?.getHealthIconId()}.png';
+      final dad = CharacterDataParser.fetchCharacter(PlayState.instance?.currentChart?.characters?.opponent);
+      var key = dad?.getHealthIconId() ?? PlayState.instance?.currentChart?.characters?.opponent ?? 'face-remnants'; // Gotta make the check here or else it breaks.
 
-      // Apply the new icon key.
-      PlayState.instance.currentChart?.discordRPCImage = icon;
-      PlayState.instance?.discordRPCIcon = icon;
+      // Use face-remnants if the icon doesn't really exists.
+      if (!Assets.exists(Paths.image('icons/icon-$key'))) key = 'face-remnants';
+
+      // Apply the new icon data.
+      PlayState.instance.currentChart?.discordRPCImage = '$PATH_ICON/$key.png';
+      PlayState.instance?.discordRPCIcon = PlayState.instance.currentChart?.discordRPCImage;
     }
 
-    // TODO: Actually check this on a proper way?
-    final album = getAssetKey(PlayState.instance?.currentSong.id, PlayState.instance?.currentVariation);
-    if (Assets.exists(Paths.image('freeplay/albumRoll/$album'))) return '$PATH_ALBUM/$album.png';
+    // Get the album asset key and parse it.
+    final asset = getAssetKey(PlayState.instance?.currentSong.id, PlayState.instance?.currentVariation);
+    final album = '$PATH_ALBUM/$asset.png';
 
+    // Apply the new album data (Only if the image exists)
+    if (Assets.exists(Paths.image('freeplay/albumRoll/$asset')))
+    {
+      PlayState.instance?.discordRPCAlbum = album;
+      return album;
+    }
+
+    // If the album doesn't get's loaded, the album will use the placeholder instead!
     return super.getDiscordRPCImage();
   }
 
