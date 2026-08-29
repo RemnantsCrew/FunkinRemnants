@@ -197,18 +197,21 @@
       "offsets": [0, 0]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "fakeoutDeath",
       "prefix": "Fakeout",
       "offsets": [-278, -126]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "firstDeath",
       "prefix": "Death Intro",
       "offsets": [-278, -126]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "deathLoop",
       "prefix": "Death Loop",
@@ -216,18 +219,21 @@
       "offsets": [-278, -126]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/death",
       "name": "deathConfirm",
       "prefix": "Death Confirm",
       "offsets": [-278, -126]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/can explosion",
       "name": "firstDeath-explosion",
       "prefix": "Can Explosion Death Start",
       "offsets": [137, 189]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/can explosion",
       "name": "deathLoop-explosion",
       "prefix": "Can Explosion Death Loop",
@@ -235,6 +241,7 @@
       "offsets": [137, 189]
     },
     {
+      "atlasSettings": { "useRenderTexture": true },
       "assetPath": "shared:characters/bf-remnants/can explosion",
       "name": "deathConfirm-explosion",
       "prefix": "Can Explosion Death Confirm",
