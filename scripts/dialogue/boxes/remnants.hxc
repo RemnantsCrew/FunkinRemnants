@@ -50,6 +50,22 @@ class RemnantsDialogueBox extends DialogueBox
     super('remnants');
   }
 
+  override function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
+
+    // This is not the best way to handle that, but we can't access "onPause" or "onResume" in Scripted Dialogue Boxes.
+    if (FlxG.state.controls.BACK)
+    {
+      // Stop the speaker sounds when paused.
+      for (sound in this.textDisplay?.sounds)
+      {
+        if (sound == null) continue;
+        sound?.stop();
+      }
+    }
+  }
+
   override public function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
