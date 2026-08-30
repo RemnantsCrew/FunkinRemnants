@@ -49,6 +49,7 @@ class LitUpBFRemnantsMixSong extends Song
     super.onCreate(event);
 
     if (RemnantsOptions.getPerformanceOption()) return;
+
     mist0 = new FlxBackdrop(Paths.image('stages/mistMid'), 0x01);
     mist0.setPosition(-650, -500);
     mist0.scrollFactor.set(1.1, 1.1);
@@ -136,12 +137,14 @@ class LitUpBFRemnantsMixSong extends Song
 
   function mistOn(duration:Float)
   {
+    if (RemnantsOptions.getPerformanceOption()) return;
+
     if (mist0 == null) return;
     if (duration == null) duration = 1;
 
     // Prevent new tweens from being overridden
     for (i in 0...7)
-      FlxTween.cancelTweensOf(scriptGet('mist' + i));
+      FlxTween.cancelTweensOf(scriptGet('mist$i'));
 
     FlxTween.tween(mist0, {alpha: 1}, duration);
     FlxTween.tween(mist1, {alpha: 0.9}, duration);
@@ -154,12 +157,14 @@ class LitUpBFRemnantsMixSong extends Song
 
   function mistOff(duration:Float)
   {
+    if (RemnantsOptions.getPerformanceOption()) return;
+
     if (mist0 == null) return;
     if (duration == null) duration = 1;
 
     // Prevent new tweens from being overridden
     for (i in 0...7)
-      FlxTween.cancelTweensOf(scriptGet('mist' + i));
+      FlxTween.cancelTweensOf(scriptGet('mist$i'));
 
     FlxTween.tween(mist0, {alpha: 0}, duration);
     FlxTween.tween(mist1, {alpha: 0}, duration);
@@ -175,14 +180,14 @@ class LitUpBFRemnantsMixSong extends Song
   {
     super.onSongRetry(event);
 
-    if (mist0.alpha > 0 && !RemnantsOptions.getPerformanceOption()) mistOff(1);
+    if (!RemnantsOptions.getPerformanceOption() && mist0?.alpha > 0) mistOff(1);
   }
 
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
 
-    if (mist0.alpha > 0 && !RemnantsOptions.getPerformanceOption()) mistOff(0);
+    if (!RemnantsOptions.getPerformanceOption() && mist0?.alpha > 0) mistOff(0);
   }
 
   public override function onPause(event:PauseScriptEvent)
@@ -190,8 +195,11 @@ class LitUpBFRemnantsMixSong extends Song
     super.onPause(event);
 
     if (RemnantsOptions.getPerformanceOption()) return;
+
     for (i in 0...7)
-      FlxTweenUtil.pauseTweensOf(scriptGet('mist' + i));
+    {
+      FlxTweenUtil.pauseTweensOf(scriptGet('mist$i'));
+    }
   }
 
   public override function onResume(event:ScriptEvent)
@@ -199,8 +207,11 @@ class LitUpBFRemnantsMixSong extends Song
     super.onResume(event);
 
     if (RemnantsOptions.getPerformanceOption()) return;
+
     for (i in 0...7)
-      FlxTweenUtil.resumeTweensOf(scriptGet('mist' + i));
+    {
+      FlxTweenUtil.resumeTweensOf(scriptGet('mist$i'));
+    }
   }
 
   function onSongLoaded(event:SongLoadScriptEvent)
