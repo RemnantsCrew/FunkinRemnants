@@ -109,7 +109,7 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
     }
   }
 
-  function afterExplosionIntro(timer:FlxTimer)
+  function afterExplosionIntro()
   {
     if (GameOverSubState.instance == null) return;
 
