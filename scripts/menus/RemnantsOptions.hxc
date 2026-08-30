@@ -1,19 +1,20 @@
 package funkin.remnants.menus;
 
 import funkin.ui.options.OptionsState;
+import funkin.ui.options.PreferencesMenu;
 
 class RemnantsOptions extends Module
 {
   public function new()
   {
-    super('remnantsOptions');
+    super('RemnantsOptions');
   }
 
   // Constants to prevent long code...
   final OPTION_ARRAY:Array<String, String> = [
-    ["Show Remnants Bumpers", "When disabled, Remnants bumpers will no longer play."],
+    ["Show Bumpers", "When disabled, Remnants bumpers will no longer play."],
     [
-      "Remnants Performance",
+      "Performance Mode",
       "When enabled, it disables shaders and other effects to improve performance on low-end devices."
     ]
   ];
@@ -41,17 +42,9 @@ class RemnantsOptions extends Module
    */
   public function onStateChangeEnd(event:StateChangeScriptEvent)
   {
-    if (!Std.isOfType(event.targetState, OptionsState) || event.targetState.optionsCodex.pages.get("preferences") == null) return;
+    if (!Std.isOfType(event.targetState, OptionsState)) return;
 
-    event.targetState.optionsCodex.pages.get("preferences").createPrefItemCheckbox(OPTION_ARRAY[0][0], OPTION_ARRAY[0][1], function(value:Bool):Void {
-      Save.instance.modOptions.set('remnantsBumpers', value);
-      Save.instance.flush();
-    }, Save.instance.modOptions.get('remnantsBumpers'));
-
-    event.targetState.optionsCodex.pages.get("preferences").createPrefItemCheckbox(OPTION_ARRAY[1][0], OPTION_ARRAY[1][1], function(value:Bool):Void {
-      Save.instance.modOptions.set('remnantsPerformance', value);
-      Save.instance.flush();
-    }, Save.instance.modOptions.get('remnantsPerformance'));
+    createCategory(event.targetState);
 
     if (!RemnantsContentUtil.remnantsContentEnabled()) return;
 
@@ -62,6 +55,52 @@ class RemnantsOptions extends Module
 
     // Replace the drums with the old ones.
     event.targetState?.drumsBG = FunkinSound.load(Paths.music('offsetsLoop-remnants/drumsLoop-remnants'), 0, true, false, false, false);
+  }
+
+  /**
+   * Creates the category for remnants options.
+   */
+  function createCategory(state:Dynamic):Void
+  {
+    // First, create the page for remnants options.
+    var remnants:PreferencesMenu = state.optionsCodex.addPage('remnants', new PreferencesMenu());
+    remnants.onExit.add(state.optionsCodex.switchPage.bind('options'));
+
+    // Creates the item for remnants options.
+    var options = state.optionsCodex.pages.get('options');
+    var item = options.createItem('REMNANTS OPTIONS', () -> {
+      state.optionsCodex.switchPage('remnants');
+    });
+
+    // Insert our item after the preferences one.
+    var preferences = options.items.getItem("PREFERENCES");
+    if (preferences != null)
+    {
+      options.items.members.remove(item);
+      options.items.members.insert(options.items.members.indexOf(preferences) + 1, item);
+    }
+
+    // Reposition all the items.
+    for (i => item in options.items.members)
+    {
+      item.y = 100 + i * 100;
+    }
+
+    // Clear the default options in our menu.
+    remnants.items.clear();
+    remnants.preferenceDesc = [];
+    remnants.preferenceItems.clear();
+
+    // Then, create the option items.
+    state.optionsCodex.pages.get("remnants").createPrefItemCheckbox(OPTION_ARRAY[0][0], OPTION_ARRAY[0][1], function(value:Bool):Void {
+      Save.instance.modOptions.set('remnantsBumpers', value);
+      Save.instance.flush();
+    }, Save.instance.modOptions.get('remnantsBumpers'));
+
+    state.optionsCodex.pages.get("remnants").createPrefItemCheckbox(OPTION_ARRAY[1][0], OPTION_ARRAY[1][1], function(value:Bool):Void {
+      Save.instance.modOptions.set('remnantsPerformance', value);
+      Save.instance.flush();
+    }, Save.instance.modOptions.get('remnantsPerformance'));
   }
 
   /**
