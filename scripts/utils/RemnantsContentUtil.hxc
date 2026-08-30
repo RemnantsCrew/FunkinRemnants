@@ -3,6 +3,8 @@ package funkin.remnants.utils;
 import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.ui.freeplay.FreeplayState;
 import funkin.data.song.SongRegistry;
+import funkin.util.ReflectUtil;
+import haxe.ds.StringMap;
 
 class RemnantsContentUtil
 {
@@ -56,6 +58,12 @@ class RemnantsContentUtil
     return true;
   }
 
+  public static function getChance(id:String):Bool
+  {
+    final percentage:Float = fetchChances().get(id);
+    return FlxG.random.bool(id);
+  }
+
   /**
    * Loads the last remnants character.
    * If everything goes fine, your game will be Funkin' their Remnants!
@@ -94,6 +102,7 @@ class RemnantsContentUtil
   }
 
   static var _songList:Array<String> = null;
+  static var _chances:StringMap = null;
 
   static function get_songList():Array<String>
   {
@@ -104,5 +113,23 @@ class RemnantsContentUtil
     }
 
     return _songList;
+  }
+
+  static function fetchChances():StringMap
+  {
+    if (_chances == null)
+    {
+      var content:String = Assets.getText(Paths.json('remnants-chances'));
+      var json:String = Json.parse(fullText);
+
+      _chances = new StringMap();
+      for (field in ReflectUtil.getAnonymousFieldsOf(json))
+      {
+        final value:Dynamic = ReflectUtil.getAnonymousField(json, field);
+        _chances.set(field, value);
+      }
+    }
+
+    return _chances;
   }
 }

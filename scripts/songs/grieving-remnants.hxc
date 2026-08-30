@@ -81,7 +81,7 @@ class GrievingRemnantsSong extends Song
       emotional = false;
     }
 
-    utterShock = FlxG.random.bool(1);
+    utterShock = RemnantsContentUtil.getChance('utterShock');
   }
 
   function onCreate(event:ScriptEvent):Void

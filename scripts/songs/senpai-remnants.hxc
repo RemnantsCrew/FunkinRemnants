@@ -111,15 +111,17 @@ class SenpaiRemnantsMixSong extends Song
 
   function startDialogue()
   {
-    var targetDialogue = 'senpai-remnants'; // Normal dialogue
+    var targetDialogue:String = 'senpai-remnants'; // Normal dialogue
 
-    if (!FlxG.random.bool(3))
+    if (RemnantsContentUtil.getChance('bfTerribleMistake'))
     {
-      if (!Preferences.naughtyness) targetDialogue += "-censored"; // Adds censored dialogue
+      // Adds Boyfriend's Terrible Mistake
+      targetDialogue += '-secret';
     }
-    else
+    else if (!Preferences.naughtyness)
     {
-      targetDialogue += "-secret"; // Adds Boyfriend's Terrible Mistake
+      // Adds censored dialogue
+      targetDialogue += "-censored";
     }
 
     PlayState.instance.disableKeys = false;

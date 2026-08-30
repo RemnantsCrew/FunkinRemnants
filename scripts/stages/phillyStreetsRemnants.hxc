@@ -232,7 +232,8 @@ class PhillyStreetsRemnantsStage extends Stage
     {
       if (paper != null)
       {
-        var skeleton:Bool = FlxG.random.bool(1); // Did you guys see that? https://x.com/shoppingcart_r/status/2023625177154695661
+        // Did you guys see that? https://x.com/shoppingcart_r/status/2023625177154695661
+        final skeleton:Bool = RemnantsContentUtil.getChance('didYouGuysSeeThat');
 
         paper.alpha = 1;
         paperInterruptable = false;

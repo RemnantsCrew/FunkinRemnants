@@ -9,6 +9,8 @@ import flixel.FlxSprite;
 
 class RemnantsMainMenu extends Module
 {
+  public static final MAIN_MENU_MERCH_SPRITES:Array<String> = ['kickstarter', 'goodies', 'donate'];
+
   public function new()
   {
     super('remnantsMainMenu', 1000, {state: MainMenuState});
@@ -78,7 +80,7 @@ class RemnantsMainMenu extends Module
     {
       var merchItem:FlxSprite = state.menuItems.getItem('merch');
       var prevAnim:String = merchItem?.animation?.curAnim?.name;
-      var item = FlxG.random.bool(50) ? 'kickstarter' : FlxG.random.bool(50) ? 'goodies' : 'donate';
+      var item = MAIN_MENU_MERCH_SPRITES[FlxG.random.int(0, MAIN_MENU_MERCH_SPRITES.length - 1)];
 
       merchItem.frames = Paths.getSparrowAtlas('mainMenu/$item');
       merchItem.animation.addByPrefix('idle', '$item idle', 24);
@@ -86,7 +88,7 @@ class RemnantsMainMenu extends Module
       merchItem.changeAnim(prevAnim);
 
       // Replace the callback so it opens or the kickstarter, or itch.io instead of the merch page.
-      merchItem.callback = item == 'donate' ? selectDonate : item == 'goodies' ? selectGoodies : selectKickstarter;
+      merchItem.callback = selectMerch.bind(item);
     }
 
     if (Save.instance.modOptions.exists('seenRemnantsCredits')) return;
@@ -102,24 +104,19 @@ class RemnantsMainMenu extends Module
     state.add(newCredits);
   }
 
-  function selectDonate()
+  function selectMerch(item:String):Void
   {
-    // Can't use Referral so it might not work on HTML5.
-    WindowUtil.openURL("https://ninja-muffin24.itch.io/funkin");
-    FlxG.state?.uiStateMachine?.transition(UIState.Idle);
-  }
+    final url:String = switch (item)
+    {
+      case 'kickstarter':
+        Constants.URL_KICKSTARTER;
+      case 'donate':
+        Constants.URL_ITCH;
+      default:
+        Constants.URL_MERCH_FALLBACK;
+    }
 
-  function selectKickstarter()
-  {
-    // Can't use Referral so it might not work on HTML5.
-    WindowUtil.openURL("https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game");
-    FlxG.state?.uiStateMachine?.transition(UIState.Idle);
-  }
-
-  function selectGoodies()
-  {
-    // Can't use Referral so it might not work on HTML5.
-    WindowUtil.openURL("https://www.goodsmile.info/en/product/13980/Nendoroid+Boyfriend.html");
+    WindowUtil.openURL(url);
     FlxG.state?.uiStateMachine?.transition(UIState.Idle);
   }
 

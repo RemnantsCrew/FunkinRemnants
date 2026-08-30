@@ -441,7 +441,7 @@ class GunsRemnantsMixSong extends Song
           FlxG.camera.fade(0xFF000000, 0, true);
           fadeOut = false;
 
-          if (FlxG.random.bool(25)) // Ascension!
+          if (!RemnantsContentUtil.getChance('ascension')) // Ascension!
           {
             FlxTween.tween(PlayState.instance.currentStage.getDad(), {y: PlayState.instance.currentStage.getDad().originalPosition.y - 300}, 10.38,
               {ease: FlxEase.smoothStepInOut});

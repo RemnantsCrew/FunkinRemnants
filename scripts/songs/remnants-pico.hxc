@@ -100,7 +100,7 @@ class RemnantsPicoSong extends Song
     PlayState.instance.tweenCameraToPosition(620, 515.5, 0);
     PlayState.instance.disableKeys = true;
 
-    var saysSlur:Bool = FlxG.random.bool(6.769420); // hahahah im so funny hahahahahahahahahaha
+    var saysSlur:Bool = RemnantsContentUtil.getChance('loadOfThisFaggot'); // i copied and pasted this i swear
 
     var cutsceneMusic:FunkinSound = FunkinSound.load(Paths.music("freeplayRandom-remnants/freeplayRandom-remnants"), 0.0, true);
     var cutsceneAudio:FunkinSound = FunkinSound.load(Paths.sound("gameplay/cutscene/remnants-pico-cutscene" + (saysSlur ? "-secret" : "")), 1.0);
@@ -111,7 +111,7 @@ class RemnantsPicoSong extends Song
 
     var pico:FunkinSprite = FunkinSprite.createTextureAtlas((bfPosition?.x ?? 0) - 260, (bfPosition?.y ?? 0) - 490,
       'stages/sketchRemnants/pico/cutscene/pico', 'shared');
-    pico.anim.addByFrameLabel('anim', "Intro" + (saysSlur ? " Faggot" : ""), 24, false); // i copied and pasted this i swear
+    pico.anim.addByFrameLabel('anim', "Intro" + (saysSlur ? " Faggot" : ""), 24, false); // PLEASE believe me when i say i copy and pasted this
     pico.shader = PlayState.instance.currentStage?.getBoyfriend()?.shader ?? null;
     pico.zIndex = PlayState.instance.currentStage?.getBoyfriend()?.zIndex ?? 0;
     PlayState.instance?.currentStage?.getBoyfriend()?.visible = false;
