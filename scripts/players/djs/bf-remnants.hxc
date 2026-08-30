@@ -17,8 +17,8 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
    */
   var SUFFIX:Int = FlxG.random.int(1, 2);
 
-  final CARTOON_SYMBOL:String = 'Animations/Boyfriend DJ watchin tv $SUFFIX';
-  final CARTOON_ANIMATION_NAME:String = 'cartoon$SUFFIX';
+  var CARTOON_SYMBOL:String = 'Animations/Boyfriend DJ watchin tv $SUFFIX';
+  var CARTOON_ANIMATION_NAME:String = 'cartoon$SUFFIX';
 
   var currentCartoonFrame:Int = 60;
   var cartoonSnd:Null<FunkinSound> = null;
@@ -32,6 +32,14 @@ class BoyfriendRemnantsFreeplayDJ extends AnimateAtlasFreeplayDJ
 
     // Re-roll the chance.
     SUFFIX = FlxG.random.int(1, 2);
+
+    // Update the animation variables.
+    CARTOON_ANIMATION_NAME = 'cartoon$SUFFIX';
+    CARTOON_SYMBOL = 'Animations/Boyfriend DJ watchin tv $SUFFIX';
+
+    // Reset the cartoon state.
+    playingCartoonAnim = false;
+    playingCartoon = false;
 
     animation.onFrameChange.add((name, number) -> {
       if (name == playableCharData.getAnimationPrefix(CARTOON_ANIMATION_NAME))
