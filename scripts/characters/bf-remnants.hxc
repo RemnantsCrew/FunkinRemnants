@@ -28,17 +28,14 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
 
     // Reset to standard death animation.
     GameOverSubState.musicSuffix = '-remnants';
-    GameOverSubState.blueBallSuffix = "";
-    GameOverSubState.animationSuffix = "";
+    GameOverSubState.blueBallSuffix = '';
+    GameOverSubState.animationSuffix = '';
 
     PauseSubState.musicSuffix = '-remnants';
-
-    bfDeathExplosion = null;
     this.visible = true;
   }
 
   var singed:FunkinSound = null;
-  var bfDeathExplosion:FunkinSprite = null;
 
   override function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
   {
