@@ -155,4 +155,18 @@ class RemnantsMusicReplacer extends Module
     // This is so the condition has a chance to be called again.
     lastRememberedLabel = null;
   }
+
+  public function onSubStateOpenEnd(event:SubStateScriptEvent):Void
+  {
+    // Reset the last remembered label between substate switches.
+    // This is so the condition has a chance to be called again.
+    lastRememberedLabel = null;
+  }
+
+  public function onSubStateCloseEnd(event:SubStateScriptEvent):Void
+  {
+    // Reset the last remembered label between substate switches.
+    // This is so the condition has a chance to be called again.
+    lastRememberedLabel = null;
+  }
 }
