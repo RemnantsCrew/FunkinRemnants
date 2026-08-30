@@ -224,7 +224,7 @@ class StressRemnantsMixSong extends Song
     setupCharacter(fakeGirlfriend, CharacterType.GF);
     PlayState.instance.currentStage.add(fakeGirlfriend);
 
-    fakeBoyfriend = CharacterDataParser.fetchCharacter('bf-remnants-tankmen');
+    fakeBoyfriend = CharacterDataParser.fetchCharacter('bf-remnants');
     setupCharacter(fakeBoyfriend, CharacterType.BF);
     PlayState.instance.currentStage.add(fakeBoyfriend);
 
@@ -542,6 +542,8 @@ class StressRemnantsMixSong extends Song
 
   function setupCharacter(character:BaseCharacter, charType:CharacterType):Void
   {
+    if (character == null) return;
+
     var stageCharData:StageDataCharacter = null;
     switch (charType)
     {
@@ -649,8 +651,8 @@ class StressRemnantsMixSong extends Song
 
     hasPlayedCutscene = true;
 
-    if (PlayState.instance.currentStage.storm0.alpha > 0
-      && !RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.storm(0, 1);
+    if (!RemnantsOptions.getPerformanceOption()
+      && PlayState.instance.currentStage.storm0?.alpha > 0) PlayState.instance.currentStage.storm(0, 1);
 
     PlayState.instance.disableKeys = false;
 
@@ -669,8 +671,8 @@ class StressRemnantsMixSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    if (PlayState.instance.currentStage.storm0.alpha > 0
-      && !RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.storm(0, 0);
+    if (!RemnantsOptions.getPerformanceOption()
+      && PlayState.instance.currentStage.storm0?.alpha > 0) PlayState.instance.currentStage.storm(0, 0);
   }
 
   function onSongLoaded(event:SongLoadScriptEvent)
