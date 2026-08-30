@@ -266,48 +266,35 @@ class TankmanBattlefieldRemnantsStage extends Stage
     }
   }
 
-  function stormOn(duration:Float)
+  function storm(alpha:Float, duration:Float)
   {
     if (RemnantsOptions.getPerformanceOption()) return;
 
     if (storm0 == null) return;
+
+    if (alpha == null) alpha = 1;
     if (duration == null) duration = 1;
 
     // Prevent new tweens from being overridden
     for (i in 0...6)
-      FlxTween.cancelTweensOf(scriptGet('storm' + i));
+      FlxTween.cancelTweensOf(scriptGet('storm$i'));
 
-    FlxTween.tween(storm0, {alpha: 1}, duration);
-    FlxTween.tween(storm1, {alpha: 0.9}, duration);
-    FlxTween.tween(storm2, {alpha: 1}, duration);
-    FlxTween.tween(storm3, {alpha: 0.5}, duration);
-    FlxTween.tween(storm4, {alpha: 0.5}, duration);
-    FlxTween.tween(storm5, {alpha: 0.5}, duration);
-  }
+    FlxTween.tween(storm0, {alpha: alpha}, duration);
+    FlxTween.tween(storm1, {alpha: alpha - 0.1}, duration);
+    FlxTween.tween(storm2, {alpha: alpha}, duration);
+    FlxTween.tween(storm3, {alpha: alpha - 0.5}, duration);
+    FlxTween.tween(storm4, {alpha: alpha - 0.5}, duration);
+    FlxTween.tween(storm5, {alpha: alpha - 0.5}, duration);
 
-  function stormOff(duration:Float)
-  {
-    if (RemnantsOptions.getPerformanceOption()) return;
-
-    if (storm0 == null) return;
-    if (duration == null) duration = 1;
-
-    // Prevent new tweens from being overridden
-    for (i in 0...6)
-      FlxTween.cancelTweensOf(scriptGet('storm' + i));
-
-    FlxTween.tween(storm0, {alpha: 0}, duration);
-    FlxTween.tween(storm1, {alpha: 0}, duration);
-    FlxTween.tween(storm2, {alpha: 0}, duration);
-    FlxTween.tween(storm3, {alpha: 0}, duration);
-    FlxTween.tween(storm4, {alpha: 0}, duration);
-    FlxTween.tween(storm5, {alpha: 0}, duration);
-  }
-
-  function onSongRetry(event:ScriptEvent)
-  {
-    super.onSongRetry(event);
-
-    refresh(); // This game fucking sucks so I added this
+    if (alpha == 0)
+    {
+      getGirlfriend().playAnimation('hairFall', true, false);
+      isBlow = false;
+    }
+    else
+    {
+      getGirlfriend().playAnimation('hairRaise', true, false);
+      isBlow = true;
+    }
   }
 }

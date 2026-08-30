@@ -278,7 +278,7 @@ class GunsRemnantsMixSong extends Song
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
 
     if (!RemnantsOptions.getPerformanceOption()
-      && PlayState.instance.currentStage.storm0?.alpha < 1) PlayState.instance.currentStage.stormOn(1);
+      && PlayState.instance.currentStage.storm0?.alpha < 1) PlayState.instance.currentStage.storm(1, 1);
 
     if (fadeHud)
     {
@@ -320,7 +320,7 @@ class GunsRemnantsMixSong extends Song
 
     PlayState.instance.camHUD.alpha = 0;
 
-    if (!RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.stormOn(0.0000001);
+    if (!RemnantsOptions.getPerformanceOption()) PlayState.instance.currentStage.storm(1, 0.0000001);
   }
 
   function onGameOver(event:ScriptEvent):Void
@@ -341,7 +341,7 @@ class GunsRemnantsMixSong extends Song
     FlxTween.tween(PlayState.instance.currentStage.getBoyfriend(), {angle: 720}, 0.5);
 
     if (!RemnantsOptions.getPerformanceOption()
-      && PlayState.instance.currentStage.storm0?.alpha < 1) PlayState.instance.currentStage.stormOn(0);
+      && PlayState.instance.currentStage.storm0?.alpha < 1) PlayState.instance.currentStage.storm(0, 1);
   }
 
   function onPause(event:ScriptEvent):Void
@@ -505,7 +505,7 @@ class GunsRemnantsMixSong extends Song
         {
           time: Conductor.instance.getBeatTimeInMs(224) / 1000,
           callback: () -> {
-            PlayState.instance.currentStage.stormOff(2.6);
+            PlayState.instance.currentStage.storm(0, 2.6);
           }
         });
     }
