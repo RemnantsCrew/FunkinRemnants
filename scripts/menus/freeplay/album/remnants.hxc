@@ -1,6 +1,5 @@
 package funkin.remnants.menus.freeplay.album;
 
-import funkin.data.character.CharacterDataParser;
 import funkin.ui.freeplay.FreeplaySongData;
 import funkin.ui.freeplay.Album;
 import haxe.Json;
@@ -34,7 +33,7 @@ class RemnantsAlbum extends Album
     // Overrides the RPC small icon.
     if (PlayState.instance != null)
     {
-      final dad = CharacterDataParser.fetchCharacter(PlayState.instance?.currentChart?.characters?.opponent);
+      final dad = PlayState.instance.currentStage?.getDad() ?? null;
       var key = dad?.getHealthIconId() ?? PlayState.instance?.currentChart?.characters?.opponent ?? 'face-remnants'; // Gotta make the check here or else it breaks.
 
       // Use face-remnants if the icon doesn't really exists.
