@@ -38,31 +38,37 @@
       "assetPath": "shared:characters/tankman-remnants/extra-animations",
       "name": "hehPrettyGood",
       "prefix": "pretty good",
-      "offsets": [5, -40]
+      "offsets": [20, -40]
     },
     {
       "assetPath": "shared:characters/tankman-remnants/extra-animations",
       "name": "ugh",
       "prefix": "ugh",
-      "offsets": [5, -40]
+      "offsets": [20, -40]
     },
     {
       "assetPath": "shared:characters/tankman-remnants/extra-animations",
       "name": "laugh",
       "prefix": "laugh",
-      "offsets": [5, -40]
+      "offsets": [20, -40]
     },
     {
       "assetPath": "shared:characters/tankman-remnants/extra-animations",
       "name": "beat it",
       "prefix": "beat it",
-      "offsets": [5, -40]
+      "offsets": [20, -40]
     },
     {
       "assetPath": "shared:characters/tankman-remnants/extra-animations",
       "name": "augh",
-      "prefix": "argh",
-      "offsets": [5, -40]
+      "prefix": "augh",
+      "offsets": [20, -40]
+    },
+    {
+      "assetPath": "shared:characters/tankman-remnants/extra-animations",
+      "name": "problem",
+      "prefix": "Problem",
+      "offsets": [20, -40]
     }
   ]
 }

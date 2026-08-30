@@ -1,7 +1,12 @@
 ﻿1
-00:01:02,000 --> 00:01:03,360
-Heh.
+00:01:02,000 --> 00:01:02,609
+Good lord,
 
 2
-00:01:03,760 --> 00:01:04,710
-Pretty good!
+00:01:02,610 --> 00:01:04,379
+What the hell is your problem man!
+
+3
+00:01:04,380 --> 00:01:04,720
+What the hell is your problem man!
+<font color="#52C7F2">Yeah!
