@@ -268,8 +268,9 @@ class TankmanBattlefieldRemnantsStage extends Stage
 
   function stormOn(duration:Float)
   {
-    if (storm0 == null) return;
+    if (RemnantsOptions.getPerformanceOption()) return;
 
+    if (storm0 == null) return;
     if (duration == null) duration = 1;
 
     // Prevent new tweens from being overridden
@@ -286,6 +287,8 @@ class TankmanBattlefieldRemnantsStage extends Stage
 
   function stormOff(duration:Float)
   {
+    if (RemnantsOptions.getPerformanceOption()) return;
+
     if (storm0 == null) return;
     if (duration == null) duration = 1;
 

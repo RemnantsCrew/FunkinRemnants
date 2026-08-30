@@ -590,8 +590,6 @@ class StressRemnantsMixSong extends Song
 
     hasPlayedCutscene = true;
 
-    if (PlayState.instance.currentStage.storm0.alpha > 0) PlayState.instance.currentStage.stormOff(1);
-
     // resets the tankmen!
     tankmanGroup?.reset(0, 0);
 
@@ -600,6 +598,9 @@ class StressRemnantsMixSong extends Song
       PlayState.instance.currentStage?.getGirlfriend().reset();
       trace('reset pico!');
     }
+
+    if (!RemnantsOptions.getPerformanceOption()
+      && PlayState.instance.currentStage.storm0?.alpha > 0) PlayState.instance.currentStage.stormOff(1);
   }
 
   function onGameOver(event:ScriptEvent):Void
@@ -607,7 +608,8 @@ class StressRemnantsMixSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    if (PlayState.instance.currentStage.storm0.alpha > 0) PlayState.instance.currentStage.stormOff(0);
+    if (!RemnantsOptions.getPerformanceOption()
+      && PlayState.instance.currentStage.storm0?.alpha > 0) PlayState.instance.currentStage.stormOff(0);
   }
 
   function onSongLoaded(event:SongLoadScriptEvent)
