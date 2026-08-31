@@ -21,53 +21,47 @@
   "animations": [
     {
       "name": "idle",
-      "animType": "framelabel",
       "prefix": "Idle"
     },
     {
       "name": "hey",
-      "animType": "framelabel",
       "prefix": "Hey"
     },
     {
       "name": "singLEFT",
-      "animType": "framelabel",
       "prefix": "Left"
     },
     {
       "name": "singDOWN",
-      "animType": "framelabel",
       "prefix": "Down"
     },
     {
       "name": "singUP",
-      "animType": "framelabel",
       "prefix": "Up"
     },
     {
       "name": "singRIGHT",
-      "animType": "framelabel",
       "prefix": "Right"
     },
     {
       "name": "singLEFTmiss",
-      "animType": "framelabel",
       "prefix": "Left Miss"
     },
     {
       "name": "singDOWNmiss",
-      "animType": "framelabel",
       "prefix": "Down Miss"
     },
     {
       "name": "singUPmiss",
-      "animType": "framelabel",
       "prefix": "Up Miss"
     },
     {
       "name": "singRIGHTmiss",
-      "animType": "framelabel",
-      "prefix": "Down Miss"
+      "prefix": "Right Miss"
+    },
+    {
+      "name": "bfCatch",
+      "prefix": "Catch GF"
     },
     {
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
