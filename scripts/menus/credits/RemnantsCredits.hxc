@@ -117,8 +117,7 @@ class RemnantsCredits extends Module
       andYou.shader = new BloomShader(RemnantsCreditsGroup.SHADER_INTENSITY);
       FlxG.state.add(andYou);
 
-      andYou.x = (specialThanks.x + (specialThanks.width - andYou.width) / 2) - 75;
-      andYou.y = (specialThanks.y + specialThanks.height) + (andYou.height * 7);
+      andYou.setPosition(100, (specialThanks.y + specialThanks.height) + (andYou.height * 7));
       andYou.borderSize = 4;
 
       // The circles!
