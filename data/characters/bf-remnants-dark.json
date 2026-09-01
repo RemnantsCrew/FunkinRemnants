@@ -3,7 +3,7 @@
   "name": "Remnants BF (Dark)",
   "renderType": "multianimateatlas",
   "assetPath": "shared:characters/bf-remnants/dark",
-  "offsets": [9.1, 25.95],
+  "offsets": [9.4, 25.65],
   "cameraOffsets": [-9.3, 41.8],
   "flipX": true,
   "singTime": 8.0,
