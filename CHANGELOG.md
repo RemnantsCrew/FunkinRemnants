@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.2] - (2026-08-31)
+## [1.1.2] - (2026-09-01)
 
 ## Added
 
@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Tutorial (Remnants Mix) Vocals.
 - Updated SugarCrash! (Remnants Mix) Vocals.
 - Updated Week 2's dark overlays to be a vignette.
+- Credits are now displayed as in-game objects instead of being entirely in a video.
 - Updated Week 2 Album Cover.
 - Updated Week 5 Stage Boppers.
 - Updated Week 7's Sky to be more optimized.
@@ -34,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated all of Darnell spraycan sprites to be consistent.
 - Tweaked Tormentor (Remnants Mix) Chart.
 - Re-Exported all of Monster & Pico Remnants sprites.
+- Re-Exported GF Base, Car & Dark sprites.
 - Merged Luis and Dad into a single atlas.
 - Adjusted Cocoa's & Fresh's Freeplay difficulty ratings.
 - Various minor code optimizations.
@@ -61,8 +63,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Week 5 Stages not creating all the snow layers.
 - Fixed the bumpers playing in Non-Remnants songs.
 - Fixed 2hot spraycan impact particle being missing.
+- Fixed GF Fear animation not playing long enough.
 - Fixed BF Holding GF's game over offsets.
 - Removed unused spritesheets from the files.
+
+
 
 
 
