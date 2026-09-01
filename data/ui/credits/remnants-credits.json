@@ -260,7 +260,7 @@
       "role": "Composer",
       "specialThanks": ["Nobody"]
     },
-    { "names": ["Loopy Boop", "Loopy"], "role": "Composer" },
+    { "names": ["LoopyBoop", "Loopy"], "role": "Composer" },
     {
       "names": ["PrinceLOLZ"],
       "role": "Composer, Certified Goon",
@@ -299,7 +299,7 @@
       ]
     },
     {
-      "names": ["Jota"],
+      "names": ["Jotacast", "Jota"],
       "role": "Composer, Weegee Consultant",
       "specialThanks": [
         "JohnnyUtah",
@@ -450,47 +450,6 @@
       ]
     },
     {
-      "names": ["toffee.caramel"],
-      "role": "Composer",
-      "specialThanks": [
-        "Chaotic Team",
-        "Hawk Tuah Town",
-        "The Vee Mix Team",
-        "Power Room Studio",
-        "Team Increase",
-        "Rhythm Doctor Lounge",
-        "Berzerk Studio",
-        "TheUnrealBlu3Cat <3",
-        "ninjamuffin99",
-        "Blooky (saddy_dummy)",
-        "MoonDroid",
-        "LunaMyria",
-        "AguaCrunch",
-        "Luisovc1812",
-        "Fernando17_ps",
-        "Nely",
-        "Wolfgun_Wes",
-        "DiogoTV",
-        "Hibachi.wav",
-        "Idk's Stuff",
-        "Kludge54n5",
-        "Koniro",
-        "Tech0",
-        "Cobalt",
-        "RapperGF",
-        "slushi_ds",
-        "fizzd",
-        "Toby Fox",
-        "Lumora <3",
-        "Fern <3",
-        "Duskryn <3",
-        "Steven Mix",
-        "FL Studio (I hate you)",
-        "Klaskii Romper Remnants.flp",
-        "And you <3"
-      ]
-    },
-    {
       "names": ["kuronamii", "kuro"],
       "role": "Composer",
       "specialThanks": [
@@ -517,6 +476,7 @@
         "stuck around with me <3"
       ]
     },
+    { "names": ["harveyzstuffNG", "harvey"], "role": "Art/Animation" },
     { "names": ["katsuki"], "role": "Composer" },
     { "names": ["FellowDesert51"], "role": "Composer" },
     { "names": ["GENZU"], "role": "Composer" },
