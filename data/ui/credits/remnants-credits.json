@@ -48,7 +48,6 @@
         "unr3gisterd",
         "Catx1y",
         "Dra9onSlayer5",
-        "terrible.tornado",
         "Marc Cea",
         "Penny",
         "SMB64585",
@@ -62,14 +61,13 @@
         "carrotingb",
         "SaltyPenguin49",
         "TheGaboDiaz",
+        "TracedInPurple",
         "AshiraMoro",
         "Unholywanderer04",
         "BazingaKookie",
         "Evening Raine",
         "Circuit25",
-        "meatku",
         "Lendon",
-        "holly.RAWR",
         "Trayfellow",
         "BaldrekNG",
         "Cycadeli",
@@ -82,7 +80,10 @@
         "LZDigiArts",
         "artalogue",
         "Flezard",
-        "Pixlexia"
+        "Pixlexia",
+        "Huzz Premium",
+        "It's me Black Impostor",
+        "Blake Expansion"
       ]
     },
     {
@@ -476,7 +477,15 @@
         "stuck around with me <3"
       ]
     },
-    { "names": ["harveyzstuffNG", "harvey"], "role": "Art/Animation" },
+    {
+      "names": ["harveyzstuffNG", "harvey"],
+      "role": "Art",
+      "specialThanks": [
+        "BlooHoodDood",
+        "Collin Ivory",
+        "John Remnants"
+      ]
+    },
     { "names": ["katsuki"], "role": "Composer" },
     { "names": ["FellowDesert51"], "role": "Composer" },
     { "names": ["GENZU"], "role": "Composer" },
@@ -539,7 +548,8 @@
         "LunarzNova for saving my family",
         "Plush for Mario Plays Mario's Madness",
         "LoopyBoopy for Playtime Remnants",
-        "Among Us Cavern"
+        "Among Us Cavern",
+        "Lights Down 2024"
       ]
     },
     { "names": ["RhysRJJ"], "role": "Charter" },
@@ -601,12 +611,12 @@
         "MartinRM",
         "Stewie Griffin",
         "Gemestone",
-        "John walt",
+        "John Walt",
         "Oda",
-        "Commando dev",
+        "CommandoDev",
         "Denji",
         "Reze",
-        "Duskiewhy",
+        "DuskieWhy",
         "D-sides deluxe",
         "All the mods I've worked for",
         "Ryomen sukuna"
@@ -715,7 +725,7 @@
     },
     { "names": ["Pixlexia"], "role": "Art/Animation" },
     {
-      "names": ["Owen The MC", "Owen"],
+      "names": ["OwenTheMC", "Owen"],
       "role": "Emotional Support",
       "specialThanks": [
         "Hawk Tuah Town",
