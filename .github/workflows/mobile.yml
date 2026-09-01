@@ -1,7 +1,6 @@
 name: Mobile Compression
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
