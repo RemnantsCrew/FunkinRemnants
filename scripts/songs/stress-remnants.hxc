@@ -6,6 +6,7 @@ import flixel.text.FlxTextBorderStyle;
 import flixel.util.FlxTimerManager;
 import funkin.play.character.BaseCharacter;
 import funkin.play.character.CharacterDataParser;
+import funkin.mobile.input.ControlsHandler;
 import funkin.modding.events.ScriptEventDispatcher;
 import funkin.modding.events.SongTimeScriptEvent;
 import funkin.data.song.SongRegistry;
@@ -64,6 +65,28 @@ class StressRemnantsMixSong extends Song
 
     school = RemnantsContentUtil.getChance('schoolShootJoke');
     if (school) FunkinMemory.cacheSound(Paths.sound('gameplay/secret/secret', "shared"));
+
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [550, -190];
+        }
+        else
+        {
+          // Upscroll Offset
+          [550, 350];
+        }
+      };
+
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows') return;
+    PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
   public override function onCountdownStart(event:CountdownScriptEvent):Void
