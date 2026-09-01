@@ -35,11 +35,6 @@
       "prefix": "Cheer Car"
     },
     {
-      "name": "sad",
-      "prefix": "Sad Car",
-      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    },
-    {
       "name": "combo50",
       "prefix": "Cheer Car"
     },

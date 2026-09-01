@@ -54,7 +54,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "<--GF Export-->/GF Dancing Beat Hair blowing CAR",
+                    "SN": "Animations/Car/GF Dancing Beat Hair blowing CAR",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 245.3, "y": 14.2 },
@@ -70,7 +70,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "<--GF Export-->/GF Cheer CAR",
+                    "SN": "Animations/Car/GF Cheer CAR",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 231.75, "y": 11.7 },
@@ -86,7 +86,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "<--GF Export-->/gf sad CAR",
+                    "SN": "Animations/Car/gf sad CAR",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 174.15, "y": 331.55 },
@@ -102,7 +102,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "<--GF Export-->/GF Duck Hair Blowing",
+                    "SN": "Animations/Car/GF Duck Hair Blowing",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 213.85, "y": 48.55 },
@@ -118,7 +118,7 @@
               "E": [
                 {
                   "SI": {
-                    "SN": "<--GF Export-->/GF Dancing Beat Hair blowing CAR",
+                    "SN": "Animations/Car/GF Dancing Beat Hair blowing CAR",
                     "FF": 0,
                     "ST": "G",
                     "TRP": { "x": 245.3, "y": 14.2 },
@@ -136,7 +136,7 @@
   "SD": {
     "S": [
       {
-        "SN": "<--GF Export-->/GF Dancing Beat Hair blowing CAR",
+        "SN": "Animations/Car/GF Dancing Beat Hair blowing CAR",
         "TL": {
           "L": [
             {
@@ -148,7 +148,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.85, "y": 46.95 },
@@ -158,7 +158,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 33.4, "y": 38 },
@@ -174,7 +174,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.9, "y": 46.95 },
@@ -184,7 +184,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 33.35, "y": 38 },
@@ -200,7 +200,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 91.25, "y": 57.35 },
@@ -210,7 +210,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.7, "y": 66.75 },
@@ -226,7 +226,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.85, "y": 46.9 },
@@ -236,7 +236,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 33.35, "y": 38 },
@@ -252,7 +252,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.9, "y": 46.95 },
@@ -262,7 +262,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 33.3, "y": 38 },
@@ -278,7 +278,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 91.25, "y": 57.35 },
@@ -288,7 +288,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 39.7, "y": 66.75 },
@@ -309,7 +309,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.7, "y": 60.4 },
@@ -319,7 +319,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.8, "y": 32.75 },
@@ -335,7 +335,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.6, "y": 60.45 },
@@ -345,7 +345,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 60, "y": 32.65 },
@@ -361,7 +361,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.7, "y": 60.35 },
@@ -371,7 +371,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.95, "y": 32.75 },
@@ -387,7 +387,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.6, "y": 60.4 },
@@ -397,7 +397,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.9, "y": 32.7 },
@@ -413,7 +413,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.7, "y": 60.5 },
@@ -423,7 +423,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.95, "y": 32.7 },
@@ -439,7 +439,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 60.5 },
@@ -449,7 +449,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.9, "y": 32.7 },
@@ -465,7 +465,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.7, "y": 60.45 },
@@ -475,7 +475,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.95, "y": 32.6 },
@@ -491,7 +491,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.6, "y": 60.45 },
@@ -501,7 +501,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.9, "y": 32.65 },
@@ -517,7 +517,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.55, "y": 60.6 },
@@ -527,7 +527,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.85, "y": 32.65 },
@@ -543,7 +543,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.7, "y": 60.55 },
@@ -553,7 +553,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.8, "y": 32.65 },
@@ -569,7 +569,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.5, "y": 60.45 },
@@ -579,7 +579,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.95, "y": 32.65 },
@@ -595,7 +595,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 60.45 },
@@ -605,7 +605,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.95, "y": 32.75 },
@@ -621,7 +621,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 60.5 },
@@ -631,7 +631,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.9, "y": 32.7 },
@@ -647,7 +647,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.75, "y": 60.4 },
@@ -657,7 +657,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.95, "y": 32.65 },
@@ -678,7 +678,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 53.15, "y": 62.05 },
@@ -688,7 +688,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.3, "y": 72.5 },
@@ -698,7 +698,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.65, "y": 63.85 },
@@ -714,7 +714,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 53.2, "y": 62.05 },
@@ -724,7 +724,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.35, "y": 72.5 },
@@ -734,7 +734,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.65, "y": 63.85 },
@@ -750,7 +750,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 53.1, "y": 62.05 },
@@ -760,7 +760,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.3, "y": 72.5 },
@@ -770,7 +770,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.6, "y": 63.85 },
@@ -786,7 +786,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 53.15, "y": 61.95 },
@@ -796,7 +796,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.25, "y": 72.45 },
@@ -806,7 +806,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.65, "y": 63.85 },
@@ -822,7 +822,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 53.2, "y": 61.95 },
@@ -832,7 +832,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.3, "y": 72.45 },
@@ -842,7 +842,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.7, "y": 63.85 },
@@ -858,7 +858,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 53.1, "y": 62.05 },
@@ -868,7 +868,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.3, "y": 72.5 },
@@ -878,7 +878,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.6, "y": 63.85 },
@@ -899,7 +899,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 6,
                         "ST": "G",
                         "TRP": { "x": 323.35, "y": 174.4 },
@@ -915,7 +915,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 323.35, "y": 174.4 },
@@ -931,7 +931,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 323.35, "y": 174.4 },
@@ -952,7 +952,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -968,7 +968,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 4,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -984,7 +984,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 2,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1000,7 +1000,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 1,
                         "ST": "G",
                         "TRP": { "x": 40.25, "y": 128.05 },
@@ -1016,7 +1016,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 4,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1032,7 +1032,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 1,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1048,7 +1048,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 3,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1064,7 +1064,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 5,
                         "ST": "G",
                         "TRP": { "x": 40.25, "y": 128.05 },
@@ -1080,7 +1080,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 1,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1096,7 +1096,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 3,
                         "ST": "G",
                         "TRP": { "x": 40.25, "y": 128.05 },
@@ -1112,7 +1112,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 4,
                         "ST": "G",
                         "TRP": { "x": 40.25, "y": 128.05 },
@@ -1128,7 +1128,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 1,
                         "ST": "G",
                         "TRP": { "x": 40.25, "y": 128.05 },
@@ -1144,7 +1144,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 4,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1160,7 +1160,7 @@
         }
       },
       {
-        "SN": "<--GF Export-->/GF Cheer CAR",
+        "SN": "Animations/Car/GF Cheer CAR",
         "TL": {
           "L": [
             {
@@ -1172,7 +1172,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf cheer body",
+                        "SN": "Parts/gf cheer body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 137, "y": 175.45 },
@@ -1188,7 +1188,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf cheer body",
+                        "SN": "Parts/gf cheer body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 137, "y": 175.45 },
@@ -1209,7 +1209,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 6,
                         "ST": "G",
                         "TRP": { "x": 323.35, "y": 174.4 },
@@ -1225,7 +1225,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 323.35, "y": 174.4 },
@@ -1246,7 +1246,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 1,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1262,7 +1262,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 3,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1278,7 +1278,7 @@
         }
       },
       {
-        "SN": "<--GF Export-->/gf sad CAR",
+        "SN": "Animations/Car/gf sad CAR",
         "TL": {
           "L": [
             {
@@ -1290,7 +1290,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/crying face",
+                        "SN": "Parts/crying face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 58.5, "y": 41.6 },
@@ -1306,7 +1306,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/crying face",
+                        "SN": "Parts/crying face",
                         "FF": 2,
                         "ST": "G",
                         "TRP": { "x": 58.5, "y": 41.6 },
@@ -1327,7 +1327,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 34.15, "y": 115.05 },
@@ -1337,7 +1337,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.35, "y": 106.55 },
@@ -1347,7 +1347,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 66.65, "y": 115.85 },
@@ -1357,7 +1357,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.25, "y": 52.4 },
@@ -1367,7 +1367,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 24.6, "y": 24.1 },
@@ -1377,7 +1377,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 60.45 },
@@ -1393,7 +1393,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf bg arm",
+                        "SN": "Parts/gf bg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 34.15, "y": 115.05 },
@@ -1403,7 +1403,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 46.35, "y": 106.5 },
@@ -1413,7 +1413,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf fg arm",
+                        "SN": "Parts/gf fg arm",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 66.6, "y": 115.85 },
@@ -1423,7 +1423,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.25, "y": 52.35 },
@@ -1433,7 +1433,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 55.7, "y": 100.75 },
@@ -1443,7 +1443,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.7, "y": 60.5 },
@@ -1464,7 +1464,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 6,
                         "ST": "G",
                         "TRP": { "x": 323.35, "y": 174.4 },
@@ -1485,7 +1485,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 4,
                         "ST": "G",
                         "TRP": { "x": 169.65, "y": 109.45 },
@@ -1501,7 +1501,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 2,
                         "ST": "G",
                         "TRP": { "x": 176.6, "y": 133.15 },
@@ -1517,7 +1517,7 @@
         }
       },
       {
-        "SN": "<--GF Export-->/GF Duck Hair Blowing",
+        "SN": "Animations/Car/GF Duck Hair Blowing",
         "TL": {
           "L": [
             {
@@ -1529,7 +1529,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf arm covering",
+                        "SN": "Parts/gf arm covering right",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 78.65, "y": 109.3 },
@@ -1539,7 +1539,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf arm covering",
+                        "SN": "Parts/gf arm covering left",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 76.2, "y": 114.2 },
@@ -1555,7 +1555,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf arm covering",
+                        "SN": "Parts/gf arm covering right",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 48.15, "y": 57.6 },
@@ -1565,7 +1565,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf arm covering",
+                        "SN": "Parts/gf arm covering left",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 48.1, "y": 57.65 },
@@ -1586,7 +1586,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 60.35 },
@@ -1596,7 +1596,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.7, "y": 32.75 },
@@ -1612,7 +1612,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf head",
+                        "SN": "Parts/gf head",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 125.65, "y": 60.45 },
@@ -1622,7 +1622,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf face",
+                        "SN": "Parts/gf face",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 59.85, "y": 32.75 },
@@ -1643,7 +1643,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.95, "y": 47.1 },
@@ -1653,7 +1653,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 33.7, "y": 38 },
@@ -1669,7 +1669,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf top leg",
+                        "SN": "Parts/gf top leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 164.95, "y": 47.05 },
@@ -1679,7 +1679,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/gf bottom leg",
+                        "SN": "Parts/gf bottom leg",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 33.5, "y": 37.95 },
@@ -1700,7 +1700,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.3, "y": 72.55 },
@@ -1716,7 +1716,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/GF body",
+                        "SN": "Parts/GF body",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 50.35, "y": 72.5 },
@@ -1737,7 +1737,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 6,
                         "ST": "G",
                         "TRP": { "x": 345.6, "y": 347.75 },
@@ -1753,7 +1753,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakers",
+                        "SN": "Parts/speakers",
                         "FF": 8,
                         "ST": "G",
                         "TRP": { "x": 345.55, "y": 347.75 },
@@ -1774,7 +1774,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 1,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1790,7 +1790,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/gf hair blowing",
+                        "SN": "Parts/gf hair blowing",
                         "FF": 2,
                         "ST": "G",
                         "TRP": { "x": 40.3, "y": 128.05 },
@@ -1806,7 +1806,7 @@
         }
       },
       {
-        "SN": "Legos/gf top leg",
+        "SN": "Parts/gf top leg",
         "TL": {
           "L": [
             {
@@ -1830,7 +1830,7 @@
         }
       },
       {
-        "SN": "Legos/gf bottom leg",
+        "SN": "Parts/gf bottom leg",
         "TL": {
           "L": [
             {
@@ -1854,7 +1854,7 @@
         }
       },
       {
-        "SN": "Legos/gf head",
+        "SN": "Parts/gf head",
         "TL": {
           "L": [
             {
@@ -1878,7 +1878,7 @@
         }
       },
       {
-        "SN": "Legos/gf face",
+        "SN": "Parts/gf face",
         "TL": {
           "L": [
             {
@@ -1902,7 +1902,7 @@
         }
       },
       {
-        "SN": "Legos/gf bg arm",
+        "SN": "Parts/gf bg arm",
         "TL": {
           "L": [
             {
@@ -1926,7 +1926,7 @@
         }
       },
       {
-        "SN": "Legos/GF body",
+        "SN": "Parts/GF body",
         "TL": {
           "L": [
             {
@@ -1950,7 +1950,7 @@
         }
       },
       {
-        "SN": "Legos/gf fg arm",
+        "SN": "Parts/gf fg arm",
         "TL": {
           "L": [
             {
@@ -1974,7 +1974,7 @@
         }
       },
       {
-        "SN": "Legos/speakers",
+        "SN": "Parts/speakers",
         "TL": {
           "L": [
             {
@@ -1986,7 +1986,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/stereo boom",
+                        "SN": "Parts/stereo boom",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 352.5, "y": 176.35 },
@@ -2002,7 +2002,7 @@
         }
       },
       {
-        "SN": "Legos/gf hair blowing",
+        "SN": "Parts/gf hair blowing",
         "TL": {
           "L": [
             {
@@ -2050,7 +2050,7 @@
         }
       },
       {
-        "SN": "Legos/gf cheer body",
+        "SN": "Parts/gf cheer body",
         "TL": {
           "L": [
             {
@@ -2074,9 +2074,40 @@
         }
       },
       {
-        "SN": "Legos/crying face",
+        "SN": "Parts/crying face",
         "TL": {
           "L": [
+            {
+              "LN": "Capa_2",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 8,
+                  "E": [
+                    {
+                      "SI": {
+                        "SN": "Parts/gf crying mouth",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 11.5, "y": 13.4 },
+                        "LP": "LP",
+                        "MX": [1, 0, 0, 1, 58.75, 56.35]
+                      }
+                    },
+                    {
+                      "SI": {
+                        "SN": "Parts/gf crying eyes",
+                        "FF": 0,
+                        "ST": "G",
+                        "TRP": { "x": 51.5, "y": 25.8 },
+                        "LP": "LP",
+                        "MX": [1, 0, 0, 1, 14.05, 0]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
             {
               "LN": "Layer 1",
               "FR": [
@@ -2086,7 +2117,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1, 0, 0, 1, 0, 0],
+                        "MX": [1, 0, 0, 1, 25, 28.7],
                         "N": "11"
                       }
                     }
@@ -2098,7 +2129,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1, 0, 0, 1, 0, 0],
+                        "MX": [1, 0, 0, 1, 25, 28.3],
                         "N": "12"
                       }
                     }
@@ -2110,7 +2141,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1, 0, 0, 1, 14.05, 0],
+                        "MX": [1, 0, 0, 1, 25, 30.55],
                         "N": "13"
                       }
                     }
@@ -2122,7 +2153,7 @@
                   "E": [
                     {
                       "ASI": {
-                        "MX": [1, 0, 0, 1, 0, 0],
+                        "MX": [1, 0, 0, 1, 25, 31.1],
                         "N": "14"
                       }
                     }
@@ -2134,11 +2165,11 @@
         }
       },
       {
-        "SN": "Legos/gf arm covering",
+        "SN": "Parts/gf arm covering right",
         "TL": {
           "L": [
             {
-              "LN": "Layer 1",
+              "LN": "Capa_2",
               "FR": [
                 {
                   "I": 0,
@@ -2158,7 +2189,31 @@
         }
       },
       {
-        "SN": "Legos/stereo boom",
+        "SN": "Parts/gf arm covering left",
+        "TL": {
+          "L": [
+            {
+              "LN": "Capa_2",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [1.13, 0, 0, 1.002, 0, 0],
+                        "N": "16"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/stereo boom",
         "TL": {
           "L": [
             {
@@ -2170,7 +2225,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakerbod1",
+                        "SN": "Parts/speakerbod1",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 198.9, "y": 175.2 },
@@ -2186,7 +2241,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/speakerbod2",
+                        "SN": "Parts/speakerbod2",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 198.9, "y": 175.2 },
@@ -2207,7 +2262,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/small speaker bump",
+                        "SN": "Parts/small speaker bump",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 0, "y": 0 },
@@ -2217,7 +2272,7 @@
                     },
                     {
                       "SI": {
-                        "SN": "Legos/small speaker bump",
+                        "SN": "Parts/small speaker bump",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 0, "y": 0 },
@@ -2233,7 +2288,55 @@
         }
       },
       {
-        "SN": "Legos/speakerbod1",
+        "SN": "Parts/gf crying mouth",
+        "TL": {
+          "L": [
+            {
+              "LN": "Capa_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [1, 0, 0, 1, 0, 0],
+                        "N": "17"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/gf crying eyes",
+        "TL": {
+          "L": [
+            {
+              "LN": "Capa_1",
+              "FR": [
+                {
+                  "I": 0,
+                  "DU": 1,
+                  "E": [
+                    {
+                      "ASI": {
+                        "MX": [1, 0, 0, 1, 0, 0],
+                        "N": "18"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "SN": "Parts/speakerbod1",
         "TL": {
           "L": [
             {
@@ -2246,7 +2349,7 @@
                     {
                       "ASI": {
                         "MX": [0.979, 0, 0, 1, -6.85, 0],
-                        "N": "16"
+                        "N": "19"
                       }
                     }
                   ]
@@ -2257,7 +2360,7 @@
         }
       },
       {
-        "SN": "Legos/speakerbod2",
+        "SN": "Parts/speakerbod2",
         "TL": {
           "L": [
             {
@@ -2270,7 +2373,7 @@
                     {
                       "ASI": {
                         "MX": [0.979, 0, 0, 1, 0, 0],
-                        "N": "17"
+                        "N": "20"
                       }
                     }
                   ]
@@ -2281,7 +2384,7 @@
         }
       },
       {
-        "SN": "Legos/small speaker bump",
+        "SN": "Parts/small speaker bump",
         "TL": {
           "L": [
             {
@@ -2293,7 +2396,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/smallspeakerbod1",
+                        "SN": "Parts/smallspeakerbod1",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 105.25, "y": 118.2 },
@@ -2309,7 +2412,7 @@
                   "E": [
                     {
                       "SI": {
-                        "SN": "Legos/small speaker bod2",
+                        "SN": "Parts/small speaker bod2",
                         "FF": 0,
                         "ST": "G",
                         "TRP": { "x": 104.1, "y": 117.3 },
@@ -2325,7 +2428,7 @@
         }
       },
       {
-        "SN": "Legos/smallspeakerbod1",
+        "SN": "Parts/smallspeakerbod1",
         "TL": {
           "L": [
             {
@@ -2338,7 +2441,7 @@
                     {
                       "ASI": {
                         "MX": [0.979, 0, 0, 1, 0, 0],
-                        "N": "18"
+                        "N": "21"
                       }
                     }
                   ]
@@ -2349,7 +2452,7 @@
         }
       },
       {
-        "SN": "Legos/small speaker bod2",
+        "SN": "Parts/small speaker bod2",
         "TL": {
           "L": [
             {
@@ -2362,7 +2465,7 @@
                     {
                       "ASI": {
                         "MX": [0.979, 0, 0, 1, 0, 0],
-                        "N": "19"
+                        "N": "22"
                       }
                     }
                   ]
@@ -2375,7 +2478,7 @@
     ]
   },
   "MD": {
-    "V": "BTA 1.2.0",
+    "V": "BTA 1.3.0",
     "N": "remnants gf",
     "BGC": "#000000",
     "W": 1920,
