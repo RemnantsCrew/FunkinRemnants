@@ -1,19 +1,17 @@
 package funkin.remnants.songs;
 
-#if mobile
 import funkin.mobile.input.ControlsHandler;
-#end
 
 class RosesRemnantsMixSong extends Song
 {
   var bgSprite:FunkinSprite;
   var hasPlayedCutscene:Bool;
 
-  var outro:Bool = false;
   var color:Bool = false;
   var sequence:SongSequence;
 
   var colorTweens:Array<FlxTween> = [];
+  var colorTweenReal:Bool = false;
 
   public function new()
   {
@@ -76,7 +74,7 @@ class RosesRemnantsMixSong extends Song
   {
     var targetDialogue = 'roses-remnants'; // Normal dialogue
 
-    if (FlxG.random.bool(10))
+    if (RemnantsContentUtil.getChance('beeMovieScript'))
     {
       targetDialogue += "-secret"; // Adds BEE MOVIE
     }
@@ -90,35 +88,42 @@ class RosesRemnantsMixSong extends Song
     PlayState.instance.startConversation(targetDialogue);
   }
 
-  /**
-   * Replay the cutscene after leaving the song.
-   */
+  public override function onDialogueEnd()
+  {
+    // We may need to wait for the outro to play.
+    Countdown.performCountdown();
+  }
+
   function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
 
     hasPlayedCutscene = false;
-    outro = false;
     color = false;
 
     PlayState.instance.camHUD.alpha = 0;
 
-    #if !mobile
-    if (!Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [550, 350]; // Upscroll PC Offset
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [550, -190];
+        }
+        else
+        {
+          // Upscroll Offset
+          [550, 350];
+        }
+      };
 
-    if (Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [550, -190]; // Downscroll PC Offset
-    #else
-    if (Preferences.controlsScheme == "Arrows"
-      && !ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [30, 350]; // Middle Mobile Offset
-
-    if (!Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [725, -350]; // Upscroll Side Mobile Offset
-
-    if (Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [725, -190]; // Downscroll Side Mobile Offset
-    #end
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows') return;
+    PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
   /**
@@ -147,7 +152,7 @@ class RosesRemnantsMixSong extends Song
 
         colorTweens.push(FlxTween.num(0, 1, 0.5,
           {
-            ease: FlxEase.linear,
+            ease: FlxEase.expoIn,
             onComplete: (t:FlxTween) -> {
               colorTweens.remove(t);
             }
@@ -163,19 +168,28 @@ class RosesRemnantsMixSong extends Song
       }
     }
 
-    if (PlayState.instance.disableKeys) PlayState.instance.disableKeys = false;
-  }
-
-  public override function onDialogueEnd()
-  {
-    // We may need to wait for the outro to play.
-    Countdown.performCountdown();
+    if (PlayState.instance.disableKeys)
+    {
+      PlayState.instance.camGame.fade(0xFF000000, 0, true, null, false);
+      PlayState.instance.disableKeys = false;
+    }
   }
 
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
     sequence?.destroy();
+
+    while (colorTweens.length > 0)
+    {
+      colorTweens.shift()?.cancel();
+
+      PlayState.instance.currentStage.getBoyfriend().colorTransform.__identity();
+      PlayState.instance.currentStage.getGirlfriend().colorTransform.__identity();
+      PlayState.instance.currentStage.getDad().colorTransform.__identity();
+      PlayState.instance.iconP1.colorTransform.__identity();
+      PlayState.instance.iconP2.colorTransform.__identity();
+    }
   }
 
   function onPause(event:ScriptEvent):Void
@@ -277,8 +291,8 @@ class RosesRemnantsMixSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(162) / 1000,
         callback: () -> {
-          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('skyEvil'), {alpha: 1}, 7.05, {ease: FlxEase.backIn});
-          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('sky'), {alpha: 0}, 7.05, {ease: FlxEase.backIn});
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('skyEvil'), {alpha: 1}, 7.05);
+          FlxTween.tween(PlayState.instance.currentStage.getNamedProp('sky'), {alpha: 0}, 7.05);
 
           FlxTween.tween(PlayState.instance.currentStage.getNamedProp('black'), {alpha: 0}, 7.05);
           FlxTween.tween(PlayState.instance.currentStage.getNamedProp('freaks'), {alpha: 1}, 7.05,
@@ -302,10 +316,12 @@ class RosesRemnantsMixSong extends Song
               char.colorTransform.blueOffset
             ];
 
+            colorTweenReal = true;
             colorTweens.push(FlxTween.num(0, 1, 7.05,
               {
                 onComplete: (t:FlxTween) -> {
                   colorTweens.remove(t);
+                  colorTweenReal = false;
                 }
               }, (value:Float) -> {
                 char.colorTransform.redOffset = originalValues[0] * (1 - value);
@@ -340,21 +356,12 @@ class RosesRemnantsMixSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(259) / 1000,
         callback: () -> {
-          if (!FlxG.random.bool(25)) // Sunflower Real
-          {
-            PlayState.instance.currentStage.getDad().playAnimation('sentpajim', true, true);
-          }
-          else
-          {
-            PlayState.instance.currentStage.getDad().playAnimation('suntpajim', true, true);
-          }
-        }
-      },
+          var anim:String = 'sentpajim';
 
-      {
-        time: Conductor.instance.getBeatTimeInMs(278) / 1000,
-        callback: () -> {
-          outro = true;
+          // Sunflower Real
+          if (RemnantsContentUtil.getChance('suntpajim')) anim = 'suntpajim';
+
+          PlayState.instance.currentStage.getDad().playAnimation(anim, true, true);
         }
       },
 

@@ -1,7 +1,5 @@
 package funkin.remnants.characters;
 
-import StringTools;
-
 class DarnellRemnantsBlazinCharacter extends AnimateAtlasCharacter
 {
   function new()
@@ -28,7 +26,7 @@ class DarnellRemnantsBlazinCharacter extends AnimateAtlasCharacter
   function onNoteHit(event:HitNoteScriptEvent)
   {
     holdTimer = 0;
-    if (!StringTools.startsWith(event?.note?.kind ?? '', 'weekend-1-')) return;
+    if (!event?.note?.kind?.startsWith('weekend-1-') ?? true) return;
 
     // SPECIAL CASE: If Pico hits a poor note at low health (at 30% chance),
     // Darnell may duck below Pico's punch to attempt an uppercut.
@@ -149,10 +147,7 @@ class DarnellRemnantsBlazinCharacter extends AnimateAtlasCharacter
   {
     holdTimer = 0;
 
-    if (!StringTools.startsWith(event.note.kind, 'weekend-1-'))
-    {
-      return;
-    }
+    if (!event?.note?.kind?.startsWith('weekend-1-') ?? true) return;
 
     // SPECIAL CASE: Darnell prepared to uppercut last time and Pico missed! FINISH HIM!
     if (getCurrentAnimation() == 'uppercutPrep')

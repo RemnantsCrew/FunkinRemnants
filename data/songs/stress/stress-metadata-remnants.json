@@ -1,8 +1,8 @@
 {
   "version": "2.2.4",
   "songName": "Stress (Remnants Mix)",
-  "artist": "Jotacast",
-  "charter": "Plush + Sammy The Goog",
+  "artist": "Jotacast (ft. LunarzNova)",
+  "charter": "Plush + LunarzNova + Sammy The Goog",
   "offsets": {},
   "playData": {
     "difficulties": ["easy", "normal", "hard"],
@@ -16,9 +16,27 @@
     },
     "stage": "tankmanBattlefieldRemnants",
     "noteStyle": "funkin",
-    "ratings": { "easy": 2, "normal": 3, "hard": 4 },
-    "album": "remnants"
+    "ratings": {
+      "easy": 7,
+      "normal": 8,
+      "hard": 9
+    },
+    "album": "remnants",
+    "stickerPack": "remnants-default"
   },
-  "generatedBy": "Friday Night Funkin' - v0.8.3 (develop : ec868f8) PROTOTYPE",
-  "timeChanges": [{ "t": 0, "b": 0, "bpm": 178, "bt": [4, 4, 4, 4] }]
+  "generatedBy": "Friday Night Funkin' - v0.8.6",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 178,
+      "bt": [4, 4, 4, 4]
+    },
+    {
+      "t": 75500,
+      "b": 223.9833,
+      "bpm": 200,
+      "bt": [4, 4, 4, 4]
+    }
+  ]
 }

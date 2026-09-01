@@ -1,0 +1,324 @@
+package funkin.remnants.menus;
+
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import funkin.util.tools.Int64Tools;
+import funkin.ui.FullScreenScaleMode;
+import funkin.remnants.shaders.BloomShader;
+import funkin.remnants.utils.RemnantsSequence;
+import funkin.data.freeplay.player.PlayerRegistry;
+import funkin.remnants.menus.props.RemnantsDevSprites;
+import funkin.remnants.menus.props.RemnantsCreditsGroup;
+import funkin.remnants.menus.props.RemnantsCreditsCircles;
+import funkin.graphics.video.FunkinVideoSprite;
+import funkin.util.assets.FlxAnimationUtil;
+import funkin.ui.freeplay.FreeplayState;
+import funkin.ui.credits.CreditsState;
+import flixel.text.FlxTextBorderStyle;
+import funkin.util.TouchUtil;
+
+class RemnantsCredits extends Module
+{
+  final VIDEO_PATH:String = 'remnants-credits';
+
+  final RATE_MULT:Float = 2.0; // Made this a variable for testing.
+
+  final REMNANTS_CHAR_COLOR:Array<Int> = [0xFF52C7F2, 0xFF06ED76]; // BF - Pico
+
+  var playerDJ:FunkinSprite;
+  var playerData:PlayerRegistry;
+
+  var devGroup:RemnantsDevSprites;
+  var circleGroup:RemnantsCreditsCircles;
+  var remnantsCredits:RemnantsCreditsGroup;
+  var specialThanks:RemnantsCreditsGroup;
+  var andYou:FlxText;
+
+  public var vid:FunkinVideoSprite;
+  public var vidBG:FunkinSprite;
+
+  var sequence:RemnantsSequence;
+
+  var allowThanks:Bool = false;
+  var playingVideo:Bool = false;
+  var allowCredits:Bool = false;
+
+  public function new()
+  {
+    super('remnantsCredits', 1000, {state: CreditsState});
+  }
+
+  override public function onStateChangeEnd(event:StateChangeScriptEvent):Void
+  {
+    if (!RemnantsContentUtil.remnantsContentEnabled()) return;
+
+    super.onStateChangeEnd(event);
+
+    var bg:FunkinSprite = FunkinSprite.create(0, 0, 'menuDesat');
+    bg.setGraphicSize(FlxG.width);
+    bg.updateHitbox();
+    bg.screenCenter();
+    bg.scrollFactor.set();
+    bg.alpha = 0.5;
+    bg.color = 0xFFB57EDC; // Lavender
+    event.targetState.insert(0, bg);
+
+    event.targetState.scrollPaused = true;
+    event.targetState.creditsGroup.y += FlxG.height / 4;
+    FlxG.sound.music?.stop();
+
+    if (!Save.instance.modOptions.exists('seenRemnantsCredits'))
+    {
+      Save.instance.modOptions.set('seenRemnantsCredits', true);
+      Save.instance.flush();
+    }
+
+    startVideo();
+  }
+
+  public function startVideo():Void
+  {
+    vidBG = new FunkinSprite();
+    vidBG.makeSolidColor(FlxG.width, FlxG.height, 0xFF000000);
+    FlxG.state.add(vidBG);
+
+    vid = new FunkinVideoSprite();
+    playingVideo = true;
+
+    if (vid != null)
+    {
+      vid.bitmap.onEncounteredError.add((msg:String) -> {
+        trace('[VLC] Encountered an error: $msg');
+        stopVideo();
+      });
+
+      vid.bitmap.onEndReached.add(stopVideo);
+
+      vid.bitmap.onFormatSetup.add(() -> {
+        vid.setGraphicSize(FlxG.initialWidth, FlxG.initialHeight);
+        vid.updateHitbox();
+        vid.screenCenter();
+      });
+
+      FlxG.state.add(vid);
+
+      remnantsCredits = new RemnantsCreditsGroup();
+      remnantsCredits.generateCredits();
+      FlxG.state.add(remnantsCredits);
+
+      specialThanks = new RemnantsCreditsGroup();
+      specialThanks.generateSpecialThanks();
+      FlxG.state.add(specialThanks);
+
+      // Adding it here just to make it stop scrolling.
+      andYou = new FlxText(0, 0, 0, "and you <3");
+      andYou.setFormat(Paths.font('creditsFont.ttf'), 65, 0xFFFFFFFF, 'center', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+      andYou.shader = new BloomShader(RemnantsCreditsGroup.SHADER_INTENSITY);
+      FlxG.state.add(andYou);
+
+      andYou.setPosition(100, (specialThanks.y + specialThanks.height) + (andYou.height * 7));
+      andYou.borderSize = 4;
+
+      // The circles!
+      var targetColor:Int = FreeplayState.rememberedCharacterId == 'bf-remnants' ? REMNANTS_CHAR_COLOR[0] : REMNANTS_CHAR_COLOR[1];
+      circleGroup = new RemnantsCreditsCircles(targetColor);
+      FlxG.state.add(circleGroup);
+
+      // Devs sprites!
+      devSprites = new RemnantsDevSprites();
+      FlxG.state.add(devSprites);
+
+      playerData = PlayerRegistry.instance.fetchEntry(FreeplayState.rememberedCharacterId).getFreeplayDJData();
+      playerDJ = FunkinSprite.createTextureAtlas(0, 0, playerData.getAssetPath(), null, {useRenderTexture: true});
+      FlxG.state.add(playerDJ);
+
+      FlxAnimationUtil.addTextureAtlasAnimations(playerDJ, playerData.getAnimationsList());
+      playDJAnim('idle', false); // Play the idle so the position is based on it.
+
+      playerDJ.shader = new BloomShader();
+      playerDJ.scale.set(0.7, 0.7);
+      playerDJ.visible = false;
+      playerDJ.updateHitbox();
+      playerDJ.screenCenter();
+
+      playerDJ.y = FlxG.height - playerDJ.height + 100;
+
+      var filePath:String = Paths.videos(VIDEO_PATH);
+      if (vid.load(filePath))
+      {
+        var sequenceData = [
+          {
+            time: 3650,
+            callback: () -> {
+              playerDJ.visible = true;
+              playDJAnim('intro', false);
+              playerDJ.animation.onFinish.addOnce(() -> playDJAnim('idle', true));
+            }
+          },
+          {
+            time: 4950,
+            callback: () -> {
+              FlxTween.tween(circleGroup, {y: 0}, 4.0 / vid.bitmap.rate, {ease: FlxEase.quadOut});
+              remnantsCredits.scrolling = allowCredits = true;
+              remnantsCredits.calculateSpeed(4950, 37500);
+            }
+          },
+          {
+            time: 37500,
+            callback: () -> {
+              remnantsCredits.scrolling = allowCredits = false;
+              specialThanks.scrolling = allowThanks = true;
+              specialThanks.calculateSpeed(37500, 150500);
+            }
+          },
+          {
+            time: 150500,
+            callback: () -> {
+              playDJAnim('charSelect', false);
+              specialThanks.scrolling = allowThanks = false;
+              FlxTween.tween(circleGroup, {y: FlxG.width / 2}, 3.0 / vid.bitmap.rate, {ease: FlxEase.quadInOut, startDelay: 0.5 / vid.bitmap.rate});
+              FlxTween.tween(andYou, {x: andYou.x - FlxG.width}, 1.5 / vid.bitmap.rate, {ease: FlxEase.quadInOut, startDelay: 0.5 / vid.bitmap.rate});
+              playerDJ.animation.onFinish.addOnce(() -> FlxTween.tween(playerDJ, {y: playerDJ.y + 750}, 3.0 / vid.bitmap.rate, {ease: FlxEase.quadInOut}));
+            }
+          },
+          {
+            time: 153400,
+            callback: () -> {
+              FlxTween.tween(devSprites, {alpha: 1}, 1.5 / vid.bitmap.rate, {ease: FlxEase.quadOut});
+            }
+          },
+          {
+            time: 157500,
+            callback: () -> {
+              FlxTween.cancelTweensOf(devSprites);
+              FlxTween.tween(devSprites, {alpha: 0}, 1.75 / vid.bitmap.rate, {ease: FlxEase.quadOut});
+            }
+          }
+        ];
+
+        sequence = new RemnantsSequence(sequenceData);
+        vid.play();
+      }
+    }
+    else
+    {
+      trace('ALERT: Video is null! Could not play remnants credits!');
+      stopVideo();
+    }
+  }
+
+  function playDJAnim(name:String, loop:Bool)
+  {
+    if (playerDJ == null) return;
+    final animPrefix = playerData?.getAnimationPrefix(name);
+    playerDJ.animation.play(animPrefix, true);
+    playerDJ.animation.curAnim.looped = loop;
+  }
+
+  public function stopVideo():Void
+  {
+    vid?.stop();
+    FlxG.state.scrollPaused = playingVideo = false;
+
+    andYou?.destroy();
+    circleGroup?.destroy();
+    specialThanks?.destroy();
+    remnantsCredits?.destroy();
+    devSprites?.destroy();
+    playerDJ?.destroy();
+
+    FunkinSound.playMusic('freeplayRandom-remnants',
+      {
+        startingVolume: 0.0,
+        overrideExisting: true,
+        restartTrack: true,
+        loop: true
+      });
+    FlxG.sound.music.fadeIn(6, 0, 0.8);
+  }
+
+  override public function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
+
+    if (vid?.bitmap != null)
+    {
+      var pressingEnter:Bool = FlxG.keys.pressed.SPACE;
+      #if mobile
+      if (TouchUtil.pressed && !TouchUtil.overlaps(state.backButton)) pressingEnter = true;
+      #end
+
+      if (playingVideo)
+      {
+        if (FlxG.keys.justPressed.I) trace(Int64Tools.toFloat(vid.bitmap.time));
+        if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT)
+        {
+          vid.pause();
+          sequence?.running = false;
+          playerDJ?.animation?.curAnim?.pause();
+        }
+        else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT)
+        {
+          vid.resume();
+          sequence?.running = true;
+          playerDJ?.animation?.curAnim?.resume();
+        }
+
+        // Handle the scrolling texts.
+        remnantsCredits?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0), allowCredits);
+        specialThanks?.updateGroup(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0), allowThanks);
+
+        // Make the circle spin.
+        if (sequence?.running) circleGroup.spinCircles(event.elapsed, (vid.bitmap != null ? vid?.bitmap?.rate : 2.0));
+
+        if (andYou != null)
+        {
+          var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
+          #if mobile
+          if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
+          #end
+
+          if (specialThanks.scrolling && andYou.y > (FlxG.height / 2) - (andYou.height / 2))
+          {
+            if (pressingEnter) andYou.y -= (specialThanks.baseSpeed * (vid.bitmap != null ? vid.bitmap.rate : 2.0)) * event.elapsed;
+            else
+              andYou.y -= specialThanks.baseSpeed * event.elapsed;
+          }
+        }
+
+        vid.bitmap.rate = pressingEnter ? RATE_MULT : 1.0;
+        sequence?.update(Int64Tools.toFloat(vid.bitmap.time));
+        playerDJ?.animation?.curAnim?.timeScale = vid.bitmap.rate;
+      }
+      else if (pressingEnter)
+      {
+        // Move the whole group by the base scroll speed.
+        vid.y -= CreditsState.CREDITS_SCROLL_FAST_SPEED * event.elapsed;
+      }
+      else if (FlxG.state.controls.PAUSE || FlxG.keys.pressed.SHIFT)
+      {
+        // Stop the whole group from moving.
+        vid.y -= CreditsState.CREDITS_SCROLL_PAUSE_SPEED * event.elapsed;
+      }
+      else
+      {
+        // Move the whole group by the base scroll speed.
+        vid.y -= CreditsState.CREDITS_SCROLL_BASE_SPEED * event.elapsed;
+      }
+
+      if (vidBG != null) vidBG.y = vid.y;
+
+      if (vid.y <= -vid.height)
+      {
+        vid.destroy();
+        vid = null;
+
+        vidBG.destroy();
+        vidBG = null;
+
+        trace('killed video');
+      }
+    }
+  }
+}

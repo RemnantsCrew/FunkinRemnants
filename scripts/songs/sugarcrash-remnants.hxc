@@ -1,8 +1,8 @@
 package funkin.remnants.songs;
 
-#if mobile
+import funkin.ui.freeplay.Album;
 import funkin.mobile.input.ControlsHandler;
-#end
+import funkin.data.freeplay.album.AlbumRegistry;
 
 /**
  * Even though this looks like just the sugarcrash song script.
@@ -26,27 +26,34 @@ class SugarCrashRemnantsSong extends Song
   override public function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
+
+    // Fetch the album and get the RPC (Little workaround because the opponent is null)
+    var albumEntry:Null<Album> = AlbumRegistry.instance.fetchEntry(PlayState.instance.currentChart?.album ?? '');
+    var album:Null<String> = albumEntry?.getDiscordRPCImage() ?? (PlayState.instance.currentChart?.album ?? '');
+
     moveComboPopUps();
   }
 
   public function moveComboPopUps():Void
   {
-    #if !mobile
-    if (!Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [0, -145]; // Upscroll PC Offset
-
-    if (Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [0, 355]; // Downscroll PC Offset
-    #else
-    if (Preferences.controlsScheme == "Arrows"
-      && !ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [30, 350]; // Middle Mobile Offset
-
-    if (!Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [0, -145]; // Upscroll Controller Mobile Offset
-
-    if (Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [0, 355]; // Downscroll Controller Mobile Offset
-    #end
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [0, 355];
+        }
+        else
+        {
+          // Upscroll Offset
+          [0, -145];
+        }
+      };
   }
 
   override public function getBaseInstrumentalId(difficultyId:String, variationId:String):String

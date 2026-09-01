@@ -1,0 +1,28 @@
+package funkin.remnants.notekinds.battle;
+
+class PrepareNoteKind extends NoteKind
+{
+  public function new()
+  {
+    super('battle-prepare-remnants', 'Prepare (DadBattle Remnants)');
+    this.noanim = true;
+  }
+}
+
+class AttackNoteKind extends NoteKind
+{
+  public function new()
+  {
+    super('battle-attack-remnants', 'Attack (DadBattle Remnants)');
+    this.noanim = true;
+  }
+}
+
+class DodgeNoteKind extends NoteKind
+{
+  public function new()
+  {
+    super('battle-dodge-remnants', 'Dodge (DadBattle Remnants)');
+    this.noanim = true;
+  }
+}

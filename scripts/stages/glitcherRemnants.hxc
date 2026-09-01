@@ -1,23 +1,17 @@
 package funkin.remnants.stages;
 
 import funkin.play.character.CharacterDataParser;
+import funkin.play.GameOverSubState;
+import funkin.play.PauseSubState;
 
 class GlitcherRemnantsStage extends Stage
 {
   var wentDark:Bool = false;
   var ambienceTween:FlxTween;
-  var dead:Bool = false;
 
   function new()
   {
     super('glitcherRemnants');
-  }
-
-  function onCreate(event:ScriptEvent):Void
-  {
-    super.onCreate(event);
-
-    dead = false;
   }
 
   override public function addCharacter(character:BaseCharacter, type:CharacterType):Void
@@ -52,7 +46,7 @@ class GlitcherRemnantsStage extends Stage
   public override function onCountdownStart(event:CountdownScriptEvent):Void
   {
     super.onCountdownStart(event);
-    changeAmbiance(false, 0.0001);
+    changeAmbiance(false, 0.0000001);
   }
 
   function changeAmbiance(goDark:Bool, duration:Float)
@@ -96,6 +90,10 @@ class GlitcherRemnantsStage extends Stage
       var targetChar:BaseCharacter = goDark ? char : remnantsChar;
       targetChar.initHealthIcon(id == 'dad');
     }
+
+    if (!goDark) PauseSubState.musicSuffix = '-remnants';
+    else
+      PauseSubState.musicSuffix = '';
   }
 
   function onPause(event:ScriptEvent):Void
@@ -110,30 +108,18 @@ class GlitcherRemnantsStage extends Stage
 
   function onGameOver(event:ScriptEvent)
   {
-    // Swap Remnants BF and current BF temporarily for Game Over.
-    var oldBF:BaseCharacter = getBoyfriend();
-    this.characters.set('bf', getCharacter('remnants-bf'));
-    this.characters.set('remnants-bf', oldBF);
-
-    getBoyfriend()?.alpha = 1;
-    oldBF?.alpha = 0;
-    dead = true;
+    if (getBoyfriend().alpha >= 0.5)
+    {
+      GameOverSubState.musicSuffix = '';
+      GameOverSubState.animationSuffix = "";
+    }
+    else
+    {
+      GameOverSubState.musicSuffix = '-remnants';
+      GameOverSubState.animationSuffix = "-remnants";
+    }
+    getBoyfriend().alpha = 1;
 
     super.onGameOver(event);
-  }
-
-  function onSongRetry(event:ScriptEvent):Void
-  {
-    if (dead)
-    {
-      // Swap BF and Remnants BF back after Game Over.
-      var remnantsBF:BaseCharacter = getBoyfriend();
-      this.characters.set('bf', getCharacter('remnants-bf'));
-      this.characters.set('remnants-bf', remnantsBF);
-      dead = false;
-    }
-
-    // no alpha changes here, they get handled at countdown!
-    super.onSongRetry();
   }
 }

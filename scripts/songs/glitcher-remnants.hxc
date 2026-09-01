@@ -18,12 +18,20 @@ class GlitcherRemnantsSong extends Song
     return false;
   }
 
+  function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+
+    PlayState.instance.disableKeys = true;
+  }
+
   function onSongRetry(event:ScriptEvent)
   {
     super.onSongRetry(event);
     sequence?.destroy();
 
     FlxTween.cancelTweensOf(PlayState.instance.camHUD);
+    PlayState.instance.disableKeys = true;
   }
 
   function onGameOver(event:ScriptEvent):Void
@@ -58,6 +66,7 @@ class GlitcherRemnantsSong extends Song
         time: 0,
         callback: () -> {
           PlayState.instance.camHUD.alpha = 0;
+          PlayState.instance.disableKeys = false;
         }
       },
 

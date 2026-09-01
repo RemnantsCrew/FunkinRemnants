@@ -1,125 +1,111 @@
 {
   "version": "1.0.0",
-  "renderType": "multianimateatlas",
-  "offsets": [22, 9],
-  "danceEvery": 1,
-  "applyStageMatrix": false,
-  "scale": 1,
-  "flipX": true,
   "name": "Remnants Pico",
-  "cameraOffsets": [-22.3, 27.3],
-  "startingAnimation": "idle",
-  "isPixel": false,
-  "singTime": 8,
+  "renderType": "multianimateatlas",
   "assetPath": "shared:characters/pico-remnants/base",
-  "healthIcon": {
-    "isPixel": false,
-    "offsets": [0, 0],
-    "scale": 1,
-    "id": "pico-remnants",
-    "flipX": false
-  },
+  "offsets": [27, 9],
+  "cameraOffsets": [-27, 32.5],
+  "flipX": true,
   "atlasSettings": {
-    "applyStageMatrix": false,
-    "useRenderTexture": false,
-    "filterQuality": 1,
-    "cacheOnLoad": false,
-    "swfMode": true
+    "useRenderTexture": true,
+    "swfMode": false
   },
   "animations": [
     {
-      "offsets": [0, 0],
-      "flipY": false,
-      "frameRate": 24,
-      "prefix": "idle",
-      "animType": "framelabel",
-      "name": "idle",
-      "looped": false,
-      "flipX": false
+      "prefix": "Idle",
+      "name": "idle"
     },
     {
-      "offsets": [0, 0],
-      "flipY": false,
-      "frameRate": 24,
-      "prefix": "left",
-      "animType": "framelabel",
-      "name": "singRIGHT",
-      "looped": false,
-      "flipX": false
+      "prefix": "Right",
+      "name": "singLEFT"
     },
     {
-      "offsets": [0, 0],
-      "flipY": false,
-      "frameRate": 24,
-      "prefix": "down",
-      "animType": "framelabel",
-      "name": "singDOWN",
-      "looped": false,
-      "flipX": false
+      "prefix": "Down",
+      "name": "singDOWN"
     },
     {
-      "offsets": [0, 5],
-      "flipY": false,
-      "frameRate": 24,
-      "prefix": "up",
-      "animType": "framelabel",
-      "name": "singUP",
-      "looped": false,
-      "flipX": false
+      "prefix": "Up",
+      "name": "singUP"
     },
     {
-      "offsets": [0, 0],
-      "flipY": false,
-      "frameRate": 24,
-      "prefix": "right",
-      "animType": "framelabel",
-      "name": "singLEFT",
-      "looped": false,
-      "flipX": false
+      "prefix": "Left",
+      "name": "singRIGHT"
     },
     {
-      "offsets": [65, 8],
-      "prefix": "left alt",
-      "animType": "framelabel",
-      "flipX": false,
-      "looped": false,
-      "name": "singRIGHT-perfect",
-      "flipY": false,
-      "assetPath": "shared:characters/pico-remnants/alt-poses",
-      "frameRate": 24
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Right Censor",
+      "name": "singLEFT-censor",
+      "offsets": [180, 200]
     },
     {
-      "offsets": [65, 8],
-      "prefix": "down alt",
-      "animType": "framelabel",
-      "flipX": false,
-      "looped": false,
-      "name": "singDOWN-perfect",
-      "flipY": false,
-      "assetPath": "shared:characters/pico-remnants/alt-poses",
-      "frameRate": 24
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Right Censor Hold",
+      "name": "singLEFT-censor-hold",
+      "looped": true,
+      "offsets": [180, 200]
     },
     {
-      "offsets": [65, 8],
-      "prefix": "up alt",
-      "animType": "framelabel",
-      "flipX": false,
-      "looped": false,
-      "name": "singUP-perfect",
-      "flipY": false,
-      "assetPath": "shared:characters/pico-remnants/alt-poses",
-      "frameRate": 24
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Down Censor",
+      "name": "singDOWN-censor",
+      "offsets": [180, 200]
     },
     {
-      "offsets": [65, 8],
-      "prefix": "right alt",
-      "animType": "framelabel",
-      "flipX": false,
-      "looped": false,
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Down Censor Hold",
+      "name": "singDOWN-censor-hold",
+      "looped": true,
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Up Censor",
+      "name": "singUP-censor",
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Up Censor Hold",
+      "name": "singUP-censor-hold",
+      "looped": true,
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Left Censor",
+      "name": "singRIGHT-censor",
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Right Perfect",
       "name": "singLEFT-perfect",
-      "flipY": false,
-      "assetPath": "shared:characters/pico-remnants/alt-poses",
-      "frameRate": 24
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Left Censor Hold",
+      "name": "singRIGHT-censor-hold",
+      "looped": true,
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Down Perfect",
+      "name": "singDOWN-perfect",
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Up Perfect",
+      "name": "singUP-perfect",
+      "offsets": [180, 200]
+    },
+    {
+      "assetPath": "shared:characters/pico-remnants/playable",
+      "prefix": "Left Perfect",
+      "name": "singRIGHT-perfect",
+      "offsets": [180, 200]
     }
   ]
 }

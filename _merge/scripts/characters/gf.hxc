@@ -1,0 +1,14 @@
+@:merge_combine
+class GirlfriendCharacter extends AnimateAtlasCharacter
+{
+  @:merge_override
+  function new(characterId:String)
+  {
+    if (characterId == 'UNKNOWN')
+    {
+      characterId = 'gf';
+    }
+
+    super(characterId);
+  }
+}

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TextureAtlas imagePath="clearPercentNumberSmall-remnants.png" width="73" height="306">
-  <SubTexture name="number 0 0000.png" x="36" y="91" width="35" height="44" frameX="-2" frameY="-1" frameWidth="35" frameHeight="44"/>
-  <SubTexture name="number 1 0000.png" x="0" y="265" width="25" height="41" frameX="-11" frameY="-1" frameWidth="25" frameHeight="41"/>
-  <SubTexture name="number 2 0000.png" x="0" y="46" width="38" height="45" frameX="-0" frameY="-0" frameWidth="38" frameHeight="45"/>
-  <SubTexture name="number 3 0000.png" x="0" y="0" width="38" height="46" frameX="-0" frameY="-0" frameWidth="38" frameHeight="46"/>
-  <SubTexture name="number 4 0000.png" x="0" y="180" width="35" height="43" frameX="-2" frameY="-0" frameWidth="35" frameHeight="43"/>
-  <SubTexture name="number 5 0000.png" x="0" y="136" width="37" height="44" frameX="-0" frameY="-1" frameWidth="37" frameHeight="44"/>
-  <SubTexture name="number 6 0000.png" x="0" y="223" width="34" height="42" frameX="-0" frameY="-3" frameWidth="34" frameHeight="42"/>
-  <SubTexture name="number 7 0000.png" x="38" y="0" width="35" height="44" frameX="-4" frameY="-0" frameWidth="35" frameHeight="44"/>
-  <SubTexture name="number 8 0000.png" x="0" y="91" width="36" height="45" frameX="-1" frameY="-0" frameWidth="36" frameHeight="45"/>
-  <SubTexture name="number 9 0000.png" x="38" y="44" width="35" height="44" frameX="-3" frameY="-0" frameWidth="35" frameHeight="44"/>
+<TextureAtlas imagePath="clearPercentNumberSmall-remnants.png" width="73" height="307">
+  <SubTexture name="number 0 0001" x="38" y="44"  width="35" height="44" frameX="-2" frameY="-1" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 1 0001" x="0" y="265"  width="25" height="42" frameX="-11" frameY="-1" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 2 0001" x="0" y="46"  width="38" height="45" frameX="-0" frameY="-0" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 3 0001" x="0" y="0"  width="38" height="46" frameX="-0" frameY="-0" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 4 0001" x="0" y="180"  width="36" height="43" frameX="-2" frameY="-0" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 5 0001" x="0" y="136"  width="37" height="44" frameX="-0" frameY="-1" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 6 0001" x="0" y="223"  width="34" height="42" frameX="-0" frameY="-3" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 7 0001" x="36" y="91"  width="35" height="44" frameX="-4" frameY="-0" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 8 0001" x="0" y="91"  width="36" height="45" frameX="-1" frameY="-0" frameWidth="39" frameHeight="46"/>
+  <SubTexture name="number 9 0001" x="38" y="0"  width="35" height="44" frameX="-3" frameY="-0" frameWidth="39" frameHeight="46"/>
 </TextureAtlas>

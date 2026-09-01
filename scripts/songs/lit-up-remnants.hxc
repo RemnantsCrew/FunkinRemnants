@@ -53,6 +53,7 @@ class LitUpRemnantsMixSong extends Song
     outro = false;
 
     if (RemnantsOptions.getPerformanceOption()) return;
+
     mist0 = new FlxBackdrop(Paths.image('stages/mistMid'), 0x01);
     mist0.setPosition(-650, -500);
     mist0.scrollFactor.set(1.1, 1.1);
@@ -140,12 +141,14 @@ class LitUpRemnantsMixSong extends Song
 
   function mistOn(duration:Float)
   {
+    if (RemnantsOptions.getPerformanceOption()) return;
+
     if (mist0 == null) return;
     if (duration == null) duration = 1;
 
     // Prevent new tweens from being overridden
     for (i in 0...7)
-      FlxTween.cancelTweensOf(scriptGet('mist' + i));
+      FlxTween.cancelTweensOf(scriptGet('mist$i'));
 
     FlxTween.tween(mist0, {alpha: 1}, duration);
     FlxTween.tween(mist1, {alpha: 0.9}, duration);
@@ -158,12 +161,14 @@ class LitUpRemnantsMixSong extends Song
 
   function mistOff(duration:Float)
   {
+    if (RemnantsOptions.getPerformanceOption()) return;
+
     if (mist0 == null) return;
     if (duration == null) duration = 1;
 
     // Prevent new tweens from being overridden
     for (i in 0...7)
-      FlxTween.cancelTweensOf(scriptGet('mist' + i));
+      FlxTween.cancelTweensOf(scriptGet('mist$i'));
 
     FlxTween.tween(mist0, {alpha: 0}, duration);
     FlxTween.tween(mist1, {alpha: 0}, duration);
@@ -179,7 +184,7 @@ class LitUpRemnantsMixSong extends Song
   {
     super.onSongRetry(event);
 
-    if (mist0.alpha > 0 && !RemnantsOptions.getPerformanceOption()) mistOff(1);
+    if (!RemnantsOptions.getPerformanceOption() && mist0?.alpha > 0) mistOff(1);
 
     if (outro)
     {
@@ -197,10 +202,10 @@ class LitUpRemnantsMixSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
+    if (!RemnantsOptions.getPerformanceOption() && mist0?.alpha > 0) mistOff(0);
+
     PlayState.instance.camHUD.alpha = 0;
     outro = true;
-
-    if (mist0.alpha > 0 && !RemnantsOptions.getPerformanceOption()) mistOff(0);
   }
 
   function onPause(event:ScriptEvent):Void
@@ -210,8 +215,11 @@ class LitUpRemnantsMixSong extends Song
     FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
 
     if (RemnantsOptions.getPerformanceOption()) return;
+
     for (i in 0...7)
-      FlxTweenUtil.pauseTweensOf(scriptGet('mist' + i));
+    {
+      FlxTweenUtil.pauseTweensOf(scriptGet('mist$i'));
+    }
   }
 
   function onResume(event:ScriptEvent):Void
@@ -221,8 +229,11 @@ class LitUpRemnantsMixSong extends Song
     FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
 
     if (RemnantsOptions.getPerformanceOption()) return;
+
     for (i in 0...7)
-      FlxTweenUtil.resumeTweensOf(scriptGet('mist' + i));
+    {
+      FlxTweenUtil.resumeTweensOf(scriptGet('mist$i'));
+    }
   }
 
   function onSongLoaded(event:SongLoadScriptEvent)

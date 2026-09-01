@@ -3,7 +3,7 @@
   "name": "Remnants BF (Dark)",
   "renderType": "multianimateatlas",
   "assetPath": "shared:characters/bf-remnants/dark",
-  "offsets": [9.1, 25.95],
+  "offsets": [9.4, 25.65],
   "cameraOffsets": [-9.3, 41.8],
   "flipX": true,
   "singTime": 8.0,
@@ -36,62 +36,62 @@
     },
     {
       "name": "singLEFT",
-      "prefix": "Pose Left",
+      "prefix": "Left",
       "offsets": [0, 0]
     },
     {
       "name": "singDOWN",
-      "prefix": "Pose Down",
+      "prefix": "Down",
       "offsets": [0, 0]
     },
     {
       "name": "singUP",
-      "prefix": "Pose Up",
+      "prefix": "Up",
       "offsets": [0, 0]
     },
     {
       "name": "singRIGHT",
-      "prefix": "Pose Right",
+      "prefix": "Right",
       "offsets": [0, 0]
     },
     {
       "name": "singLEFT-perfect",
-      "prefix": "Perfect Left",
+      "prefix": "Left Perfect",
       "offsets": [0, 0]
     },
     {
       "name": "singDOWN-perfect",
-      "prefix": "Perfect Down",
+      "prefix": "Down Perfect",
       "offsets": [0, 0]
     },
     {
       "name": "singUP-perfect",
-      "prefix": "Perfect Up",
+      "prefix": "Up Perfect",
       "offsets": [0, 0]
     },
     {
       "name": "singRIGHT-perfect",
-      "prefix": "Perfect Right",
+      "prefix": "Right Perfect",
       "offsets": [0, 0]
     },
     {
       "name": "singLEFTmiss",
-      "prefix": "Miss Left",
+      "prefix": "Left Miss",
       "offsets": [0, 0]
     },
     {
       "name": "singDOWNmiss",
-      "prefix": "Miss Down",
+      "prefix": "Down Miss",
       "offsets": [0, 0]
     },
     {
       "name": "singUPmiss",
-      "prefix": "Miss Up",
+      "prefix": "Up Miss",
       "offsets": [0, 0]
     },
     {
       "name": "singRIGHTmiss",
-      "prefix": "Miss Right",
+      "prefix": "Right Miss",
       "offsets": [0, 0]
     },
     {

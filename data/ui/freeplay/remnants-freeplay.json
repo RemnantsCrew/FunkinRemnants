@@ -4,7 +4,7 @@
     "remnants": {
       "albumCover": "remnants-remnants",
       "secret": {
-        "albumCover": "ridge-remnants",
+        "albumCover": "remnants-ridge",
         "difficulty": { "easy": 1, "hard": 3, "normal": 2 },
         "name": "Ridge (Remnants Mix)",
         "icon": "ridge-remnants",
@@ -71,7 +71,7 @@
       "ostName": "BACON CHEESE",
       "albumCover": "remnants-expansion",
       "secret": {
-        "albumCover": "smash-remnants",
+        "albumCover": "remnants-smash",
         "difficulty": { "easy": 4, "hard": 6, "normal": 5 },
         "name": "Smash (Remnants Mix)",
         "hideOSTName": true,

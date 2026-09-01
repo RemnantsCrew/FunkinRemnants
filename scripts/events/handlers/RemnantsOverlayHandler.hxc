@@ -3,7 +3,6 @@ package funkin.remnants.events.handlers;
 import funkin.play.event.SongEvent;
 import funkin.util.ReflectUtil;
 import openfl.filters.ColorMatrixFilter;
-import Std;
 
 class RemnantsOverlayHandler extends Module
 {
@@ -47,13 +46,13 @@ class RemnantsOverlayHandler extends Module
       overlay.color = white ? 0xFFFFFFFF : 0xFF000000;
       overlay.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
       overlay.alpha = startAlpha;
-
-      PlayState.instance.refresh();
     }
 
     var oldAlpha:Float = overlay.alpha;
     overlay.alpha = 0;
     setOverlayAlpha(oldAlpha);
+
+    PlayState.instance.refresh();
   }
 
   override public function onStateChangeEnd(event:StateChangeScriptEvent):Void
@@ -192,8 +191,9 @@ class RemnantsOverlayHandler extends Module
         }
       }, setOverlayAlpha);
 
-    overlay.color = white ? 0xFFFFFFFF : 0xFF000000;
-    overlay.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
+    overlay?.color = white ? 0xFFFFFFFF : 0xFF000000;
+    trace(hud);
+    overlay?.cameras = [hud ? PlayState.instance.camCutscene : PlayState.instance.camHUD];
   }
 
   var colorMatrixFilter:ColorMatrixFilter;

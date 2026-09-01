@@ -45,7 +45,7 @@ class PicoRemnantsSpeakerCharacter extends AnimateAtlasCharacter
     shootTimes = [];
     // The tankmen's timings and directions are determined
     // by the chart, specifically the internal "picospeaker" difficulty.
-    var animChart:SongDifficulty = PlayState.instance.currentSong.getDifficulty('picospeaker', PlayState.instance.currentVariation);
+    var animChart:SongDifficulty = PlayState.instance?.currentSong?.getDifficulty('picospeaker', PlayState.instance?.currentVariation);
     if (animChart == null)
     {
       trace('Initializing Pico (speaker) failed; no `picospeaker` chart found for this song.');

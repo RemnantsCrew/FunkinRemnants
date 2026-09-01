@@ -1,7 +1,5 @@
 package funkin.remnants.characters;
 
-using StringTools;
-
 class MonsterRemnantsCharacter extends AnimateAtlasCharacter
 {
   public function new()

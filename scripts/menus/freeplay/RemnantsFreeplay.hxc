@@ -1,0 +1,178 @@
+package funkin.remnants.menus.freeplay;
+
+import funkin.ui.freeplay.FreeplayState;
+import funkin.ui.freeplay.SongMenuItem;
+import funkin.ui.freeplay.AlbumRoll;
+import funkin.util.ReflectUtil;
+import haxe.Json;
+
+class RemnantsFreeplay extends Module
+{
+  public static var instance:RemnantsFreeplay = null;
+
+  var freeplayJson:Dynamic = {};
+
+  var previousAlbumKey:String = null;
+  var selectedSong:Bool = false;
+
+  public function new()
+  {
+    super('RemnantsFreeplay', 1000, {state: FreeplayState});
+
+    var freeplayPath:String = Paths.json('ui/freeplay/remnants-freeplay');
+    freeplayJson = Json.parse(Assets.getText(freeplayPath)) ?? {};
+
+    RemnantsFreeplay.instance = this;
+  }
+
+  function customCapsules(event:CapsuleScriptEvent)
+  {
+    for (capsule in getFreeplay().grpCapsules.members)
+    {
+      if (capsule == null || !capsule.alive || capsule.freeplayData == null) continue;
+
+      var freeplayData:FreeplaySongData = capsule.freeplayData;
+
+      var newData:Dynamic = getReplaceSongData(freeplayData.songId, freeplayData.curVariation);
+      if (newData == null) continue;
+
+      var isSecret:Bool = isSongSecret(freeplayData.songId, freeplayData.curVariation);
+
+      var capsuleTitle:String = newData.capsuleTitle;
+      if (isSecret && newData.secret.capsuleTitle != null) capsuleTitle = newData.secret.capsuleTitle;
+
+      if (capsuleTitle != null)
+      {
+        capsule.createWeekTextGraphic(capsuleTitle);
+        capsule.weekText.loadGraphic(FlxG.bitmap.get(capsuleTitle));
+
+        if (newData.capsuleOffset != null)
+        {
+          capsule.weekText.offset.set(newData.capsuleOffset[0], newData.capsuleOffset[1]);
+        }
+      }
+
+      if (isSecret)
+      {
+        var replacedSongName:String = newData.secret.name ?? capsule.songText.text;
+        if (capsule.songText.text != replacedSongName)
+        {
+          capsule.songText.text = replacedSongName;
+          capsule.songText.clipWidth = capsule.songText.clipWidth;
+          capsule.updateSelected();
+        }
+
+        if (newData.secret.difficulty != null)
+        {
+          var rating:Int = ReflectUtil.getProperty(newData.secret.difficulty, event.difficultyId);
+          if (rating != null)
+          {
+            if (capsule.selected) getFreeplay().albumRoll.setDifficultyStars(rating);
+            capsule.updateDifficultyRating(rating);
+          }
+        }
+
+        if (newData.secret.icon != null) capsule.pixelIcon.setCharacter(newData.secret.icon);
+        if (newData.secret.bpm != null) capsule.updateBPM(newData.secret.bpm);
+      }
+    }
+  }
+
+  public function replaceRandomSong(event:CapsuleScriptEvent):Void
+  {
+    // Replace the random capsule theme if we are on it.
+    if (event.capsule.freeplayData != null) return;
+
+    // Replace the sound with a bit more of delay so it actually overrides it every time it needs to play.
+    new FlxTimer().start(0.3, _ -> {
+      getFreeplay().clearPreviews();
+
+      var previewVolume:Float = 0.7;
+      if (getFreeplay().dj != null) previewVolume *= getFreeplay().dj.getMusicPreviewMult();
+
+      // Check if this music is already playing before fading it in, in case the player is just scrolling through variations while on the capsule.
+      var shouldFade:Bool = FunkinSound.playMusic('freeplayRandom-remnants',
+        {
+          startingVolume: 0.0,
+          overrideExisting: true,
+          restartTrack: false
+        });
+
+      if (shouldFade) FlxG.sound.music.fadeIn(2, 0, previewVolume);
+    });
+  }
+
+  public function handleAlbumRollUpdate(event:CapsuleScriptEvent):Void
+  {
+    if (event?.capsule?.freeplayData?.data?.getAlbumId(event.difficultyId, event.variationId) != 'remnants') return;
+
+    var albumRoll:AlbumRoll = getFreeplay().albumRoll;
+    if (albumRoll.albumData == null) return;
+
+    var albumRollKey:String = albumRoll?.albumData?.getAlbumArtAssetKey();
+
+    if (albumRollKey != previousAlbumKey || previousAlbumKey == null)
+    {
+      albumRoll.updateAlbum();
+      albumRoll.skipIntro();
+    }
+
+    previousAlbumKey = albumRollKey;
+  }
+
+  override function onDifficultySwitch(event:CapsuleScriptEvent):Void
+  {
+    super.onDifficultySwitch(event);
+    selectedSong = false;
+
+    customCapsules(event);
+  }
+
+  override function onCapsuleSelected(event:CapsuleScriptEvent):Void
+  {
+    super.onCapsuleSelected(event);
+    selectedSong = false;
+
+    if (!RemnantsContentUtil.remnantsContentEnabled()) return;
+
+    replaceRandomSong(event);
+    handleAlbumRollUpdate(event);
+    customCapsules(event);
+  }
+
+  override function onSongSelected(event:CapsuleScriptEvent):Void
+  {
+    super.onSongSelected(event);
+    selectedSong = true;
+  }
+
+  public function getReplaceSongData(songId:String, variationId:String):Dynamic
+  {
+    var curSong:Dynamic = ReflectUtil.getProperty(freeplayJson, songId);
+    var curVariation:Dynamic = ReflectUtil.getProperty(curSong, variationId);
+
+    return curVariation;
+  }
+
+  public function isSongSecret(songId:String, variationId:String):Bool
+  {
+    if (selectedSong)
+    {
+      // This sucks. Maybe we should cancel the preview here instead?
+      trace('Forcefully disabling `isSongSecret` check!');
+      return false;
+    }
+
+    var json:Dynamic = this.getReplaceSongData(songId, variationId);
+
+    var variationSuffix:String = variationId != Constants.DEFAULT_VARIATION ? variationId : '';
+    var beatenSong:Bool = Save.instance.hasBeatenSong(songId, null, variationSuffix);
+
+    return !beatenSong && json?.secret != null;
+  }
+
+  public function getFreeplay():FreeplayState
+  {
+    return FlxG.state.subState;
+  }
+}

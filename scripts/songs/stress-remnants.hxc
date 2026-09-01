@@ -3,14 +3,14 @@ package funkin.remnants.songs;
 import funkin.play.GameOverSubState;
 import flixel.text.FlxText;
 import flixel.text.FlxTextBorderStyle;
+import flixel.util.FlxTimerManager;
 import funkin.play.character.BaseCharacter;
 import funkin.play.character.CharacterDataParser;
+import funkin.mobile.input.ControlsHandler;
 import funkin.modding.events.ScriptEventDispatcher;
 import funkin.modding.events.SongTimeScriptEvent;
-import funkin.play.character.CharacterType;
 import funkin.data.song.SongRegistry;
 import funkin.ui.FullScreenScaleMode;
-import flixel.util.FlxTimerManager;
 import funkin.util.TouchUtil;
 
 class StressRemnantsMixSong extends Song
@@ -28,6 +28,7 @@ class StressRemnantsMixSong extends Song
   var cutsceneTimerManager:FlxTimerManager;
   var cutsceneMusic:FunkinSound;
   var sequence:SongSequence;
+  var school:Bool = false;
 
   public function new()
   {
@@ -37,6 +38,12 @@ class StressRemnantsMixSong extends Song
       });
 
     hasPlayedCutscene = false;
+  }
+
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (currentVariation == 'remnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);
+    return false;
   }
 
   function onCreate(event:ScriptEvent):Void
@@ -55,19 +62,38 @@ class StressRemnantsMixSong extends Song
     bgSprite.alpha = 0;
     PlayState.instance.add(bgSprite);
     PlayState.instance.refresh();
-  }
 
-  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
-  {
-    if (currentVariation == 'remnants') return !Save.instance.hasBeatenSong(this.id, null, this.variation);
-    return false;
+    school = RemnantsContentUtil.getChance('schoolShootJoke');
+    if (school) FunkinMemory.cacheSound(Paths.sound('gameplay/secret/secret', "shared"));
+
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [550, -190];
+        }
+        else
+        {
+          // Upscroll Offset
+          [550, 350];
+        }
+      };
+
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows') return;
+    PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
   public override function onCountdownStart(event:CountdownScriptEvent):Void
   {
     super.onCountdownStart(event);
 
-    if (!hasPlayedCutscene)
+    if (!hasPlayedCutscene && !PlayState.instance.isChartingMode)
     {
       trace('Pausing countdown to play in-game cutscene (`stress-remnants`)');
 
@@ -122,6 +148,7 @@ class StressRemnantsMixSong extends Song
   var fakeBoyfriend:BaseCharacter = null;
   var fakeGirlfriend:BaseCharacter = null;
   var gfFaceplant:FunkinSprite = null;
+  var schoolImage:FunkinSprite = null;
 
   function runCutscene():Void
   {
@@ -167,6 +194,11 @@ class StressRemnantsMixSong extends Song
       // @TechnikTil no i HATE funkin remnants
       var subtitlesFile:String = 'songs/' + PlayState.instance.currentSong.id + '/subtitles/cutscene-remnants';
 
+      if (school)
+      {
+        subtitlesFile += '-secret';
+      }
+
       if (!Preferences.naughtyness)
       {
         subtitlesFile += '-censored';
@@ -195,8 +227,14 @@ class StressRemnantsMixSong extends Song
     steveDies = FunkinSound.load(Paths.sound("steveDies"), 1, false);
     cutsceneSounds.push(steveDies);
 
-    gfFail = FlxG.random.bool(35);
+    gfFail = RemnantsContentUtil.getChance('facePlant');
     if (gfFail) trace("Girlfriend is face-planting!");
+
+    if (school)
+    {
+      schoolSound = FunkinSound.load(Paths.sound("school"), 4, false);
+      cutsceneSounds.push(schoolSound);
+    }
 
     var dadPosition:FlxPoint = PlayState.instance.currentStage.getDadPosition();
     var gfPosition:FlxPoint = PlayState.instance.currentStage.getGirlfriendPosition();
@@ -226,13 +264,26 @@ class StressRemnantsMixSong extends Song
     {
       gfFaceplant = FunkinSprite.createSparrow(gfPosition.x + 123.5, gfPosition.y - 139, "remnants/cutscene/gfFail");
       gfFaceplant.animation.addByPrefix('faceplant', "", 24, false);
-      gfFaceplant.zIndex = PlayState.instance.currentStage.getBoyfriend().zIndex + 1;
+      gfFaceplant.zIndex = PlayState.instance.currentStage.getBoyfriend().zIndex + 2;
       gfFaceplant.visible = false;
       gfFaceplant.animation.onFinish.add(() -> {
         // loop the twitching, its too funny to only play once!
         gfFaceplant.animation.play('faceplant', true, false, 10);
       });
       PlayState.instance.currentStage.add(gfFaceplant);
+    }
+
+    if (school)
+    {
+      var bfPosition:FlxPoint = PlayState.instance.currentStage.getBoyfriendPosition();
+
+      schoolImage = FunkinSprite.create(0, 0, "remnants/cutscene/school");
+      schoolImage.zIndex = PlayState.instance.currentStage.getBoyfriend().zIndex + 1;
+      schoolImage.scale.set(0.75, 0.75);
+      schoolImage.updateHitbox();
+      schoolImage.setPosition(bfPosition.x - schoolImage.width / 2, bfPosition.y - schoolImage.height + 5);
+      schoolImage.visible = false;
+      PlayState.instance.currentStage.add(schoolImage);
     }
 
     PlayState.instance.currentStage.refresh();
@@ -348,6 +399,37 @@ class StressRemnantsMixSong extends Song
       cameraFollowPoint.setPosition(590, 510);
       PlayState.instance.resetCamera(false, false, false);
     });
+
+    if (school)
+    {
+      new FlxTimer(cutsceneTimerManager).start(27.192, function(_) {
+        cutsceneSkipped = true;
+        canSkipCutscene = false;
+
+        FlxTween.tween(skipText, {alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+
+        cutsceneMusic.fadeOut(0.0000001, 0, function(_) {
+          cutsceneMusic.stop();
+          cutsceneMusic.destroy();
+          cutsceneMusic = null;
+        });
+
+        tankmanCutscene.anim.pause();
+        schoolImage.visible = true;
+        FunkinSound.playOnce(Paths.sound('gameplay/secret/secret', "shared"), 1);
+        PlayState.instance.tweenCameraZoom(1.035, 0.5, true, FlxEase.quadOut);
+        cameraFollowPoint.setPosition(990, 630);
+        tankTalk2.stop();
+        schoolSound.play();
+      });
+
+      new FlxTimer(cutsceneTimerManager).start(32.192, function(_) {
+        schoolImage.destroy();
+        endCutscene();
+        cutsceneConductor = null;
+      });
+    }
+    if (school) return;
 
     new FlxTimer(cutsceneTimerManager).start(32.3, function(_) {
       cameraFollowPoint.setPosition(990, 660);
@@ -483,6 +565,8 @@ class StressRemnantsMixSong extends Song
 
   function setupCharacter(character:BaseCharacter, charType:CharacterType):Void
   {
+    if (character == null) return;
+
     var stageCharData:StageDataCharacter = null;
     switch (charType)
     {
@@ -590,7 +674,10 @@ class StressRemnantsMixSong extends Song
 
     hasPlayedCutscene = true;
 
-    if (PlayState.instance.currentStage.storm0.alpha > 0) PlayState.instance.currentStage.stormOff(1);
+    if (!RemnantsOptions.getPerformanceOption()
+      && PlayState.instance.currentStage.storm0?.alpha > 0) PlayState.instance.currentStage.storm(0, 1);
+
+    PlayState.instance.disableKeys = false;
 
     // resets the tankmen!
     tankmanGroup?.reset(0, 0);
@@ -607,7 +694,8 @@ class StressRemnantsMixSong extends Song
     super.onGameOver(event);
     sequence?.destroy();
 
-    if (PlayState.instance.currentStage.storm0.alpha > 0) PlayState.instance.currentStage.stormOff(0);
+    if (!RemnantsOptions.getPerformanceOption()
+      && PlayState.instance.currentStage.storm0?.alpha > 0) PlayState.instance.currentStage.storm(0, 0);
   }
 
   function onSongLoaded(event:SongLoadScriptEvent)
@@ -616,26 +704,41 @@ class StressRemnantsMixSong extends Song
 
     var sequenceData = [
       {
-        time: Conductor.instance.getBeatTimeInMs(96) / 1000,
+        time: Conductor.instance.getBeatTimeInMs(352) / 1000,
         callback: () -> {
-          PlayState.instance.currentStage.stormOn(1);
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(160) / 1000,
-        callback: () -> {
-          PlayState.instance.currentStage.stormOff(1);
-        }
-      },
-
-      {
-        time: Conductor.instance.getBeatTimeInMs(224) / 1000,
-        callback: () -> {
-          PlayState.instance.currentStage.stormOn(1);
+          for (i in 0...4)
+            PlayState.instance.playerStrumline.releaseKey(i);
+          PlayState.instance.disableKeys = true;
         }
       },
     ];
+
+    if (!RemnantsOptions.getPerformanceOption())
+    {
+      sequenceData.push(
+        {
+          time: Conductor.instance.getBeatTimeInMs(96) / 1000,
+          callback: () -> {
+            PlayState.instance.currentStage.storm(1, 1);
+          }
+        });
+
+      sequenceData.push(
+        {
+          time: Conductor.instance.getBeatTimeInMs(160) / 1000,
+          callback: () -> {
+            PlayState.instance.currentStage.storm(0, 1);
+          }
+        });
+
+      sequenceData.push(
+        {
+          time: Conductor.instance.getBeatTimeInMs(223) / 1000,
+          callback: () -> {
+            PlayState.instance.currentStage.storm(1, 0.3);
+          }
+        });
+    }
 
     sequence = new SongSequence(sequenceData);
     sequence.startTime = 0;

@@ -85,7 +85,7 @@ class BlazinRemnantsMixSong extends Song
       {
         time: Conductor.instance.getBeatTimeInMs(343) / 1000,
         callback: () -> {
-          gigacut = FlxG.random.bool(25);
+          gigacut = RemnantsUtil.getChance('gigacut');
         }
       },
     ];

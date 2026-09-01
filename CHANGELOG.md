@@ -5,6 +5,73 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - (2026-09-01)
+
+## Added
+
+- Created `RemnantsSoundUtil` (It adds two useful functions)
+- Game Over Animations and Pause Music now adapt to the current character in "Glitcher (Remnants Mix)".
+- The "Back to Exit" graphic now pushes itself out of the way when the QT Rewired Plush Button is available.
+- Added LunarzNova's "Stupid Fucking Capital N" to their "Sugarcrash! (Remnants Mix)" credit.
+- Added a new secret random chance to Stress.
+- Added a Remnants variant of the "Clear Percentage" Graphic in the Results Screen.
+
+## Changes
+
+- Re-Exported "Stress (Remnants Mix)".
+- Updated "Tutorial (Remnants Mix)" Vocals.
+- Updated "SugarCrash! (Remnants Mix)" Vocals.
+- Updated Week 2's dark overlays to be a vignette.
+- Remnants Credits are now displayed as in-game objects instead of being entirely in a video.
+- Updated Week 2 Album Cover.
+- Updated Week 5 Stage Boppers.
+- Updated Week 7's Sky to be more optimized.
+- Moved all of Remnants Options into their own category in the Options Menu.
+- Updated Discord RPC to use the native implementation in 0.8.6.
+- Random Chances are now data driven! (All of their percentage data are now in `remnants-chances.json`)
+- Completely reworked the Remnants Results implementation for better memory management.
+- Changed the mod ID from `funkin-remnants` to `funkin_remnants`.
+- Made Intro Bumpers transition into In-Game Cutscenes better. ([3267a2c](https://github.com/RemnantsCrew/FunkinRemnants/commit/3267a2c3f1a396648e75a93e6374509bb73b1dff)) - by @ComedyLost in [#27](https://github.com/RemnantsCrew/FunkinRemnants/pull/27)
+- Moved all Mechanic notekinds for "DadBattle (Remnants Mix)" into a single script.
+- Updated all of Darnell spraycan sprites for better consistency.
+- Tweaked the chart for "Tormentor (Remnants Mix)".
+- Re-Exported all of Monster & Pico Remnants sprites.
+- Re-Exported GF Base, Car & Dark sprites.
+- Merged Luis and Dad into a single atlas.
+- Adjusted "Cocoa (Remnants Mix)" and "Fresh (Remnants Mix)" difficulty ratings in Freeplay.
+- Various minor code optimizations.
+
+## Fixes
+
+- Fixed Spirit's trail not showing in 0.8.6.
+- Fixed the Remnants Results crashing in 0.8.6.
+- Fixed the "Tormentor (Remnants Mix)" shader in 0.8.6.
+- Fixed Remnants BF Freeplay Cartoon Animation in 0.8.6.
+- Fixed the "Lose..." text not fading out when a shader is applied in 0.8.6.
+- Fixed BF Remnants Car and BF Remnants Glitcher Death Animations displaying wrong in 0.8.6.
+- Fixed the credits completion trigger without even completing every song in the mod in 0.8.6.
+- Fixed Remnants Overlay Event not being able to fade under the hud if you don't start the song with one.
+- Fixed "Roses (Remnants Mix)" Random Chance Sounds not pausing when they are meant to.
+- Fixed "Remnants (Remnants Mix)" Dialogue Sounds not pausing when they are meant to.
+- Fixed `RemnantsMusicReplacer` not replacing a music when coming from a substate.
+- Fixed the "Remnants Random" theme playing in Non-Remnants freeplay menus.
+- Fixed Performance Mode in "Lit Up (Remnants Mix)", "Lit Up (BF Remnants Mix)", and all Week 7 songs.
+- Fixed the "BF catching GF" animation missing in the "Stress (Remnants Mix)" cutscene.
+- Fixed BF Remnants Dark Right Pose not showing up as intended.
+- Fixed 2hot spraycans causing a lag-spike everytime they spawn.
+- [MOBILE] Fixed the custom combo offsets showing up wrong.
+- Fixed the "Hey!" animations not playing correctly in "Bopeebo (Remnants Mix)".
+- Fixed Week 5 Stages not creating all the snow layers.
+- Fixed the bumpers playing in Non-Remnants songs.
+- Fixed 2hot spraycan impact particle being missing.
+- Fixed GF Fear animation not playing long enough.
+- Fixed BF Holding GF's game over offsets.
+- Removed unused spritesheets from the files.
+
+
+
+
+
 ## [1.1.1] - (2026-04-09)
 
 ### Changes

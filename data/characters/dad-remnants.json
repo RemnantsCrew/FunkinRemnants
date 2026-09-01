@@ -3,12 +3,9 @@
   "name": "Remnants Dad",
   "assetPath": "shared:characters/dad-remnants",
   "renderType": "animateatlas",
-  "offsets": [36, 2],
-  "cameraOffsets": [-12, 9],
+  "offsets": [39, 2],
+  "cameraOffsets": [-15, 6],
   "singTime": 8.0,
-  "healthIcon": {
-    "id": "dad-remnants"
-  },
   "animations": [
     {
       "name": "idle",
@@ -16,80 +13,75 @@
     },
     {
       "name": "idle-hold",
-      "prefix": "Idle",
-      "looped": true,
-      "frameIndices": [11, 12]
+      "prefix": "Idle Hold",
+      "looped": true
     },
     {
       "name": "singLEFT",
-      "prefix": "Left",
-      "offsets": [-7, 0]
+      "prefix": "Left"
     },
     {
       "name": "singLEFT-hold",
-      "prefix": "Left",
-      "looped": true,
-      "frameIndices": [2, 3, 4, 5],
-      "offsets": [-7, 0]
-    },
-    {
-      "name": "singLEFT-miss",
-      "prefix": "Left Miss",
-      "offsets": [-7, 0]
+      "prefix": "Left Hold",
+      "looped": true
     },
     {
       "name": "singDOWN",
-      "prefix": "Down",
-      "offsets": [6, 5]
+      "prefix": "Down"
     },
     {
       "name": "singUP",
-      "prefix": "Up",
-      "offsets": [0, -2]
+      "prefix": "Up"
     },
     {
       "name": "singUP-hold",
-      "prefix": "Up",
-      "looped": true,
-      "frameIndices": [2, 3, 4, 5],
-      "offsets": [0, -2]
+      "prefix": "Up Hold",
+      "looped": true
     },
     {
       "name": "singRIGHT",
-      "prefix": "Right",
-      "offsets": [9, 1]
+      "prefix": "Right"
     },
     {
       "name": "singRIGHT-hold",
-      "prefix": "Right",
-      "looped": true,
-      "frameIndices": [2, 3, 4, 5],
-      "offsets": [9, 1]
+      "prefix": "Right Hold",
+      "looped": true
     },
     {
-      "name": "grunt",
-      "prefix": "Grunt",
-      "offsets": [-7, -1]
+      "name": "singLEFTmiss",
+      "prefix": "Left Miss"
+    },
+    {
+      "name": "singUPmiss",
+      "prefix": "Up Miss"
+    },
+    {
+      "name": "singDOWNmiss",
+      "prefix": "Down Miss"
+    },
+    {
+      "name": "singRIGHTmiss",
+      "prefix": "Right Miss"
     },
     {
       "name": "hit",
-      "prefix": "Hit",
-      "offsets": [-7, 2]
-    },
-    {
-      "name": "preAttack",
-      "prefix": "Pre-Attack",
-      "offsets": [-7, -1]
-    },
-    {
-      "name": "attack",
-      "prefix": "Attack",
-      "offsets": [-7, -2]
+      "prefix": "Hit"
     },
     {
       "name": "block",
-      "prefix": "Block",
-      "offsets": [-7, -2]
+      "prefix": "Block"
+    },
+    {
+      "name": "grunt",
+      "prefix": "Grunt"
+    },
+    {
+      "name": "preAttack",
+      "prefix": "Pre-Attack"
+    },
+    {
+      "name": "attack",
+      "prefix": "Attack"
     }
   ]
 }

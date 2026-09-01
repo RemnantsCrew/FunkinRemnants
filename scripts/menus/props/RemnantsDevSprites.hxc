@@ -1,0 +1,23 @@
+package funkin.remnants.menus.props;
+
+import funkin.ui.FullScreenScaleMode;
+import funkin.remnants.shaders.BloomShader;
+
+/**
+ * The class responsable of displaying the ending dev sprites <3.
+ */
+class RemnantsDevSprites extends FunkinSprite
+{
+  override public function new()
+  {
+    super();
+
+    this.loadTextureAtlas("creditsMenu/dev-sprites", null, {applyStageMatrix: true, useRenderTexture: true});
+    this.anim.addBySymbol("devs", "Dev Sprites", 24, false);
+    this.anim.play("devs");
+
+    this.x = FullScreenScaleMode.gameCutoutSize.x / 2;
+    this.shader = new BloomShader();
+    this.alpha = 0.00001;
+  }
+}

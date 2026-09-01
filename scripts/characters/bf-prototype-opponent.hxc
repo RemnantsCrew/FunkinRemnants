@@ -4,9 +4,12 @@ import funkin.data.notestyle.NoteStyleRegistry;
 import openfl.filters.DropShadowFilter;
 import funkin.ui.FullScreenScaleMode;
 import funkin.play.notes.Strumline;
+import funkin.Conductor;
 
 class BFPrototypeOpponentCharacter extends AnimateAtlasCharacter
 {
+  public var currentSustains:Array<Dynamic> = [];
+
   public function new()
   {
     super('bf-prototype-opponent');
@@ -18,6 +21,12 @@ class BFPrototypeOpponentCharacter extends AnimateAtlasCharacter
 
     var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 0, 0x000000, 1, 15, 15, 255);
     filters = [dropShadowFilter];
+  }
+
+  override public function resetCharacter(resetCamera:Bool = true):Void
+  {
+    currentSustains = [];
+    super.resetCharacter(resetCamera);
   }
 
   override public function onAdd(event:ScriptEvent):Void
@@ -61,33 +70,53 @@ class BFPrototypeOpponentCharacter extends AnimateAtlasCharacter
     }
   }
 
-  var isSustain:Bool = false;
-
-  function onStepHit(event:SongTimeScriptEvent)
+  override public function onNoteHit(event:HitNoteScriptEvent):Void
   {
-    super.onStepHit(event);
-
-    if (PlayState.instance == null || this.debug) return;
-
-    var strumline:Strumline = switch (characterType)
+    var isTarget:Bool = switch (characterType)
     {
+      case CharacterType.BF:
+        event.note.noteData.getMustHitNote();
       case CharacterType.DAD:
-        PlayState.instance?.opponentStrumline;
+        !event.note.noteData.getMustHitNote();
       default:
-        PlayState.instance?.playerStrumline;
+        false;
+    };
+
+    super.onNoteHit(event);
+
+    if (isTarget && event.note.length > 0)
+    {
+      currentSustains.push({noteData: event.note.noteData, elapsed: 0});
+    }
+  }
+
+  override public function onUpdate(event:UpdateScriptEvent):Void
+  {
+    var i:Int = 0;
+    while (i < currentSustains.length)
+    {
+      var data:Dynamic = currentSustains[i];
+
+      var stepBefore:Float = Math.floor(data.elapsed / Conductor.instance.stepLengthMs);
+      data.elapsed += event.elapsed * 1000;
+      var stepNow:Float = Math.floor(data.elapsed / Conductor.instance.stepLengthMs);
+
+      if (stepNow - stepBefore >= 1)
+      {
+        // No suffix support... we should be fine... right?
+        this.playSingAnimation(data.noteData.getDirection(), false, '');
+        this.holdTimer = 0;
+      }
+
+      if (data.elapsed >= data.noteData.length)
+      {
+        currentSustains.remove(data);
+      }
+
+      i++;
     }
 
-    for (hold in strumline.holdNotes.group.members)
-    {
-      if (hold == null || !hold.alive) continue;
-      if (hold.hitNote) this.isSustain = hold.sustainLength > 0;
-    }
-
-    if (this.isSustain)
-    {
-      this.isSustain = false;
-      this.animation.play(this.animation.name, true);
-    }
+    super.onUpdate(event);
   }
 
   override public function onCountdownStart(event:CountdownScriptEvent):Void

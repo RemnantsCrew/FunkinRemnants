@@ -5,8 +5,6 @@ import funkin.graphics.shaders.RuntimeRainShader;
 import openfl.filters.ShaderFilter;
 import flixel.addons.display.FlxBackdrop;
 
-using StringTools;
-
 class PhillyStreetsRemnantsStage extends Stage
 {
   var rainShader:RuntimeRainShader = new RuntimeRainShader();
@@ -50,7 +48,7 @@ class PhillyStreetsRemnantsStage extends Stage
     {
       rainShader.scale = FlxG.height / 200; // adjust this value so that the rain looks nice
       FlxG.console.registerObject("rainShader", rainShader);
-      switch (PlayState.instance.currentSong.id)
+      switch (PlayState.instance?.currentSong?.id)
       {
         case "darnell":
           rainShaderStartIntensity = 0;
@@ -179,18 +177,18 @@ class PhillyStreetsRemnantsStage extends Stage
     var graphic:FlxGraphic = FlxG.bitmap.add(Paths.image('remnants/paper-secret'), false);
 
     // Make sure that the cache system knows that this graphic exists.
-    if (!paper.frames.usedGraphics.contains(graphic))
+    if (!paper?.frames?.usedGraphics?.contains(graphic))
     {
-      paper.frames.pushFrame(graphic.imageFrame.frame, true);
+      paper?.frames?.pushFrame(graphic?.imageFrame?.frame, true);
 
-      paper.frames.usedGraphics.push(graphic);
-      graphic.incrementUseCount();
+      paper?.frames?.usedGraphics?.push(graphic);
+      graphic?.incrementUseCount();
     }
 
     // Since this "frame" doesn't have a name, I need to add it by the location in the Array.
     // This is actually what health icons do too, surprisingly enough.
-    var index:Int = paper.frames.frames.indexOf(graphic.imageFrame.frame);
-    paper.animation.add('paperBlow-secret', [index], 1, false);
+    var index:Int = paper?.frames?.frames?.indexOf(graphic?.imageFrame?.frame);
+    paper?.animation?.add('paperBlow-secret', [index], 1, false);
   }
 
   var _timer:Float = 0;
@@ -234,7 +232,8 @@ class PhillyStreetsRemnantsStage extends Stage
     {
       if (paper != null)
       {
-        var skeleton:Bool = FlxG.random.bool(1); // Did you guys see that? https://x.com/shoppingcart_r/status/2023625177154695661
+        // Did you guys see that? https://x.com/shoppingcart_r/status/2023625177154695661
+        final skeleton:Bool = RemnantsContentUtil.getChance('didYouGuysSeeThat');
 
         paper.alpha = 1;
         paperInterruptable = false;

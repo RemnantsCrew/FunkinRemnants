@@ -54,12 +54,12 @@ class SchoolEvilRemnantsStage extends Stage
       wiggleTrees = new WiggleEffectRuntime(2, 4, 0.007, WiggleEffectType.DREAMY);
       wiggleOverlay = new WiggleEffectRuntime(50, 90, 0.7, WiggleEffectType.DREAMY);
 
-      getNamedProp('sky').shader = wiggleSky;
-      getNamedProp('backTrees').shader = wiggleBack;
-      getNamedProp('school').shader = wiggleSchool;
-      getNamedProp('street').shader = wiggleGround;
-      getNamedProp('trees').shader = wiggleTrees;
-      getNamedProp('pixeloverlay').shader = wiggleOverlay;
+      getNamedProp('sky')?.shader = wiggleSky;
+      getNamedProp('backTrees')?.shader = wiggleBack;
+      getNamedProp('school')?.shader = wiggleSchool;
+      getNamedProp('street')?.shader = wiggleGround;
+      getNamedProp('trees')?.shader = wiggleTrees;
+      getNamedProp('pixeloverlay')?.shader = wiggleOverlay;
     }
   }
 

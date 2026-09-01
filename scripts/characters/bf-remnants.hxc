@@ -28,17 +28,14 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
 
     // Reset to standard death animation.
     GameOverSubState.musicSuffix = '-remnants';
-    GameOverSubState.blueBallSuffix = "";
-    GameOverSubState.animationSuffix = "";
+    GameOverSubState.blueBallSuffix = '';
+    GameOverSubState.animationSuffix = '';
 
     PauseSubState.musicSuffix = '-remnants';
-
-    bfDeathExplosion = null;
     this.visible = true;
   }
 
   var singed:FunkinSound = null;
-  var bfDeathExplosion:FunkinSprite = null;
 
   override function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
   {
@@ -97,7 +94,7 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
 
     HapticUtil.vibrate(0, 0.5);
 
-    new FlxTimer().start(3.0, afterExplosionIntro);
+    FlxTimer.wait(3.0, afterExplosionIntro);
   }
 
   function doExplosionConfirm()
@@ -109,8 +106,10 @@ class BoyfriendRemnantsCharacter extends MultiAnimateAtlasCharacter
     }
   }
 
-  function afterExplosionIntro(timer:FlxTimer)
+  function afterExplosionIntro()
   {
+    if (GameOverSubState.instance == null) return;
+
     // Start the (standard) death music, 3.5 seconds after the explosion starts,
     // not when the explosion sound finishes or when the loop starts.
     GameOverSubState.instance.startDeathMusic(1, true);

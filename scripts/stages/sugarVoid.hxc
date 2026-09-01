@@ -22,15 +22,15 @@ class SugarCrashVoidStage extends Stage
     skillIssue.setGraphicSize(FlxG.width, FlxG.height);
     skillIssue.updateHitbox();
 
-    skillIssue.cameras = [PlayState.instance.camHUD];
+    skillIssue.cameras = [PlayState.instance?.camHUD];
     skillIssue.zIndex = 0;
 
     skillIssue.alpha = 0;
 
-    PlayState.instance.add(skillIssue);
-    PlayState.instance.refresh();
+    PlayState.instance?.add(skillIssue);
+    PlayState.instance?.refresh();
 
-    PlayState.instance.opponentStrumline.visible = false;
+    PlayState.instance?.opponentStrumline?.visible = false;
   }
 
   override public function onCountdownStart(event:CountdownScriptEvent):Void

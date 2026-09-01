@@ -1,0 +1,79 @@
+package funkin.remnants.utils;
+
+/**
+ * A time event sequence with rate multiplier support.
+ */
+@:nullSafety
+class RemnantsSequence
+{
+  /**
+   * The list of the events this sequence holds.
+   */
+  var events:Array<Bool> = [];
+
+  /**
+   * The list of the events data.
+   */
+  var eventData:Array<SequenceEvent> = [];
+
+  /**
+   * Create a new remnants sequence.
+   * @param list A list of `SequenceEvent`s.
+   * @param start Whether to immediately start the sequence.
+   */
+  public function new(list:Array<SequenceEvent>, start:Bool = true)
+  {
+    if (list.length == 0) return;
+
+    eventData = list;
+
+    for (event in eventData)
+    {
+      events.push(false);
+    }
+
+    running = start;
+  }
+
+  public function update(position:Float):Void
+  {
+    if (!running || eventData.length == 0) return;
+    for (id => event in eventData)
+    {
+      if (position >= event.time && !events[id])
+      {
+        event.callback();
+        events[id] = true;
+      }
+    }
+  }
+
+  /**
+   * Controls whether this sequence is running or not.
+   */
+  public var running(get, set):Bool;
+
+  var _running:Bool = false;
+
+  function get_running():Bool
+  {
+    return completed ? false : _running;
+  }
+
+  function set_running(v:Bool):Bool
+  {
+    if (completed) return false;
+    _running = v;
+    return _running;
+  }
+
+  /**
+   * Whether this sequence has completed.
+   */
+  public var completed(get, never):Bool;
+
+  function get_completed():Bool
+  {
+    return events[events.length - 1] == true;
+  }
+}

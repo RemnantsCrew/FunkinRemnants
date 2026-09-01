@@ -6,15 +6,26 @@ import funkin.play.stage.StageProp;
 
 class TwoHOTRemnantsMixSong extends Song
 {
+  var canVibrationPreset:VibrationPreset =
+    {
+      period: 0.1,
+      duration: 0.1,
+      amplitude: 1,
+      sharpness: 1
+    };
+
   function new()
   {
     super('2hot',
       {
         variation: 'remnants'
       });
-
-    hasPlayedCutscene = false;
   }
+
+  /**
+   * Health lost when hit by can.
+   */
+  var HEALTH_LOSS = 0.25 * 2;
 
   public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
   {
@@ -37,16 +48,6 @@ class TwoHOTRemnantsMixSong extends Song
     }
 
     if (hasBeatenRemnantsMix) return results;
-  }
-
-  function onCreate(event:ScriptEvent)
-  {
-    super.onCreate(event);
-
-    // Precache the assets for the song.
-    FunkinMemory.cacheTexture(Paths.image("CanImpactParticle"));
-    FunkinMemory.cacheTexture(Paths.image("spraypaintExplosionEZ"));
-    FunkinMemory.cacheTexture(Paths.image("remnants/spraycans/spraycanAtlas/spritemap1"));
   }
 
   function onSongRetry(event:ScriptEvent)
@@ -262,6 +263,11 @@ class TwoHOTRemnantsMixSong extends Song
 
       new FlxTimer().start(1 / 24, function(tmr) {
         darkenStageProps();
+
+        if (HapticUtil.hapticsAvailable)
+        {
+          HapticUtil.vibrateByPreset(canVibrationPreset);
+        }
       });
     }
   }
@@ -278,7 +284,7 @@ class TwoHOTRemnantsMixSong extends Song
 
   function spawnImpactParticle()
   {
-    var impactParticle = FunkinSprite.createSparrow(0, 0, 'remnants/mechanics/CanImpactParticle');
+    var impactParticle = FunkinSprite.createSparrow(0, 0, 'CanImpactParticle');
     impactParticle.animation.addByPrefix('idle', 'CanImpactParticle0', 24, false);
     impactParticle.animation.play('idle');
     impactParticle.x = PlayState.instance.currentStage.getBoyfriend().x + 400;
@@ -318,26 +324,11 @@ class TwoHOTRemnantsMixSong extends Song
     }
   }
 
-  /**
-   * Health lost when hit by can.
-   */
-  var HEALTH_LOSS = 0.25 * 2;
-
-  var canDamageVibrationPreset:VibrationPreset =
-    {
-      period: 0.1,
-      duration: 0.1,
-      amplitude: 1,
-      sharpness: 1
-    };
-
   function takeCanDamage():Void
   {
     trace('Taking damage from can exploding!');
 
     PlayState.instance.health -= HEALTH_LOSS;
-    // TODO: This is jank as hell! Add some better way to prevent onNoteMiss's normal health loss.
-    // PlayState.instance.health += 0.0775;
 
     if (PlayState.instance.health <= 0)
     {
@@ -351,12 +342,27 @@ class TwoHOTRemnantsMixSong extends Song
     else if (HapticUtil.hapticsAvailable)
     {
       // Can hits pico.
-      HapticUtil.vibrateByPreset(canDamageVibrationPreset);
+      HapticUtil.vibrateByPreset(canVibrationPreset);
 
       new FlxTimer().start(0.45, function(tmr) {
         // Can explodes.
-        HapticUtil.vibrateByPreset(canDamageVibrationPreset);
+        HapticUtil.vibrateByPreset(canVibrationPreset);
       });
     }
+  }
+
+  function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+
+    // Precache the assets for the song.
+    FunkinMemory.cacheTexture(Paths.image("CanImpactParticle"));
+    FunkinMemory.cacheTexture(Paths.image("SpraypaintExplosion"));
+    FunkinMemory.cacheTexture(Paths.image("spraypaintExplosionEZ"));
+    FunkinMemory.cacheTexture(Paths.image("remnants/spraycans/spraycan-remnants/spritemap1"));
+
+    // Precache the spraycan prop.
+    final can:SpraycanAtlasSpriteRemnants = new SpraycanAtlasSpriteRemnants(0, 0);
+    can.kill(); // kill() leaves it in memory, which is what we need.
   }
 }

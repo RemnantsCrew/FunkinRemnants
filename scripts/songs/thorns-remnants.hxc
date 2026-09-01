@@ -176,7 +176,7 @@ class ThornsRemnantsMixSong extends Song
           localManExplodesFreeSoundEffect.play();
         }
 
-        if (FlxG.random.bool(5)) // 5% chance of this happening.
+        if (RemnantsContentUtil.getChance('memorial'))
         {
           new FlxTimer(cutsceneTimerManager).start(1.75, function(deadTime:FlxTimer) {
             // Prevent skipping the cutscene from here.

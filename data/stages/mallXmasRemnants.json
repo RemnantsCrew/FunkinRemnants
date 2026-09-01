@@ -379,6 +379,38 @@
           "looped": false,
           "name": "idle",
           "offsets": [0, 0],
+          "prefix": "These guys"
+        }
+      ],
+      "assetPath": "remnants/beppers",
+      "blend": "",
+      "color": "#FFFFFF",
+      "danceEvery": 2,
+      "flipX": false,
+      "flipY": false,
+      "isPixel": false,
+      "name": "hankBop",
+      "position": [-2084, -1100],
+      "scale": 1,
+      "scroll": [1, 1],
+      "startingAnimation": "idle",
+      "zIndex": 17
+    },
+    {
+      "alpha": 1,
+      "angle": 0,
+      "animType": "animateatlas",
+      "animations": [
+        {
+          "assetPath": null,
+          "animType": "symbol",
+          "flipX": false,
+          "flipY": false,
+          "frameIndices": [],
+          "frameRate": 24,
+          "looped": false,
+          "name": "idle",
+          "offsets": [0, 0],
           "prefix": "spg boppin"
         }
       ],
@@ -427,38 +459,6 @@
       "scroll": [1, 1],
       "startingAnimation": "idle",
       "zIndex": 11
-    },
-    {
-      "alpha": 1,
-      "angle": 0,
-      "animType": "animateatlas",
-      "animations": [
-        {
-          "assetPath": null,
-          "animType": "symbol",
-          "flipX": false,
-          "flipY": false,
-          "frameIndices": [],
-          "frameRate": 24,
-          "looped": false,
-          "name": "idle",
-          "offsets": [0, 0],
-          "prefix": "These guys"
-        }
-      ],
-      "assetPath": "remnants/beppers",
-      "blend": "",
-      "color": "#FFFFFF",
-      "danceEvery": 2,
-      "flipX": false,
-      "flipY": false,
-      "isPixel": false,
-      "name": "frenchieHankBop",
-      "position": [-2084, -1100],
-      "scale": 1,
-      "scroll": [1, 1],
-      "startingAnimation": "idle",
-      "zIndex": 17
     },
     {
       "alpha": 1,

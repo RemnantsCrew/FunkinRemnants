@@ -11,7 +11,7 @@
   },
   "death": {
     "cameraZoom": 0.85,
-    "cameraOffsets": [275, 50]
+    "cameraOffsets": [-25, -75]
   },
   "atlasSettings": {
     "swfMode": false,
@@ -21,72 +21,66 @@
   "animations": [
     {
       "name": "idle",
-      "animType": "framelabel",
       "prefix": "Idle"
     },
     {
       "name": "hey",
-      "animType": "framelabel",
       "prefix": "Hey"
     },
     {
       "name": "singLEFT",
-      "animType": "framelabel",
       "prefix": "Left"
     },
     {
       "name": "singDOWN",
-      "animType": "framelabel",
       "prefix": "Down"
     },
     {
       "name": "singUP",
-      "animType": "framelabel",
       "prefix": "Up"
     },
     {
       "name": "singRIGHT",
-      "animType": "framelabel",
       "prefix": "Right"
     },
     {
       "name": "singLEFTmiss",
-      "animType": "framelabel",
       "prefix": "Left Miss"
     },
     {
       "name": "singDOWNmiss",
-      "animType": "framelabel",
       "prefix": "Down Miss"
     },
     {
       "name": "singUPmiss",
-      "animType": "framelabel",
       "prefix": "Up Miss"
     },
     {
       "name": "singRIGHTmiss",
-      "animType": "framelabel",
-      "prefix": "Down Miss"
+      "prefix": "Right Miss"
+    },
+    {
+      "name": "bfCatch",
+      "prefix": "Catch GF"
     },
     {
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
       "name": "firstDeath",
       "prefix": "Death Intro",
-      "offsets": [-278, -126]
+      "offsets": [22, -23]
     },
     {
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
       "name": "deathLoop",
       "prefix": "Death Loop",
       "looped": true,
-      "offsets": [-278, -126]
+      "offsets": [22, -23]
     },
     {
       "assetPath": "shared:characters/bf-remnants/holding gf/death",
       "name": "deathConfirm",
       "prefix": "Death Confirm",
-      "offsets": [-278, -126]
+      "offsets": [22, -23]
     }
   ]
 }

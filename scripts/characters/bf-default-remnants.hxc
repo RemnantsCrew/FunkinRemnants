@@ -1,7 +1,5 @@
 package funkin.remnants.characters;
 
-using StringTools;
-
 class BoyfriendDefaultRemnantsCharacter extends MultiAnimateAtlasCharacter
 {
   function new()

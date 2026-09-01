@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="spritesheet.png">
+	<!-- Created with Adobe Animate version 23.0.15.4 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="number 0 0000" x="2" y="2" width="81" height="89" frameX="0" frameY="-1" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 1 0000" x="85" y="2" width="62" height="88" frameX="-6" frameY="-1" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 2 0000" x="149" y="2" width="75" height="88" frameX="-1" frameY="-1" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 3 0000" x="226" y="2" width="78" height="88" frameX="-3" frameY="-1" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 4 0000" x="306" y="2" width="79" height="86" frameX="-1" frameY="-2" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 5 0000" x="387" y="2" width="79" height="90" frameX="-2" frameY="-1" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 6 0000" x="2" y="94" width="74" height="88" frameX="-2" frameY="-2" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 7 0000" x="78" y="94" width="75" height="86" frameX="-5" frameY="-2" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 8 0000" x="155" y="94" width="78" height="90" frameX="-2" frameY="0" frameWidth="81" frameHeight="91"/>
+	<SubTexture name="number 9 0000" x="235" y="94" width="78" height="87" frameX="-3" frameY="-2" frameWidth="81" frameHeight="91"/>
+</TextureAtlas>

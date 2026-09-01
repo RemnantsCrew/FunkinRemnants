@@ -1,0 +1,383 @@
+package funkin.remnants.menus.props;
+
+import funkin.remnants.shaders.BloomShader;
+import flixel.text.FlxTextBorderStyle;
+import funkin.ui.FullScreenScaleMode;
+import funkin.group.FunkinGroup;
+import funkin.util.ReflectUtil;
+import funkin.util.TouchUtil;
+import flixel.text.FlxText;
+import haxe.Json;
+
+/**
+ * The class responsable of displaying the credits text.
+ */
+class RemnantsCreditsGroup extends FunkinGroup
+{
+  /**
+   * The speed the remnants credits scroll at, in pixels per second.
+   */
+  public var baseSpeed = 75.0;
+
+  /**
+   * Is the group scrolling?
+   */
+  public var scrolling:Bool = false;
+
+  /**
+   * The intensity of the bloom shader glow.
+   */
+  public static final SHADER_INTENSITY:Float = 4.0;
+
+  /**
+   * The size a header should have.
+   */
+  final HEADER_SIZE:Int = 25;
+
+  /**
+   * The size a credit name should have.
+   */
+  final NAME_SIZE:Int = 22;
+
+  /**
+   * The size a credit role should have.
+   */
+  final ROLE_SIZE:Int = 18;
+
+  /**
+   * The size a person's header should have.
+   */
+  final NAME_THANKS_SIZE:Int = 20;
+
+  /**
+   * The size a special thank should have.
+   */
+  final THANKS_SIZE:Int = 16;
+
+  /**
+   * This group's credits raw data.
+   */
+  var creditsJson:Dynamic = {};
+
+  override public function new()
+  {
+    super((FullScreenScaleMode.gameCutoutSize.x / 2) + 10, FlxG.height);
+
+    var jsonPath:String = Paths.json('ui/credits/remnants-credits');
+    creditsJson = Json.parse(Assets.getText(jsonPath)) ?? {};
+  }
+
+  /**
+   * Fetches and creates the main credits.
+   */
+  public function generateCredits():Void
+  {
+    // First create the header for the section.
+    addHeader('Remnants Crew Credits:');
+
+    // Then fetch the entries from the json and create them.
+    var lastId:Int = 0;
+    var entries:Dynamic = ReflectUtil.getProperty(creditsJson, "entries");
+    for (id => entry in entries)
+    {
+      if (entry.onlySP) continue;
+      addEntry(id, entry.names[0], entry.role);
+      lastId = id;
+    }
+
+    // If the mods DLC is present, create a section for the original mod directors / owners.
+    #if funkin_remnants_mods
+    addMods(lastId + 1);
+    #end
+  }
+
+  /**
+   * Fetches and adds the mod credits (Only if the mods DLC is present)
+   */
+  #if funkin_remnants_mods
+  public function addMods(id:Int):Void
+  {
+    // First add a separator.
+    var modId:Int = id;
+    var lineOfDashes:String = '';
+    for (dash in 1...24)
+      lineOfDashes += '---';
+    addEntry(modId, lineOfDashes, ''); // If the role is empty, it will not add the " - Role String".
+
+    // Then, load the mods entries.
+    var mods:Dynamic = ReflectUtil.getProperty(creditsJson, "mods");
+    for (entry in mods)
+    {
+      modId++;
+      addEntry(modId, entry.name, entry.credit);
+    }
+  }
+  #end
+
+  /**
+   * Handles the distance in the y-axis of the left column.
+   */
+  var leftColumnY:Float = 0;
+
+  /**
+   * Handles the position in the x-axis of the right column.
+   */
+  var rightColumnX:Float = 0;
+
+  /**
+   * Handles the distance in the y-axis of the right column.
+   */
+  var rightColumnY:Float = 0;
+
+  /**
+   * Fetches and then creates the special thanks entries.
+   */
+  public function generateSpecialThanks():Void
+  {
+    // First create the header for the section.
+    addHeader('SPECIAL THANKS!');
+
+    // Before adding the contributors, we save the starting y-axis.
+    var startY:Float = headersGroup.children[0].localY + headersGroup.children[0].height + 5;
+    leftColumnY = rightColumnY = startY;
+    rightColumnX = getMaxWidth() + 15;
+
+    // Before adding the team's thanks, we are giving our contributors a special space <3
+    var contributors:Dynamic = ReflectUtil.getProperty(creditsJson, "contributors");
+    addSpecialThank(1, "The Remnants Crew", contributors, true);
+
+    // Cute ending text for the contributors section.
+    var itMeansALot = new FlxText(0, 0, 0, "Your contributions mean a lot! <3");
+    itMeansALot.setFormat(Paths.font('creditsFont.ttf'), 25, 0xFFFFFFFF, 'center', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    itMeansALot.shader = new BloomShader(SHADER_INTENSITY);
+    itMeansALot.borderSize = 4;
+    this.add(itMeansALot);
+
+    // Evil manual position fix
+    itMeansALot.localY = this.children[1].y + this.children[1].height + 90;
+
+    // Before adding anything, we reset the starting y-axis for both columns.
+    var startY:Float = this.children[2].localY + this.children[2].height + 35;
+    leftColumnY = startY;
+    rightColumnY = startY;
+
+    // Now we fetch the entries for the special thanks from the json and filter them.
+    var entries:Dynamic = ReflectUtil.getProperty(creditsJson, "entries");
+    var validEntries:Array<Dynamic> = [
+      for (entry in entries)
+        if (entry.specialThanks != null) entry
+    ];
+
+    var newID:Int = 1;
+    if (validEntries.length <= 2)
+    {
+      for (entry in validEntries)
+      {
+        addSpecialThank(newID, entry.names[1] ?? entry.names[0], entry.specialThanks);
+        newID++;
+      }
+      return;
+    }
+
+    // Gotta keep this ones apart for later.
+    var firstEntry = validEntries.shift();
+    var lastEntry = validEntries.pop();
+
+    // Then we sort the remaining entries from the longest to the shortest.
+    validEntries.sort(function(a, b) {
+      return b.specialThanks.length - a.specialThanks.length;
+    });
+
+    // And finally, add the entries to the group.
+    var sortedEntries:Array<Dynamic> = [firstEntry];
+    sortedEntries = sortedEntries.concat(validEntries);
+    sortedEntries.push(lastEntry);
+
+    for (entry in sortedEntries)
+    {
+      addSpecialThank(newID, entry.names[1] ?? entry.names[0], entry.specialThanks);
+      newID++;
+    }
+  }
+
+  /**
+   * The subgroup responsable of holding the headers.
+   */
+  public var headersGroup:FunkinGroup;
+
+  /**
+   * Creates a header, followed by a line of dashes to then add it to the group.
+   * @param title The title for the header.
+   */
+  function addHeader(title:String):Void
+  {
+    if (headersGroup == null)
+    {
+      headersGroup = new FunkinGroup(this.x, this.y);
+      this.add(headersGroup);
+    }
+
+    var header = new FlxText(0, 0, 0, title);
+    header.setFormat(Paths.font('creditsFont.ttf'), HEADER_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    header.shader = new BloomShader(SHADER_INTENSITY);
+    headersGroup.add(header);
+    header.borderSize = 4;
+
+    var lineOfDashes:String = '';
+    for (dash in 1...header.text.length + 1)
+      lineOfDashes += '---';
+    header.text += '\n$lineOfDashes';
+  }
+
+  /**
+   * Creates a CreditGroup and adds it to the group.
+   * It holds the person name and it's role.
+   */
+  function addEntry(id:Int, name:String, role:String):Void
+  {
+    if (this.children[id] == null) return;
+
+    var targetY:Float = (headersGroup.children[0].localY + headersGroup.children[0].height) + 5;
+    if (id != 0) targetY = (this.children[id].y + this.children[id].height) + 8;
+
+    var creditGroup:FunkinGroup = new FunkinGroup(this.x, targetY);
+    this.add(creditGroup);
+
+    creditGroup.localY = targetY;
+
+    var name = new FlxText(0, 0, 0, name);
+    name.setFormat(Paths.font('creditsFont.ttf'), NAME_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    name.shader = new BloomShader(SHADER_INTENSITY);
+    creditGroup.add(name);
+    name.borderSize = 4;
+
+    var role = new FlxText(0, 0, 0, (role == '') ? '' : ' - $role');
+    role.setFormat(Paths.font('creditsFont.ttf'), ROLE_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    role.shader = new BloomShader(SHADER_INTENSITY);
+    creditGroup.add(role);
+    role.borderSize = 3;
+
+    creditGroup.children[1].localX = (creditGroup.children[0].localX + creditGroup.children[0].width) - 2;
+    creditGroup.children[1].localY += 4; // evil manual offset
+  }
+
+  /**
+   * Creates a CreditGroup and adds it to the group.
+   * It holds the person name and it's special thanks list.
+   */
+  function addSpecialThank(id:Int, name:String, specialThanks:Array<String>, ?contributors:Bool = false):Void
+  {
+    // First we create the credits group.
+    var creditGroup:FunkinGroup = new FunkinGroup();
+    this.add(creditGroup);
+
+    // And then it's text.
+    var name = new FlxText(0, 0, 0, '$name would like to Thank:');
+    name.setFormat(Paths.font('creditsFont.ttf'), NAME_THANKS_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    name.shader = new BloomShader(SHADER_INTENSITY);
+    creditGroup.add(name);
+    name.borderSize = 4;
+
+    var list:String = '';
+    for (id => thanks in specialThanks)
+    {
+      if (id > 0) list += "\n";
+      list += thanks;
+    }
+
+    var specialThanks = new FlxText(0, 0, 0, list);
+    specialThanks.setFormat(Paths.font('creditsFont.ttf'), THANKS_SIZE, 0xFFFFFFFF, 'left', FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    specialThanks.shader = new BloomShader(SHADER_INTENSITY);
+    creditGroup.add(specialThanks);
+    specialThanks.borderSize = 4;
+
+    // Offset the special thanks below the person's header.
+    final nameTxt = creditGroup.children[0];
+    creditGroup.children[1].localY = (nameTxt.localY + nameTxt.height);
+
+    // And after that we position the entry.
+    // But we first get the maximum width of the left column.
+    var entryHeight:Float = specialThanks.localY + specialThanks.height;
+
+    // This shit almost killed me....
+    if (leftColumnY <= rightColumnY)
+    {
+      creditGroup.localX = 0;
+      creditGroup.localY = leftColumnY;
+      if (!contributors) leftColumnY += entryHeight + 35;
+    }
+    else
+    {
+      creditGroup.localX = rightColumnX;
+      creditGroup.localY = rightColumnY;
+      if (!contributors) rightColumnY += entryHeight + 35;
+    }
+  }
+
+  /**
+   * Helper function for updating the group's position.
+   */
+  public function updateGroup(elapsed:Float, mult:Float, pause:Bool)
+  {
+    var pressingEnter:Bool = FlxG.keys.pressed.ENTER || FlxG.keys.pressed.SPACE;
+    #if mobile
+    if (TouchUtil.pressed && !TouchUtil.overlaps(FlxG.state.backButton)) pressingEnter = true;
+    #end
+
+    if (FlxG.state.controls.PAUSE_P || FlxG.keys.justPressed.SHIFT) this.scrolling = false;
+    else if (FlxG.state.controls.PAUSE_R || FlxG.keys.justReleased.SHIFT) this.scrolling = pause;
+
+    if (this.scrolling)
+    {
+      if (pressingEnter) this.y -= (this.baseSpeed * mult) * elapsed;
+      else
+        this.y -= this.baseSpeed * elapsed;
+    }
+  }
+
+  /**
+   * Helper function to calculate the scrolling speed (in pixels per second)
+   */
+  public function calculateSpeed(start:Float, end:Float):Void
+  {
+    var distance:Float = this.y - -this.height;
+    var duration:Float = (end - start) / 1000.0;
+    this.baseSpeed = (distance / duration) + 5;
+  }
+
+  /**
+   * Helper function to get the right column not overlapping with the left one.
+   */
+  function getMaxWidth():Float
+  {
+    var maxWidth:Float = 0;
+    var entries:Dynamic = ReflectUtil.getProperty(creditsJson, "entries");
+
+    for (entry in entries)
+    {
+      if (entry.specialThanks == null) continue;
+
+      var list:String = '';
+      var header = new FlxText(0, 0, 0, '${entry.names[1] ?? entry.names[0]} would like to Thank:');
+      header.setFormat(Paths.font('creditsFont.ttf'), NAME_THANKS_SIZE);
+
+      for (i => thanks in entry.specialThanks)
+      {
+        if (i > 0) list += "\n";
+        list += thanks;
+      }
+
+      var thanksText = new FlxText(0, 0, 0, list);
+      thanksText.setFormat(Paths.font('creditsFont.ttf'), THANKS_SIZE);
+
+      var groupWidth:Float = Math.max(header.width, thanksText.width);
+      if (groupWidth > maxWidth) maxWidth = groupWidth;
+
+      // Clean up the RAM please!
+      header?.destroy();
+      thanksText?.destroy();
+    }
+
+    return maxWidth;
+  }
+}

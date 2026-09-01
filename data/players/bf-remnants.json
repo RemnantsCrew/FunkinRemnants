@@ -38,6 +38,9 @@
     "charSelect": {
       "transitionDelay": 0.45
     },
+    "atlasSettings": {
+      "useRenderTexture": true
+    },
     "text1": "FUNKIN' REMNANTS",
     "text2": "OLD FUNKIN' CONTENT AT YOUR SERVICE",
     "text3": "WIREFRAME IS OUR GAME",

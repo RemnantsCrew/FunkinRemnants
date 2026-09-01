@@ -1,0 +1,87 @@
+package funkin.remnants.menus.freeplay.album;
+
+import funkin.ui.freeplay.FreeplaySongData;
+import funkin.ui.freeplay.Album;
+import haxe.Json;
+
+class RemnantsAlbum extends Album
+{
+  public function new()
+  {
+    super('remnants');
+  }
+
+  override public function getAlbumArtAssetKey():String
+  {
+    final currentSong:FreeplaySongData = getFreeplaySongData();
+    if (currentSong == null) return super.getAlbumArtAssetKey();
+
+    final albumKey:String = getAssetKey(currentSong.songId, currentSong.curVariation);
+    final albumPath:String = 'freeplay/albumRoll/$albumKey';
+    if (Assets.exists(Paths.image(albumPath))) return albumPath;
+
+    return super.getAlbumArtAssetKey();
+  }
+
+  final PATH_ICON:String = 'https://files.tilnotdrip.org/discord-rpc/remnants/icons';
+  final PATH_ALBUM:String = 'https://files.tilnotdrip.org/discord-rpc/remnants/albums';
+
+  // TODO: Instead of checking if the icon or album asset exists IN THE GAME FILES, check if it exists IN THE SERVER.
+  // Impossible or really hard to accomplish because "haxe.Http" and "Sys.Http" are blacklisted and there's no other way to check a request status.
+  override public function getDiscordRPCImage():Null<String>
+  {
+    // Overrides the RPC small icon.
+    if (PlayState.instance != null)
+    {
+      final dad = PlayState.instance.currentStage?.getDad() ?? null;
+      var key = dad?.getHealthIconId() ?? PlayState.instance?.currentChart?.characters?.opponent ?? 'face-remnants'; // Gotta make the check here or else it breaks.
+
+      // Use face-remnants if the icon doesn't really exists.
+      if (!Assets.exists(Paths.image('icons/icon-$key'))) key = 'face-remnants';
+
+      // Apply the new icon data.
+      PlayState.instance.currentChart?.discordRPCImage = '$PATH_ICON/$key.png';
+      PlayState.instance?.discordRPCIcon = PlayState.instance.currentChart?.discordRPCImage;
+    }
+
+    // Get the album asset key and parse it.
+    final asset = getAssetKey(PlayState.instance?.currentSong.id, PlayState.instance?.currentVariation);
+    final album = '$PATH_ALBUM/$asset.png';
+
+    // Apply the new album data (Only if the image exists)
+    if (Assets.exists(Paths.image('freeplay/albumRoll/$asset')))
+    {
+      PlayState.instance?.discordRPCAlbum = album;
+      return album;
+    }
+
+    // If the album doesn't get's loaded, the album will use the placeholder instead!
+    return super.getDiscordRPCImage();
+  }
+
+  override public function getAlbumOSTName():Null<String>
+  {
+    final songData:FreeplaySongData = getFreeplaySongData();
+    if (songData == null) return super.getAlbumOSTName();
+
+    final json:Dynamic = RemnantsFreeplay.instance?.getReplaceSongData(songData.songId, songData.curVariation);
+    final isSecret:Bool = RemnantsFreeplay.instance?.isSongSecret(songData.songId, songData.curVariation);
+    if (isSecret && json?.secret?.hideOSTName ?? false) return super.getAlbumOSTName();
+
+    return json?.ostName ?? super.getAlbumOSTName();
+  }
+
+  public function getAssetKey(songId:String, songVariation:String):String
+  {
+    final json:Dynamic = RemnantsFreeplay.instance?.getReplaceSongData(songId, songVariation);
+    final isSecret:Bool = RemnantsFreeplay.instance?.isSongSecret(songId, songVariation);
+    if (isSecret && json?.secret?.albumCover != null) return json.secret.albumCover ?? 'remnants-placeholder';
+
+    return json?.albumCover ?? 'remnants-placeholder';
+  }
+
+  function getFreeplaySongData():FreeplaySongData
+  {
+    return FlxG.state?.subState?.currentCapsule?.freeplayData ?? null;
+  }
+}

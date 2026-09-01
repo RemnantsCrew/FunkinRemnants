@@ -20,10 +20,6 @@
       ]
     },
     {
-      "name": "sad",
-      "prefix": "Sad"
-    },
-    {
       "name": "cheer",
       "prefix": "Cheer"
     },
@@ -33,7 +29,8 @@
     },
     {
       "name": "drop70",
-      "prefix": "Sad"
+      "prefix": "Sad",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }
   ]
 }

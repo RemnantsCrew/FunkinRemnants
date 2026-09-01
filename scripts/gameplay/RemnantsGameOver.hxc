@@ -2,8 +2,6 @@ package funkin.remnants.gameplay;
 
 import funkin.play.GameOverSubState;
 
-using StringTools;
-
 class RemnantsGameOver extends Module
 {
   final CHAR_BLACKLIST:Array<String> = ["bf-remnants-blazin", "pico-remnants-blazin"];
@@ -69,14 +67,17 @@ class RemnantsGameOver extends Module
     loseSprite.cameras = [PlayState?.instance?.camCutscene];
     loseSprite.visible = false;
 
-    // shader
-    loseSprite.shader = GameOverSubState.instance?.boyfriend?.shader ?? null;
-
     loseSprite.animation.onFinish.add(function(name:String) {
       loseSprite.animation.play('idle', true);
     });
 
     GameOverSubState.instance.add(loseSprite);
+
+    // For Roses Color Event
+    if (PlayState.instance?.currentSong?.scriptHas('color')
+      && PlayState.instance.currentSong.color
+      && PlayState.instance?.currentSong?.scriptHas('colorTweenReal')
+      && !PlayState.instance.currentSong.colorTweenReal) loseSprite.colorTransform.color = 0xFF3C43A4;
   }
 
   public function playFall():Void

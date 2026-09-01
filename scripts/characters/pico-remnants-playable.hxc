@@ -5,8 +5,6 @@ import funkin.play.character.PicoPlayerBaseCharacter;
 import funkin.play.GameOverSubState;
 import funkin.play.PauseSubState;
 
-using StringTools;
-
 class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
 {
   override function get_CACHE_IMAGE_PATHS():Array<String>
@@ -34,45 +32,22 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
     GameOverSubState.animationSuffix = "";
 
     PauseSubState.musicSuffix = '-remnants-pico';
-
-    for (img in CACHE_IMAGE_PATHS)
-    {
-      var lib:String = Paths.getLibrary(img);
-      var file:String = Paths.stripLibrary(img);
-
-      // We don't need these graphics outside of Weekend 1.
-      if (lib == "weekend1" && Paths.currentLevel != "weekend1")
-      {
-        continue;
-      }
-
-      FunkinMemory.cacheTexture(Paths.image(file, lib == 'preload' ? null : lib));
-    }
-
-    // We don't need these sounds outside of Weekend 1.
-    if (Paths.currentLevel == "weekend1")
-    {
-      for (snd in CACHE_SOUND_PATHS)
-      {
-        FunkinMemory.cacheSound(Paths.sound(snd, "weekend1"));
-      }
-    }
   }
 
   /**
-     * Initialize and cache sprites used for the death animation,
+   * Initialize and cache sprites used for the death animation,
    * for use later.
    */
   override function createDeathSprites()
   {
     deathSpriteNene = FunkinSprite.createSparrow(0, 0, "characters/neneKnife-remnants");
-    var gf = PlayState.instance?.currentStage.getGirlfriend();
-    deathSpriteNene.x = gf.originalPosition.x + 120;
-    deathSpriteNene.y = gf.originalPosition.y;
+    var gf = PlayState.instance?.currentStage?.getGirlfriend();
+    deathSpriteNene.x = gf?.originalPosition?.x + 120;
+    deathSpriteNene.y = gf?.originalPosition?.y;
     deathSpriteNene.zIndex = this.zIndex - 5;
     deathSpriteNene.animation.addByPrefix('throw', "knife toss0", 24, false);
     deathSpriteNene.visible = true;
-    deathSpriteNene.animation.onFinish.add(function(name:String) {
+    deathSpriteNene.animation.onFinish?.add(function(name:String) {
       deathSpriteNene.visible = false;
     });
   }
@@ -93,7 +68,7 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
       // Standard death animation.
       createDeathSprites();
 
-      GameOverSubState.instance.add(deathSpriteNene);
+      GameOverSubState.instance?.add(deathSpriteNene);
       deathSpriteNene.animation.play("throw");
     }
 
@@ -154,7 +129,7 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
     }
 
     // Suffixed death sound will already play.
-    GameOverSubState.instance.targetCameraZoom = 0.8;
+    GameOverSubState.instance?.targetCameraZoom = 0.8;
 
     HapticUtil.vibrate(0, 0.5);
 
@@ -164,7 +139,11 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
       HapticUtil.vibrate(0, 0.1, 0.1, 1);
     });
 
-    new FlxTimer().start(3.0, afterPicoDeathExplosionIntro);
+    FlxTimer.wait(3.0, () -> {
+      if (GameOverSubState.instance == null) return;
+
+      afterPicoDeathExplosionIntro();
+    });
   }
 
   override function onSongRetry(event:ScriptEvent):Void
@@ -183,7 +162,7 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
   {
     if (name == "firstDeath" && frameNumber == 36 - 1)
     {
-      GameOverSubState.instance.startDeathMusic(1.0, false);
+      GameOverSubState.instance?.startDeathMusic(1.0, false);
       // force the deathloop to play in here, since we are starting the music early it
       // doesn't check this in gameover substate !
       // also no animation suffix 🤔
@@ -264,14 +243,8 @@ class PicoRemnantsPlayerCharacter extends PicoPlayerBaseCharacter
    */
   override function playFireGunAnim():Void
   {
-    if (FlxG.random.bool(50))
-    {
-      this.playAnimation('shoot', true, true);
-    }
-    else
-    {
-      this.playAnimation('fire', true, true);
-    }
+    final variant:Int = FlxG.random.int(1, 2);
+    this.playAnimation('shoot$variant', true, true);
 
     FunkinSound.playOnce(Paths.soundRandom('shot', 1, 4));
   }

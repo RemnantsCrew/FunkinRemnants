@@ -2,8 +2,6 @@ package funkin.remnants.utils;
 
 import flixel.FlxSprite;
 
-using StringTools;
-
 class RemnantsAssetReplacer extends Module
 {
   public function new()

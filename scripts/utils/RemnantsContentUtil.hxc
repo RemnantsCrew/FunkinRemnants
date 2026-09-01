@@ -1,14 +1,28 @@
 package funkin.remnants.utils;
 
-import funkin.ui.freeplay.FreeplayState;
 import funkin.data.freeplay.player.PlayerRegistry;
+import funkin.ui.freeplay.FreeplayState;
 import funkin.data.song.SongRegistry;
-import StringTools;
+import funkin.util.ReflectUtil;
+import haxe.ds.StringMap;
+import haxe.Json;
 
 class RemnantsContentUtil
 {
+  public static var songList(get, never):Array<String>;
+
+  /**
+   * Checks if the current playable character is Funkin' their Remnants.
+   * @return Bool
+   */
   public static function remnantsContentEnabled():Bool
   {
+    if (PlayState.instance != null)
+    {
+      var playerCharacterId:String = PlayerRegistry.instance.getCharacterOwnerId(PlayState.instance?.currentChart?.characters.player);
+      return playerCharacterId?.contains('remnants') ?? false;
+    }
+
     // Look through all new characters + the current selected character.
     // If one of them is Funkin' their Remnants, enable remnants content.
     var characters:Array<String> = PlayerRegistry.instance.listNewCharacters();
@@ -16,42 +30,45 @@ class RemnantsContentUtil
 
     for (charId in characters)
     {
-      if (charId != null && StringTools.contains(charId, 'remnants')) return true;
+      if (charId != null && charId.contains('remnants')) return true;
     }
 
     return false;
   }
 
+  /**
+   * Checks if the player has beaten all the songs in the mod.
+   * @return Bool
+   */
   public static function hasBeatenAllSongs():Bool
   {
-    for (songID in SongRegistry.instance.listEntryIds())
+    for (id in SongRegistry.instance.listEntryIds())
     {
-      var song:Song = SongRegistry.instance.fetchEntry(songID);
+      var song:Song = SongRegistry.instance.fetchEntry(id);
 
       for (variation in song.variations)
       {
-        if (!StringTools.contains(songID, 'remnants') && !StringTools.contains(variation, 'remnants')) continue;
+        final parsedSong = (variation != Constants.DEFAULT_VARIATION) ? '$id-$variation' : id;
 
-        var difficultyList:String = song.listDifficulties(variation, null, true, false);
+        if (!songList.contains(parsedSong)) continue;
 
-        var hasBeatenSong:Bool = false;
-        for (difficultyID in difficultyList)
-        {
-          hasBeatenSong = Save.instance.getSongScore(songID, difficultyID, variation) != null;
-          if (hasBeatenSong) break;
-        }
-
-        if (!hasBeatenSong)
-        {
-          trace('Has not beaten "' + song.songName + '" on "' + variation + '"!');
-          return false;
-        }
+        if (!Save.instance.hasBeatenSong(id, null, variation)) return false;
       }
     }
 
     return true;
   }
 
+  public static function getChance(id:String):Bool
+  {
+    final percentage:Float = fetchChances().get(id);
+    return FlxG.random.bool(percentage);
+  }
+
+  /**
+   * Loads the last remnants character.
+   * If everything goes fine, your game will be Funkin' their Remnants!
+   */
   public static function loadLastRemnantsChar():Void
   {
     if (!Save.instance.modOptions.exists('lastRemnantsChar')) return;
@@ -61,17 +78,59 @@ class RemnantsContentUtil
     Save.instance.flush();
   }
 
+  /**
+   * Saves the last remnants character.
+   * This will make the game remember it when you open it again!
+   */
   public static function saveLastRemnantsChar():Void
   {
-    if (!StringTools.contains(FreeplayState.rememberedCharacterId, 'remnants')) return;
+    if (!FreeplayState.rememberedCharacterId.contains('remnants')) return;
 
     Save.instance.modOptions.set('lastRemnantsChar', FreeplayState.rememberedCharacterId);
     Save.instance.flush();
   }
 
+  /**
+   * Checks if the current song is Funkin' their Remnants.
+   * @return Bool
+   */
   public static function isRemnantsSong():Bool
   {
-    var longAssName:String = [for (i in PlayState.instance?.currentStage?.characters ?? []) i.characterId].join('-');
-    return StringTools.contains(longAssName, 'remnants');
+    final id:String = PlayState.instance?.currentSong?.id;
+    final variation:String = PlayState.instance?.currentChart?.variation;
+    final songCheck:String = variation != Constants.DEFAULT_VARIATION ? '$id-$variation' : id;
+    return songList.contains(songCheck);
+  }
+
+  static var _songList:Array<String> = null;
+  static var _chances:StringMap = null;
+
+  static function get_songList():Array<String>
+  {
+    if (_songList == null)
+    {
+      var fullText:String = Assets.getText(Paths.txt('ui/remnants-songlist'));
+      _songList = fullText.trim().split('\n').map(i -> i.trim());
+    }
+
+    return _songList;
+  }
+
+  static function fetchChances():StringMap
+  {
+    if (_chances == null)
+    {
+      var content:String = Assets.getText(Paths.json('remnants-chances'));
+      var json:String = Json.parse(content);
+
+      _chances = new StringMap();
+      for (field in ReflectUtil.getAnonymousFieldsOf(json))
+      {
+        final value:Dynamic = ReflectUtil.getAnonymousField(json, field);
+        _chances.set(field, value);
+      }
+    }
+
+    return _chances;
   }
 }

@@ -1,8 +1,6 @@
 package funkin.remnants.songs;
 
-#if mobile
 import funkin.mobile.input.ControlsHandler;
-#end
 
 class MonsterRemnantsMixSong extends Song
 {
@@ -26,51 +24,33 @@ class MonsterRemnantsMixSong extends Song
   {
     super.onCreate(event);
 
-    #if !mobile
-    if (!Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [550, 350]; // Upscroll PC Offset
+    PlayState.instance.comboPopUps.offsets =
+      {
+        if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows')
+        {
+          // Mobile Offset
+          [30, 350];
+        }
+        else if (Preferences.downscroll)
+        {
+          // Downscroll Offset
+          [550, -190];
+        }
+        else
+        {
+          // Upscroll Offset
+          [550, 350];
+        }
+      };
 
-    if (Preferences.downscroll) PlayState.instance.comboPopUps.offsets = [550, -190]; // Downscroll PC Offset
-    #else
-    if (Preferences.controlsScheme == "Arrows"
-      && !ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [30, 350]; // Middle Mobile Offset
-
-    if (!Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [725, -350]; // Upscroll Side Mobile Offset
-
-    if (Preferences.downscroll
-      && Preferences.controlsScheme == "Arrows"
-      && ControlsHandler.usingExternalInputDevice) PlayState.instance.comboPopUps.offsets = [725, -190]; // Downscroll Side Mobile Offset
-    #end
-  }
-
-  function onSongRetry(event:ScriptEvent)
-  {
-    super.onSongRetry(event);
-
-    FlxTween.cancelTweensOf(PlayState.instance.camHUD);
+    if (!ControlsHandler.usingExternalInputDevice && Preferences.controlsScheme == 'Arrows') return;
+    PlayState.instance.comboPopUps.offsets[0] += (FlxG.width - FlxG.initialWidth) / 2;
   }
 
   function onGameOver(event:ScriptEvent):Void
   {
     super.onGameOver(event);
     sequence?.destroy();
-
-    FlxTween.cancelTweensOf(PlayState.instance.camHUD);
-  }
-
-  function onPause(event:ScriptEvent):Void
-  {
-    super.onPause(event);
-
-    FlxTweenUtil.pauseTweensOf(PlayState.instance.camHUD);
-  }
-
-  function onResume(event:ScriptEvent):Void
-  {
-    super.onResume(event);
-
-    FlxTweenUtil.resumeTweensOf(PlayState.instance.camHUD);
   }
 
   function onSongLoaded(event:SongLoadScriptEvent)
@@ -82,7 +62,22 @@ class MonsterRemnantsMixSong extends Song
         time: 0,
         callback: () -> {
           PlayState.instance.currentStage.changeAmbiance(true, 0.0001);
-          if (PlayState.instance.camHUD.alpha != 1) PlayState.instance.camHUD.alpha = 1;
+          PlayState.instance.currentStage.vignette.alpha = 1;
+          FlxTween.tween(PlayState.instance.currentStage.vignette, {alpha: 0.9}, 6.79, {ease: FlxEase.smootherStepOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(64) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.vignette, {alpha: 0.8}, 6.79, {ease: FlxEase.backIn});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(96) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.vignette, {alpha: 0.6}, 6.79, {ease: FlxEase.backIn});
         }
       },
 
@@ -90,13 +85,29 @@ class MonsterRemnantsMixSong extends Song
         time: Conductor.instance.getBeatTimeInMs(128) / 1000,
         callback: () -> {
           PlayState.instance.currentStage.changeAmbiance(false, 0.0001);
+          PlayState.instance.currentStage.vignette.alpha = 0.0001;
         }
       },
 
       {
         time: Conductor.instance.getBeatTimeInMs(227) / 1000,
         callback: () -> {
-          PlayState.instance.currentStage.changeAmbiance(true, 0.5);
+          PlayState.instance.currentStage.changeAmbiance(true, 0.56);
+          FlxTween.tween(PlayState.instance.currentStage.vignette, {alpha: 0.7}, 0.56);
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(323) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.vignette, {alpha: 0.8}, 1.12, {ease: FlxEase.expoInOut});
+        }
+      },
+
+      {
+        time: Conductor.instance.getBeatTimeInMs(340) / 1000,
+        callback: () -> {
+          FlxTween.tween(PlayState.instance.currentStage.vignette, {alpha: 1}, 6.79);
         }
       },
     ];

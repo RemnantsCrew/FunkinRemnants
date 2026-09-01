@@ -1,6 +1,8 @@
 package funkin.remnants.characters;
 
 import flixel.util.FlxColor;
+import funkin.play.PauseSubState;
+import funkin.play.GameOverSubState;
 
 class BfRemnantsPFPCharacter extends AnimateAtlasCharacter
 {
@@ -17,6 +19,9 @@ class BfRemnantsPFPCharacter extends AnimateAtlasCharacter
   override public function onCreate(event:ScriptEvent):Void
   {
     super.onCreate(event);
+
+    GameOverSubState.musicSuffix = '-remnants';
+    PauseSubState.musicSuffix = '-remnants';
 
     oneColor = new OneColorShader();
   }

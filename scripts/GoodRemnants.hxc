@@ -1,63 +1,77 @@
 package funkin.remnants;
 
-import Math;
+import flixel.group.FlxTypedGroup;
+import animate.FlxAnimate;
+import flixel.FlxSprite;
+import flixel.FlxState;
 
-class GoodRemnantsModule extends Module
+/**
+ * It's time to make Remnants peak.
+ */
+class GoodRemnants extends Module
 {
+  /**
+   * The highest and lowest that skew should be set to.
+   */
+  public static final SKEW_RANGE:Array<Float> = [-5, 5];
+
+  /**
+   * The highest and lowest that scale should be set to.
+   */
+  public static final SCALE_RANGE:Array<Float> = [0, 2];
+
+  /**
+   * The highest and lowest that angle should be set to.
+   */
+  public static final ANGLE_RANGE:Array<Float> = [0, 359];
+
   public function new()
   {
     super('goodRemnants');
   }
 
-  public function onUpdate(event:UpdateScriptEvent)
+  override public function onUpdate(event:UpdateScriptEvent):Void
   {
+    super.onUpdate(event);
+
     if (FlxG.keys.justPressed.F10)
     {
-      resetSpriteThing(FlxG.state);
+      applyToAllChildren(FlxG.state);
     }
   }
 
-  public function resetSpriteThing(spr:Dynamic):Void
+  public function applyToAllChildren(basic:FlxBasic):Void
   {
-    var lookThrough:Array<Dynamic> = [spr];
+    if (basic == null) return;
 
-    while (lookThrough.length > 0)
+    if (Std.isOfType(basic, FlxAnimate))
     {
-      var thing:Dynamic = lookThrough.shift();
+      basic.skew.x = FlxG.random.float(SKEW_RANGE[0], SKEW_RANGE[1]);
+      basic.skew.y = FlxG.random.float(SKEW_RANGE[0], SKEW_RANGE[1]);
+    }
 
-      if (thing == null) continue;
+    if (Std.isOfType(basic, FlxSprite))
+    {
+      basic.scale.x = FlxG.random.float(SCALE_RANGE[0], SCALE_RANGE[1]);
+      basic.scale.y = FlxG.random.float(SCALE_RANGE[0], SCALE_RANGE[1]);
 
-      try
+      basic.angle = FlxG.random.float(ANGLE_RANGE[0], ANGLE_RANGE[1]);
+    }
+
+    if (Std.isOfType(basic, FlxState))
+    {
+      for (child in basic.subState?.members ?? [])
       {
-        for (i in thing.members)
-          lookThrough.push(i);
+        applyToAllChildren(child);
       }
-      catch (e:Exception) {}
+    }
 
-      try
+    if (Std.isOfType(basic, FlxTypedGroup))
+    {
+      for (child in basic.members ?? [])
       {
-        for (i in thing.subState.members)
-          lookThrough.push(i);
+        applyToAllChildren(child);
       }
-      catch (e:Exception) {}
-
-      try
-      {
-        thing.scale.set(FlxG.random.float(0, 2), FlxG.random.float(0, 2));
-      }
-      catch (e:Exception) {}
-
-      try
-      {
-        thing.angle = FlxG.random.float(0, 360);
-      }
-      catch (e:Exception) {}
-
-      try
-      {
-        thing.skew.set(FlxG.random.float(-5, 5), FlxG.random.float(-5, 5));
-      }
-      catch (e:Exception) {}
     }
   }
 }

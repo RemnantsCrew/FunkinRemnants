@@ -15,7 +15,9 @@
     "cameraOffsets": [45, -60]
   },
   "atlasSettings": {
-    "swfMode": false
+    "swfMode": false,
+    "useRenderTexture": true,
+    "uniqueInCache": true
   },
   "animations": [
     {

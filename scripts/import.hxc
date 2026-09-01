@@ -14,3 +14,5 @@ import funkin.FunkinMemory;
 import funkin.play.character.CharacterType;
 import flixel.util.FlxTimer;
 import funkin.Conductor;
+
+using StringTools;
