@@ -5,6 +5,67 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - (2026-08-31)
+
+## Added
+
+- Created RemnantsSoundUtil (It adds two useful function)
+- Glitcher (Remnants Mix) Game-Over Animation and Pause Music now adapts to the current character.
+- Made the Remnants Main Menu "Back to Exit" Graphic when the QT Rewired Plush Button exists.
+- Added LunarzNova's Stupid Fucking Capital N to their Sugarcrash (Remnants Mix) credit.
+- Added a new secret random chance to Stress
+
+## Changes
+
+- Re-Exported Stress (Remnants Mix).
+- Updated Tutorial (Remnants Mix) Vocals.
+- Updated SugarCrash! (Remnants Mix) Vocals.
+- Updated Week 2's dark overlays to be a vignette.
+- Updated Week 2 Album Cover.
+- Updated Week 5 Stage Boppers.
+- Updated Week 7's Sky to be more optimized.
+- Moved all of Remnants Options into their own category.
+- Completely overhauled the mod's Discord RPC (Now we use the native mod support implemented in 0.8.6)
+- Random Chances are now data driven! (All of their percentage data are now in remnants-chances.json)
+- Completely Reworked the Results (Now every asset is replaced with their Remnants variant as intended!)
+- Changed the mod ID from funkin-remnants to funkin_remnants.
+- Make Bumpers transition into In-Game Cutscenes better ([3267a2c](https://github.com/RemnantsCrew/FunkinRemnants/commit/3267a2c3f1a396648e75a93e6374509bb73b1dff)) - by @ComedyLost in [#27](https://github.com/RemnantsCrew/FunkinRemnants/pull/27)
+- Moved all DadBattle (Remnants Mix) Mechanic Note Kind scripts into a single script.
+- Updated all of Darnell spraycan sprites to be consistent.
+- Tweaked Tormentor (Remnants Mix) Chart.
+- Re-Exported all of Monster & Pico Remnants sprites.
+- Merged Luis and Dad into a single atlas.
+- Adjusted Cocoa's & Fresh's Freeplay difficulty ratings.
+- Various minor code optimizations.
+
+## Fixes
+
+- Fixed Spirit's trail not showing in 0.8.6.
+- Fixed the Remnants Results crashing in 0.8.6.
+- Fixed Tormentor (Remnants Mix) Shader in 0.8.6.
+- Fixed Remnants BF Freeplay Cartoon Animation in 0.8.6.
+- Fixed the "Lose..." text not fading out when it has a shader applied in 0.8.6.
+- Fixed BF Remnants Car and BF Remnants Glitcher Death Animations displaying wrong in 0.8.6.
+- Fixed the credits completion trigger without even completing every song in the mod in 0.8.6.
+- Fixed Remnants Overlay Event not being able to fade under the hud if you don't start the song with one.
+- Fixed Roses (Remnants Mix) Random Chance Sounds not pausing when they're meant to.
+- Fixed Remnants (Remnants Mix) Dialogue Sounds not pausing when they're meant to.
+- Fixed RemnantsMusicReplacer not replacing a music when coming from a substate.
+- Fixed the "Remnants Random" theme playing in Non-Remnants freeplay menus.
+- Fixed Performance Mode in Lit Up (Both Variations) and Week 7 Songs.
+- Fixed BF catching GF animation being missing in the Stress cutscene.
+- Fixed BF Remnants Dark Right Pose not showing up as intended.
+- Fixed 2hot spraycans causing a lag-spike everytime they spawn.
+- [MOBILE] Fixed the custom combo offsets showing up wrong.
+- Fixed Bopeebo (Remnants Mix) Hey animations not playing.
+- Fixed Week 5 Stages not creating all the snow layers.
+- Fixed the bumpers playing in Non-Remnants songs.
+- Fixed 2hot spraycan impact particle being missing.
+- Fixed BF Holding GF's game over offsets.
+- Removed unused spritesheets from the files.
+
+
+
 ## [1.1.1] - (2026-04-09)
 
 ### Changes
