@@ -2345,7 +2345,8 @@
    },
    {
     "t": 17700,
-    "d": 0
+    "d": 0,
+    "k": "noanim"
    },
    {
     "t": 18000,
@@ -3036,11 +3037,12 @@
    },
    {
     "t": 69300,
-    "d": 0
+    "d": 1
    },
    {
     "t": 69300,
-    "d": 1
+    "d": 0,
+    "k": "noanim"
    },
    {
     "t": 69450,
@@ -3163,5 +3165,5 @@
    }
   ]
  },
- "generatedBy": "Friday Night Funkin' - v0.8.5"
+ "generatedBy": "Friday Night Funkin' - v0.8.6"
 }
